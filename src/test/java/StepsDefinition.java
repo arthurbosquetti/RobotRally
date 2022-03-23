@@ -1,3 +1,5 @@
+import static org.junit.Assert.*;
+
 import java.util.Random;
 
 import io.cucumber.java.en.Given;
@@ -11,5 +13,5 @@ import setUp.Level;
 import setUp.Player;
 
 public class StepsDefinition {
-		
+	
 }
