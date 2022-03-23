@@ -8,9 +8,9 @@ public class Board {
 		this.boardType=i;
 	}
 	
-	String[] board1 = {"board level 1"};
-	String[] board2 = {"board level 2"};
-	String[] board3 = {"board level 3"};
+	String[] board1 = {"Easy Board"};
+	String[] board2 = {"Medium Board"};
+	String[] board3 = {"Hard Boardx"};
 	
 	public void printBoard() {
 		if (boardType==1) {
@@ -25,7 +25,7 @@ public class Board {
 			for (String row : board3) {
 				System.out.println(row);
 			}
-		} //must check that difficulty level is range 1-3...
+		} else System.out.println("Not a valid difficulty level");
 	}
 	
 }
