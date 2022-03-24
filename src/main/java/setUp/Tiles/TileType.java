@@ -2,20 +2,21 @@ package setUp.Tiles;
 
 public enum TileType {
 	
-	OPEN_FLOOR("tiles/floor.png"),
-	PIT("tiles/pit.png"),
-	ACID("tiles/acid.png"),
-	FLAG("tiles/flag.png"),
-	RADIATION("tiles/radiation.png");
-
+	//TODO: change strings to pictures
+	OPEN_FLOOR("|F|"),
+	PIT("|P|"),
+	ACID("|A|"),
+	FLAG("|^|"),
+	RADIATION("|R|");
 	
-	private String pictureFile;
+	private String picture;
 	
-	private TileType(String pictureFile) {
-		this.pictureFile = pictureFile;
+	private TileType(String pic) {
+		this.picture = pic;
 	}
 	
-	public String getPictureFile() {
-		return pictureFile;
+	public String getPicture() {
+		return picture;
 	}
 }
+

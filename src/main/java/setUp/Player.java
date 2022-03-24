@@ -5,6 +5,7 @@ public class Player {
 	private String name;
 	private boolean turn;
 	private Card[] hand;
+	private int lives;
 	
 	public void setName(String name) {
 		this.name=name;
@@ -16,6 +17,14 @@ public class Player {
 
 	public void setHand(Card[] cards) {
 		this.hand=cards;
+	}
+	
+	public void setLives(int newLives) {
+		this.lives = newLives;
+	}
+	
+	public int getLives() {
+		return this.lives;
 	}
 	
 }
