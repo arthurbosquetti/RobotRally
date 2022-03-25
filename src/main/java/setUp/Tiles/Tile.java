@@ -17,4 +17,8 @@ public class Tile {
 	public boolean validTile() {
 		return true;
 	}
+	
+	public String toString() {
+		return this.type.getPicture();
+	}
 }
