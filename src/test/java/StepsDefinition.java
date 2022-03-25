@@ -24,6 +24,7 @@ public class StepsDefinition {
 	Board board;
 	Card[] availableCards;
 	Card[] chosenCards;
+	Tile tile;
 
 	
 	/////////////////////////////////////////////////////////////////////////////
@@ -51,7 +52,8 @@ public class StepsDefinition {
 		assertNotNull(board);
 	}
 	
-
+	
+	/////////////////////////////////////////////////////////////////////////////
 	/*
 	 * USER STORY: As a player I want to choose my cards so that I can play the game
 	 */
@@ -86,62 +88,96 @@ public class StepsDefinition {
 	
 	
 	
-	
+	// Margret: We somehow need to relate flags to players
+	// Maybe we keep trach of the flags for the players
+	// booleans setFlag1, getFlag1 in the Player class
 	
 	
 //////FLAGS //////////
+	
+//Tag 1	
+	
+	
+	@Given("the robot has not already reached the first flag")
+	public void the_robot_has_not_already_reached_on_the_first_flag() {
+		player1.setFlag1(false);
+	}
+	@When("the robot reaches the first flag")
+	public void the_robot_reaches_the_first_flag() {
+		assertEquals(true,Tile.firstFlagReached());
+	}
+	@Then("the robot is marked with one flag")
+	public void mark_flag1() {
+		assertTrue(player1.getFlag1());
+	}
+	
+//Tag 2	
+	
+	@Given("the robot has already reached the first flag")
+	public void the_robot_has_already_reached_on_the_first_flag() {
+		player1.setFlag1(true);
+	}
+	@When("the robot reaches the first flag")
+	public void the_robot_reaches_the_first_flag1() {
+		assertEquals(true,Tile.firstFlagReached());
+	}
+	@Then("no change")
+	public void no_change() {
+		assertTrue(player1.getFlag1());
+	}
+	
 //Tag 3
 
-	@Given("the robot steps on the second flag")
-	public void the_robot_steps_on_the_second_flag() {
-	    assertEquals(true,Tile.secondFlagReached());
-	}
 	@Given("the robot has not already stepped on the first flag")
 	public void the_robot_has_not_already_stepped_on_the_first_flag() {
+		// Margret: player1.setFlag1(false); don't know if this way makes sens but we'll figure it out
 		assertEquals(false,Tile.firstFlagReached());
 	}
 	@When("the robot reaches the second flag")
 	public void the_robot_reaches_the_second_flag() {
-	    assertEquals(true,Tile.secondFlagReached());
+		assertEquals(true,Tile.secondFlagReached());
 	}
 	@Then("nothing happens")
 	public void nothing_happens() {
-	    assertEquals(false, game.getGameStatus());
+		assertFalse(player1.getFlag2());
 	}
 
 // Tag 4
 	@Given("the robot has already reached the first flag")
 	public void the_robot_has_already_reached_the_first_flag() {
-		assertEquals(true,Tile.firstFlagReached());
+		assertEquals(true,Tile.firstFlagReached()); 
+		// Margret: player1.setFlag1(true);
+	}
+	@When("the robot steps on the second flag")
+	public void the_robot_steps_on_the_second_flag1() {
+	    assertEquals(true,Tile.secondFlagReached());
 	}
 	@Then("the robot has won")
 	public void the_robot_has_won() {
-	    // Write code here that turns the phrase above into concrete actions
+	    // Margret: false? since the game is now over
 		assertEquals(true, game.getGameStatus());
 	}
 	
 ////// OBSTACLES //////////
+	
+//Tag 1
 
-	@Given("a movement executed by a robot")
-	public void a_movement_executed_by_a_robot() {
-		//Michaela - I wrote movement to be based on tiles rather than players, we can discuss this
-		assertEquals(true, Tile.robotMoved());
-	}
 	@Given("a stopping obstacle on the board in front of the robot")
 	public void a_stopping_obstacle_on_the_board_in_front_of_the_robot() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    tile.obstacleType("Stop");
 	}
 	@When("the robot hits the obstacle")
 	public void the_robot_hits_the_obstacle() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    
 	}
 	@Then("the robot cannot move into the obstacle")
 	public void the_robot_cannot_move_into_the_obstacle() {
 	    // Write code here that turns the phrase above into concrete actions
 	    throw new io.cucumber.java.PendingException();
 	}
+	
+	
+	
 	@Given("a damaging obstacle on the board in front of the robot")
 	public void a_damaging_obstacle_on_the_board_in_front_of_the_robot() {
 	    // Write code here that turns the phrase above into concrete actions

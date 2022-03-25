@@ -36,4 +36,9 @@ public class Tile {
 	public static boolean robotMoved() {
 		return robotMoved;
 	}
+
+	public void obstacleType(String string) {
+		// TODO Auto-generated method stub
+		
+	}
 }
