@@ -6,6 +6,9 @@ public class Game {
 	public void setGameStatus(boolean b) {
 		this.gameOn = b;
 	}
+	public boolean getGameStatus(){
+		return gameOn;
+	}
 	
 	
 }

@@ -27,5 +27,7 @@ public class Board {
 			}
 		} else System.out.println("Not a valid difficulty level");
 	}
+
+
 	
 }
