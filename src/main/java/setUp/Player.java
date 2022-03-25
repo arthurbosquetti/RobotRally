@@ -24,7 +24,11 @@ public class Player {
 	}
 	
 	public int getLives() {
-		return this.lives;
+		return lives;
+	}
+
+	public boolean getTurn() {
+		return turn;
 	}
 	
 }

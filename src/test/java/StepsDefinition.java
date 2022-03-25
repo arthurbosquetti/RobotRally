@@ -21,7 +21,16 @@ public class StepsDefinition {
 	Player player2  = new Player();
 	Game game		= new Game();
 	Board board;
+	Card[] availableCards;
+	Card[] chosenCards;
 
+	
+	/////////////////////////////////////////////////////////////////////////////
+	/*
+	 * USER STORY: As a player I want to start the game so that I can play
+	 */
+	
+	//Scenario: Successful start of the game
 	@Given("difficulty level is {int}")
 	public void difficulty_level_is(Integer int1) {
 	    level.setLevel(int1);
@@ -40,7 +49,45 @@ public class StepsDefinition {
 	public void board_is_initialized() {
 		assertNotNull(board);
 	}
-
+	
+	/////////////////////////////////////////////////////////////////////////////
+	/*
+	 * USER STORY: As a player I want to choose my cards so that I can play the game
+	 */
+	
+	//Scenario: Successful Turn
+	@Given("{int} possible movement cards")
+	public void possible_movement_cards(Integer int1) {
+		availableCards=new Card[int1];
+	}
+	@Given("P1’s turn")
+	public void p1_s_turn() {
+	    player1.setTurn(true);
+	}
+	@When("P1 chooses {int} cards")
+	public void p1_chooses_cards(Integer int1) {
+	    chosenCards = new Card[int1];
+		player1.setHand(chosenCards);
+	}
+	@When("P1’s hand is saved")
+	public void p1_s_hand_is_saved() {
+		player1.setTurn(false);
+	    player2.setTurn(true);
+	}
+	@Then("P2’s turn")
+	public void p2_s_turn() {
+		assertFalse(player1.getTurn());
+	    assertTrue(player2.getTurn());
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@Given("the robot steps on the second flag")
 	public void the_robot_steps_on_the_second_flag() {
 	    // Write code here that turns the phrase above into concrete actions
