@@ -12,6 +12,7 @@ import setUp.Deck;
 import setUp.Game;
 import setUp.Level;
 import setUp.Player;
+import setUp.Tiles.Tile;
 
 public class StepsDefinition {
 
@@ -50,7 +51,7 @@ public class StepsDefinition {
 		assertNotNull(board);
 	}
 	
-	/////////////////////////////////////////////////////////////////////////////
+
 	/*
 	 * USER STORY: As a player I want to choose my cards so that I can play the game
 	 */
@@ -60,7 +61,7 @@ public class StepsDefinition {
 	public void possible_movement_cards(Integer int1) {
 		availableCards=new Card[int1];
 	}
-	@Given("P1’s turn")
+	@Given("P's turn")
 	public void p1_s_turn() {
 	    player1.setTurn(true);
 	}
@@ -69,12 +70,12 @@ public class StepsDefinition {
 	    chosenCards = new Card[int1];
 		player1.setHand(chosenCards);
 	}
-	@When("P1’s hand is saved")
+	@When("P1's hand is saved")
 	public void p1_s_hand_is_saved() {
 		player1.setTurn(false);
 	    player2.setTurn(true);
 	}
-	@Then("P2’s turn")
+	@Then("P2's turn")
 	public void p2_s_turn() {
 		assertFalse(player1.getTurn());
 	    assertTrue(player2.getTurn());
@@ -88,31 +89,43 @@ public class StepsDefinition {
 	
 	
 	
+//////FLAGS //////////
+//Tag 3
+
 	@Given("the robot steps on the second flag")
 	public void the_robot_steps_on_the_second_flag() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    assertEquals(true,Tile.secondFlagReached());
 	}
 	@Given("the robot has not already stepped on the first flag")
 	public void the_robot_has_not_already_stepped_on_the_first_flag() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+		assertEquals(false,Tile.firstFlagReached());
 	}
 	@When("the robot reaches the second flag")
 	public void the_robot_reaches_the_second_flag() {
-	    // Write code here that turns the phrase above into concrete actions
-	    throw new io.cucumber.java.PendingException();
+	    assertEquals(true,Tile.secondFlagReached());
 	}
 	@Then("nothing happens")
 	public void nothing_happens() {
 	    assertEquals(false, game.getGameStatus());
 	}
 
+// Tag 4
+	@Given("the robot has already reached the first flag")
+	public void the_robot_has_already_reached_the_first_flag() {
+		assertEquals(true,Tile.firstFlagReached());
+	}
+	@Then("the robot has won")
+	public void the_robot_has_won() {
+	    // Write code here that turns the phrase above into concrete actions
+		assertEquals(true, game.getGameStatus());
+	}
+	
 ////// OBSTACLES //////////
 
 	@Given("a movement executed by a robot")
 	public void a_movement_executed_by_a_robot() {
-		throw new io.cucumber.java.PendingException();
+		//Michaela - I wrote movement to be based on tiles rather than players, we can discuss this
+		assertEquals(true, Tile.robotMoved());
 	}
 	@Given("a stopping obstacle on the board in front of the robot")
 	public void a_stopping_obstacle_on_the_board_in_front_of_the_robot() {
