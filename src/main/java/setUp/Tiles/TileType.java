@@ -5,9 +5,8 @@ public enum TileType {
 	//TODO: change strings to pictures
 	OPEN_FLOOR("|F|"),
 	PIT("|P|"),
-	ACID("|A|"),
 	FLAG("|^|"),
-	RADIATION("|R|");
+	TALL("|T|");
 	
 	private String picture;
 	

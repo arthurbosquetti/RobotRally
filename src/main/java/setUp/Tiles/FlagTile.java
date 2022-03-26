@@ -7,7 +7,7 @@ public class FlagTile extends Tile {
     private int flagNum;
 
     public FlagTile(int num) {
-        super(TileType.FLAG);
+        super(TileType.FLAG, true);
         this.flagNum = num;
     }
     

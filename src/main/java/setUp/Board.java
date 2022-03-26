@@ -3,12 +3,13 @@ package setUp;
 import setUp.Tiles.Tile;
 import setUp.Tiles.TileType;
 
-public class Board {
+public class Board implements Level{
 	
 	private int boardType;
 	private Tile[][] board;
 	private int rows;
 	private int cols;
+	private int level;
 	
 	public Board(int type) {
 		this.boardType = type;
@@ -17,7 +18,7 @@ public class Board {
 		this.board = new Tile[rows][cols];
 
 		
-		generateBoard(type);
+		//generateBoard(type);
 		
 		
 	}
@@ -36,15 +37,15 @@ public class Board {
 	}
 	
 	//TODO: change generation based on boardType
-	public void generateBoard(int type) {
-		
-		for (int j = 0; j < rows; j++) {
-			for (int i = 0; i < cols; i++) {
-				Tile t = new Tile(TileType.OPEN_FLOOR);
-				this.board[j][i] = t;
-			}
-		}
-	}
+//	public void generateBoard(int type) {
+//
+//		for (int j = 0; j < rows; j++) {
+//			for (int i = 0; i < cols; i++) {
+//				Tile t = new Tile(TileType.OPEN_FLOOR);
+//				this.board[j][i] = t;
+//			}
+//		}
+//	}
 	
 	public void printBoard() {
 		for (Tile[] row : this.board) {
@@ -69,6 +70,15 @@ public class Board {
 		} else {
 			System.out.println("Not a valid difficulty level"); 
 		}
+	}
+
+
+
+	public void setLevel(int i) {
+		this.level = i;
+	}
+	public int getLevel() {
+		return level;
 	}
 
 

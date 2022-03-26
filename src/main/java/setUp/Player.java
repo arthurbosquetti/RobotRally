@@ -6,16 +6,18 @@ public class Player {
 	private boolean turn;
 	private Card[] hand;
 	private int lives;
-	private boolean flag;
-	private boolean Flag;
+	private boolean flag1;
+	private boolean flag2;
+	private boolean alive;
 	
 	public Player() {}
 
 	public Player(String newName, int newLives) {
 		this.name = newName;
 		this.lives = newLives;
-		this.flag = false;
-		this.Flag = false;
+		this.flag1 = false;
+		this.flag2 = false;
+		this.alive = true;
 	}
 
 	public void setName(String name) {this.name=name;}
@@ -42,17 +44,25 @@ public class Player {
 
 	public boolean getTurn() {return turn;}
 	
-	public void setFlag1(boolean flag1) {this.flag = flag1;}
+	public void setFlag1(boolean newFlag1) {this.flag1 = newFlag1;}
 	
 	public boolean getFlag1() {
-		return flag;
+		return flag1;
 	}
 
-	public void setFlag2(boolean flag2) {
-		this.Flag = flag2;
+	public void setFlag2(boolean newFlag2) {
+		this.flag2 = newFlag2;
 	}
 	
 	public boolean getFlag2() {
-		return Flag;	
+		return flag2;
 	}
+
+	public void setLivingStatus(boolean living) {
+        this.alive = living;
+    }
+
+    public boolean isAlive() {
+        return alive;
+    }
 }

@@ -4,7 +4,7 @@ Feature: Obstaclewar
         Scenario: Robot hits a stopping obstacle
         Given a stopping obstacle on the board in front of the robot
         When the robot hits the obstacle
-        Then the robot cannot move ford
+        Then the robot cannot move into the obstacle
 
     @tag2
         Scenario: Robot hits a damaging obstacle and survives
@@ -19,5 +19,5 @@ Feature: Obstaclewar
         Given a damaging obstacle on the board in front of the robot
         And one life left
         When the robot hits the obstacle
-        Then the robot loses a life
+        Then the robot has no lives
         And is out of the game

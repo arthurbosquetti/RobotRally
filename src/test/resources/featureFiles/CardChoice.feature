@@ -1,5 +1,3 @@
-
-
 @tag
 Feature: Choosing 5 cards to be played
 

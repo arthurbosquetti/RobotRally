@@ -5,13 +5,12 @@ import setUp.Robot;;
 public class Tile {
 
     private TileType type;
-    private static boolean firstFlagReached;
-    private static boolean secondFlagReached;
-    private static boolean robotMoved;
+	private boolean valid;
+	private int x; private int y;
 
-    public Tile(TileType type) {
+    public Tile(TileType type, boolean isValid) {
         this.type = type;
-
+		this.valid = isValid;
     }
 
     public void hit(Robot robot)
@@ -20,23 +19,11 @@ public class Tile {
 	}
 	
 	public boolean validTile() {
-		return true;
+		return valid;
 	}
 	
 	public String toString() {
 		return this.type.getPicture();
-	}
-	
-	public static boolean firstFlagReached() {
-		return firstFlagReached;
-	}
-	
-	public static boolean secondFlagReached() {
-		return secondFlagReached;
-	}
-	
-	public static boolean robotMoved() {
-		return robotMoved;
 	}
 
 	public void obstacleType(String string) {
