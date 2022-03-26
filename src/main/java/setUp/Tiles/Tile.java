@@ -1,5 +1,7 @@
 package setUp.Tiles;
 
+import setUp.Robot;;
+
 public class Tile {
 
     private TileType type;
@@ -12,7 +14,7 @@ public class Tile {
 
     }
 
-    public void hit()
+    public void hit(Robot robot)
 	{	
 		System.out.println("nothing");
 	}
