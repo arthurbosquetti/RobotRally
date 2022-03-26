@@ -16,8 +16,8 @@ Feature: Flags
 		Then nothing happens
 
 
-	 @tag3
-	 Scenario: Robot reaches the second flag before the first
+	@tag3
+	Scenario: Robot reaches the second flag before the first
 		Given the second flag on the board in front of the robot
 		And the robot has not already reached the first flag
 		When a movement is executed by a robot
