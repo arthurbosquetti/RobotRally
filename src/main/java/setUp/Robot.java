@@ -1,7 +1,7 @@
 package setUp;
 
 import setUp.Tiles.Tile;
-import setUp.Direction;
+
 
 public class Robot extends Player {
     
@@ -14,11 +14,9 @@ public class Robot extends Player {
 
     public Robot(String name) {
         super(name, 9);
-        //TODO: change this to change based on board generation
-        this.direction = new Direction(0);
     }
 
-    //Getters and Setters for X and Y
+
     public int getX() {
         return this.x;
     }
@@ -32,21 +30,27 @@ public class Robot extends Player {
     public void setY(int newY) {
         this.y = newY;
     }
-    
-    public Direction getDir() {
-    	return direction;
+
+    public void turnLeft() {
+        this.direction.turnLeft();
     }
-    
-    //moves the Robot to nextTile then interacts
+
+    public void turnRight() {
+        this.direction.turnRight();
+    }
+
     public void move() {
-    	this.currentTile = nextTile;
-        this.currentTile.hit(this);
+        if (nextTile.validTile()) {
+            this.currentTile = nextTile;
+            this.currentTile.hit(this);
+        } 
         
     }
 
     public Tile getTile() {
         return currentTile;
     }
+
     public void nextTile(Tile newTile) {
         this.nextTile = newTile;
     }
@@ -57,7 +61,6 @@ public class Robot extends Player {
             this.setLives(0);
             this.setLivingStatus(false);
         } else {
-        	//TODO: add code to respawn Robot
             this.setLives(this.getLives() - dmg);
         }
     }
