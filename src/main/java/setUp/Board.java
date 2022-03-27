@@ -2,11 +2,13 @@ package setUp;
 
 import setUp.Tiles.Tile;
 import setUp.Tiles.TileType;
+import setUp.Movement;
 
 public class Board implements Level{
 	
 	private int boardType;
 	private Tile[][] board;
+	private Movement mov;
 	private int rows;
 	private int cols;
 	private int level;
@@ -16,10 +18,10 @@ public class Board implements Level{
 		this.rows = 8;
 		this.cols = 8;
 		this.board = new Tile[rows][cols];
-
+		this.mov = new Movement(this);
 		
-		//generateBoard(type);
-		
+		//still needed for testing
+		generateBoard(type);
 		
 	}
 	
@@ -32,20 +34,47 @@ public class Board implements Level{
 	}
 	
 	public void setTile(int x, int y, Tile newTile) {
-		//TODO fix for indexOutOfBounds
-		 this.board[y][x] = newTile;
+		//checks to make sure new tile is within the game board
+		if (x < 0 || x >= this.getCols() || y < 0 || y >= this.getRows()) {
+			this.board[y][x] = newTile;
+		}
+		System.out.println("Error: attempted to set tile outside of gameboard");
+		
+	}
+	
+	public int getCols() {
+		return cols;
+	}
+	public int getRows() {
+		return rows;
+	}
+	
+	//change to work with movement card, and change based on those
+	public boolean makeMove(Robot robot, boolean forward, int steps) {
+		//gets the next point based on move
+		int[] newPoint = mov.newPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
+		//checks move for validity
+		if (mov.checkMove(newPoint)) {
+			//Code for moving the Robot
+			robot.nextTile(this.getTile(newPoint[0], newPoint[1]));
+			robot.move();
+			robot.setX(newPoint[0]);
+			robot.setY(newPoint[1]);	
+			return true;
+		}
+		//Code for when robot can't move forward
+		return false;
 	}
 	
 	//TODO: change generation based on boardType
-//	public void generateBoard(int type) {
-//
-//		for (int j = 0; j < rows; j++) {
-//			for (int i = 0; i < cols; i++) {
-//				Tile t = new Tile(TileType.OPEN_FLOOR);
-//				this.board[j][i] = t;
-//			}
-//		}
-//	}
+	public void generateBoard(int type) {
+		for (int j = 0; j < rows; j++) {
+			for (int i = 0; i < cols; i++) {
+				Tile t = new Tile(TileType.OPEN_FLOOR, true);
+				this.board[j][i] = t;
+			}
+		}
+	}
 	
 	public void printBoard() {
 		for (Tile[] row : this.board) {
