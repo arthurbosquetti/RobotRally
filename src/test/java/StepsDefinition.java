@@ -21,7 +21,7 @@ public class StepsDefinition {
 	Player player1 	= new Player();
 	Player player2  = new Player();
 	Game game		= new Game();
-	private Board board;
+	Board board = new Board(1);
 	Card[] availableCards;
 	Card[] chosenCards;
 	FlagTile flag1 = new FlagTile(1);
@@ -139,24 +139,28 @@ public class StepsDefinition {
 	//Scenario: Robot hits a stopping obstacle
 	@Given("a stopping obstacle on the board in front of the robot")
 	public void a_stopping_obstacle_on_the_board_in_front_of_the_robot() {
-		robot.nextTile(stopper);
+		board.setTile(2, 2, stopper);
+		robot.setX(2);
+		robot.setY(3);
 	}
 
 	@When("the robot hits the obstacle")
 	public void the_robot_hits_the_obstacle() {
-	    robot.move();
+		board.makeMove(robot, true, 1);
 	}
 
 	@Then("the robot cannot move into the obstacle")
 	public void the_robot_cannot_move_into_the_obstacle() {
-	    //assertFalse(board.checkValidMove());
+	    assertFalse(board.makeMove(robot, true, 1));
 	}
 
 
 	 //Scenario: Robot 1 hits a damaging obstacle and survives
 	@Given("a damaging obstacle on the board in front of the robot")
 	public void a_damaging_obstacle_on_the_board_in_front_of_the_robot() {
-	    robot.nextTile(pit);
+		board.setTile(2, 2, pit);
+		robot.setX(2);
+		robot.setY(3);
 	}
 
 	@Given("two or more lives left")

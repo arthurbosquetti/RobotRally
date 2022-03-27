@@ -35,9 +35,9 @@ public class Board implements Level{
 	
 	public void setTile(int x, int y, Tile newTile) {
 		//checks to make sure new tile is within the game board
-		if (x < 0 || x >= this.getCols() || y < 0 || y >= this.getRows()) {
+		if (x > 0 || x < cols || y > 0 || y < rows) {
 			this.board[y][x] = newTile;
-		}
+		} else 
 		System.out.println("Error: attempted to set tile outside of gameboard");
 		
 	}
