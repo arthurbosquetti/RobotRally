@@ -76,6 +76,7 @@ public class Board implements Level{
 		}
 	}
 	
+	//printing a board without a robot
 	public void printBoard() {
 		for (Tile[] row : this.board) {
 			for (Tile col : row) {
@@ -99,6 +100,40 @@ public class Board implements Level{
 		} else {
 			System.out.println("Not a valid difficulty level"); 
 		}
+	}
+	
+	//Overloaded printBoard method for printing a robot
+	public void printBoard(Robot robot) {
+		int x = robot.getX();
+		int y = robot.getY();
+		//loop through board
+		for (int row = 0; row < board.length; row++)  {
+			for (int col = 0; col < board[0].length; col++) {
+				//check for robot in current tile
+				if (x == col && y == row ) {
+					System.out.print(" |R|");
+				} else 
+				System.out.print(" " + board[row][col]);
+			}
+			System.out.println(" ");
+		}
+		
+		if (boardType==1) {
+			for (String row : board1) {
+				System.out.println(row);
+			}
+		} else if (boardType==2) {
+			for (String row : board2) {
+				System.out.println(row);
+			}
+		} else if (boardType==3) {
+			for (String row : board3) {
+				System.out.println(row);
+			}
+		} else {
+			System.out.println("Not a valid difficulty level"); 
+		}
+
 	}
 
 
