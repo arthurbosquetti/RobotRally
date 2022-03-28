@@ -35,6 +35,7 @@ public class Player {
 			player2.setTurn(true);
 			}
 		}
+
 	public Card[] getHand() {return hand;}
 	
 	
