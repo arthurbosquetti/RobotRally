@@ -18,9 +18,9 @@ import setUp.Tiles.FlagTile;
 
 public class StepsDefinition {
 	
-	Player player1 	= new Player();
-	Player player2  = new Player();
-	Game game		= new Game();
+	Player player1 = new Player();
+	Player player2 = new Player();
+	Game game = new Game();
 	private Board board;
 	Card[] availableCards;
 	Card[] chosenCards;
@@ -30,14 +30,14 @@ public class StepsDefinition {
 	TallObstacle stopper = new TallObstacle();
 	PitObstacle pit = new PitObstacle();
 
-	
+////////////////////////////
 ////// GAME START //////////
 
 	//Scenario: Successful start of the game
 	@Given("difficulty level is {int}")
 	public void difficulty_level_is(Integer int1) {
-	    board = new Board(board.getLevel());
-		board.setLevel(int1);
+	    board = new Board(int1);
+		//board.setLevel(int1);
 
 	}
 	@Given("players set their names to {string} and {string}")
@@ -51,9 +51,16 @@ public class StepsDefinition {
 	}
 	@Then("board is initialized")
 	public void board_is_initialized() {
-		assertNotNull(board);
+		assertNotNull(board.getBoard());
+	}
+	
+	//Scenario: Unsuccessful start of the game
+	@Then("board is not initialized")
+	public void board_is_not_initialized() {
+	   assertNull(board.getBoard());
 	}
 
+/////////////////////////////
 ////// CARD CHOICE //////////
 	
 	//Scenario: Successful Turn
@@ -81,59 +88,54 @@ public class StepsDefinition {
 		assertFalse(player2.getTurn());
 	}
 
+///////////////////////
 ////// FLAGS //////////
-
 
 	//Scenario: Robot reaches flag first time
 	@Given("the first flag on the board in front of the robot")
 	public void theFirstFlagOnTheBoardInFrontOfTheRobot() {
 		robot.nextTile(flag1);
 	}
-
 	@And("the robot has not already reached the first flag")
 	public void the_robot_has_not_already_reached_on_the_first_flag() {
 		robot.setFlag1(false);
 	}
-
 	@When("a movement is executed by a robot")
 	public void aMovementExecutedByARobot() {
 		robot.move();
 	}
-
 	@Then("the robot is marked with one flag")
 	public void mark_flag1() {
 		assertTrue(robot.getFlag1());
 	}
-
 
 	//Scenario: Robot reaches the first flag again
 	@And("the second flag on the board in front of the robot")
 	public void theSecondFlagOnTheBoardInFrontOfTheRobot() {
 		robot.nextTile(flag2);
 	}
-
 	@Given("the robot has already reached the first flag")
 	public void the_robot_has_already_reached_the_first_flag() {
 		robot.setFlag1(true);
 	}
-
 	@Then("no change")
 	public void no_change() {
 		assertTrue(robot.getFlag1());
 	}
-
+	
 	//Scenario: Robot reaches the second flag before the first
 	@Then("nothing happens")
 	public void nothing_happens() {
 		assertFalse(robot.getFlag2());
 	}
-
-	 //Scenario: Robot wins
+	
+	//Scenario: Robot wins
 	@Then("the robot has won")
 	public void the_robot_has_won() {
 		assertFalse(game.getGameStatus());
 	}
 
+/////////////////////////
 //// OBSTACLES //////////
 
 	//Scenario: Robot hits a stopping obstacle
@@ -141,29 +143,24 @@ public class StepsDefinition {
 	public void a_stopping_obstacle_on_the_board_in_front_of_the_robot() {
 		robot.nextTile(stopper);
 	}
-
 	@When("the robot hits the obstacle")
 	public void the_robot_hits_the_obstacle() {
 	    robot.move();
 	}
-
 	@Then("the robot cannot move into the obstacle")
 	public void the_robot_cannot_move_into_the_obstacle() {
 	    //assertFalse(board.checkValidMove());
 	}
-
 
 	 //Scenario: Robot 1 hits a damaging obstacle and survives
 	@Given("a damaging obstacle on the board in front of the robot")
 	public void a_damaging_obstacle_on_the_board_in_front_of_the_robot() {
 	    robot.nextTile(pit);
 	}
-
 	@Given("two or more lives left")
 	public void two_or_more_lives_left() {
 	    robot.setLives(4);
 	}
-
 	@Then("the robot loses a life")
 	public void the_robot_loses_a_life() {
 	    assertEquals(robot.getLives(), 3);
@@ -178,12 +175,10 @@ public class StepsDefinition {
     public void one_life_left() {
         robot.setLives(1);
     }
-
 	@Then("the robot has no lives")
 	public void robot_has_no_lives() {
 		assertEquals(robot.getLives(), 0);
 	}
-
     @Then("is out of the game")
     public void is_out_of_the_game() {
         assertFalse(robot.isAlive());

@@ -1,5 +1,6 @@
+@tag
 Feature: Obstaclewar
-
+    
     @tag1
         Scenario: Robot hits a stopping obstacle
         Given a stopping obstacle on the board in front of the robot
