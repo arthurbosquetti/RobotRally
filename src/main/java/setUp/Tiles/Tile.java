@@ -1,6 +1,6 @@
 package setUp.Tiles;
 
-import setUp.Robot;;
+import setUp.Robot;
 
 public class Tile {
 

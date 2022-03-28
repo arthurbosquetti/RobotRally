@@ -13,7 +13,7 @@ public class Robot extends Player {
     
 
     public Robot(String name) {
-        super(name, 9);
+    	super(name);
     }
 
 
