@@ -1,11 +1,9 @@
 package setUp;
 
 import setUp.Cards.JumpCard;
-import setUp.Cards.MovingCard;
 
 public class Card{
 	MovingCard moving = new MovingCard();
-	JumpCard jump = new JumpCard();
 	
 	private String action;
 	
@@ -16,18 +14,15 @@ public class Card{
 		return action;
 	}
 	
-	public void executeAction(String action, Robot robot) {
-		if (action == "F1" | action == "F2" |action == "F3"|action == "B" ) {
-			moving.detMove(action, robot);
+	public void executeAction(String action, Robot robot, Board board) {
+		if (action == "F1" | action == "F2" |action == "F3"|action == "B"|action=="j") {
+			moving.detMove(action, robot, board);
 		}
 		else if (action == "R") {
 			robot.getDir().turnRight();
 		}
 		else if (action == "L") {
 			robot.getDir().turnLeft();
-		}
-		else if (action == "J") {
-			
 		}
 	}
 	
