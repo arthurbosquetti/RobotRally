@@ -1,14 +1,10 @@
 package setUp;
 
-public enum Direction {
-    NORTH(0),
-    WEST(90),
-    SOUTH(180),
-    EAST(270);
+public class Direction {
 
     private int direction;
 
-    private Direction(int dir) {
+    Direction(int dir) {
         this.direction = dir;
     }
 
@@ -26,6 +22,26 @@ public enum Direction {
         } else {
             direction = 270;
         }
+    }
+    
+    public String getDirection() {
+    	switch (direction) {
+    		case 0:
+    			return "north";
+    		case 90:
+    			return "east";
+    		case 180:
+    			return "south";
+    		case 270:
+    			return "west";
+    		default:
+    			System.out.println("Error in Direction");
+    			return "";
+    	}
+    }
+    
+    public String toString() {
+    	return this.getDirection();
     }
 
 }

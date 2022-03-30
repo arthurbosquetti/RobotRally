@@ -10,7 +10,7 @@ public class Player {
 	private boolean flag2;
 	private boolean alive;
 	
-	public Player() {}
+	public Player() {   }
 
 	public Player(String newName, int newLives) {
 		this.name = newName;
@@ -20,9 +20,11 @@ public class Player {
 		this.alive = true;
 	}
 
-	public void setName(String name) {this.name=name;}
+	public void setName(String name) { this.name = name; }
 
 	public void setTurn(boolean b) {this.turn=b;}
+	
+	public boolean getTurn() {return turn;}
 
 	public void setHand(Card[] cards, Player player2) {
 		if (cards.length!=5) {
@@ -33,17 +35,15 @@ public class Player {
 			this.hand=cards;
 			this.setTurn(false);
 			player2.setTurn(true);
-			}
 		}
-	public Card[] getHand() {return hand;}
+	}
 	
+	public Card[] getHand() { return hand; }
 	
-	public void setLives(int newLives) {this.lives = newLives;}
+	public void setLives(int newLives) { this.lives = newLives; }
 	
 	public int getLives() {return lives;}
 
-	public boolean getTurn() {return turn;}
-	
 	public void setFlag1(boolean newFlag1) {this.flag1 = newFlag1;}
 	
 	public boolean getFlag1() {
