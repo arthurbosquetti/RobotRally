@@ -30,7 +30,7 @@ public class RobotRally {
 		board.printBoard(robo);
 		
 		//make move function working
-		board.makeMove(robo, true, 1);
+		board.makeMove(robo, true, 1, false);
 		
 		
 	}

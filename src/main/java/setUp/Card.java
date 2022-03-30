@@ -1,7 +1,5 @@
 package setUp;
 
-import setUp.Cards.JumpCard;
-
 public class Card{
 	MovingCard moving = new MovingCard();
 	
