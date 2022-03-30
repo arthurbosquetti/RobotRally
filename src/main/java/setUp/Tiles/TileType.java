@@ -6,6 +6,7 @@ public enum TileType {
 	OPEN_FLOOR("| |"),
 	PIT("|P|"),
 	FLAG("|^|"),
+	GLUE("|G|"),
 	TALL("|T|");
 	
 	private String picture;

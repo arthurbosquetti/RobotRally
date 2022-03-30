@@ -43,9 +43,17 @@ public class Board {
 	}
 	
 	//TODO: add code for robots colliding, change to work with movement card, and change based on those
-	public boolean makeMove(Robot robot, boolean forward, int steps) {
+	public boolean makeMove(Robot robot, boolean forward, int steps, boolean jump) {
 		//gets the next point based on move
-		int[] newPoint = robot.getNewPoint(forward, steps);
+		int[] newPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
+		
+		if (jump) {
+			int [] midPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
+			if (!(mov.checkMove(midPoint))) {
+				return false;
+			}
+		}
+		
 		//checks move for validity
 		if (mov.checkMove(newPoint)) {
 			//Code for moving the Robot

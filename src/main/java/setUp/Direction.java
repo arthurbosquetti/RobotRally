@@ -4,7 +4,7 @@ public class Direction {
 
     private int direction;
 
-    Direction(int dir) {
+    public Direction(int dir) {
         this.direction = dir;
     }
 
