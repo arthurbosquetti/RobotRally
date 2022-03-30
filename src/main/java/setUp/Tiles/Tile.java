@@ -15,7 +15,7 @@ public class Tile {
 
     public void hit(Robot robot)
 	{	
-		System.out.println("nothing");
+		System.out.println("Floor tile, no result");
 	}
 	
 	public boolean validTile() {

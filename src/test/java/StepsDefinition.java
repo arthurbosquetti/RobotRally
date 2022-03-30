@@ -9,6 +9,7 @@ import io.cucumber.java.en.When;
 import setUp.Board;
 import setUp.Card;
 import setUp.Game;
+import setUp.Level;
 import setUp.Player;
 import setUp.Robot;
 import setUp.Tiles.PitObstacle;
@@ -18,10 +19,17 @@ import setUp.Tiles.FlagTile;
 
 public class StepsDefinition {
 	
+<<<<<<< HEAD
 	Player player1 = new Player();
 	Player player2 = new Player();
 	Game game = new Game();
 	private Board board;
+=======
+	Player player1 	= new Player();
+	Player player2  = new Player();
+	Game game		= new Game();
+	Board board = new Board(1);
+>>>>>>> branch 'md' of https://github.com/arthurbosquetti/RobotRally.git
 	Card[] availableCards;
 	Card[] chosenCards;
 	FlagTile flag1 = new FlagTile(1);
@@ -29,6 +37,7 @@ public class StepsDefinition {
 	Robot robot = new Robot("test");
 	TallObstacle stopper = new TallObstacle();
 	PitObstacle pit = new PitObstacle();
+	Level level;
 
 ////////////////////////////
 ////// GAME START //////////
@@ -36,8 +45,13 @@ public class StepsDefinition {
 	//Scenario: Successful start of the game
 	@Given("difficulty level is {int}")
 	public void difficulty_level_is(Integer int1) {
+<<<<<<< HEAD
 	    board = new Board(int1);
 		//board.setLevel(int1);
+=======
+		level.setLevel(int1);
+	    board = new Board(board.getLevel());
+>>>>>>> branch 'md' of https://github.com/arthurbosquetti/RobotRally.git
 
 	}
 	@Given("players set their names to {string} and {string}")
@@ -83,9 +97,10 @@ public class StepsDefinition {
 	}
 
 	//Scenario: Unsuccessful Turn
-	@Then("Not P2’s turn")
-	public void not_p2_s_turn() {
-		assertFalse(player2.getTurn());
+	
+	@Then("P1 hand empty")
+	public void p1_hand_empty() {
+		assertNull(player1.getHand());
 	}
 
 ///////////////////////
@@ -141,21 +156,25 @@ public class StepsDefinition {
 	//Scenario: Robot hits a stopping obstacle
 	@Given("a stopping obstacle on the board in front of the robot")
 	public void a_stopping_obstacle_on_the_board_in_front_of_the_robot() {
-		robot.nextTile(stopper);
+		board.setTile(2, 2, stopper);
+		robot.setX(2);
+		robot.setY(3);
 	}
 	@When("the robot hits the obstacle")
 	public void the_robot_hits_the_obstacle() {
-	    robot.move();
+		board.makeMove(robot, true, 1);
 	}
 	@Then("the robot cannot move into the obstacle")
 	public void the_robot_cannot_move_into_the_obstacle() {
-	    //assertFalse(board.checkValidMove());
+	    assertFalse(board.makeMove(robot, true, 1));
 	}
 
 	 //Scenario: Robot 1 hits a damaging obstacle and survives
 	@Given("a damaging obstacle on the board in front of the robot")
 	public void a_damaging_obstacle_on_the_board_in_front_of_the_robot() {
-	    robot.nextTile(pit);
+		board.setTile(2, 2, pit);
+		robot.setX(2);
+		robot.setY(3);
 	}
 	@Given("two or more lives left")
 	public void two_or_more_lives_left() {
@@ -167,7 +186,9 @@ public class StepsDefinition {
 	}
 	@Then("the robot is moved to the starting position")
 	public void the_robot_is_moved_to_the_starting_position() {
-	    //assertEquals(robot.getTile(), robot.spawnPoint());
+	    int[] spawnpoint = robot.getSpawn();
+		assertEquals(robot.getX(), spawnpoint[0]);
+		assertEquals(robot.getY(), spawnpoint[1]);
 	}
 
 	 //Scenario: Robot hits a damaging obstacle and dies!

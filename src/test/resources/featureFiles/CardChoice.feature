@@ -12,4 +12,5 @@ Feature: Choosing 5 cards to be played
 		Given 9 possible movement cards
 		And P1’s turn
 		When P1 chooses 3 cards
-		Then Not P2’s turn
+		Then P1 hand empty
+		Then P2’s turn

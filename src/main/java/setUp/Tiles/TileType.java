@@ -3,7 +3,7 @@ package setUp.Tiles;
 public enum TileType {
 	
 	//TODO: change strings to pictures
-	OPEN_FLOOR("|F|"),
+	OPEN_FLOOR("| |"),
 	PIT("|P|"),
 	FLAG("|^|"),
 	TALL("|T|");
