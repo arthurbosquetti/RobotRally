@@ -11,6 +11,7 @@ public class RobotRally {
 		Board board = new Board(1);
 		board.setTile(2, 2, new TallObstacle());
 		
+		
 		Robot robo = new Robot("dev");
 		robo.setX(2);
 		robo.setY(3);

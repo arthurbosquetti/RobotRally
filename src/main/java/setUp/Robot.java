@@ -70,7 +70,24 @@ public class Robot extends Player {
             this.setLives(this.getLives() - dmg);
         }
     }
-
+    
+    public int[] getNewPoint(boolean forward, int steps) {
+		switch (direction.getDirection()) {
+			case "north":
+				return (forward)? new int[]{x, y -= steps} : new int[]{x, y += steps};
+			case "east":
+				return (forward)? new int[]{x += steps, y} : new int[]{x -= steps, y};
+				
+			case "south":
+				return (forward)? new int[]{x, y += steps} : new int[]{x, y -= steps};
+				
+			case "west":
+				return (forward)? new int[]{x -= steps, y} : new int[]{x += steps, y};
+				
+			default:
+				return new int[]{x, y};	
+		}
+	}
     
 
 }

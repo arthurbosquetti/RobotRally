@@ -58,7 +58,7 @@ public class Board implements Level{
 	//TODO: add code for robots colliding, change to work with movement card, and change based on those
 	public boolean makeMove(Robot robot, boolean forward, int steps) {
 		//gets the next point based on move
-		int[] newPoint = mov.newPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
+		int[] newPoint = robot.getNewPoint(forward, steps);
 		//checks move for validity
 		if (mov.checkMove(newPoint)) {
 			//Code for moving the Robot
@@ -125,6 +125,8 @@ public class Board implements Level{
 			}
 			System.out.println(" ");
 		}
+		
+		System.out.println("Robot is facing: " + robot.getDir());
 		
 		if (boardType==1) {
 			for (String row : board1) {

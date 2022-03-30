@@ -39,5 +39,9 @@ public class Direction {
     			return "";
     	}
     }
+    
+    public String toString() {
+    	return this.getDirection();
+    }
 
 }
