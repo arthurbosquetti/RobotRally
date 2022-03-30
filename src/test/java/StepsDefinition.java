@@ -149,12 +149,12 @@ public class StepsDefinition {
 
 	@When("the robot hits the obstacle")
 	public void the_robot_hits_the_obstacle() {
-		board.makeMove(robot, true, 1);
+		board.makeMove(robot, true, 1, false);
 	}
 
 	@Then("the robot cannot move into the obstacle")
 	public void the_robot_cannot_move_into_the_obstacle() {
-	    assertFalse(board.makeMove(robot, true, 1));
+	    assertFalse(board.makeMove(robot, true, 1, false));
 	}
 
 
