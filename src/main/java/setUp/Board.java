@@ -61,7 +61,7 @@ public class Board {
 			robot.setX(newPoint[0]);
 			robot.setY(newPoint[1]);
 			robot.move();
-			return true;
+			return true; 
 		}
 		//Code for when robot can't move forward
 		return false;
