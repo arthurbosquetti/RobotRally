@@ -36,10 +36,9 @@ public class StepsDefinition {
 ////// GAME START //////////
 
 	//Scenario: Successful start of the game
-	@Given("difficulty level is {int}")
-	public void difficulty_level_is(Integer int1) {
-		level.setLevel(int1);
-	    board = new Board();
+	@Given("difficulty level is {string}")
+	public void difficulty_level_is(String str) {
+		level = new Level(str,board);
 
 	}
 	@Given("players set their names to {string} and {string}")
@@ -74,6 +73,7 @@ public class StepsDefinition {
 	}
 	@Then("P2’s turn")
 	public void p2_s_turn() {
+		System.out.println(player2.getTurn());
 	    assertTrue(player2.getTurn());
 	}
 
