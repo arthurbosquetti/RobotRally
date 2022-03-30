@@ -38,7 +38,7 @@ public class StepsDefinition {
 	//Scenario: Successful start of the game
 	@Given("difficulty level is {string}")
 	public void difficulty_level_is(String str) {
-		level = new Level(str,board);
+		level = new Level(str, board);
 
 	}
 	@Given("players set their names to {string} and {string}")

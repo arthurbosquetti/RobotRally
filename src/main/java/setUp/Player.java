@@ -29,7 +29,7 @@ public class Player {
 	public void setHand(Card[] cards, Player player2) {
 		if (cards.length!=5) {
 			this.hand=null;
-			player2.setTurn(false);
+			player2.setTurn(true);
 		}
 		else {
 			this.hand=cards;
