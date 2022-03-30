@@ -50,9 +50,9 @@ public class Board {
 		if (mov.checkMove(newPoint)) {
 			//Code for moving the Robot
 			robot.nextTile(this.getTile(newPoint[0], newPoint[1]));
-			robot.move();
 			robot.setX(newPoint[0]);
-			robot.setY(newPoint[1]);	
+			robot.setY(newPoint[1]);
+			robot.move();
 			return true;
 		}
 		//Code for when robot can't move forward

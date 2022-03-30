@@ -17,8 +17,8 @@ public class Robot extends Player {
         super(name, 9);
         //TODO: change these based on board generation
         this.direction = new Direction(0);
-        this.spawnX = 2;
-        this.spawnY = 2;
+        this.spawnX = 5;
+        this.spawnY = 5;
     }
 
     //Getters and Setters
@@ -74,15 +74,15 @@ public class Robot extends Player {
     public int[] getNewPoint(boolean forward, int steps) {
 		switch (direction.getDirection()) {
 			case "north":
-				return (forward)? new int[]{x, y -= steps} : new int[]{x, y += steps};
+				return (forward)? new int[]{x, y - steps} : new int[]{x, y + steps};
 			case "east":
-				return (forward)? new int[]{x += steps, y} : new int[]{x -= steps, y};
+				return (forward)? new int[]{x + steps, y} : new int[]{x - steps, y};
 				
 			case "south":
-				return (forward)? new int[]{x, y += steps} : new int[]{x, y -= steps};
+				return (forward)? new int[]{x, y + steps} : new int[]{x, y - steps};
 				
 			case "west":
-				return (forward)? new int[]{x -= steps, y} : new int[]{x += steps, y};
+				return (forward)? new int[]{x - steps, y} : new int[]{x + steps, y};
 				
 			default:
 				return new int[]{x, y};	
