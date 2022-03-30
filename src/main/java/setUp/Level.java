@@ -2,17 +2,13 @@ package setUp;
 
 public class Level {
 	
-	private int boardsize; private int obstaclenumber; private String thislevel; private int level; private Board board;
+	private String thislevel; private int level; private Board board;
 	
 	public Level(String a, Board newBoard) {
 		this.thislevel = a;
 		this.board = newBoard;
 		initializeBoard();
 	}
-	
-	//Level easy = new Level("Easy"); do in game class?
-	//Level medium = new Level("Medium");
-	//Level hard = new Level("Hard");
 
 			
 // this is all bullshit rn but just an example
@@ -21,24 +17,20 @@ public class Level {
 		
 		switch(thislevel) {
 			case "Easy":
-				setBoardSize(3);
-				setObstacleNumber(2);
+				board.setBoardSize(3);
+				board.setObstacleNumber(2);
 			case "Medium":
-				setBoardSize(5);
-				setObstacleNumber(3);
+				board.setBoardSize(5);
+				board.setObstacleNumber(3);
 			case "Hard":
-				setBoardSize(7);
-				setObstacleNumber(5);
+				board.setBoardSize(7);
+				board.setObstacleNumber(5);
+			default:
+				board.setBoardSize(0);
+				board.setObstacleNumber(0);
+				
 		}
 		
-	}
-	
-	public void setBoardSize(int boardSize) {
-		this.boardsize = boardSize;
-	}
-	
-	public void setObstacleNumber(int obstacleNumber) {
-		this.obstaclenumber = obstacleNumber;
 	}
 	
 	public void setLevel(int i) {
