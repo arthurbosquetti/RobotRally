@@ -174,7 +174,9 @@ public class StepsDefinition {
 	}
 	@Then("the robot is moved to the starting position")
 	public void the_robot_is_moved_to_the_starting_position() {
-	    //assertEquals(robot.getTile(), robot.spawnPoint());
+	    int[] spawnpoint = robot.getSpawn();
+		assertEquals(robot.getX(), spawnpoint[0]);
+		assertEquals(robot.getY(), spawnpoint[1]);
 	}
 
 	 //Scenario: Robot hits a damaging obstacle and dies!

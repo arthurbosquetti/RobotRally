@@ -22,24 +22,22 @@ public class Board implements Level{
 		
 		//still needed for testing
 		generateBoard(type);
-		
 	}
 	
 	String[] board1 = {"Easy Board"};
 	String[] board2 = {"Medium Board"};
 	String[] board3 = {"Hard Boardx"};
 	
+	//Getters and Setters
 	public Tile getTile(int x, int y) {
 		return this.board[y][x];
 	}
-	
 	public void setTile(int x, int y, Tile newTile) {
 		//checks to make sure new tile is within the game board
 		if (x > 0 || x < cols || y > 0 || y < rows) {
 			this.board[y][x] = newTile;
 		} else 
 		System.out.println("Error: attempted to set tile outside of gameboard");
-		
 	}
 	
 	public int getCols() {
@@ -49,7 +47,15 @@ public class Board implements Level{
 		return rows;
 	}
 	
-	//change to work with movement card, and change based on those
+	public void setLevel(int i) {
+		this.level = i;
+	}
+	public int getLevel() {
+		return level;
+	}
+	
+	
+	//TODO: add code for robots colliding, change to work with movement card, and change based on those
 	public boolean makeMove(Robot robot, boolean forward, int steps) {
 		//gets the next point based on move
 		int[] newPoint = mov.newPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
@@ -76,9 +82,11 @@ public class Board implements Level{
 		}
 	}
 	
+	
 	//printing a board without a robot
 	public void printBoard() {
 		for (Tile[] row : this.board) {
+			
 			for (Tile col : row) {
 				System.out.print(" " + col);
 			}
@@ -133,18 +141,6 @@ public class Board implements Level{
 		} else {
 			System.out.println("Not a valid difficulty level"); 
 		}
-
 	}
-
-
-
-	public void setLevel(int i) {
-		this.level = i;
-	}
-	public int getLevel() {
-		return level;
-	}
-
-
 	
 }
