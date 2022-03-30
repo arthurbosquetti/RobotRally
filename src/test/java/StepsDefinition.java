@@ -9,6 +9,7 @@ import io.cucumber.java.en.When;
 import setUp.Board;
 import setUp.Card;
 import setUp.Game;
+import setUp.Level;
 import setUp.Player;
 import setUp.Robot;
 import setUp.Tiles.PitObstacle;
@@ -29,6 +30,7 @@ public class StepsDefinition {
 	Robot robot = new Robot("test");
 	TallObstacle stopper = new TallObstacle();
 	PitObstacle pit = new PitObstacle();
+	Level level;
 
 	
 ////// GAME START //////////
@@ -36,8 +38,8 @@ public class StepsDefinition {
 	//Scenario: Successful start of the game
 	@Given("difficulty level is {int}")
 	public void difficulty_level_is(Integer int1) {
+		level.setLevel(int1);
 	    board = new Board(board.getLevel());
-		board.setLevel(int1);
 
 	}
 	@Given("players set their names to {string} and {string}")
@@ -76,9 +78,10 @@ public class StepsDefinition {
 	}
 
 	//Scenario: Unsuccessful Turn
-	@Then("Not P2’s turn")
-	public void not_p2_s_turn() {
-		assertFalse(player2.getTurn());
+	
+	@Then("P1 hand empty")
+	public void p1_hand_empty() {
+		assertNull(player1.getHand());
 	}
 
 ////// FLAGS //////////

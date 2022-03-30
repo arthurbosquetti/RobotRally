@@ -23,6 +23,8 @@ public class Player {
 	public void setName(String name) {this.name=name;}
 
 	public void setTurn(boolean b) {this.turn=b;}
+	
+	public boolean getTurn() {return turn;}
 
 	public void setHand(Card[] cards, Player player2) {
 		if (cards.length!=5) {
@@ -42,8 +44,6 @@ public class Player {
 	
 	public int getLives() {return lives;}
 
-	public boolean getTurn() {return turn;}
-	
 	public void setFlag1(boolean newFlag1) {this.flag1 = newFlag1;}
 	
 	public boolean getFlag1() {

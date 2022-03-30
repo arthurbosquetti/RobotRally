@@ -3,15 +3,14 @@ package setUp;
 import setUp.Tiles.Tile;
 import setUp.Tiles.TileType;
 
-public class Board implements Level{
+public class Board {
 	
 	private int boardType;
 	private Tile[][] board;
 	private int rows;
 	private int cols;
-	private int level;
 	
-	public Board(int type) {
+	public Board() {
 		this.boardType = type;
 		this.rows = 8;
 		this.cols = 8;
@@ -25,7 +24,7 @@ public class Board implements Level{
 	
 	String[] board1 = {"Easy Board"};
 	String[] board2 = {"Medium Board"};
-	String[] board3 = {"Hard Boardx"};
+	String[] board3 = {"Hard Board"};
 	
 	public Tile getTile(int x, int y) {
 		return this.board[y][x];
@@ -74,12 +73,7 @@ public class Board implements Level{
 
 
 
-	public void setLevel(int i) {
-		this.level = i;
-	}
-	public int getLevel() {
-		return level;
-	}
+	
 
 
 	
