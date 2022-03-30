@@ -22,7 +22,6 @@ public class Movement {
 		} else 
 			System.out.println("move failed, obstacle in the way");
 			return false;
-	}
-		
+	}	
 
 }

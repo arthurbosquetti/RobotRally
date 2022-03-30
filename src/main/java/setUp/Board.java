@@ -6,7 +6,6 @@ import setUp.Movement;
 
 public class Board {
 	
-	private int boardType;
 	private Tile[][] board;
 	private Movement mov;
 	private int rows;
@@ -15,19 +14,14 @@ public class Board {
 	private int obstaclenumber;
 	
 	public Board() {
-		this.boardType = type;
 		this.rows = 8;
 		this.cols = 8;
 		this.board = new Tile[rows][cols];
 		this.mov = new Movement(this);
 		
 		//still needed for testing
-		generateBoard(type);
+		generateBoard();
 	}
-	
-	String[] board1 = {"Easy Board"};
-	String[] board2 = {"Medium Board"};
-	String[] board3 = {"Hard Board"};
 	
 	//Getters and Setters
 	public Tile getTile(int x, int y) {
@@ -48,14 +42,6 @@ public class Board {
 		return rows;
 	}
 	
-	public void setLevel(int i) {
-		this.level = i;
-	}
-	public int getLevel() {
-		return level;
-	}
-	
-	
 	//TODO: add code for robots colliding, change to work with movement card, and change based on those
 	public boolean makeMove(Robot robot, boolean forward, int steps) {
 		//gets the next point based on move
@@ -74,7 +60,7 @@ public class Board {
 	}
 	
 	//TODO: change generation based on boardType
-	public void generateBoard(int type) {
+	public void generateBoard() {
 		for (int j = 0; j < rows; j++) {
 			for (int i = 0; i < cols; i++) {
 				Tile t = new Tile(TileType.OPEN_FLOOR, true);
@@ -93,22 +79,6 @@ public class Board {
 			}
 			System.out.println(" ");
 		}
-		
-		if (boardType==1) {
-			for (String row : board1) {
-				System.out.println(row);
-			}
-		} else if (boardType==2) {
-			for (String row : board2) {
-				System.out.println(row);
-			}
-		} else if (boardType==3) {
-			for (String row : board3) {
-				System.out.println(row);
-			}
-		} else {
-			System.out.println("Not a valid difficulty level"); 
-		}
 	}
 	
 	public void setBoardSize(int boardSize) {
@@ -118,15 +88,10 @@ public class Board {
 	public void setObstacleNumber(int obstacleNumber) {
 		this.obstaclenumber = obstacleNumber;
 	}
-<<<<<<< HEAD
 
 
 
-	
-
-
-=======
-	
+		
 	//Overloaded printBoard method for printing a robot
 	public void printBoard(Robot robot) {
 		int x = robot.getX();
@@ -144,23 +109,6 @@ public class Board {
 		}
 		
 		System.out.println("Robot is facing: " + robot.getDir());
-		
-		if (boardType==1) {
-			for (String row : board1) {
-				System.out.println(row);
-			}
-		} else if (boardType==2) {
-			for (String row : board2) {
-				System.out.println(row);
-			}
-		} else if (boardType==3) {
-			for (String row : board3) {
-				System.out.println(row);
-			}
-		} else {
-			System.out.println("Not a valid difficulty level"); 
-		}
 	}
->>>>>>> branch 'md' of https://github.com/arthurbosquetti/RobotRally.git
 	
 }

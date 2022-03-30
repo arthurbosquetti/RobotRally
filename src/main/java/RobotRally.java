@@ -8,10 +8,10 @@ public class RobotRally {
 	public static void main(String[] args) {
 		
 		//Board & Robot for testing
-		Board board = new Board(1);
+		Board board = new Board();
 		board.setTile(2, 2, new TallObstacle());
 		
-		
+	
 		Robot robo = new Robot("dev");
 		robo.setX(2);
 		robo.setY(3);

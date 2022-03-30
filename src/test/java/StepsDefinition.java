@@ -22,7 +22,7 @@ public class StepsDefinition {
 	Player player1 	= new Player();
 	Player player2  = new Player();
 	Game game		= new Game();
-	Board board = new Board(1);
+	Board board = new Board();
 	Card[] availableCards;
 	Card[] chosenCards;
 	FlagTile flag1 = new FlagTile(1);
@@ -39,7 +39,7 @@ public class StepsDefinition {
 	@Given("difficulty level is {int}")
 	public void difficulty_level_is(Integer int1) {
 		level.setLevel(int1);
-	    board = new Board(board.getLevel());
+	    board = new Board();
 
 	}
 	@Given("players set their names to {string} and {string}")

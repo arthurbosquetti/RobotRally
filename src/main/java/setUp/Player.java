@@ -22,15 +22,9 @@ public class Player {
 
 	public void setName(String name) { this.name = name; }
 
-<<<<<<< HEAD
 	public void setTurn(boolean b) {this.turn=b;}
 	
 	public boolean getTurn() {return turn;}
-=======
-	public void setTurn(boolean b) { this.turn = b; }
-	
-	public boolean getTurn() { return turn; }
->>>>>>> branch 'md' of https://github.com/arthurbosquetti/RobotRally.git
 
 	public void setHand(Card[] cards, Player player2) {
 		if (cards.length!=5) {
@@ -48,15 +42,9 @@ public class Player {
 	
 	public void setLives(int newLives) { this.lives = newLives; }
 	
-<<<<<<< HEAD
 	public int getLives() {return lives;}
 
 	public void setFlag1(boolean newFlag1) {this.flag1 = newFlag1;}
-=======
-	public int getLives() { return lives; }
-	
-	public void setFlag1(boolean newFlag1) { this.flag1 = newFlag1; }
->>>>>>> branch 'md' of https://github.com/arthurbosquetti/RobotRally.git
 	
 	public boolean getFlag1() {
 		return flag1;
