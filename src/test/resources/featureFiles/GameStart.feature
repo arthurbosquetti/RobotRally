@@ -9,6 +9,7 @@ Feature: Starting the game
 		And players set their names to "Water" and "Fire"
 		When game is started
 		Then board is initialized	 
+	
 
 
 

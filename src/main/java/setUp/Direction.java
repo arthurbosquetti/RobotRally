@@ -3,12 +3,16 @@ package setUp;
 public class Direction {
 
     private int direction;
+    private boolean rotatedLeft;
+    private boolean rotatedRight;
 
     public Direction(int dir) {
         this.direction = dir;
     }
 
     public void turnLeft() {
+    	System.out.println("I turned left");
+    	this.rotatedLeft = true;
         if (direction < 270) {
             direction += 90;
         } else {
@@ -17,11 +21,16 @@ public class Direction {
     }
 
     public void turnRight() {
+    	this.rotatedRight = true;
         if (direction > 0) {
             direction -= 90;
         } else {
             direction = 270;
         }
+    }
+    
+    public int getDirectionInt() {
+    	return direction;
     }
     
     public String getDirection() {
@@ -43,5 +52,12 @@ public class Direction {
     public String toString() {
     	return this.getDirection();
     }
+    
 
+    public boolean getRotatedRight() {
+    	return rotatedRight;
+    }
+    public boolean getRotatedLeft() {
+    	return rotatedLeft;
+    }
 }

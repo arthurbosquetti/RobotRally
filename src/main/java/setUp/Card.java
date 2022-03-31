@@ -12,15 +12,17 @@ public class Card{
 		return action;
 	}
 	
-	public void executeAction(String action, Robot robot, Board board) {
-		if (action == "F1" | action == "F2" |action == "F3"|action == "B"|action=="j") {
+	public void executeAction(Robot robot, Board board) {
+		if (action == "F1" | action == "F2" |action == "F3"|action == "B"|action=="J") {
 			moving.detMove(action, robot, board);
 		}
 		else if (action == "R") {
+			//This never actually runs -> turnRight cannot be accessed
 			robot.getDir().turnRight();
 		}
 		else if (action == "L") {
-			robot.getDir().turnLeft();
+			//Same comment as above
+			(robot.getDir()).turnLeft();
 		}
 	}
 	

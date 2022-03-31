@@ -38,11 +38,6 @@ public class Deck{
 		System.out.println(Hand);
 	}
 	
-	
-	public Card getCard(int index) {
-		return Hand.get(index);
-	}
-
 
 }
 

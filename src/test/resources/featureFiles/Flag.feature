@@ -13,19 +13,18 @@ Feature: Flags
 		Given the first flag on the board in front of the robot
 		And the robot has already reached the first flag
 		When a movement is executed by a robot
-		Then nothing happens
+		Then robot does not collect first flag again
 
-
-	@tag3
-	Scenario: Robot reaches the second flag before the first
-		Given the second flag on the board in front of the robot
-		And the robot has not already reached the first flag
-		When a movement is executed by a robot
-		Then nothing happens
-				
-	@tag4
-	Scenario: Robot wins
-		Given the second flag on the board in front of the robot
-		And the robot has already reached the first flag
-		When a movement is executed by a robot
-		Then the robot has won
+		@tag3
+		Scenario: Robot reaches the second flag before the first
+			Given the second flag on the board in front of the robot
+			And the robot has not already reached the first flag
+			When a movement is executed by a robot
+			Then robot does not collect second flag
+					
+		@tag4
+		Scenario: Robot wins
+			Given the second flag on the board in front of the robot
+			And the robot has already reached the first flag
+			When a movement is executed by a robot
+			Then the robot has won
