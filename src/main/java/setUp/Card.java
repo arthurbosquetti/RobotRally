@@ -1,5 +1,6 @@
 package setUp;
 
+
 public class Card{
 	MovingCard moving = new MovingCard();
 	
@@ -8,20 +9,25 @@ public class Card{
 	public Card(String action) {
 		this.action = action;
 	}
+	
+	public MovingCard get_MovingCard() {
+		return moving;
+	}
+	
 	public String getCardAction() {
 		return action;
 	}
 	
 	public void executeAction(Robot robot, Board board) {
-		if (action == "F1" | action == "F2" |action == "F3"|action == "B"|action=="J") {
+		System.out.println(this.action.equals("F"));
+		if ( (this.action.equals("F1"))|| (this.action.equals("F2")) || (this.action.equals("F3")) || (this.action.equals("B")) || (this.action.equals("J"))) {
+			System.out.println("I got here");
 			moving.detMove(action, robot, board);
 		}
-		else if (action == "R") {
-			//This never actually runs -> turnRight cannot be accessed
+		else if (this.action.equals("R")) {
 			robot.getDir().turnRight();
 		}
-		else if (action == "L") {
-			//Same comment as above
+		else if (this.action.equals("L")) {
 			(robot.getDir()).turnLeft();
 		}
 	}
@@ -30,5 +36,6 @@ public class Card{
 	public String toString() { //overriding the toString() method  
   		return action + "";
  	} 
+ 	
 	
 }

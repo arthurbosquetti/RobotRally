@@ -76,7 +76,6 @@ public class StepsDefinition {
 	}
 	@Then("P2s turn")
 	public void p2_s_turn() {
-		System.out.println(player2.getTurn());
 	    assertTrue(player2.getTurn());
 	}
 	@Then("Hand is not empty")
@@ -89,6 +88,7 @@ public class StepsDefinition {
 	public void p1_chooses_card(String action) {
 		this.card1 = new Card(action);
 	}
+	
 	@When("the card is executed")
 	public void the_card_is_executed() {
 	    card1.executeAction(robot, board);
@@ -97,8 +97,16 @@ public class StepsDefinition {
 	@Then("Robot rotates left")
 	public void robot_rotates_left() {
 		//System.out.println(robot.getDir());
-		System.out.println(robot.getDir().getRotatedLeft());
+		//System.out.println(robot.getDir().getRotatedLeft());
 	    assertTrue(robot.getDir().getRotatedLeft());
+	}
+
+
+	//Scenario: Moving forward
+	@Then("Robot moves forward")
+	public void robot_moves_forward() {
+		System.out.println(card1.get_MovingCard().get_MovedForward());
+	    assertEquals(1, card1.get_MovingCard().get_MovedForward());
 	}
 
 

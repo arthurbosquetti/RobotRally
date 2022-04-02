@@ -35,7 +35,6 @@ public class Deck{
 				Hand.add(new Card("J"));
 			}
 		}
-		System.out.println(Hand);
 	}
 	
 

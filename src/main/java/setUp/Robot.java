@@ -44,7 +44,7 @@ public class Robot extends Player {
     
     public Direction getDir() {
     	//This prints north but it shouldn't print anything
-    	System.out.println(direction);
+    	//System.out.println(direction);
     	return this.direction;
     }
     

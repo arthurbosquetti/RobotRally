@@ -13,5 +13,14 @@ Feature: Choosing 5 cards to be played
 	Given P1 chooses card "L"
 	And P1 chooses 5 cards
 	When the card is executed
-	And Robot rotates left
+	Then Robot rotates left
+	
+	@tag3
+	Scenario: Moving forward
+	Given P1 chooses card "F1"
+	And P1 chooses 5 cards
+	When the card is executed
+	Then Robot moves forward 
+	
+
 
