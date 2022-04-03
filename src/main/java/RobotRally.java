@@ -1,4 +1,5 @@
 import setUp.Board;
+import setUp.Level;
 import setUp.Tiles.Tile;
 import setUp.Tiles.TallObstacle;
 import setUp.Robot;
@@ -9,7 +10,12 @@ public class RobotRally {
 		
 		//Board & Robot for testing
 		Board board = new Board();
-		board.setTile(2, 2, new TallObstacle());
+		Level easy = new Level("Easy", board);
+
+		board.printBoard();
+//		board.getTile(1,1);
+
+//		board.setTile(2, 2, new TallObstacle());
 		
 	
 		Robot robo = new Robot("dev");
@@ -20,10 +26,10 @@ public class RobotRally {
 		//board.printBoard();
 		
 		//printing board with robot on it
-		board.printBoard(robo);
+//		board.printBoard(robo);
 		
 		//make move function working
-		board.makeMove(robo, true, 1);
+//		board.makeMove(robo, true, 1);
 		
 		
 	}

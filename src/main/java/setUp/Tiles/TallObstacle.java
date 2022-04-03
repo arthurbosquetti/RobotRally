@@ -4,13 +4,17 @@ import setUp.Robot;
 
 public class TallObstacle extends Tile {
 
-    public TallObstacle() {
-        super(TileType.TALL, false);
+//    public TallObstacle() {
+//        super(TileType.TALL, false);
+//    }
+
+    @Override
+    public String tileType() {
+        return "T";
     }
 
-    public void hit(Robot robot) {
-
+    @Override
+    public void steppedOn(Robot robot) {
+        robot.hurt(1);
     }
-
-
 }

@@ -25,8 +25,8 @@ public class StepsDefinition {
 	Board board = new Board();
 	Card[] availableCards;
 	Card[] chosenCards;
-	FlagTile flag1 = new FlagTile(1);
-	FlagTile flag2 = new FlagTile(2);
+//	FlagTile flag1 = new FlagTile(1);
+//	FlagTile flag2 = new FlagTile(2);
 	Robot robot = new Robot("test");
 	TallObstacle stopper = new TallObstacle();
 	PitObstacle pit = new PitObstacle();
@@ -90,7 +90,7 @@ public class StepsDefinition {
 	//Scenario: Robot reaches flag first time
 	@Given("the first flag on the board in front of the robot")
 	public void theFirstFlagOnTheBoardInFrontOfTheRobot() {
-		robot.nextTile(flag1);
+//		robot.nextTile(flag1);
 	}
 
 	@And("the robot has not already reached the first flag")
@@ -111,9 +111,9 @@ public class StepsDefinition {
 
 	//Scenario: Robot reaches the first flag again
 	@And("the second flag on the board in front of the robot")
-	public void theSecondFlagOnTheBoardInFrontOfTheRobot() {
-		robot.nextTile(flag2);
-	}
+//	public void theSecondFlagOnTheBoardInFrontOfTheRobot() {
+//		robot.nextTile(flag2);
+//	}
 
 	@Given("the robot has already reached the first flag")
 	public void the_robot_has_already_reached_the_first_flag() {
@@ -148,14 +148,14 @@ public class StepsDefinition {
 	}
 
 	@When("the robot hits the obstacle")
-	public void the_robot_hits_the_obstacle() {
-		board.makeMove(robot, true, 1);
-	}
+//	public void the_robot_hits_the_obstacle() {
+//		board.makeMove(robot, true, 1);
+//	}
 
 	@Then("the robot cannot move into the obstacle")
-	public void the_robot_cannot_move_into_the_obstacle() {
-	    assertFalse(board.makeMove(robot, true, 1));
-	}
+//	public void the_robot_cannot_move_into_the_obstacle() {
+//	    assertFalse(board.makeMove(robot, true, 1));
+//	}
 
 
 	 //Scenario: Robot 1 hits a damaging obstacle and survives

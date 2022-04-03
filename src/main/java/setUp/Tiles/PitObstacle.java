@@ -3,11 +3,16 @@ package setUp.Tiles;
 import setUp.Robot;
 public class PitObstacle extends Tile {
     
-    public PitObstacle() {
-        super(TileType.PIT, true);
+//    public PitObstacle() {
+//        super(TileType.PIT, true);
+//    }
+
+    @Override
+    public String tileType() {
+        return "P";
     }
 
-    public void hit(Robot robot) {
+    public void steppedOn(Robot robot) {
         robot.hurt(1);
     }
 

@@ -54,7 +54,7 @@ public class Robot extends Player {
     //moves the Robot to nextTile then interacts
     public void move() {
     	this.currentTile = nextTile;
-        this.currentTile.hit(this);
+//        this.currentTile.hit(this);
     }
     
     public void hurt(int dmg) {
