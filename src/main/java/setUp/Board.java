@@ -64,22 +64,23 @@ public class Board {
 	public void generateBoard() {
 		this.boardLayout = new Tile[boardSize][boardSize];
 		Random r = new Random();
-		for (int k = 0; k < boardSize*boardSize; k++) {
-			for (int j = 0; j < boardSize; j++) {
-				for (int i = 0; i < boardSize; i++) {
-					int randTile = r.nextInt(boardSize*boardSize);
-					int randObstacle = r.nextInt(2);
-					if (randTile < 2) {
-						this.boardLayout[j][i] = TileFactory.getTile("FLAG");
-					} else if (randTile < 2 + obstacleNumber) {
-						if (randObstacle == 0) {
-							this.boardLayout[j][i] = TileFactory.getTile("PIT");
-						} else {
-							this.boardLayout[j][i] = TileFactory.getTile("TALL");
-						}
+		for (int j = 0; j < boardSize; j++) {
+			for (int i = 0; i < boardSize; i++) {
+				int randTile = r.nextInt(boardSize*boardSize - 2);
+				int randObstacle = r.nextInt(2);
+				int randFlag = r.nextInt(2);
+				if (randFlag == 0 && flagNumber != 0) {
+					this.boardLayout[j][i] = TileFactory.getTile("FLAG");
+					flagNumber--;
+				} else if (randTile < obstacleNumber) {
+					if (randObstacle == 0) {
+						this.boardLayout[j][i] = TileFactory.getTile("PIT");
 					} else {
-						this.boardLayout[j][i] = TileFactory.getTile("EMPTY");
+						this.boardLayout[j][i] = TileFactory.getTile("TALL");
 					}
+				} else {
+					this.boardLayout[j][i] = TileFactory.getTile("EMPTY");
+				}
 
 //					if (flagNumber == 0 && obstacleNumber == 0) {
 //						this.boardLayout[j][i] = TileFactory.getTile("EMPTY");
@@ -114,7 +115,6 @@ public class Board {
 //							obstacleNumber--;
 //						}
 //					}
-				}
 			}
 		}
 	}
