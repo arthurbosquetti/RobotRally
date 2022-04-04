@@ -2,44 +2,41 @@ package setUp;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 public class Deck{
 	
-	private ArrayList<Card> cards = new ArrayList<Card>();
+	private ArrayList<Card> Hand = new ArrayList<Card>(); 
+	private Random rnd = new Random();
+
 	
-	public Deck() { //generates cards: 20F1, 15F2,10F3,B10,R20,L20,J5
-
-		for (int i=0; i<20; i++) {
-			cards.add(new Card("F1"));
-		}
-		for (int i=0; i<15; i++) {
-			cards.add(new Card("F2"));
-		}
-		for (int i=0; i<10; i++) {
-			cards.add(new Card("F3"));
-		}
-		for (int i=0; i<10; i++) {
-			cards.add(new Card("B"));
-		}
-		for (int i=0; i<20; i++) {
-			cards.add(new Card("L"));
-		}
-		for (int i=0; i<20; i++) {
-			cards.add(new Card("R"));
-		}
-		for (int i=0; i<5; i++) {
-			cards.add(new Card("J"));
-		}
-	}
-	public Card getCard(int index) {
-		return cards.get(index);
-	}
-
-	public void printcards() {
-		for (int i=0; i<100; i++) {
-			System.out.println((cards.get(i)).toString());
+	public void newHand() {
+		for (int i=0; i<9; i++) {
+			double val = rnd.nextDouble();
+			if (val < 0.20) {
+				Hand.add(new Card("F1"));
+			}
+			else if (val < 0.35) {
+				Hand.add(new Card("F2"));
+			}
+			else if (val < 0.45) {
+				Hand.add(new Card("F3"));
+			}
+			else if (val < 0.65) {
+				Hand.add(new Card("R"));
+			}
+			else if (val < 0.85) {
+				Hand.add(new Card("L"));
+			}
+			else if (val < 0.95) {
+				Hand.add(new Card("B"));
+			}
+			else if (val < 1) {
+				Hand.add(new Card("J"));
+			}
 		}
 	}
+	
 
 }
 

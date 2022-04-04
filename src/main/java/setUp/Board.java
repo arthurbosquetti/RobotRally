@@ -13,7 +13,7 @@ import java.util.Random;
 public class Board {
 	
 	private Tile[][] boardLayout;
-//	private Movement mov;
+	private Movement mov;
 	private int boardSize;
 	private int obstacleNumber;
 	private int flagNumber = 2;
@@ -46,48 +46,31 @@ public class Board {
 //	}
 
 	//TODO: add code for robots colliding, change to work with movement card, and change based on those
-//	public boolean makeMove(Robot robot, boolean forward, int steps) {
-//		//gets the next point based on move
-//		int[] newPoint = robot.getNewPoint(forward, steps);
-//		//checks move for validity
-//		if (mov.checkMove(newPoint)) {
-//			//Code for moving the Robot
-//			robot.nextTile(this.getTile(newPoint[0], newPoint[1]));
-//			robot.setX(newPoint[0]);
-//			robot.setY(newPoint[1]);
-//			robot.move();
-//			return true;
-//		}
-//		//Code for when robot can't move forward
-//		return false;
-//	}
+	public boolean makeMove(Robot robot, boolean forward, int steps, boolean jump) {
+		//gets the next point based on move
+		int[] newPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
 
-	//TODO: change generation based on boardType
-//	public void generateBoard() {
-//		this.boardLayout = new Tile[boardSize][boardSize];
-//		Random r = new Random();
-//		for (int j = 0; j < boardSize; j++) {
-//			for (int i = 0; i < boardSize; i++) {
-//				int randTile = r.nextInt(boardSize*boardSize - 2);
-//				int randObstacle = r.nextInt(2);
-//				int randFlag = r.nextInt(2);
-//				if (randFlag == 0 && flagNumber != 0) {
-//					this.boardLayout[j][i] = TileFactory.getTile("FLAG");
-//					flagNumber--;
-//				} else if (randTile < obstacleNumber) {
-//					if (randObstacle == 0) {
-//						this.boardLayout[j][i] = TileFactory.getTile("PIT");
-//					} else {
-//						this.boardLayout[j][i] = TileFactory.getTile("TALL");
-//					}
-//				} else {
-//					this.boardLayout[j][i] = TileFactory.getTile("EMPTY");
-//				}
-//			}
-//		}
-//	}
+		if (jump) {
+			int [] midPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
+			if (!(mov.checkMove(midPoint))) {
+				return false;
+			}
+		}
 
-	// Testing randomized board generation stuff
+		//checks move for validity
+		if (mov.checkMove(newPoint)) {
+			//Code for moving the Robot
+			robot.nextTile(this.getTile(newPoint[0], newPoint[1]));
+			robot.setX(newPoint[0]);
+			robot.setY(newPoint[1]);
+			robot.move();
+			return true;
+		}
+		//Code for when robot can't move forward
+		return false;
+	}
+
+	// Randomized board generation
 	public void generateBoard() {
 		this.boardLayout = new Tile[boardSize][boardSize];
 
@@ -117,7 +100,6 @@ public class Board {
 					this.boardLayout[randCol][randRow] = TileFactory.getTile("EMPTY");
 				}
 			}
-//			boardSize--;
 		}
 	}
 	

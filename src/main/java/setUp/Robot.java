@@ -12,6 +12,7 @@ public class Robot extends Player {
     private Direction direction;
     private Tile currentTile;
     private Tile nextTile;
+    private boolean canMove;
     
     public Robot(String name) {
         super(name, 9);
@@ -21,6 +22,9 @@ public class Robot extends Player {
 //        this.spawnY = 5;
         this.x = 4;
         this.y = 4;
+        this.spawnX = 5;
+        this.spawnY = 5;
+        canMove = true;
     }
 
     //Getters and Setters
@@ -43,7 +47,9 @@ public class Robot extends Player {
     }
     
     public Direction getDir() {
-    	return direction;
+    	//This prints north but it shouldn't print anything
+    	//System.out.println(direction);
+    	return this.direction;
     }
     
     public Tile getTile() {
@@ -76,15 +82,15 @@ public class Robot extends Player {
     public int[] getNewPoint(boolean forward, int steps) {
 		switch (direction.getDirection()) {
 			case "north":
-				return (forward)? new int[]{x, y - steps} : new int[]{x, y + steps};
+				return (forward)? new int[]{x, y - 1} : new int[]{x, y + 1};
 			case "east":
-				return (forward)? new int[]{x + steps, y} : new int[]{x - steps, y};
+				return (forward)? new int[]{x + 1, y} : new int[]{x - 1, y};
 				
 			case "south":
-				return (forward)? new int[]{x, y + steps} : new int[]{x, y - steps};
+				return (forward)? new int[]{x, y + 1} : new int[]{x, y - 1};
 				
 			case "west":
-				return (forward)? new int[]{x - steps, y} : new int[]{x + steps, y};
+				return (forward)? new int[]{x - 1, y} : new int[]{x + 1, y};
 				
 			default:
 				return new int[]{x, y};	

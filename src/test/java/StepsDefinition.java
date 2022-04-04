@@ -8,6 +8,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import setUp.Board;
 import setUp.Card;
+import setUp.Deck;
 import setUp.Game;
 import setUp.Level;
 import setUp.Player;
@@ -19,18 +20,29 @@ import setUp.Tiles.FlagTile;
 
 public class StepsDefinition {
 	
-	Player player1 	= new Player();
-	Player player2  = new Player();
-	Game game		= new Game();
-	Board board = new Board();
+	Player player1 		 = new Player();
+	Player player2  	 = new Player();
+	Game game		 	 = new Game();
+	Board board     	 = new Board();
+	Deck deck      	     = new Deck();
+	FlagTile flag1  	 = new FlagTile(1);
+	FlagTile flag2       = new FlagTile(2);
+	Robot robot     	 = new Robot("test");
+	TallObstacle stopper = new TallObstacle();
+	PitObstacle pit      = new PitObstacle();
+	Level level;
 	Card[] availableCards;
 	Card[] chosenCards;
+<<<<<<< HEAD
 //	FlagTile flag1 = new FlagTile(1);
 //	FlagTile flag2 = new FlagTile(2);
 	Robot robot = new Robot("test");
 	TallObstacle stopper = new TallObstacle();
 	PitObstacle pit = new PitObstacle();
 	Level level;
+=======
+	Card card1;
+>>>>>>> feddfaf07f8938579293c1efad97af672c09140a
 
 	
 ////// GAME START //////////
@@ -58,11 +70,11 @@ public class StepsDefinition {
 ////// CARD CHOICE //////////
 	
 	//Scenario: Successful Turn
-	@Given("{int} possible movement cards")
-	public void possible_movement_cards(Integer int1) {
-		availableCards=new Card[int1];
+	@Given("possible movement cards")
+	public void possible_movement_cards() {
+		deck.newHand();
 	}
-	@Given("P1’s turn")
+	@Given("P1s turn")
 	public void p1_s_turn() {
 	    player1.setTurn(true);
 	}
@@ -71,18 +83,42 @@ public class StepsDefinition {
 	    chosenCards = new Card[int1];
 		player1.setHand(chosenCards, player2);
 	}
-	@Then("P2’s turn")
+	@Then("P2s turn")
 	public void p2_s_turn() {
-		System.out.println(player2.getTurn());
 	    assertTrue(player2.getTurn());
 	}
-
-	//Scenario: Unsuccessful Turn
-	
-	@Then("P1 hand empty")
-	public void p1_hand_empty() {
-		assertNull(player1.getHand());
+	@Then("Hand is not empty")
+	public void hand_is_not_empty() {
+		assertNotNull(player1.getHand());
 	}
+
+	//Scenario: Turning left
+	@Given("P1 chooses card {string}")
+	public void p1_chooses_card(String action) {
+		this.card1 = new Card(action);
+	}
+	
+	@When("the card is executed")
+	public void the_card_is_executed() {
+	    card1.executeAction(robot, board);
+	    //System.out.println("Did it rotate " + robot.getDir().getDirectionInt());
+	}
+	@Then("Robot rotates left")
+	public void robot_rotates_left() {
+		//System.out.println(robot.getDir());
+		//System.out.println(robot.getDir().getRotatedLeft());
+	    assertTrue(robot.getDir().getRotatedLeft());
+	}
+
+
+	//Scenario: Moving forward
+	@Then("Robot moves forward")
+	public void robot_moves_forward() {
+		System.out.println(card1.get_MovingCard().get_MovedForward());
+	    assertEquals(1, card1.get_MovingCard().get_MovedForward());
+	}
+
+
 
 ////// FLAGS //////////
 
@@ -110,24 +146,32 @@ public class StepsDefinition {
 
 
 	//Scenario: Robot reaches the first flag again
+<<<<<<< HEAD
 	@And("the second flag on the board in front of the robot")
 //	public void theSecondFlagOnTheBoardInFrontOfTheRobot() {
 //		robot.nextTile(flag2);
 //	}
 
+=======
+>>>>>>> feddfaf07f8938579293c1efad97af672c09140a
 	@Given("the robot has already reached the first flag")
 	public void the_robot_has_already_reached_the_first_flag() {
 		robot.setFlag1(true);
 	}
 
-	@Then("no change")
-	public void no_change() {
+	@Then("robot does not collect first flag again")
+	public void robot_does_not_collect_first_flag_again() {
 		assertTrue(robot.getFlag1());
 	}
 
+
 	//Scenario: Robot reaches the second flag before the first
-	@Then("nothing happens")
-	public void nothing_happens() {
+	@And("the second flag on the board in front of the robot")
+	public void theSecondFlagOnTheBoardInFrontOfTheRobot() {
+		robot.nextTile(flag2);
+	}
+	@Then("robot does not collect second flag")
+	public void robot_does_not_collect_second_flag() {
 		assertFalse(robot.getFlag2());
 	}
 
@@ -148,6 +192,7 @@ public class StepsDefinition {
 	}
 
 	@When("the robot hits the obstacle")
+<<<<<<< HEAD
 //	public void the_robot_hits_the_obstacle() {
 //		board.makeMove(robot, true, 1);
 //	}
@@ -156,6 +201,16 @@ public class StepsDefinition {
 //	public void the_robot_cannot_move_into_the_obstacle() {
 //	    assertFalse(board.makeMove(robot, true, 1));
 //	}
+=======
+	public void the_robot_hits_the_obstacle() {
+		board.makeMove(robot, true, 1, false);
+	}
+
+	@Then("the robot cannot move into the obstacle")
+	public void the_robot_cannot_move_into_the_obstacle() {
+	    assertFalse(board.makeMove(robot, true, 1, false));
+	}
+>>>>>>> feddfaf07f8938579293c1efad97af672c09140a
 
 
 	 //Scenario: Robot 1 hits a damaging obstacle and survives
