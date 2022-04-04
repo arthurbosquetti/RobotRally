@@ -25,10 +25,12 @@ public class Level {
 			case "Medium":
 				board.setBoardSize(5);
 				board.setObstacleNumber(3);
+				board.generateBoard();
 				break;
 			case "Hard":
 				board.setBoardSize(7);
 				board.setObstacleNumber(5);
+				board.generateBoard();
 				break;
 			default:
 				board.setBoardSize(0);

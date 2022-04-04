@@ -9,7 +9,7 @@ public class PitObstacle extends Tile {
 
     @Override
     public String tileType() {
-        return "P";
+        return " P ";
     }
 
     public void steppedOn(Robot robot) {

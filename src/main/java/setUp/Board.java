@@ -5,6 +5,8 @@ import setUp.Tiles.Tile;
 import setUp.Tiles.TileFactory;
 import setUp.Tiles.TileType;
 
+import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Random;
 //import setUp.Movement;
 
@@ -61,61 +63,61 @@ public class Board {
 //	}
 
 	//TODO: change generation based on boardType
+//	public void generateBoard() {
+//		this.boardLayout = new Tile[boardSize][boardSize];
+//		Random r = new Random();
+//		for (int j = 0; j < boardSize; j++) {
+//			for (int i = 0; i < boardSize; i++) {
+//				int randTile = r.nextInt(boardSize*boardSize - 2);
+//				int randObstacle = r.nextInt(2);
+//				int randFlag = r.nextInt(2);
+//				if (randFlag == 0 && flagNumber != 0) {
+//					this.boardLayout[j][i] = TileFactory.getTile("FLAG");
+//					flagNumber--;
+//				} else if (randTile < obstacleNumber) {
+//					if (randObstacle == 0) {
+//						this.boardLayout[j][i] = TileFactory.getTile("PIT");
+//					} else {
+//						this.boardLayout[j][i] = TileFactory.getTile("TALL");
+//					}
+//				} else {
+//					this.boardLayout[j][i] = TileFactory.getTile("EMPTY");
+//				}
+//			}
+//		}
+//	}
+
+	// Testing randomized board generation stuff
 	public void generateBoard() {
 		this.boardLayout = new Tile[boardSize][boardSize];
-		Random r = new Random();
-		for (int j = 0; j < boardSize; j++) {
-			for (int i = 0; i < boardSize; i++) {
-				int randTile = r.nextInt(boardSize*boardSize - 2);
-				int randObstacle = r.nextInt(2);
-				int randFlag = r.nextInt(2);
-				if (randFlag == 0 && flagNumber != 0) {
-					this.boardLayout[j][i] = TileFactory.getTile("FLAG");
-					flagNumber--;
-				} else if (randTile < obstacleNumber) {
-					if (randObstacle == 0) {
-						this.boardLayout[j][i] = TileFactory.getTile("PIT");
-					} else {
-						this.boardLayout[j][i] = TileFactory.getTile("TALL");
-					}
-				} else {
-					this.boardLayout[j][i] = TileFactory.getTile("EMPTY");
-				}
 
-//					if (flagNumber == 0 && obstacleNumber == 0) {
-//						this.boardLayout[j][i] = TileFactory.getTile("EMPTY");
-//					} else if (obstacleNumber == 0) {
-//						if (randInt == 0) {
-//							this.boardLayout[j][i] = TileFactory.getTile("EMPTY");
-//						} else {
-//							this.boardLayout[j][i] = TileFactory.getTile("FLAG");
-//							flagNumber--;
-//						}
-//					} else if (flagNumber == 0) {
-//						if (randObstacle == 0) {
-//							this.boardLayout[j][i] = TileFactory.getTile("EMPTY");
-//						} else if (randObstacle == 1) {
-//							this.boardLayout[j][i] = TileFactory.getTile("PIT");
-//							obstacleNumber--;
-//						} else {
-//							this.boardLayout[j][i] = TileFactory.getTile("TALL");
-//							obstacleNumber--;
-//						}
-//					} else {
-//						if (randTile == 0) {
-//							this.boardLayout[j][i] = TileFactory.getTile("EMPTY");
-//						} else if (randTile == 1) {
-//							this.boardLayout[j][i] = TileFactory.getTile("FLAG");
-//							flagNumber--;
-// 						} else if (randTile == 2) {
-//							this.boardLayout[j][i] = TileFactory.getTile("PIT");
-//							obstacleNumber--;
-//						} else {
-//							this.boardLayout[j][i] = TileFactory.getTile("TALL");
-//							obstacleNumber--;
-//						}
-//					}
+		// Place players in bottom corners, rn keep always keep them empty
+		this.boardLayout[boardSize - 1][0] = TileFactory.getTile("EMPTY");
+		this.boardLayout[boardSize - 1][boardSize - 1] = TileFactory.getTile("EMPTY");
+
+		Random r = new Random();
+		for (int i = 0; i < 1000; i++) {
+			// Generating random coords
+			int randRow = r.nextInt(boardSize);
+			int randCol = r.nextInt(boardSize);
+			int randObstacle = r.nextInt(2);
+			// Go to coords and set tile
+			if (this.boardLayout[randCol][randRow] == null) {
+				if (flagNumber != 0) {
+					this.boardLayout[randCol][randRow] = TileFactory.getTile("FLAG");
+					flagNumber--;
+				} else if (obstacleNumber != 0) {
+					if (randObstacle == 0) {
+						this.boardLayout[randCol][randRow] = TileFactory.getTile("PIT");
+					} else {
+						this.boardLayout[randCol][randRow] = TileFactory.getTile("TALL");
+					}
+					obstacleNumber--;
+				} else {
+					this.boardLayout[randCol][randRow] = TileFactory.getTile("EMPTY");
+				}
 			}
+//			boardSize--;
 		}
 	}
 	
@@ -162,7 +164,7 @@ public class Board {
 			for (int col = 0; col < boardLayout[0].length; col++) {
 				//check for robot in current tile
 				if (x == col && y == row ) {
-					System.out.print(" |R|");
+					System.out.print("  |R|");
 				} else 
 				System.out.print(" " + boardLayout[row][col]);
 			}

@@ -10,23 +10,23 @@ public class RobotRally {
 		
 		//Board & Robot for testing
 		Board board = new Board();
-		Level easy = new Level("Easy", board);
+		Level easy = new Level("Medium", board);
 
-		board.printBoard();
+//		board.printBoard();
 //		board.getTile(1,1);
 
 //		board.setTile(2, 2, new TallObstacle());
 		
 	
 		Robot robo = new Robot("dev");
-		robo.setX(2);
-		robo.setY(3);
+//		robo.setX(2);
+//		robo.setY(2);
 		
 		//able to print a board with a robot
-		//board.printBoard();
+//		board.printBoard();
 		
 		//printing board with robot on it
-//		board.printBoard(robo);
+		board.printBoard(robo);
 		
 		//make move function working
 //		board.makeMove(robo, true, 1);

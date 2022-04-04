@@ -5,7 +5,7 @@ import setUp.Robot;
 public class EmptyTile extends Tile{
     @Override
     public String tileType() {
-        return "E";
+        return " _ ";
     }
 
     @Override

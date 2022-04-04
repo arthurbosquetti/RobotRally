@@ -10,7 +10,7 @@ public class TallObstacle extends Tile {
 
     @Override
     public String tileType() {
-        return "T";
+        return " T ";
     }
 
     @Override
