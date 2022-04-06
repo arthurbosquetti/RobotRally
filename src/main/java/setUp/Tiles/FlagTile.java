@@ -6,9 +6,13 @@ public class FlagTile extends Tile {
 
     private int flagNum;
 
+    public FlagTile(int flagNum) {
+        this.flagNum = flagNum;
+    }
+
     @Override
     public String tileType() {
-        return " |>";
+        return " |>" + flagNum;
     }
 
     @Override

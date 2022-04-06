@@ -25,24 +25,14 @@ public class StepsDefinition {
 	Game game		 	 = new Game();
 	Board board     	 = new Board();
 	Deck deck      	     = new Deck();
-	FlagTile flag1  	 = new FlagTile(1);
-	FlagTile flag2       = new FlagTile(2);
+//	FlagTile flag1  	 = new FlagTile(1);
+//	FlagTile flag2       = new FlagTile(2);
 	Robot robot     	 = new Robot("test");
 	TallObstacle stopper = new TallObstacle();
 	PitObstacle pit      = new PitObstacle();
 	Level level;
 	Card[] availableCards;
 	Card[] chosenCards;
-<<<<<<< HEAD
-//	FlagTile flag1 = new FlagTile(1);
-//	FlagTile flag2 = new FlagTile(2);
-	Robot robot = new Robot("test");
-	TallObstacle stopper = new TallObstacle();
-	PitObstacle pit = new PitObstacle();
-	Level level;
-=======
-	Card card1;
->>>>>>> feddfaf07f8938579293c1efad97af672c09140a
 
 	
 ////// GAME START //////////
@@ -94,13 +84,13 @@ public class StepsDefinition {
 
 	//Scenario: Turning left
 	@Given("P1 chooses card {string}")
-	public void p1_chooses_card(String action) {
-		this.card1 = new Card(action);
-	}
+//	public void p1_chooses_card(String action) {
+//		this.card1 = new Card(action);
+//	}
 	
 	@When("the card is executed")
 	public void the_card_is_executed() {
-	    card1.executeAction(robot, board);
+//	    card1.executeAction(robot, board);
 	    //System.out.println("Did it rotate " + robot.getDir().getDirectionInt());
 	}
 	@Then("Robot rotates left")
@@ -114,8 +104,8 @@ public class StepsDefinition {
 	//Scenario: Moving forward
 	@Then("Robot moves forward")
 	public void robot_moves_forward() {
-		System.out.println(card1.get_MovingCard().get_MovedForward());
-	    assertEquals(1, card1.get_MovingCard().get_MovedForward());
+//		System.out.println(card1.get_MovingCard().get_MovedForward());
+//	    assertEquals(1, card1.get_MovingCard().get_MovedForward());
 	}
 
 
@@ -146,14 +136,14 @@ public class StepsDefinition {
 
 
 	//Scenario: Robot reaches the first flag again
-<<<<<<< HEAD
-	@And("the second flag on the board in front of the robot")
+//<<<<<<< HEAD
+//	@And("the second flag on the board in front of the robot")
 //	public void theSecondFlagOnTheBoardInFrontOfTheRobot() {
 //		robot.nextTile(flag2);
 //	}
 
-=======
->>>>>>> feddfaf07f8938579293c1efad97af672c09140a
+//=======
+//>>>>>>> feddfaf07f8938579293c1efad97af672c09140a
 	@Given("the robot has already reached the first flag")
 	public void the_robot_has_already_reached_the_first_flag() {
 		robot.setFlag1(true);
@@ -167,9 +157,9 @@ public class StepsDefinition {
 
 	//Scenario: Robot reaches the second flag before the first
 	@And("the second flag on the board in front of the robot")
-	public void theSecondFlagOnTheBoardInFrontOfTheRobot() {
-		robot.nextTile(flag2);
-	}
+//	public void theSecondFlagOnTheBoardInFrontOfTheRobot() {
+//		robot.nextTile(flag2);
+//	}
 	@Then("robot does not collect second flag")
 	public void robot_does_not_collect_second_flag() {
 		assertFalse(robot.getFlag2());
@@ -191,26 +181,26 @@ public class StepsDefinition {
 		robot.setY(3);
 	}
 
-	@When("the robot hits the obstacle")
-<<<<<<< HEAD
+//	@When("the robot hits the obstacle")
+//<<<<<<< HEAD
 //	public void the_robot_hits_the_obstacle() {
 //		board.makeMove(robot, true, 1);
 //	}
 
-	@Then("the robot cannot move into the obstacle")
+//	@Then("the robot cannot move into the obstacle")
 //	public void the_robot_cannot_move_into_the_obstacle() {
 //	    assertFalse(board.makeMove(robot, true, 1));
 //	}
-=======
-	public void the_robot_hits_the_obstacle() {
-		board.makeMove(robot, true, 1, false);
-	}
+//=======
+//	public void the_robot_hits_the_obstacle() {
+//		board.makeMove(robot, true, 1, false);
+//	}
 
 	@Then("the robot cannot move into the obstacle")
-	public void the_robot_cannot_move_into_the_obstacle() {
-	    assertFalse(board.makeMove(robot, true, 1, false));
-	}
->>>>>>> feddfaf07f8938579293c1efad97af672c09140a
+//	public void the_robot_cannot_move_into_the_obstacle() {
+//	    assertFalse(board.makeMove(robot, true, 1, false));
+//	}
+//>>>>>>> feddfaf07f8938579293c1efad97af672c09140a
 
 
 	 //Scenario: Robot 1 hits a damaging obstacle and survives

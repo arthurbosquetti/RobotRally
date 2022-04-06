@@ -13,18 +13,10 @@ import java.util.Random;
 public class Board {
 	
 	private Tile[][] boardLayout;
-	private Movement mov;
+//	private Movement mov;
 	private int boardSize;
 	private int obstacleNumber;
 	private int flagNumber = 2;
-	
-	public Board() {
-//		this.mov = new Movement(this);
-
-		//still needed for testing
-
-//		generateBoard();
-	}
 
 	//Getters and Setters
 	public Tile getTile(int x, int y) {
@@ -38,37 +30,30 @@ public class Board {
 		System.out.println("Error: attempted to set tile outside of gameboard");
 	}
 
-//	public int getCols() {
-//		return cols;
-//	}
-//	public int getRows() {
-//		return rows;
-//	}
-
 	//TODO: add code for robots colliding, change to work with movement card, and change based on those
-	public boolean makeMove(Robot robot, boolean forward, int steps, boolean jump) {
-		//gets the next point based on move
-		int[] newPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
-
-		if (jump) {
-			int [] midPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
-			if (!(mov.checkMove(midPoint))) {
-				return false;
-			}
-		}
-
-		//checks move for validity
-		if (mov.checkMove(newPoint)) {
-			//Code for moving the Robot
-			robot.nextTile(this.getTile(newPoint[0], newPoint[1]));
-			robot.setX(newPoint[0]);
-			robot.setY(newPoint[1]);
-			robot.move();
-			return true;
-		}
-		//Code for when robot can't move forward
-		return false;
-	}
+//	public boolean makeMove(Robot robot, boolean forward, int steps, boolean jump) {
+//		//gets the next point based on move
+//		int[] newPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
+//
+//		if (jump) {
+//			int [] midPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
+//			if (!(mov.checkMove(midPoint))) {
+//				return false;
+//			}
+//		}
+//
+//		//checks move for validity
+//		if (mov.checkMove(newPoint)) {
+//			//Code for moving the Robot
+//			robot.nextTile(this.getTile(newPoint[0], newPoint[1]));
+//			robot.setX(newPoint[0]);
+//			robot.setY(newPoint[1]);
+//			robot.move();
+//			return true;
+//		}
+//		//Code for when robot can't move forward
+//		return false;
+//	}
 
 	// Randomized board generation
 	public void generateBoard() {
@@ -79,7 +64,9 @@ public class Board {
 		this.boardLayout[boardSize - 1][boardSize - 1] = TileFactory.getTile("EMPTY");
 
 		Random r = new Random();
-		for (int i = 0; i < 1000; i++) {
+		boolean boardGenerated = true;
+		//while generating
+		while (boardGenerated) {
 			// Generating random coords
 			int randRow = r.nextInt(boardSize);
 			int randCol = r.nextInt(boardSize);
@@ -87,7 +74,7 @@ public class Board {
 			// Go to coords and set tile
 			if (this.boardLayout[randCol][randRow] == null) {
 				if (flagNumber != 0) {
-					this.boardLayout[randCol][randRow] = TileFactory.getTile("FLAG");
+					this.boardLayout[randCol][randRow] = TileFactory.getTile("FLAG" + flagNumber);
 					flagNumber--;
 				} else if (obstacleNumber != 0) {
 					if (randObstacle == 0) {
@@ -97,7 +84,14 @@ public class Board {
 					}
 					obstacleNumber--;
 				} else {
-					this.boardLayout[randCol][randRow] = TileFactory.getTile("EMPTY");
+					boardGenerated = false;
+				}
+			}
+		}
+		for (int i = 0; i < boardSize; i++) {
+			for (int j = 0; j < boardSize; j++) {
+				if (this.boardLayout[i][j] == null) {
+					this.boardLayout[i][j] = TileFactory.getTile("EMPTY");
 				}
 			}
 		}
@@ -122,20 +116,6 @@ public class Board {
 	public void setObstacleNumber(int obstacleNumber) {
 		this.obstacleNumber = obstacleNumber;
 	}
-
-	public void setFlag() {
-		this.flagNumber--;
-	}
-
-	public int getFlagNumber() {
-		return flagNumber;
-	}
-
-	public int getObstacleNumber() { return obstacleNumber; }
-
-	public int getBoardSize() { return boardSize; }
-
-
 		
 	//Overloaded printBoard method for printing a robot
 	public void printBoard(Robot robot) {

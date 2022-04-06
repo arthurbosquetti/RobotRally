@@ -11,47 +11,18 @@ public class RobotRally {
 	
 	public static void main(String[] args) {
 
-		/*Deck deck = new Deck();
+		Deck deck = new Deck();
 		deck.newHand();
 		
-		//For testing the boards
-		//Board board = new Board(1);
-		//board.setTile(2, 2, new Tile(TileType.FLAG));
-		//Board & Robot for testing
 		Board board = new Board();
-		Level easy = new Level("Medium", board);
+		Level easy = new Level("Easy", board);
 
-//		board.printBoard();
-//		board.getTile(1,1);
-
-//		board.setTile(2, 2, new TallObstacle());
-		
-	
-		Robot robo = new Robot("dev");
-//		robo.setX(2);
-//		robo.setY(2);
-		
-		//able to print a board with a robot
-//		board.printBoard();
-		
-		//printing board with robot on it
-		board.printBoard(robo);
-		
-		//make move function working
-//		board.makeMove(robo, true, 1);
-		board.makeMove(robo, true, 1, false);
-
-		Card card1 = new Card("F1");
-	    card1.executeAction(robo, board);
-	    */
-		Board board = new Board();
-		board.setTile(2, 2, new TallObstacle());
-		
-	
 		Robot robo = new Robot("dev");
 		robo.setX(2);
-		robo.setY(3);
-		
+		robo.setY(2);
+
+		board.printBoard(robo);
+
 		Card card1 = new Card("F1");
 	    card1.executeAction(robo, board);
 	}
