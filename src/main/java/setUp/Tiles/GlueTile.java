@@ -1,14 +1,22 @@
-//package setUp.Tiles;
-//
-//public class GlueTile extends Tile {
-//
-//    public GlueTile() {
-//        super(TileType.GLUE, true);
-//    }
-//
-//    public void hit(Robot robot) {
-//
-//    }
-//
-//
-//}
+package setUp.Tiles;
+
+import setUp.Robot;
+
+public class GlueTile extends Tile {
+
+	public GlueTile() {
+		this.setValid(true);
+	}
+	
+    @Override
+    public String tileType() {
+        return " |G|";
+    }
+
+    @Override
+    public void steppedOn(Robot robot) {
+    	//TODO: this
+    }
+
+
+}

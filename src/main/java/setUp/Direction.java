@@ -52,7 +52,6 @@ public class Direction {
     public String toString() {
     	return this.getDirection();
     }
-    
 
     public boolean getRotatedRight() {
     	return rotatedRight;

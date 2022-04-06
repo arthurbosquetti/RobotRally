@@ -1,15 +1,15 @@
 package setUp.Tiles;
 
 import setUp.Robot;
-public class PitObstacle extends Tile {
+public class PitTile extends Tile {
     
-//    public PitObstacle() {
-//        super(TileType.PIT, true);
-//    }
+    public PitTile() {
+        this.setValid(true);
+    }
 
     @Override
     public String tileType() {
-        return " P ";
+        return " |P|";
     }
 
     public void steppedOn(Robot robot) {

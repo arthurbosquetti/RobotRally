@@ -3,8 +3,7 @@ import setUp.Board;
 import setUp.Level;
 import setUp.Card;
 import setUp.Deck;
-import setUp.Tiles.Tile;
-import setUp.Tiles.TallObstacle;
+import setUp.Tiles.*;
 import setUp.Robot;
 
 public class RobotRally {
@@ -15,7 +14,7 @@ public class RobotRally {
 		deck.newHand();
 		
 		Board board = new Board();
-		Level easy = new Level("Easy", board);
+		Level hard = new Level("Hard", board);
 
 		Robot robo = new Robot("dev");
 		robo.setX(2);

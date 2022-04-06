@@ -20,8 +20,8 @@ public class Robot extends Player {
         this.direction = new Direction(0);
 //        this.spawnX = 5;
 //        this.spawnY = 5;
-        this.x = 4;
-        this.y = 4;
+//        this.x = 4;
+//        this.y = 4;
         this.spawnX = 5;
         this.spawnY = 5;
         canMove = true;
@@ -47,7 +47,6 @@ public class Robot extends Player {
     }
     
     public Direction getDir() {
-    	//This prints north but it shouldn't print anything
     	//System.out.println(direction);
     	return this.direction;
     }
@@ -62,7 +61,7 @@ public class Robot extends Player {
     //moves the Robot to nextTile then interacts
     public void move() {
     	this.currentTile = nextTile;
-//        this.currentTile.hit(this);
+        this.currentTile.steppedOn(this);
     }
     
     public void hurt(int dmg) {

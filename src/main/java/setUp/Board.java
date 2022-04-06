@@ -8,20 +8,26 @@ import setUp.Tiles.TileType;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Random;
-//import setUp.Movement;
+import setUp.Movement;
 
+@SuppressWarnings("unused")
 public class Board {
 	
 	private Tile[][] boardLayout;
-//	private Movement mov;
+	private Movement mov;
 	private int boardSize;
 	private int obstacleNumber;
 	private int flagNumber = 2;
 
+	public Board() {
+		mov = new Movement(this);
+	}
+	
 	//Getters and Setters
 	public Tile getTile(int x, int y) {
 		return this.boardLayout[y][x];
 	}
+	
 	public void setTile(int x, int y, Tile newTile) {
 		//checks to make sure new tile is within the game board
 		if (x > 0 || x < boardSize || y > 0 || y < boardSize) {
@@ -31,29 +37,29 @@ public class Board {
 	}
 
 	//TODO: add code for robots colliding, change to work with movement card, and change based on those
-//	public boolean makeMove(Robot robot, boolean forward, int steps, boolean jump) {
-//		//gets the next point based on move
-//		int[] newPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
-//
-//		if (jump) {
-//			int [] midPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
-//			if (!(mov.checkMove(midPoint))) {
-//				return false;
-//			}
-//		}
-//
-//		//checks move for validity
-//		if (mov.checkMove(newPoint)) {
-//			//Code for moving the Robot
-//			robot.nextTile(this.getTile(newPoint[0], newPoint[1]));
-//			robot.setX(newPoint[0]);
-//			robot.setY(newPoint[1]);
-//			robot.move();
-//			return true;
-//		}
-//		//Code for when robot can't move forward
-//		return false;
-//	}
+	public boolean makeMove(Robot robot, boolean forward, int steps, boolean jump) {
+		//gets the next point based on move
+		int[] newPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
+		
+		if (jump) {
+			int [] midPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
+			if (!(mov.checkMove(midPoint))) {
+				return false;
+			}
+		}
+
+		//checks move for validity
+		if (mov.checkMove(newPoint)) {
+			//Code for moving the Robot
+			robot.nextTile(this.getTile(newPoint[0], newPoint[1]));
+			robot.setX(newPoint[0]);
+			robot.setY(newPoint[1]);
+			robot.move();
+			return true;
+		}
+		//Code for when robot can't move forward
+		return false;
+	}
 
 	// Randomized board generation
 	public void generateBoard() {
@@ -97,6 +103,17 @@ public class Board {
 		}
 	}
 	
+	public void setBoardSize(int boardSize) {
+		this.boardSize = boardSize;
+	}
+	
+	public int getBoardSize() {
+		return boardSize;
+	}
+	
+	public void setObstacleNumber(int obstacleNumber) {
+		this.obstacleNumber = obstacleNumber;
+	}
 	
 	//printing a board without a robot
 	public void printBoard() {
@@ -108,14 +125,6 @@ public class Board {
 			System.out.println(" ");
 		}
 	}
-	
-	public void setBoardSize(int boardSize) {
-		this.boardSize = boardSize;
-	}
-	
-	public void setObstacleNumber(int obstacleNumber) {
-		this.obstacleNumber = obstacleNumber;
-	}
 		
 	//Overloaded printBoard method for printing a robot
 	public void printBoard(Robot robot) {
@@ -126,7 +135,7 @@ public class Board {
 			for (int col = 0; col < boardLayout[0].length; col++) {
 				//check for robot in current tile
 				if (x == col && y == row ) {
-					System.out.print("  |R|");
+					System.out.print("   |R| ");
 				} else 
 				System.out.print(" " + boardLayout[row][col]);
 			}

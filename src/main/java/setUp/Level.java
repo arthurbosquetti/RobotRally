@@ -11,9 +11,7 @@ public class Level {
 		initializeBoard(board);
 	}
 
-			
-// this is all bullshit rn but just an example
-	
+				
 	public void initializeBoard(Board board) {
 		
 		switch(thislevel) {
@@ -39,12 +37,5 @@ public class Level {
 		}
 		
 	}
-	
-//	public void setLevel(int i) {
-//		this.level = i;
-//	}
-//	public int getLevel() {
-//		return level;
-//	}
 }
 

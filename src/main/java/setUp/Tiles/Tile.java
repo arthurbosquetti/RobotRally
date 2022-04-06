@@ -3,6 +3,8 @@ package setUp.Tiles;
 import setUp.Robot;;
 
 public abstract class Tile {
+	
+	private boolean valid;
 
 	public abstract String tileType();
 	public abstract void steppedOn(Robot robot);
@@ -12,30 +14,11 @@ public abstract class Tile {
 		return " " + this.tileType() + " ";
 	}
 
-//    private TileType type;
-//	private boolean valid;
-//	private int x; private int y;
-//
-//    public Tile(TileType type, boolean isValid) {
-//        this.type = type;
-//		this.valid = isValid;
-//    }
-//
-//    public void hit(Robot robot)
-//	{
-//		System.out.println("Floor tile, no result");
-//	}
-//
-//	public boolean validTile() {
-//		return valid;
-//	}
-//
-//	public String toString() {
-//		return this.type.getPicture();
-//	}
-//
-//	public void obstacleType(String string) {
-//		// TODO Auto-generated method stub
-//
-//	}
+	public boolean validTile() {
+		return valid;
+	}
+	
+	public void setValid(boolean newValid) {
+		this.valid = newValid;
+	}
 }

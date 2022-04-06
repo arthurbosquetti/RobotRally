@@ -2,7 +2,7 @@ package setUp;
 
 
 public class Card{
-//	MovingCard moving = new MovingCard();
+	MovingCard moving = new MovingCard();
 	
 	private String action;
 	
@@ -10,9 +10,9 @@ public class Card{
 		this.action = action;
 	}
 	
-//	public MovingCard get_MovingCard() {
-//		return moving;
-//	}
+	public MovingCard get_MovingCard() {
+		return moving;
+	}
 	
 	public String getCardAction() {
 		return action;
@@ -22,7 +22,7 @@ public class Card{
 		System.out.println(this.action.equals("F"));
 		if ( (this.action.equals("F1"))|| (this.action.equals("F2")) || (this.action.equals("F3")) || (this.action.equals("B")) || (this.action.equals("J"))) {
 			System.out.println("I got here");
-//			moving.detMove(action, robot, board);
+			moving.detMove(action, robot, board);
 		}
 		else if (this.action.equals("R")) {
 			robot.getDir().turnRight();

@@ -2,19 +2,19 @@ package setUp.Tiles;
 
 import setUp.Robot;
 
-public class TeleportTile extends Tile {
-	
-	public TeleportTile() {
-		this.setValid(true);
-	}
-	
+public class TallTile extends Tile {
+
+    public TallTile() {
+        this.setValid(false);
+    }
+
     @Override
     public String tileType() {
-        return " |0|";
+        return " |T|";
     }
 
     @Override
     public void steppedOn(Robot robot) {
-    	//TODO
+    	
     }
 }

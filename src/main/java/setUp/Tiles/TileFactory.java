@@ -7,9 +7,9 @@ public class TileFactory {
         } else if (tile.equalsIgnoreCase("FLAG2")) {
             return new FlagTile(2);
         } else if (tile.equalsIgnoreCase("PIT")) {
-            return new PitObstacle();
+            return new PitTile();
         } else if (tile.equalsIgnoreCase("TALL")) {
-            return new TallObstacle();
+            return new TallTile();
         } else if (tile.equalsIgnoreCase("EMPTY")) {
             return new EmptyTile();
         }
