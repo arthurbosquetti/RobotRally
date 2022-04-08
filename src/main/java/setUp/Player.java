@@ -25,13 +25,13 @@ public class Player {
 	public void setTurn(boolean b) {this.turn=b;}
 	
 	public boolean getTurn() {return turn;}
+	
+	public void setHand(Card card1) {
+		
+	}
 
-	public void setHand(Card[] cards, Player player2) {
-		if (cards.length!=5) {
-			this.hand=null;
-			player2.setTurn(true);
-		}
-		else {
+	public void checkHand(Card[] cards, Player player2) {
+		if (cards.length == 5) {
 			this.hand=cards;
 			this.setTurn(false);
 			player2.setTurn(true);

@@ -13,8 +13,8 @@ import setUp.Game;
 import setUp.Level;
 import setUp.Player;
 import setUp.Robot;
-import setUp.Tiles.PitObstacle;
-import setUp.Tiles.TallObstacle;
+import setUp.Tiles.PitTile;
+import setUp.Tiles.TallTile;
 import setUp.Tiles.Tile;
 import setUp.Tiles.FlagTile;
 
@@ -28,11 +28,12 @@ public class StepsDefinition {
 //	FlagTile flag1  	 = new FlagTile(1);
 //	FlagTile flag2       = new FlagTile(2);
 	Robot robot     	 = new Robot("test");
-	TallObstacle stopper = new TallObstacle();
-	PitObstacle pit      = new PitObstacle();
+	TallTile stopper = new TallTile();
+	PitTile pit      = new PitTile();
 	Level level;
 	Card[] availableCards;
 	Card[] chosenCards;
+	Card card1;
 
 	
 ////// GAME START //////////
@@ -41,7 +42,6 @@ public class StepsDefinition {
 	@Given("difficulty level is {string}")
 	public void difficulty_level_is(String str) {
 		level = new Level(str, board);
-
 	}
 	@Given("players set their names to {string} and {string}")
 	public void players_set_name(String name1, String name2) {
@@ -71,7 +71,7 @@ public class StepsDefinition {
 	@When("P1 chooses {int} cards")
 	public void p1_chooses_cards(Integer int1) {
 	    chosenCards = new Card[int1];
-		player1.setHand(chosenCards, player2);
+		player1.checkHand(chosenCards, player2);
 	}
 	@Then("P2s turn")
 	public void p2_s_turn() {
@@ -84,13 +84,13 @@ public class StepsDefinition {
 
 	//Scenario: Turning left
 	@Given("P1 chooses card {string}")
-//	public void p1_chooses_card(String action) {
-//		this.card1 = new Card(action);
-//	}
+	public void p1_chooses_card(String action) {
+		this.card1 = new Card(action);
+	}
 	
 	@When("the card is executed")
 	public void the_card_is_executed() {
-//	    card1.executeAction(robot, board);
+	    card1.executeAction(robot, board);
 	    //System.out.println("Did it rotate " + robot.getDir().getDirectionInt());
 	}
 	@Then("Robot rotates left")
@@ -105,7 +105,7 @@ public class StepsDefinition {
 	@Then("Robot moves forward")
 	public void robot_moves_forward() {
 //		System.out.println(card1.get_MovingCard().get_MovedForward());
-//	    assertEquals(1, card1.get_MovingCard().get_MovedForward());
+	    assertEquals(1, card1.get_MovingCard().get_MovedForward());
 	}
 
 
