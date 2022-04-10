@@ -8,24 +8,33 @@ import setUp.Tiles.TileType;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Random;
+
 import setUp.Movement;
 
 @SuppressWarnings("unused")
 public class Board {
 	
 	private Tile[][] boardLayout;
-	private Movement mov;
+	private Movement mov = new Movement(this);
 	private int boardSize;
 	private int obstacleNumber;
 	private int flagNumber = 2;
-
-	public Board() {
-		mov = new Movement(this);
-	}
 	
 	//Getters and Setters
 	public Tile getTile(int x, int y) {
 		return this.boardLayout[y][x];
+	}
+	
+	public void setBoardSize(int boardSize) {
+		this.boardSize = boardSize;
+	}
+	
+	public int getBoardSize() {
+		return boardSize;
+	}
+	
+	public void setObstacleNumber(int obstacleNumber) {
+		this.obstacleNumber = obstacleNumber;
 	}
 	
 	public void setTile(int x, int y, Tile newTile) {
@@ -47,7 +56,6 @@ public class Board {
 				return false;
 			}
 		}
-
 		//checks move for validity
 		if (mov.checkMove(newPoint)) {
 			//Code for moving the Robot
@@ -103,22 +111,10 @@ public class Board {
 		}
 	}
 	
-	public void setBoardSize(int boardSize) {
-		this.boardSize = boardSize;
-	}
-	
-	public int getBoardSize() {
-		return boardSize;
-	}
-	
-	public void setObstacleNumber(int obstacleNumber) {
-		this.obstacleNumber = obstacleNumber;
-	}
 	
 	//printing a board without a robot
 	public void printBoard() {
 		for (Tile[] row : this.boardLayout) {
-			
 			for (Tile col : row) {
 				System.out.print(" " + col);
 			}
@@ -127,22 +123,31 @@ public class Board {
 	}
 		
 	//Overloaded printBoard method for printing a robot
-	public void printBoard(Robot robot) {
-		int x = robot.getX();
-		int y = robot.getY();
+	public void printBoard(Robot[] robot) {
 		//loop through board
 		for (int row = 0; row < boardLayout.length; row++)  {
 			for (int col = 0; col < boardLayout[0].length; col++) {
 				//check for robot in current tile
-				if (x == col && y == row ) {
-					System.out.print("   |R| ");
-				} else 
-				System.out.print(" " + boardLayout[row][col]);
+				boolean robotOn = false;
+				for (Robot robo : robot) {
+					if (robo.getX() == col && robo.getY() == row ) {
+						System.out.print("   |R| ");
+						robotOn = true;
+					}
+				}
+				if (!robotOn) {
+					System.out.print(" " + boardLayout[row][col]);		
+				}
 			}
 			System.out.println(" ");
 		}
+	}
+	
+	public void searchBoard(Tile tile) {
 		
-		System.out.println("Robot is facing: " + robot.getDir());
+		
+		
+		
 	}
 	
 }

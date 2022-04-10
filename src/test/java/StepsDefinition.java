@@ -13,8 +13,8 @@ import setUp.Game;
 import setUp.Level;
 import setUp.Player;
 import setUp.Robot;
-import setUp.Tiles.PitObstacle;
-import setUp.Tiles.TallObstacle;
+import setUp.Tiles.PitTile;
+import setUp.Tiles.TallTile;
 import setUp.Tiles.Tile;
 import setUp.Tiles.FlagTile;
 
@@ -28,8 +28,8 @@ public class StepsDefinition {
 //	FlagTile flag1  	 = new FlagTile(1);
 //	FlagTile flag2       = new FlagTile(2);
 	Robot robot     	 = new Robot("test");
-	TallObstacle stopper = new TallObstacle();
-	PitObstacle pit      = new PitObstacle();
+	TallTile stopper = new TallTile();
+	PitTile pit      = new PitTile();
 	Level level;
 	Card[] availableCards;
 	Card[] chosenCards;
