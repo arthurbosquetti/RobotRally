@@ -16,17 +16,17 @@ public class Level {
 		
 		switch(thislevel) {
 			case "Easy":
-				board.setBoardSize(3);
+				board.setBoardSize(7);
 				board.setObstacleNumber(2);
 				board.generateBoard();
 				break;
 			case "Medium":
-				board.setBoardSize(5);
+				board.setBoardSize(10);
 				board.setObstacleNumber(3);
 				board.generateBoard();
 				break;
 			case "Hard":
-				board.setBoardSize(7);
+				board.setBoardSize(15);
 				board.setObstacleNumber(5);
 				board.generateBoard();
 				break;

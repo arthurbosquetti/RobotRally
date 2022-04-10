@@ -15,7 +15,7 @@ public class Board {
 	
 	private Tile[][] boardLayout;
 	private Movement mov;
-	private int boardSize;
+	private static int boardSize;
 	private int obstacleNumber;
 	private int flagNumber = 2;
 
@@ -30,11 +30,14 @@ public class Board {
 	
 	public void setTile(int x, int y, Tile newTile) {
 		//checks to make sure new tile is within the game board
-		if (x > 0 || x < boardSize || y > 0 || y < boardSize) {
+		if ((x > 0 && x < boardSize) && (y > 0 && y < boardSize)) {
 			this.boardLayout[y][x] = newTile;
-		} else
+		} 
+		else {
 		System.out.println("Error: attempted to set tile outside of gameboard");
+		}
 	}
+	
 
 	//TODO: add code for robots colliding, change to work with movement card, and change based on those
 	public boolean makeMove(Robot robot, boolean forward, int steps, boolean jump) {
@@ -63,6 +66,7 @@ public class Board {
 
 	// Randomized board generation
 	public void generateBoard() {
+		System.out.println("here the size is " + boardSize);
 		this.boardLayout = new Tile[boardSize][boardSize];
 
 		// Place players in bottom corners, rn keep always keep them empty
@@ -103,8 +107,8 @@ public class Board {
 		}
 	}
 	
-	public void setBoardSize(int boardSize) {
-		this.boardSize = boardSize;
+	public void setBoardSize(int givenBoardSize) {
+		boardSize = givenBoardSize;
 	}
 	
 	public int getBoardSize() {
