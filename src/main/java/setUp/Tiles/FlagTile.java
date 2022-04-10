@@ -8,6 +8,7 @@ public class FlagTile extends Tile {
 
     public FlagTile(int flagNum) {
         this.flagNum = flagNum;
+        this.setImage("tiles/flag"+flagNum+".png");
     }
 
     @Override

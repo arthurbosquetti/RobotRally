@@ -5,17 +5,21 @@ import setUp.Tiles.Tile;
 import setUp.Tiles.TileFactory;
 import setUp.Tiles.TileType;
 
+import java.awt.GridLayout;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JPanel;
+
 import setUp.Movement;
 
 @SuppressWarnings("unused")
-public class Board {
+public class Board extends JPanel {
 	
+	private static final long serialVersionUID = -8623078556898821308L;
 	private Tile[][] boardLayout;
-	private Movement mov = new Movement(this);
+	private Movement mov= new Movement(this);
 	private int boardSize;
 	private int obstacleNumber;
 	private int flagNumber = 2;
@@ -144,10 +148,15 @@ public class Board {
 	}
 	
 	public void searchBoard(Tile tile) {
-		
-		
-		
-		
+		//TODO
 	}
 	
+	public void loadBoard() {
+		setLayout(new GridLayout(boardSize, boardSize));
+		for (Tile[] row : boardLayout) {
+			for (Tile tile : row) {
+				add(tile);
+			}
+		}
+	}
 }

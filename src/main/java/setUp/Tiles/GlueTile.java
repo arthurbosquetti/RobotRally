@@ -6,6 +6,7 @@ public class GlueTile extends Tile {
 
 	public GlueTile() {
 		this.setValid(true);
+		this.setImage("tiles/acid.png");
 	}
 	
     @Override

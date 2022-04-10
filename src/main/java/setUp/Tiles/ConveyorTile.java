@@ -9,6 +9,7 @@ public class ConveyorTile extends Tile {
 
     public ConveyorTile(Direction dir) {
     	this.setValid(true);
+    	this.setImage("tiles/acid.png");
     	direction = dir;
     }
     
