@@ -18,12 +18,10 @@ public class Robot extends Player {
         super(name, 9);
         //TODO: change these based on board generation
         this.direction = new Direction(0);
+        this.x = 4;
+        this.y = 1;
 //        this.spawnX = 5;
 //        this.spawnY = 5;
-//        this.x = 4;
-//        this.y = 4;
-        this.spawnX = 5;
-        this.spawnY = 5;
         canMove = true;
     }
 
@@ -41,7 +39,7 @@ public class Robot extends Player {
     public void setY(int newY) {
         this.y = newY;
     }
-    
+
     public int[] getSpawn() {
     	return new int[] {spawnX, spawnY};
     }

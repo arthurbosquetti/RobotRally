@@ -20,9 +20,9 @@ import setUp.Tiles.FlagTile;
 
 public class StepsDefinition {
 	
+	Game game		 	 = new Game();
 	Player player1 		 = new Player();
 	Player player2  	 = new Player();
-	Game game		 	 = new Game();
 	Board board     	 = new Board();
 	Deck deck      	     = new Deck();
 	FlagTile flag1  	 = new FlagTile(1);
@@ -110,7 +110,6 @@ public class StepsDefinition {
 	//Scenario: Robot hits a stopping obstacle
 	@Given("a stopping obstacle on the board in front of the robot")
 	public void a_stopping_obstacle_on_the_board_in_front_of_the_robot() {
-		System.out.println(board.getBoardSize());
 		board.setTile(2, 2, stopper);
 		robot.setX(2);
 		robot.setY(3);
@@ -176,7 +175,7 @@ public class StepsDefinition {
 	}
 
 	@And("the robot has not already reached the first flag")
-	public void the_robot_has_not_already_reached_on_the_first_flag() {
+	public void the_robot_has_not_already_reached_the_first_flag() {
 		robot.setFlag1(false);
 	}
 
@@ -185,7 +184,7 @@ public class StepsDefinition {
 		robot.move();
 	}
 
-	@Then("the robot is marked with one flag")
+	@Then("the robot collects the first flag")
 	public void mark_flag1() {
 		assertTrue(robot.getFlag1());
 	}
@@ -201,14 +200,14 @@ public class StepsDefinition {
 		robot.setFlag1(true);
 	}
 
-	@Then("robot does not collect first flag again")
-	public void robot_does_not_collect_first_flag_again() {
+	@Then("robot does not collect the first flag")
+	public void robot_does_not_collect_first_flag() {
 		assertTrue(robot.getFlag1());
 	}
 
 
 	//Scenario: Robot reaches the second flag before the first
-	@Then("robot does not collect second flag")
+	@Then("robot does not collect the second flag")
 	public void robot_does_not_collect_second_flag() {
 		assertFalse(robot.getFlag2());
 	}

@@ -66,7 +66,6 @@ public class Board {
 
 	// Randomized board generation
 	public void generateBoard() {
-		System.out.println("here the size is " + boardSize);
 		this.boardLayout = new Tile[boardSize][boardSize];
 
 		// Place players in bottom corners, rn keep always keep them empty
