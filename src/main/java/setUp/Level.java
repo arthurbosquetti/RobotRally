@@ -16,23 +16,24 @@ public class Level {
 		
 		switch(thislevel) {
 			case "Easy":
-				board.setBoardSize(7);
-				board.setObstacleNumber(2);
+				board.setBoardSize(8);
+				//Defining different numbers of obstacles (TeleportNr,MineNr,PitNr,GlueNr,ConveyorNr,TallN)
+				board.setObstacleNumber(0, 0, 3,2,1,4);
 				board.generateBoard();
 				break;
 			case "Medium":
-				board.setBoardSize(10);
-				board.setObstacleNumber(3);
+				board.setBoardSize(12);
+				board.setObstacleNumber(2,2,4,3,3,6);
 				board.generateBoard();
 				break;
 			case "Hard":
 				board.setBoardSize(15);
-				board.setObstacleNumber(5);
+				board.setObstacleNumber(2,6,8,4,4,6);
 				board.generateBoard();
 				break;
 			default:
 				board.setBoardSize(0);
-				board.setObstacleNumber(0);
+				board.setObstacleNumber(0,0,0,0,0,0);
 				
 		}
 		

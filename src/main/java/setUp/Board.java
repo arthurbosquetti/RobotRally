@@ -16,7 +16,7 @@ public class Board {
 	private Tile[][] boardLayout;
 	private Movement mov;
 	private static int boardSize;
-	private int obstacleNumber;
+	private int[] obstacleNumbers;
 	private int flagNumber = 2;
 
 	public Board() {
@@ -69,8 +69,14 @@ public class Board {
 		this.boardLayout = new Tile[boardSize][boardSize];
 
 		// Place players in bottom corners, rn keep always keep them empty
-		this.boardLayout[boardSize - 1][0] = TileFactory.getTile("EMPTY");
-		this.boardLayout[boardSize - 1][boardSize - 1] = TileFactory.getTile("EMPTY");
+		for (int i = 0; i < 3; i++){
+			for(int j = 0; j < 3 ; j++){
+				this.boardLayout[boardSize - i -1][j] = TileFactory.getTile("EMPTY");
+				this.boardLayout[boardSize - i -1][boardSize - j - 1] = TileFactory.getTile("EMPTY");
+			}
+		}
+		this.boardLayout[boardSize - 2][1] = TileFactory.getTile("SPAWN1");
+		this.boardLayout[boardSize - 2][boardSize - 2] = TileFactory.getTile("SPAWN2");
 
 		Random r = new Random();
 		boolean boardGenerated = true;
@@ -85,14 +91,32 @@ public class Board {
 				if (flagNumber != 0) {
 					this.boardLayout[randCol][randRow] = TileFactory.getTile("FLAG" + flagNumber);
 					flagNumber--;
-				} else if (obstacleNumber != 0) {
-					if (randObstacle == 0) {
-						this.boardLayout[randCol][randRow] = TileFactory.getTile("PIT");
-					} else {
-						this.boardLayout[randCol][randRow] = TileFactory.getTile("TALL");
-					}
-					obstacleNumber--;
-				} else {
+				}
+				else if (obstacleNumbers[0] != 0 ){
+					this.boardLayout[randCol][randRow] = TileFactory.getTile("TELEPORT");
+					obstacleNumbers[0]--;
+				}
+				else if (obstacleNumbers[1] != 0 ){
+					this.boardLayout[randCol][randRow] = TileFactory.getTile("MINE");
+					obstacleNumbers[1]--;
+				}
+				else if (obstacleNumbers[2] != 0 ){
+					this.boardLayout[randCol][randRow] = TileFactory.getTile("PIT");
+					obstacleNumbers[2]--;
+				}
+				else if (obstacleNumbers[3] != 0 ){
+					this.boardLayout[randCol][randRow] = TileFactory.getTile("GLUE");
+					obstacleNumbers[3]--;
+				}
+				else if (obstacleNumbers[4] != 0 ){
+					this.boardLayout[randCol][randRow] = TileFactory.getTile("CONVEYOR");
+					obstacleNumbers[4]--;
+				}
+				else if (obstacleNumbers[5] != 0 ){
+					this.boardLayout[randCol][randRow] = TileFactory.getTile("TALL");
+					obstacleNumbers[5]--;
+				}
+				else {
 					boardGenerated = false;
 				}
 			}
@@ -114,8 +138,8 @@ public class Board {
 		return boardSize;
 	}
 	
-	public void setObstacleNumber(int obstacleNumber) {
-		this.obstacleNumber = obstacleNumber;
+	public void setObstacleNumber(int TeleportNr, int MineNr, int PitNr, int GlueNr, int ConveyorNr, int TallNr) {
+		this.obstacleNumbers = new int[]{TeleportNr,MineNr,PitNr,GlueNr,ConveyorNr,TallNr};
 	}
 	
 	//printing a board without a robot

@@ -10,7 +10,7 @@ public class MineTile extends Tile{
 	
     @Override
     public String tileType() {
-        return " |m|";
+        return " |M|";
     }
 
     @Override

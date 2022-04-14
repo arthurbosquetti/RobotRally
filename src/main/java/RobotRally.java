@@ -14,7 +14,7 @@ public class RobotRally {
 			deck.newHand();
 			
 			Board board = new Board();
-			Level hard = new Level("Hard", board);
+			Level hard = new Level("Medium", board);
 	
 			Robot robo = new Robot("dev");
 			robo.setX(2);
