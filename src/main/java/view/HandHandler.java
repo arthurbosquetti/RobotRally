@@ -6,22 +6,22 @@ import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import setUp.Board;
 import setUp.Card;
+import setUp.Deck;
 
 public class HandHandler extends JPanel {
-
 	private static final long serialVersionUID = -1363523608759469440L;
-	
 	private GridBagConstraints c = new GridBagConstraints();
 
-	
-	public HandHandler() {
-		setLayout(new GridBagLayout());
-	}
-	
 	private ArrayList<JButton> buttons = new ArrayList<JButton>();
+	
+	
+	public HandHandler() {setLayout(new GridBagLayout());}
+	
 	
 	public void drawNewHand(ArrayList<Card> hand) {
 		clearHand();
@@ -36,7 +36,6 @@ public class HandHandler extends JPanel {
 			add(button, c);
 		}
 	}
-	
 	
 	public void clearHand() {
 		for (JButton button : buttons) {
