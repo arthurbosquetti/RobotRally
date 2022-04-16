@@ -7,6 +7,7 @@ import java.util.Random;
 public class Deck{
 	
 	private ArrayList<Card> hand = new ArrayList<Card>(); 
+	private ArrayList<Card> choosenCards = new ArrayList<Card>();
 	private Random rnd = new Random();
 
 	
@@ -39,6 +40,22 @@ public class Deck{
 	
 	public ArrayList<Card> getHand() {
 		return hand;
+	}
+	
+	public ArrayList<Card> getChoosen() {
+		return choosenCards;
+	}
+	
+	public Card getCard(int index) {
+		return hand.get(index);
+	}
+	
+	public void setCard(int index, Card card) {
+		hand.set(index, card);
+	}
+	
+	public void chooseCard(int index) {
+		choosenCards.add(hand.get(index));
 	}
 
 }
