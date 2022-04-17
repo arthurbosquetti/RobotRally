@@ -26,13 +26,16 @@ public class FirstScreen extends JPanel {
 	private JButton easy, mid, hard;
 	private JTextField p1name, p2name;
 	private static String player1, player2;
+	private Game game;
 	
 	
 	
-	public static void main(String[] args) {new FirstScreen();}
+	//public static void main(String[] args) {new FirstScreen();}
 
 	
-	public FirstScreen() {
+	public FirstScreen(Game game) {
+		this.game = game;
+		
 		JLabel name = new JLabel("Robot Rally Game");
 		JLabel labelP1 = new JLabel("Name of Player 1:");
 	    JLabel labelP2 = new JLabel("Name of Player 2:");
@@ -44,7 +47,7 @@ public class FirstScreen extends JPanel {
 	    JPanel newPanel = new JPanel(new GridBagLayout());
 	    
         //Listener for the buttons
-        Clicklistener click = new Clicklistener();
+        Clicklistener click = new Clicklistener(game);
         
 	    easy = new JButton("Easy");
 	    mid = new JButton("Medium");
@@ -110,10 +113,14 @@ public class FirstScreen extends JPanel {
 	
 
 private class Clicklistener implements ActionListener{
-		//When user clicks on a button the game starts\
-		Game game = new Game();
+		//When user clicks on a button the game starts\		
 		
-		
+	private Game game;
+	
+	public Clicklistener(Game game) {
+		this.game = game;
+	}
+	
 	    public void actionPerformed(ActionEvent e)
 	    {
 	      player1 = p1name.getText();

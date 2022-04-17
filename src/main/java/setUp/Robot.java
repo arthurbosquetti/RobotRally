@@ -14,8 +14,8 @@ public class Robot extends Player {
     private Tile nextTile;
     private boolean canMove;
     
-    public Robot(String name) {
-        super(name, 9);
+    public Robot(String name, int lives) {
+        super(name, lives);
         //TODO: change these based on board generation
         this.direction = new Direction(0);
 //        this.spawnX = 5;

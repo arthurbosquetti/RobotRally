@@ -10,15 +10,13 @@ import setUp.Board;
 import setUp.Deck;
 import setUp.Robot;
 
-public class CardListener implements ActionListener {
+public class HandListener implements ActionListener {
 
-	private Board board;
 	private Robot robot;
 	private Deck deck;
 	private HandHandler handler;
 	
-	public CardListener(Board board) {
-		this.board = board;
+	public HandListener() {
 	}
 	
 	public void setRobot(Robot robot) {

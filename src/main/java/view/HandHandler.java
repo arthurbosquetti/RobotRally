@@ -25,13 +25,13 @@ public class HandHandler extends JPanel {
 	private GridBagConstraints c = new GridBagConstraints();
 	private GridBagLayout gbl = new GridBagLayout();
 	private ArrayList<JButton> buttons = new ArrayList<JButton>();
-	private CardListener listener;
+	private HandListener listener = new HandListener();
+	private ChoosenCardHandler cch;
 
 	
-	public HandHandler(Robot robot, Deck deck, CardListener listener) {
+	public HandHandler(Robot robot) {
 		this.robot = robot;
-		this.deck = deck;
-		this.listener = listener;
+		this.deck = robot.getDeck();
 		listener.setDeck(deck);
 		listener.setRobot(robot);
 		listener.setHandler(this);
@@ -39,43 +39,34 @@ public class HandHandler extends JPanel {
 		setLayout(gbl);
 	}	
 	
-	public HandHandler() {setLayout(new GridBagLayout());}
+	public HandHandler() { setLayout(new GridBagLayout()); }
 	
 	
 	public void drawNewHand(ArrayList<Card> hand) {
-		clearHand();
+		//clearHand();
 		for (int i = 0; i < hand.size(); i ++) {
 			String action = hand.get(i).getCardAction();
 			JButton button = new JButton(action);
 			button.setActionCommand(action);
 			//TODO: make this change to fit two columns
-			c.gridx = i;
-			c.gridy = i;
+			c.gridx = i % 6;
+			c.gridy = i / 6;
 			buttons.add(button);
 			add(button, c);
 		}
 	}
 	
-	
-	public void newHand() {
-		
-	}
 	public void clearHand() {
-		for (JButton button : buttons) {
-			remove(button);
-		}
 		buttons.clear();
 		revalidate();
 		repaint();
-		deck.newHand();
 	}
 	
-	public void drawCards() {
+	public void drawCards(ArrayList<Card> hand) {
 		JLabel cardLbl = new JLabel(robot.getName() + "'s cards: ");
 		c.gridx = 0;
 		c.gridy = 0;
 		add(cardLbl, c);
-		ArrayList<Card> hand = deck.getHand();
 		for (int i = 0; i < hand.size(); i ++) {
 			//System.out.println(hand.get(i));
 			String action = hand.get(i).getCardAction();
@@ -88,15 +79,10 @@ public class HandHandler extends JPanel {
 			buttons.add(button);
 			add(button, c);
 		}
-		JLabel choosenLbl = new JLabel("Choosen cards: ");
-		c.gridx = 0;
-		c.gridy = 2;
-		add(choosenLbl, c);
 	}
 	
 	//In desperate need of testing
 	public void removeButton(int index) {
-		//buttons.get(index).setVisible(false);
 		Component button = this.getComponent(index+1);
 		GridBagConstraints contraints = gbl.getConstraints(button);
 		

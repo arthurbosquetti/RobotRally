@@ -4,11 +4,11 @@ public class Player {
 	
 	private String name;
 	private boolean turn;
-	private Card[] hand;
 	private int lives;
 	private boolean flag1;
 	private boolean flag2;
 	private boolean alive;
+	private Deck deck;
 
 	public Player(String newName, int newLives) {
 		this.name = newName;
@@ -16,7 +16,8 @@ public class Player {
 		this.flag1 = false;
 		this.flag2 = false;
 		this.alive = true;
-		
+		this.deck = new Deck();
+		deck.newHand();
 		System.out.println("I am:" + name);
 	}
 
@@ -28,19 +29,23 @@ public class Player {
 	
 	public boolean getTurn() {return turn;}
 	
-	public void setHand(Card card1) {
-		
-	}
-
-	public void checkHand(Card[] cards, Player player2) {
-		if (cards.length == 5) {
-			this.hand=cards;
-			this.setTurn(false);
-			player2.setTurn(true);
-		}
+	public void setDeck(Deck newDeck) { 
+		this.deck = newDeck;
 	}
 	
-	public Card[] getHand() { return hand; }
+	public Deck getDeck() {
+		return deck;
+	}
+
+//	public void checkHand(Card[] cards, Player player2) {
+//		if (cards.length == 5) {
+//			this.hand=cards;
+//			this.setTurn(false);
+//			player2.setTurn(true);
+//		}
+//	}
+	
+//	public Card[] getHand() { return hand; }
 	
 	public void setLives(int newLives) { this.lives = newLives; }
 	
