@@ -9,8 +9,6 @@ public class Player {
 	private boolean flag1;
 	private boolean flag2;
 	private boolean alive;
-	
-	public Player() {   }
 
 	public Player(String newName, int newLives) {
 		this.name = newName;
@@ -18,6 +16,8 @@ public class Player {
 		this.flag1 = false;
 		this.flag2 = false;
 		this.alive = true;
+		
+		System.out.println("I am:" + name);
 	}
 
 	public void setName(String name) { this.name = name; }
