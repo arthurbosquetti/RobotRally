@@ -38,6 +38,10 @@ public class Deck{
 		}
 	}
 	
+	public boolean canChoose() {
+		return (choosenCards.size() < 5)? true : false;
+	}
+	
 	public ArrayList<Card> getHand() {
 		return hand;
 	}

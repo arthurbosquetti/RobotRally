@@ -12,33 +12,27 @@ import setUp.Robot;
 
 public class HandListener implements ActionListener {
 
-	private Robot robot;
 	private Deck deck;
 	private HandHandler handler;
 	
-	public HandListener() {
-	}
-	
-	public void setRobot(Robot robot) {
-		this.robot = robot;	
+	public HandListener(HandHandler hh, Deck newDeck) {
+		this.handler = hh;
+		this.deck = newDeck;
 	}
 	
 	public void setDeck(Deck newDeck) {
 		this.deck = newDeck;	
 	}
 	
-	public void setHandler(HandHandler hh) {
-		handler = hh;
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent arg) {
 		int index = Integer.valueOf(arg.getActionCommand());
 		
-		deck.chooseCard(index);
-		handler.addChoosenCard(deck.getCard(index).getCardAction());
-		handler.removeButton(index);
-		
+		if(deck.canChoose()) {
+			deck.chooseCard(index);
+			handler.addChoosenCard(deck.getCard(index));
+			handler.removeButton(index);
+		}
 	}
 
 }

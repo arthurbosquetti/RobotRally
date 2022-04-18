@@ -1,16 +1,25 @@
 package setUp;
 
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import view.FirstScreen;
 import view.HandHandler;
 
 public class Game {
 	
-	private boolean gameOn;
+	private GridBagConstraints c = new GridBagConstraints();
+	private GridBagLayout gbl = new GridBagLayout();
+	private JFrame gameFrame;
 	
 	private Board board = new Board();
 	private Level level;
@@ -18,6 +27,7 @@ public class Game {
 	private Robot robot1;
 	private Robot robot2;
 
+	private boolean gameOn;
 	
 	public Game() {
 		FirstScreen fs = new FirstScreen(this); 
@@ -53,31 +63,38 @@ public class Game {
 			robot2 = new Robot(p2, 1);
 		}
 		
-		gameScreen();
-	}
-	
-	public void gameScreen() {
-		JFrame f = new JFrame("RobotRally game");
-		
-		
-		Deck deck = new Deck();
-		deck.newHand();
 		board.loadBoard();
 		
-		HandHandler hh1 = new HandHandler(robot1);	
-		hh1.drawCards(robot1.getDeck().getHand());
-		
-		HandHandler hh2 = new HandHandler(robot2);	
-		hh2.drawCards(robot2.getDeck().getHand());
+		initGameScreen();
+	}
 	
-		f.setLayout(new FlowLayout(FlowLayout.LEFT));
-		f.add(board);
-		f.add(hh1);
-		f.add(hh2);
-		f.setSize(1000, 700);
-		f.setResizable(false);
-		f.pack();
-		f.setVisible(true);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public void initGameScreen() {
+		gameFrame = new JFrame("RobotRally game");
+		gameFrame.setLayout(gbl);
+		
+		c.insets = new Insets(2, 2, 2, 2);
+		c.weightx = 0.5;
+		
+		HandHandler hh1 = new HandHandler(robot1);	
+		HandHandler hh2 = new HandHandler(robot2);	
+		
+		//70 * boardSize
+		c.gridx = 0;
+		c.gridy = 0;
+		gameFrame.add(board, c);
+		
+		JPanel hands = new JPanel();
+		hands.setLayout(new BoxLayout(hands, BoxLayout.Y_AXIS));
+		hands.add(hh1);
+		hands.add(Box.createRigidArea(new Dimension(0, 25)));
+		hands.add(hh2);
+		c.gridx = 3;
+		c.gridy = 0;
+		gameFrame.add(hands, c);
+		
+		gameFrame.setSize(70 * board.getBoardSize() + 700, 600);
+		gameFrame.setResizable(false);
+		gameFrame.setVisible(true);
+		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }
