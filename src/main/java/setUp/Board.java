@@ -60,9 +60,13 @@ public class Board extends JPanel {
 				return false;
 			}
 		}
-		//checks move for validity
+		//checks move for validity: runs code to move robot
 		if (mov.checkMove(newPoint)) {
-			//Code for moving the Robot
+			//remove robot from previous tile
+			this.getTile(robot.getX(), robot.getY()).setRobotOff();
+			//add robot to next tile
+			this.getTile(newPoint[0], newPoint[1]).setRobotOn(robot);;
+			//moves robot
 			robot.nextTile(this.getTile(newPoint[0], newPoint[1]));
 			robot.setX(newPoint[0]);
 			robot.setY(newPoint[1]);

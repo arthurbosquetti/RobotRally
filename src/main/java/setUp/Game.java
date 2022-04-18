@@ -31,6 +31,8 @@ public class Game {
 	
 	public Game() {
 		FirstScreen fs = new FirstScreen(this); 
+		
+		System.out.println("here");
 	}
 	
 	public void setGameStatus(boolean b) {
@@ -96,5 +98,17 @@ public class Game {
 		gameFrame.setResizable(false);
 		gameFrame.setVisible(true);
 		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		runGame();
+	}
+	
+	public void runGame() {
+		
+		//temporary code for testing robot on board
+		robot1.setX(2);
+		robot1.setY(2);
+		
+		board.makeMove(robot1, true, 1, false);
+		
 	}
 }
