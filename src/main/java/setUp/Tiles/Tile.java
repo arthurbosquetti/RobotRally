@@ -15,10 +15,11 @@ import setUp.Robot;;
 
 public abstract class Tile extends JPanel {
 	
-	private static final String robotLoc = "tiles/robot.png";
+	private static final String robotLoc = "robot.png";
 	
 	private static final long serialVersionUID = -5737440232503577884L;
-	public static final int pixelSize = 66;
+	public static int pixelSize;
+	private static String difficulty;
 	private boolean valid;
 	private BufferedImage image;
 	private Robot robotOn;
@@ -36,7 +37,6 @@ public abstract class Tile extends JPanel {
 	}	
 	public void setRobotOn(Robot robot) {
 		robotOn = robot;
-		System.out.println("works here");
 	}
 	public void setRobotOff() {
 		robotOn = null;
@@ -49,9 +49,16 @@ public abstract class Tile extends JPanel {
 		this.valid = newValid;
 	}
 	
+	public static void setDifficulty(String diff) {
+		difficulty = diff;
+	}
+	public static void setPixelSize(int pixSize) {
+		pixelSize = pixSize;
+	}
+	
 	public void setImage(String loc) {
 		try {
-			this.image = ImageIO.read(getClass().getClassLoader().getResourceAsStream(loc));
+			this.image = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/"+difficulty+"/"+loc));
 		} catch (IOException e) {
 			this.image = new BufferedImage(1, 1, BufferedImage.TYPE_INT_RGB);
 			System.out.println("oops");

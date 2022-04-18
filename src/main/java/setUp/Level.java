@@ -13,21 +13,21 @@ public class Level {
 
 				
 	public void initializeBoard(Board board) {
-		
+		//TODO: change these to final values
 		switch(thislevel) {
 			case "Easy":
-				board.setBoardSize(3);
-				board.setObstacleNumber(2);
+				board.setBoardSize(8);
+				board.setObstacleNumber(10);
 				board.generateBoard();
 				break;
 			case "Medium":
-				board.setBoardSize(5);
-				board.setObstacleNumber(3);
+				board.setBoardSize(10);
+				board.setObstacleNumber(20);
 				board.generateBoard();
 				break;
 			case "Hard":
-				board.setBoardSize(7);
-				board.setObstacleNumber(5);
+				board.setBoardSize(14);
+				board.setObstacleNumber(30);
 				board.generateBoard();
 				break;
 			default:

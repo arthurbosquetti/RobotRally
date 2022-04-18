@@ -12,6 +12,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import setUp.Tiles.Tile;
 import view.FirstScreen;
 import view.HandHandler;
 
@@ -47,20 +48,26 @@ public class Game {
 		setGameStatus(true);
 	
 		if (newLevel == "easy") {
+			Tile.setDifficulty("easy");
+			Tile.setPixelSize(75);
 		  	level = new Level("Easy", board);
 		  	
 		  	robot1 = new Robot(p1, 5);
 			robot2 = new Robot(p2, 5);
 		  	}
 		else if (newLevel == "mid") {
+			Tile.setDifficulty("medium");
+			Tile.setPixelSize(66);
 		  	level = new Level("Medium", board);
 		  	
 		  	robot1 = new Robot(p1, 3);
 			robot2 = new Robot(p2, 3);
 		  	}
 		else if (newLevel == "hard") {
+			Tile.setDifficulty("hard");
+			Tile.setPixelSize(50);
 		  	level = new Level("Hard", board);
-		  	
+
 		  	robot1 = new Robot(p1, 1);
 			robot2 = new Robot(p2, 1);
 		}
@@ -74,7 +81,7 @@ public class Game {
 		gameFrame = new JFrame("RobotRally game");
 		gameFrame.setLayout(gbl);
 		
-		c.insets = new Insets(2, 2, 2, 2);
+		//c.insets = new Insets(2, 2, 2, 2);
 		c.weightx = 0.5;
 		
 		HandHandler hh1 = new HandHandler(robot1);	
@@ -94,7 +101,7 @@ public class Game {
 		c.gridy = 0;
 		gameFrame.add(hands, c);
 		
-		gameFrame.setSize(70 * board.getBoardSize() + 700, 600);
+		gameFrame.setSize((Tile.pixelSize * board.getBoardSize()) + 700, (Tile.pixelSize * board.getBoardSize()) + 100);
 		gameFrame.setResizable(false);
 		gameFrame.setVisible(true);
 		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

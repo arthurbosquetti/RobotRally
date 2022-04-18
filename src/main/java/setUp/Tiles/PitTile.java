@@ -5,7 +5,7 @@ public class PitTile extends Tile {
     
     public PitTile() {
         this.setValid(true);
-        this.setImage("tiles/pit.png");
+        this.setImage("pit.png");
     }
 
     @Override
