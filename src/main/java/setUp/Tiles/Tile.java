@@ -75,11 +75,11 @@ public abstract class Tile extends JPanel {
 		
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.drawImage(image, 0, 0, null);
+		//draw robot on top of tile if there is robot on the board
 		if (robotOn != null) {
 			try {
 				BufferedImage robotImage = ImageIO.read(getClass().getClassLoader().getResourceAsStream(robotLoc));
 				g2d.drawImage(robotImage, 0, 0, null);
-				System.out.println("worked");
 			} catch (IOException e) {
 				System.out.println("oops");
 			}

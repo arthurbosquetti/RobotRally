@@ -21,6 +21,7 @@ public class Direction {
     }
 
     public void turnRight() {
+    	System.out.println("I turned left");
     	this.rotatedRight = true;
         if (direction > 0) {
             direction -= 90;

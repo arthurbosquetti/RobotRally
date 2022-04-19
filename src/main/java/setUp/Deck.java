@@ -12,7 +12,7 @@ public class Deck{
 
 	
 	public void newHand() {
-		for (int i=0; i<=9; i++) {
+		for (int i=0; i<9; i++) {
 			double val = rnd.nextDouble();
 			if (val < 0.20) {
 				hand.add(new Card("F1"));

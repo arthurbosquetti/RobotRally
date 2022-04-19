@@ -1,9 +1,5 @@
 package view;
 
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,6 +9,7 @@ import setUp.Deck;
 
 public class ChoosenCardHandler extends JPanel {
 	
+	private static final long serialVersionUID = -419638239226798711L;
 	private String player;
 	private Deck deck;	
 	
@@ -21,21 +18,15 @@ public class ChoosenCardHandler extends JPanel {
 		
 		this.player = player;
 		this.deck = deck;
-		
 
 		JLabel choosenLbl = new JLabel("Choosen cards: ");
 		add(choosenLbl);
 	}
 	
 	public void addCard(Card card) {
-		System.out.println("here");
 		JLabel actLbl = new JLabel(" "+ card.getCardAction()+ " ");
 		add(actLbl);
 		revalidate();
 		repaint();
 	}
-	
-	
-	
-	
 }

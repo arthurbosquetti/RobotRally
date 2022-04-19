@@ -3,18 +3,15 @@ package view;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import setUp.Board;
 import setUp.Card;
 import setUp.Deck;
+import setUp.Game;
 import setUp.Robot;
 
 public class HandHandler extends JPanel {
@@ -28,12 +25,12 @@ public class HandHandler extends JPanel {
 	private HandListener listener;
 	private ChoosenCardHandler cch;
 	
-	public HandHandler(Robot robot) {
+	public HandHandler(Robot robot, Game game) {
 		setLayout(gbl);
 		
 		this.robot = robot;
 		this.deck = robot.getDeck();
-		listener = new HandListener(this, deck);
+		listener = new HandListener(this, deck, game);
 		
 		drawCards();
 		
@@ -56,21 +53,32 @@ public class HandHandler extends JPanel {
 	
 	public void drawCards() {
 		ArrayList<Card> hand = deck.getHand();
+		
 		JLabel cardLbl = new JLabel(robot.getName() + "'s cards: ");
 		c.gridx = 0;
 		c.gridy = 0;
 		add(cardLbl, c);
+		
 		for (int i = 0; i < hand.size(); i ++) {
 			String action = hand.get(i).getCardAction();
 			JButton button = new JButton(action);
 			button.setActionCommand(""+i);
 			button.addActionListener(listener);
 			//TODO: make this change to fit two rows better
-			c.gridx = i % 6 + 1;
-			c.gridy = i / 6 ;
+			c.gridx = i % 5 + 1;
+			c.gridy = i / 5 ;
 			buttons.add(button);
 			add(button, c);
 		}
+		
+		JButton submitButton = new JButton("submit");
+		submitButton.setActionCommand("-1");
+		submitButton.addActionListener(listener);
+		//TODO: make this change to fit two rows better
+		c.gridx = 5;
+		c.gridy = 1;
+		buttons.add(submitButton);
+		add(submitButton, c);
 	}
 	
 	public void removeButton(int index) {
@@ -78,6 +86,8 @@ public class HandHandler extends JPanel {
 		button.setVisible(false);
 		repaint(button.getX(), button.getY(), button.getWidth(), button.getHeight());
 	}
+	
+	
 	
 	public void addChoosenCard(Card card) {
 		cch.addCard(card);

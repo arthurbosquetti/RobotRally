@@ -3,7 +3,6 @@ package setUp;
 import setUp.Tiles.EmptyTile;
 import setUp.Tiles.Tile;
 import setUp.Tiles.TileFactory;
-import setUp.Tiles.TileType;
 
 import java.awt.GridLayout;
 import java.util.ArrayDeque;

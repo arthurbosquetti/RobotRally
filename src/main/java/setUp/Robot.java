@@ -18,10 +18,6 @@ public class Robot extends Player {
         super(name, lives);
         //TODO: change these based on board generation
         this.direction = new Direction(0);
-//        this.spawnX = 5;
-//        this.spawnY = 5;
-//        this.x = 4;
-//        this.y = 4;
         this.spawnX = 5;
         this.spawnY = 5;
         canMove = true;
@@ -47,7 +43,6 @@ public class Robot extends Player {
     }
     
     public Direction getDir() {
-    	//System.out.println(direction);
     	return this.direction;
     }
     

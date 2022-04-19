@@ -8,16 +8,19 @@ import javax.swing.JPanel;
 
 import setUp.Board;
 import setUp.Deck;
+import setUp.Game;
 import setUp.Robot;
 
 public class HandListener implements ActionListener {
 
 	private Deck deck;
 	private HandHandler handler;
+	private Game game;
 	
-	public HandListener(HandHandler hh, Deck newDeck) {
+	public HandListener(HandHandler hh, Deck newDeck, Game game) {
 		this.handler = hh;
 		this.deck = newDeck;
+		this.game = game;
 	}
 	
 	public void setDeck(Deck newDeck) {
@@ -28,11 +31,14 @@ public class HandListener implements ActionListener {
 	public void actionPerformed(ActionEvent arg) {
 		int index = Integer.valueOf(arg.getActionCommand());
 		
-		if(deck.canChoose()) {
+		if(deck.canChoose() && index != -1) {
 			deck.chooseCard(index);
 			handler.addChoosenCard(deck.getCard(index));
 			handler.removeButton(index);
+		} else if (!deck.canChoose() && index == -1) {
+			System.out.println("player done choosing");
+			handler.removeButton(9);
+			game.playerDone();
 		}
 	}
-
 }

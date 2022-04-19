@@ -19,9 +19,7 @@ public class Card{
 	}
 	
 	public void executeAction(Robot robot, Board board) {
-		System.out.println(this.action.equals("F"));
 		if ( (this.action.equals("F1"))|| (this.action.equals("F2")) || (this.action.equals("F3")) || (this.action.equals("B")) || (this.action.equals("J"))) {
-			System.out.println("I got here");
 			moving.detMove(action, robot, board);
 		}
 		else if (this.action.equals("R")) {

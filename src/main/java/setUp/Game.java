@@ -1,26 +1,19 @@
 package setUp;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import setUp.Tiles.Tile;
 import view.FirstScreen;
+import view.GameScreen;
 import view.HandHandler;
 
 public class Game {
 	
-	private GridBagConstraints c = new GridBagConstraints();
-	private GridBagLayout gbl = new GridBagLayout();
-	private JFrame gameFrame;
+	private GameScreen gs;
+	
+	private HandHandler hh1;
+	private HandHandler hh2;
 	
 	private Board board = new Board();
 	private Level level;
@@ -78,44 +71,44 @@ public class Game {
 	}
 	
 	public void initGameScreen() {
-		gameFrame = new JFrame("RobotRally game");
-		gameFrame.setLayout(gbl);
+		gs = new GameScreen();
 		
-		//c.insets = new Insets(2, 2, 2, 2);
-		c.weightx = 0.5;
+		hh1 = new HandHandler(robot1, this);	
+		hh2 = new HandHandler(robot2, this);	
 		
-		HandHandler hh1 = new HandHandler(robot1);	
-		HandHandler hh2 = new HandHandler(robot2);	
+		gs.initGameScreen(board, hh1, hh2);
 		
-		//70 * boardSize
-		c.gridx = 0;
-		c.gridy = 0;
-		gameFrame.add(board, c);
+		//temp for testing
+		robot1.setX(3);
+		robot1.setY(3);
+		robot2.setX(5);
+		robot2.setY(5);
 		
-		JPanel hands = new JPanel();
-		hands.setLayout(new BoxLayout(hands, BoxLayout.Y_AXIS));
-		hands.add(hh1);
-		hands.add(Box.createRigidArea(new Dimension(0, 25)));
-		hands.add(hh2);
-		c.gridx = 3;
-		c.gridy = 0;
-		gameFrame.add(hands, c);
-		
-		gameFrame.setSize((Tile.pixelSize * board.getBoardSize()) + 700, (Tile.pixelSize * board.getBoardSize()) + 100);
-		gameFrame.setResizable(false);
-		gameFrame.setVisible(true);
-		gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		runGame();
 	}
 	
-	public void runGame() {
+	public void playerDone() {
 		
-		//temporary code for testing robot on board
-		robot1.setX(2);
-		robot1.setY(2);
-		
-		board.makeMove(robot1, true, 1, false);
-		
+		ArrayList<Card> choosen1 = robot1.getDeck().getChoosen();
+		ArrayList<Card> choosen2 = robot2.getDeck().getChoosen();
+		if (!(robot1.getDeck().canChoose()) & !(robot2.getDeck().canChoose())) {
+			//removes submit button if it still exists
+			hh1.removeButton(9);
+			hh2.removeButton(9);
+			
+			//executes moves selected
+			System.out.println("starting moves:");
+			for (int i = 0; i < 5; i++) {
+				choosen1.get(i).executeAction(robot1, board);
+				//one second pause to slow things down a bit
+				try {
+					TimeUnit.SECONDS.sleep(1);
+				} catch (InterruptedException e) {
+					}
+				choosen2.get(i).executeAction(robot1, board);
+				board.repaint();
+			}
+			
+			//Code to move select again, etc
+		}
 	}
 }
