@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import setUp.Tiles.Tile;
+import view.EndScreen;
 import view.FirstScreen;
 import view.GameScreen;
 import view.HandHandler;
@@ -110,5 +111,15 @@ public class Game {
 			
 			//Code to move select again, etc
 		}
+	}
+	
+	public void gameEnd(){
+		if (robot1.isAlive() == false || robot2.getWinner()== true) {
+			EndScreen es = new EndScreen(robot2.getName());
+		}
+		else if (robot2.isAlive() == false || robot1.getWinner()== true) {
+			EndScreen es = new EndScreen(robot1.getName());
+		}
+		
 	}
 }

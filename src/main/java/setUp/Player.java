@@ -8,17 +8,19 @@ public class Player {
 	private boolean flag1;
 	private boolean flag2;
 	private boolean alive;
+	private boolean won;
 	private Deck deck;
-
+	
+	
 	public Player(String newName, int newLives) {
 		this.name = newName;
 		this.lives = newLives;
 		this.flag1 = false;
 		this.flag2 = false;
 		this.alive = true;
+		this.won = false;
 		this.deck = new Deck();
 		deck.newHand();
-		System.out.println("I am:" + name);
 	}
 
 	public void setName(String name) { this.name = name; }
@@ -59,6 +61,9 @@ public class Player {
 
 	public void setFlag2(boolean newFlag2) {
 		this.flag2 = newFlag2;
+		if (flag2 == true) {
+			setWinner(true);
+		}
 	}
 	
 	public boolean getFlag2() {
@@ -73,4 +78,12 @@ public class Player {
         return alive;
     }
     
+    public void setWinner(boolean won) {
+    	this.won = won;
+    }
+    
+    public boolean getWinner() {
+    	return won;
+    }
+
 }

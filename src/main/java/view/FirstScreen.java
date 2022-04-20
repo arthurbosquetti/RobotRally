@@ -28,11 +28,6 @@ public class FirstScreen extends JPanel {
 	private static String player1, player2;
 	private Game game;
 	
-	
-	
-	//public static void main(String[] args) {new FirstScreen();}
-
-	
 	public FirstScreen(Game game) {
 		this.game = game;
 		
@@ -113,7 +108,7 @@ public class FirstScreen extends JPanel {
 	
 
 private class Clicklistener implements ActionListener{
-		//When user clicks on a button the game starts\		
+		//When user clicks on a button the game starts	
 		
 	private Game game;
 	
