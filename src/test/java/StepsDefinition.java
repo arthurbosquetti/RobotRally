@@ -20,14 +20,14 @@ import setUp.Tiles.FlagTile;
 
 public class StepsDefinition {
 	
-	Player player1 		 = new Player();
-	Player player2  	 = new Player();
 	Game game		 	 = new Game();
+	Player player1 		 = new Player("test1", 9);
+	Player player2  	 = new Player("test2", 9);
 	Board board     	 = new Board();
 	Deck deck      	     = new Deck();
-//	FlagTile flag1  	 = new FlagTile(1);
-//	FlagTile flag2       = new FlagTile(2);
-	Robot robot     	 = new Robot("test");
+	FlagTile flag1  	 = new FlagTile(1);
+	FlagTile flag2       = new FlagTile(2);
+	Robot robot     	 = new Robot("test", 9);
 	TallTile stopper = new TallTile();
 	PitTile pit      = new PitTile();
 	Level level;
@@ -41,7 +41,7 @@ public class StepsDefinition {
 	//Scenario: Successful start of the game
 	@Given("difficulty level is {string}")
 	public void difficulty_level_is(String str) {
-		level = new Level(str, board);
+		this.level = new Level(str, board);
 	}
 	@Given("players set their names to {string} and {string}")
 	public void players_set_name(String name1, String name2) {
@@ -90,13 +90,11 @@ public class StepsDefinition {
 	
 	@When("the card is executed")
 	public void the_card_is_executed() {
-	    card1.executeAction(robot, board);
-	    //System.out.println("Did it rotate " + robot.getDir().getDirectionInt());
+	    card1.executeAction(robot, board);   
 	}
+	
 	@Then("Robot rotates left")
 	public void robot_rotates_left() {
-		//System.out.println(robot.getDir());
-		//System.out.println(robot.getDir().getRotatedLeft());
 	    assertTrue(robot.getDir().getRotatedLeft());
 	}
 
@@ -104,74 +102,10 @@ public class StepsDefinition {
 	//Scenario: Moving forward
 	@Then("Robot moves forward")
 	public void robot_moves_forward() {
-//		System.out.println(card1.get_MovingCard().get_MovedForward());
 	    assertEquals(1, card1.get_MovingCard().get_MovedForward());
 	}
 
-
-
-////// FLAGS //////////
-
-
-	//Scenario: Robot reaches flag first time
-	@Given("the first flag on the board in front of the robot")
-	public void theFirstFlagOnTheBoardInFrontOfTheRobot() {
-//		robot.nextTile(flag1);
-	}
-
-	@And("the robot has not already reached the first flag")
-	public void the_robot_has_not_already_reached_on_the_first_flag() {
-		robot.setFlag1(false);
-	}
-
-	@When("a movement is executed by a robot")
-	public void aMovementExecutedByARobot() {
-		robot.move();
-	}
-
-	@Then("the robot is marked with one flag")
-	public void mark_flag1() {
-		assertTrue(robot.getFlag1());
-	}
-
-
-	//Scenario: Robot reaches the first flag again
-//<<<<<<< HEAD
-//	@And("the second flag on the board in front of the robot")
-//	public void theSecondFlagOnTheBoardInFrontOfTheRobot() {
-//		robot.nextTile(flag2);
-//	}
-
-//=======
-//>>>>>>> feddfaf07f8938579293c1efad97af672c09140a
-	@Given("the robot has already reached the first flag")
-	public void the_robot_has_already_reached_the_first_flag() {
-		robot.setFlag1(true);
-	}
-
-	@Then("robot does not collect first flag again")
-	public void robot_does_not_collect_first_flag_again() {
-		assertTrue(robot.getFlag1());
-	}
-
-
-	//Scenario: Robot reaches the second flag before the first
-	@And("the second flag on the board in front of the robot")
-//	public void theSecondFlagOnTheBoardInFrontOfTheRobot() {
-//		robot.nextTile(flag2);
-//	}
-	@Then("robot does not collect second flag")
-	public void robot_does_not_collect_second_flag() {
-		assertFalse(robot.getFlag2());
-	}
-
-	 //Scenario: Robot wins
-	@Then("the robot has won")
-	public void the_robot_has_won() {
-		assertFalse(game.getGameStatus());
-	}
-
-//// OBSTACLES //////////
+////OBSTACLES //////////
 
 	//Scenario: Robot hits a stopping obstacle
 	@Given("a stopping obstacle on the board in front of the robot")
@@ -181,27 +115,15 @@ public class StepsDefinition {
 		robot.setY(3);
 	}
 
-//	@When("the robot hits the obstacle")
-//<<<<<<< HEAD
-//	public void the_robot_hits_the_obstacle() {
-//		board.makeMove(robot, true, 1);
-//	}
-
-//	@Then("the robot cannot move into the obstacle")
-//	public void the_robot_cannot_move_into_the_obstacle() {
-//	    assertFalse(board.makeMove(robot, true, 1));
-//	}
-//=======
-//	public void the_robot_hits_the_obstacle() {
-//		board.makeMove(robot, true, 1, false);
-//	}
+	@When("the robot hits the obstacle")
+	public void the_robot_hits_the_obstacle() {
+		board.makeMove(robot, true, 1, false);
+	}
 
 	@Then("the robot cannot move into the obstacle")
-//	public void the_robot_cannot_move_into_the_obstacle() {
-//	    assertFalse(board.makeMove(robot, true, 1, false));
-//	}
-//>>>>>>> feddfaf07f8938579293c1efad97af672c09140a
-
+	public void the_robot_cannot_move_into_the_obstacle() {
+	    assertFalse(board.makeMove(robot, true, 1, false));
+	}
 
 	 //Scenario: Robot 1 hits a damaging obstacle and survives
 	@Given("a damaging obstacle on the board in front of the robot")
@@ -228,19 +150,73 @@ public class StepsDefinition {
 	}
 
 	 //Scenario: Robot hits a damaging obstacle and dies!
-    @Given("one life left")
-    public void one_life_left() {
-        robot.setLives(1);
-    }
+   @Given("one life left")
+   public void one_life_left() {
+       robot.setLives(1);
+   }
 
 	@Then("the robot has no lives")
 	public void robot_has_no_lives() {
 		assertEquals(robot.getLives(), 0);
 	}
 
-    @Then("is out of the game")
-    public void is_out_of_the_game() {
-        assertFalse(robot.isAlive());
-    }
+   @Then("is out of the game")
+   public void is_out_of_the_game() {
+       assertFalse(robot.isAlive());
+   }
 
+
+
+////// FLAGS //////////
+	//Scenario: Robot reaches flag first time
+	@Given("the first flag on the board in front of the robot")
+	public void theFirstFlagOnTheBoardInFrontOfTheRobot() {
+		robot.nextTile(flag1);
+	}
+
+	@And("the robot has not already reached the first flag")
+	public void the_robot_has_not_already_reached_the_first_flag() {
+		robot.setFlag1(false);
+	}
+
+	@When("a movement is executed by a robot")
+	public void aMovementExecutedByARobot() {
+		robot.move();
+	}
+
+	@Then("the robot collects the first flag")
+	public void mark_flag1() {
+		assertTrue(robot.getFlag1());
+	}
+
+
+	//Scenario: Robot reaches the first flag again
+	@And("the second flag on the board in front of the robot")
+	public void theSecondFlagOnTheBoardInFrontOfTheRobot() {
+		robot.nextTile(flag2);
+	}
+	@Given("the robot has already reached the first flag")
+	public void the_robot_has_already_reached_the_first_flag() {
+		robot.setFlag1(true);
+	}
+
+	@Then("robot does not collect the first flag")
+	public void robot_does_not_collect_first_flag() {
+		assertTrue(robot.getFlag1());
+	}
+
+
+	//Scenario: Robot reaches the second flag before the first
+	@Then("robot does not collect the second flag")
+	public void robot_does_not_collect_second_flag() {
+		assertFalse(robot.getFlag2());
+	}
+
+	 //Scenario: Robot wins
+	@Then("the robot has won")
+	public void the_robot_has_won() {
+		assertFalse(game.getGameStatus());
+	}
 }
+
+

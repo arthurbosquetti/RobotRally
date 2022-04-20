@@ -27,7 +27,6 @@ public class Movement {
 	public int[] getNewPoint(Direction dir, int x, int y, boolean forward, int step) {
 		switch (dir.getDirection()) {
 			case "north":
-				System.out.println("we good");	
 				return (forward)? new int[]{x, y - step} : new int[]{x, y + step};
 			case "east":
 				return (forward)? new int[]{x + step, y} : new int[]{x - step, y};

@@ -17,9 +17,9 @@ import setUp.Movement;
 public class Board extends JPanel {
 	
 	private static final long serialVersionUID = -8623078556898821308L;
+	private static int boardSize;
 	private Tile[][] boardLayout;
 	private Movement mov= new Movement(this);
-	private int boardSize;
 	private int obstacleNumber;
 	private int flagNumber = 2;
 	
@@ -42,11 +42,14 @@ public class Board extends JPanel {
 	
 	public void setTile(int x, int y, Tile newTile) {
 		//checks to make sure new tile is within the game board
-		if (x > 0 || x < boardSize || y > 0 || y < boardSize) {
+		if ((x > 0 && x < boardSize) && (y > 0 && y < boardSize)) {
 			this.boardLayout[y][x] = newTile;
-		} else
+		} 
+		else {
 		System.out.println("Error: attempted to set tile outside of gameboard");
+		}
 	}
+	
 
 	//TODO: add code for robots colliding, change to work with movement card, and change based on those
 	public boolean makeMove(Robot robot, boolean forward, int steps, boolean jump) {
@@ -117,8 +120,7 @@ public class Board extends JPanel {
 			}
 		}
 	}
-	
-	
+		
 	//printing a board without a robot
 	public void printBoard() {
 		for (Tile[] row : this.boardLayout) {

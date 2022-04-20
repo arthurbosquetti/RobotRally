@@ -10,17 +10,19 @@ Feature: Choosing 5 cards to be played
 		
 	@tag2 
 	Scenario: Turning left
-	Given P1 chooses card "L"
+	Given difficulty level is "Easy"
+	And P1 chooses card "L"
 	And P1 chooses 5 cards
 	When the card is executed
 	Then Robot rotates left
 	
 	@tag3
 	Scenario: Moving forward
-	Given P1 chooses card "F1"
+	Given difficulty level is "Medium"
+	When P1 chooses card "F1"
 	And P1 chooses 5 cards
-	When the card is executed
-	Then Robot moves forward 
+	Then the card is executed
+	And Robot moves forward
 	
 
 
