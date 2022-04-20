@@ -37,13 +37,13 @@ public class Player {
 		return deck;
 	}
 
-//	public void checkHand(Card[] cards, Player player2) {
-//		if (cards.length == 5) {
+	public void checkHand(Card[] cards, Player player2) {
+		if (cards.length == 5) {
 //			this.hand=cards;
-//			this.setTurn(false);
-//			player2.setTurn(true);
-//		}
-//	}
+			this.setTurn(false);
+			player2.setTurn(true);
+		}
+	}
 	
 //	public Card[] getHand() { return hand; }
 	
