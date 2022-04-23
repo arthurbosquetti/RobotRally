@@ -24,7 +24,19 @@ public class ConveyorTile extends Tile {
     }
 
     @Override
-    public void steppedOn(Robot robot) {
-        //TODO: this
+    public void steppedOn(Robot robot) { //assuming this is never on an edge
+    	int x = robot.getX();
+    	int y = robot.getY();
+    	
+    	switch (this.direction.getDirection()) {
+		case "north":
+			robot.setY(y-1);
+		case "east":
+			robot.setX(x+1);
+		case "south":
+			robot.setY(y+1);
+		case "west":
+			robot.setX(x-1);
+    	}
     }
 }

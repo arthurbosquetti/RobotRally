@@ -13,6 +13,7 @@ public class Robot extends Player {
     private Tile currentTile;
     private Tile nextTile;
     private boolean canMove;
+    //private boolean glue;
     
     public Robot(String name, int lives) {
         super(name, lives);
@@ -89,6 +90,16 @@ public class Robot extends Player {
 			default:
 				return new int[]{x, y};	
 		}
+	}
+
+	//public boolean isGlue() {
+		//return glue;
+	//	return canMove;
+	//}
+
+	public void setGlue(boolean glue) {
+		//this.glue = glue;
+		this.canMove = glue;
 	}
     
 

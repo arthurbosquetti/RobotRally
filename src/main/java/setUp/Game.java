@@ -108,7 +108,8 @@ public class Game {
 				choosen2.get(i).executeAction(robot1, board);
 				board.repaint();
 			}
-			
+			robot1.setGlue(true);
+			robot2.setGlue(true);
 			//Code to move select again, etc
 		}
 	}
