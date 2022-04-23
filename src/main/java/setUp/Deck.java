@@ -37,6 +37,9 @@ public class Deck{
 		}
 	}
 	
+	public ArrayList<Card> getHand(){
+		return Hand;
+	}
 
 }
 

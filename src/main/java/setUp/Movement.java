@@ -15,12 +15,12 @@ public class Movement {
 		int x = point[0];
 		int y = point[1];
 		if (x < 0 || x >= board.getBoardSize() || y < 0 || y >= board.getBoardSize()) {
-			System.out.println("Error: move out of board");
+			//System.out.println("Error: move out of board");
 			return false;
 		} else if (board.getTile(x, y).validTile()) {	// no clue what a valid tile is... any tile that's not null?
 			return true;
 		} else
-			System.out.println("move failed, obstacle in the way");
+			//System.out.println("move failed, obstacle in the way");
 			return false;
 	}
 
