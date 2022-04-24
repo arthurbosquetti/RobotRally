@@ -176,6 +176,27 @@ public class Board extends JPanel {
 		}
 	}
 	
+	public int[][] searchBoard(Tile tile) { // currently built for finding 2 teleport tiles :P
+		int[][] tileSpot = new int[2][2];
+		for (int row = 0; row < boardLayout.length; row++)  { //search from top left corner
+			for (int col = 0; col < boardLayout[0].length; col++) {	
+				if (this.boardLayout[row][col] == tile) {
+					tileSpot[0][0] = row;
+					tileSpot[0][1] = col;
+				}
+			}
+		}
+		for (int row = boardLayout.length-1; row > -1; row--)  { //search from bottom right corner
+			for (int col = boardLayout.length-1; col > -1; col--) {	
+				if (this.boardLayout[row][col] == tile) {
+					tileSpot[1][0] = row;
+					tileSpot[1][1] = col;
+				}
+			}
+		}
+		return tileSpot;
+	}
+	
 	public void loadBoard() {
 		setLayout(new GridLayout(boardSize, boardSize));
 		for (Tile[] row : boardLayout) {
