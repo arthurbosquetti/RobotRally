@@ -109,6 +109,13 @@ public class Game {
 		robot2.hurt(1);
 	}
 	
+	public int[] findOtherPlayer(Robot robot1) {
+		int[] other = new int[2];
+		other[0] = robot2.getX();
+		other[1] = robot2.getY();
+		return other;
+	}
+	
 	public void gameEnd(){
 		if (robot1.isAlive() == false || robot2.getWinner()== true) {
 			EndScreen es = new EndScreen(robot2.getName());
