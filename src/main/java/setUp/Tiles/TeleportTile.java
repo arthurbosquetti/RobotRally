@@ -1,6 +1,7 @@
 package setUp.Tiles;
 
 import setUp.Board;
+import setUp.Game;
 import setUp.Robot;
 
 public class TeleportTile extends Tile {
@@ -30,7 +31,7 @@ public class TeleportTile extends Tile {
     }
     
     @Override
-	public void steppedOn(Robot robot, Board board) {
+	public void steppedOn(Robot robot, Board board, Game game) {
 	  int[] otherTile = findOtherTeleportTile(robot, board);
 	  robot.setX(otherTile[1]);
 	  robot.setY(otherTile[0]);

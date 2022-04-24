@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import setUp.Board;
+import setUp.Game;
 import setUp.Robot;;
 
 public abstract class Tile extends JPanel {
@@ -26,7 +27,7 @@ public abstract class Tile extends JPanel {
 	private Robot robotOn;
 
 	public abstract String tileType();
-	public abstract void steppedOn(Robot robot, Board board);
+	public abstract void steppedOn(Robot robot, Board board, Game game);
 
 	@Override
 	public String toString() {

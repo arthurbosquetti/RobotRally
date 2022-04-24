@@ -105,6 +105,10 @@ public class Game {
 		}
 	}
 	
+	public void hurtOtherPlayer(Robot robot1) {
+		robot2.hurt(1);
+	}
+	
 	public void gameEnd(){
 		if (robot1.isAlive() == false || robot2.getWinner()== true) {
 			EndScreen es = new EndScreen(robot2.getName());

@@ -1,6 +1,7 @@
 package setUp.Tiles;
 
 import setUp.Board;
+import setUp.Game;
 import setUp.Robot;
 public class PitTile extends Tile {
     
@@ -14,7 +15,7 @@ public class PitTile extends Tile {
         return " |P|";
     }
 
-    public void steppedOn(Robot robot, Board board) {
+    public void steppedOn(Robot robot, Board board, Game game) {
        robot.hurt(1);
     }
 

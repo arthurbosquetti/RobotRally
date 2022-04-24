@@ -1,6 +1,7 @@
 package setUp.Tiles;
 
 import setUp.Board;
+import setUp.Game;
 import setUp.Robot;
 
 public class FlagTile extends Tile {
@@ -18,7 +19,7 @@ public class FlagTile extends Tile {
     }
 
     @Override
-    public void steppedOn(Robot robot, Board board) {
+    public void steppedOn(Robot robot, Board board, Game game) {
         if (flagNum == 1) {
             robot.setFlag1(true);
         } else if (flagNum == 2 && robot.getFlag1()) {

@@ -2,8 +2,9 @@ package setUp.Tiles;
 
 import setUp.Board;
 import setUp.Robot;
+import setUp.Game;
 
-public class MineTile extends Tile{
+public class MineTile extends Tile{ // now used as kamikaze tile!!!!
 
 	public MineTile() {
 		this.setValid(true);
@@ -15,25 +16,8 @@ public class MineTile extends Tile{
     }
     
     @Override
-	public void steppedOn(Robot robot, Board board) {
-		// TODO Auto-generated method stub
-		// for the 3x3 area do hurt
-    	int x = robot.getX();
-    	int y = robot.getY();
-    	
-    	int rc = board.getBoardSize();
-    	//int coords[][] = board.whereAreThey(robot, robot);
-    	
-    	//  inside case
-    	if (x > 0 && x < rc && y > 0 && y < rc) {
-    		for (int i = x-1; i <= x+1; i++) {
-    			for (int j = y-1; j <= y+1; j++) {
-    				//tile(i,j).robotOn.hurt(1);
-    			}
-    		}
-    	}
-    	//
-    	
-		
+	public void steppedOn(Robot robot, Board board, Game game) {
+    	robot.hurt(1);
+		game.hurtOtherPlayer(robot);
 	}
 }

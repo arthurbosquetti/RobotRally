@@ -14,6 +14,7 @@ public class Robot extends Player {
     private Tile nextTile;
     private boolean canMove;
     private Board board;
+    private Game game;
     //private boolean glue;
     
     public Robot(String name, int lives) {
@@ -55,7 +56,7 @@ public class Robot extends Player {
     //moves the Robot to nextTile then interacts
     public void move() {
     	this.currentTile = nextTile;
-        this.currentTile.steppedOn(this, board); 
+        this.currentTile.steppedOn(this, board, game); 
     }
     
     public void hurt(int dmg) {

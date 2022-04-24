@@ -1,6 +1,7 @@
 package setUp.Tiles;
 
 import setUp.Board;
+import setUp.Game;
 import setUp.Robot;
 
 public class GlueTile extends Tile {
@@ -16,7 +17,7 @@ public class GlueTile extends Tile {
     }
 
     @Override
-    public void steppedOn(Robot robot, Board board) {
+    public void steppedOn(Robot robot, Board board, Game game) {
     	robot.setGlue(false); // then canMove is true, but might be too confusing
     }
 

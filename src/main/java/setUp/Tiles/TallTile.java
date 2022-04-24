@@ -1,6 +1,7 @@
 package setUp.Tiles;
 
 import setUp.Board;
+import setUp.Game;
 import setUp.Robot;
 
 public class TallTile extends Tile {
@@ -16,7 +17,7 @@ public class TallTile extends Tile {
     }
 
 	@Override
-	public void steppedOn(Robot robot, Board board) {
+	public void steppedOn(Robot robot, Board board, Game game) {
 
 	}
 }
