@@ -1,6 +1,7 @@
 package setUp.Tiles;
 
 import setUp.Robot;
+import setUp.Board;
 import setUp.Direction;
 
 public class ConveyorTile extends Tile {
@@ -24,7 +25,7 @@ public class ConveyorTile extends Tile {
     }
 
     @Override
-    public void steppedOn(Robot robot) { //assuming this is never on an edge
+    public void steppedOn(Robot robot, Board board) { //assuming this is never on an edge
     	int x = robot.getX();
     	int y = robot.getY();
     	

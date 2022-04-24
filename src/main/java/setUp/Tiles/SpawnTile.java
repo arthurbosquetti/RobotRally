@@ -1,5 +1,6 @@
 package setUp.Tiles;
 
+import setUp.Board;
 import setUp.Robot;
 
 public class SpawnTile extends Tile {
@@ -16,7 +17,8 @@ public class SpawnTile extends Tile {
         return " |" + spawnNum+"|";
     }
 
-    @Override
-    public void steppedOn(Robot robot) {
-    }
+	@Override
+	public void steppedOn(Robot robot, Board board) {
+		
+	}
 }
