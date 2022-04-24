@@ -11,22 +11,15 @@ public class Direction {
     }
 
     public void turnRight() {
-    	this.rotatedLeft = true;
-        if (direction <= 270) {
-            direction += 90;
-        } else {
-            direction = 0;
-        }
+    	System.out.println("I turned right");
+    	this.rotatedRight = true;
+    	direction = (direction + 90) % 360;
     }
 
     public void turnLeft() {
     	System.out.println("I turned left");
-    	this.rotatedRight = true;
-        if (direction >= 0) {
-            direction -= 90;
-        } else {
-            direction = 270;
-        }
+    	this.rotatedLeft = true;
+    	direction = (direction - 90) % 360;
     }
     
     public int getDirectionInt() {

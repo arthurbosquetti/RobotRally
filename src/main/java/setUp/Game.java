@@ -75,7 +75,7 @@ public class Game {
 		robot1.setY(3);
 		robot2.setX(5);
 		robot2.setY(5);
-		
+
 	}
 	
 	public void playerDone() {
