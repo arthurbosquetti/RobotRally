@@ -10,19 +10,19 @@ public class Direction {
         this.direction = dir;
     }
 
-    public void turnLeft() {
+    public void turnRight() {
     	this.rotatedLeft = true;
-        if (direction < 270) {
+        if (direction <= 270) {
             direction += 90;
         } else {
             direction = 0;
         }
     }
 
-    public void turnRight() {
+    public void turnLeft() {
     	System.out.println("I turned left");
     	this.rotatedRight = true;
-        if (direction > 0) {
+        if (direction >= 0) {
             direction -= 90;
         } else {
             direction = 270;

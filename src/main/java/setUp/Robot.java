@@ -18,10 +18,7 @@ public class Robot extends Player {
     
     public Robot(String name, int lives) {
         super(name, lives);
-        //TODO: change these based on board generation
         this.direction = new Direction(0);
-//        this.spawnX = 5;
-//        this.spawnY = 5;
         canMove = true;
     }
 
@@ -58,7 +55,7 @@ public class Robot extends Player {
     //moves the Robot to nextTile then interacts
     public void move() {
     	this.currentTile = nextTile;
-        this.currentTile.steppedOn(this, board);
+        this.currentTile.steppedOn(this, board); 
     }
     
     public void hurt(int dmg) {

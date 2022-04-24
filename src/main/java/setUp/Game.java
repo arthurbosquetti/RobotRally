@@ -18,25 +18,16 @@ public class Game {
 	
 	private Board board = new Board();
 	private Level level;
-	//TODO: change to array to support more than 2 players
 	private Robot robot1;
 	private Robot robot2;
 
 	private boolean gameOn;
 	
-	public Game() {
-		FirstScreen fs = new FirstScreen(this); 
-		
-		System.out.println("here");
-	}
+	public Game() {FirstScreen fs = new FirstScreen(this);}
 	
-	public void setGameStatus(boolean b) {
-		this.gameOn = b;
-	}
+	public void setGameStatus(boolean b) {this.gameOn = b;}
 	
-	public boolean getGameStatus(){
-		return gameOn;
-	}
+	public boolean getGameStatus(){return gameOn;}
 	
 	public void gameStart(String newLevel, String p1, String p2) {
 		setGameStatus(true);

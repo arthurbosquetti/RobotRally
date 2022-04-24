@@ -42,7 +42,7 @@ public class FirstScreen extends JPanel {
 	    JPanel newPanel = new JPanel(new GridBagLayout());
 	    
         //Listener for the buttons
-        Clicklistener click = new Clicklistener(game);
+        Clicklistener click = new Clicklistener();
         
 	    easy = new JButton("Easy");
 	    mid = new JButton("Medium");
@@ -108,13 +108,6 @@ public class FirstScreen extends JPanel {
 	
 
 private class Clicklistener implements ActionListener{
-		//When user clicks on a button the game starts	
-		
-	private Game game;
-	
-	public Clicklistener(Game game) {
-		this.game = game;
-	}
 	
 	    public void actionPerformed(ActionEvent e)
 	    {

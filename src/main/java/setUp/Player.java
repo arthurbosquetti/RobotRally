@@ -31,33 +31,24 @@ public class Player {
 	
 	public boolean getTurn() {return turn;}
 	
-	public void setDeck(Deck newDeck) { 
-		this.deck = newDeck;
-	}
+	public void setDeck(Deck newDeck) {this.deck = newDeck;}
 	
-	public Deck getDeck() {
-		return deck;
-	}
+	public Deck getDeck() {return deck;}
 
 	public void checkHand(Card[] cards, Player player2) {
 		if (cards.length == 5) {
-//			this.hand=cards;
 			this.setTurn(false);
 			player2.setTurn(true);
 		}
 	}
 	
-//	public Card[] getHand() { return hand; }
-	
-	public void setLives(int newLives) { this.lives = newLives; }
+	public void setLives(int newLives) {this.lives = newLives;}
 	
 	public int getLives() {return lives;}
 
 	public void setFlag1(boolean newFlag1) {this.flag1 = newFlag1;}
 	
-	public boolean getFlag1() {
-		return flag1;
-	}
+	public boolean getFlag1() {return flag1;}
 
 	public void setFlag2(boolean newFlag2) {
 		this.flag2 = newFlag2;
@@ -66,24 +57,14 @@ public class Player {
 		}
 	}
 	
-	public boolean getFlag2() {
-		return flag2;
-	}
+	public boolean getFlag2() {return flag2;}
 
-	public void setLivingStatus(boolean living) {
-        this.alive = living;
-    }
+	public void setLivingStatus(boolean living) {this.alive = living;}
 
-    public boolean isAlive() {
-        return alive;
-    }
+    public boolean isAlive() {return alive;}
     
-    public void setWinner(boolean won) {
-    	this.won = won;
-    }
+    public void setWinner(boolean won) {this.won = won;}
     
-    public boolean getWinner() {
-    	return won;
-    }
+    public boolean getWinner() {return won;}
 
 }
