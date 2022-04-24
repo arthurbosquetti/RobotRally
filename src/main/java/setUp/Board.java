@@ -1,22 +1,13 @@
 package setUp;
 
-import setUp.Tiles.EmptyTile;
 import setUp.Tiles.Tile;
 import setUp.Tiles.TileFactory;
 
-import java.awt.GridLayout;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Random;
 
-import javax.swing.JPanel;
-
-import setUp.Movement;
-
 @SuppressWarnings("unused")
-public class Board extends JPanel {
+public class Board {
 	
-	private static final long serialVersionUID = -8623078556898821308L;
 	private static int boardSize;
 	private Tile[][] boardLayout;
 	private Movement mov= new Movement(this);
@@ -144,37 +135,6 @@ public class Board extends JPanel {
 			}
 		}
 	}
-		
-	//printing a board without a robot
-	public void printBoard() {
-		for (Tile[] row : this.boardLayout) {
-			for (Tile col : row) {
-				System.out.print(" " + col);
-			}
-			System.out.println(" ");
-		}
-	}
-		
-	//Overloaded printBoard method for printing a robot
-	public void printBoard(Robot[] robot) {
-		//loop through board
-		for (int row = 0; row < boardLayout.length; row++)  {
-			for (int col = 0; col < boardLayout[0].length; col++) {
-				//check for robot in current tile
-				boolean robotOn = false;
-				for (Robot robo : robot) {
-					if (robo.getX() == col && robo.getY() == row ) {
-						System.out.print("   |R| ");
-						robotOn = true;
-					}
-				}
-				if (!robotOn) {
-					System.out.print(" " + boardLayout[row][col]);		
-				}
-			}
-			System.out.println(" ");
-		}
-	}
 	
 	public int[][] searchBoard(Tile tile) { // currently built for finding 2 teleport tiles :P
 		int[][] tileSpot = new int[2][2];
@@ -195,14 +155,5 @@ public class Board extends JPanel {
 			}
 		}
 		return tileSpot;
-	}
-	
-	public void loadBoard() {
-		setLayout(new GridLayout(boardSize, boardSize));
-		for (Tile[] row : boardLayout) {
-			for (Tile tile : row) {
-				add(tile);
-			}
-		}
 	}
 }

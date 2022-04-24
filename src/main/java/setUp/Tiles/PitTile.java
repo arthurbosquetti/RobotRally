@@ -7,12 +7,12 @@ public class PitTile extends Tile {
     
     public PitTile() {
         this.setValid(true);
-        this.setImage("pit.png");
+//        this.setImage("pit.png");
     }
 
     @Override
     public String tileType() {
-        return " |P|";
+        return "PIT";
     }
 
     public void steppedOn(Robot robot, Board board, Game game) {

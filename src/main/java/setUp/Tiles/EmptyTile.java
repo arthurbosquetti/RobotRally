@@ -8,7 +8,7 @@ public class EmptyTile extends Tile{
 	
 	public EmptyTile() {
 		this.setValid(true);
-		this.setImage("floor.png");
+//		this.setImage("empty.png");
 	}
 	
     @Override

@@ -1,13 +1,13 @@
 package setUp;
 
-import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
-
-import setUp.Tiles.Tile;
 import view.EndScreen;
 import view.FirstScreen;
 import view.GameScreen;
 import view.HandHandler;
+
+import java.util.ArrayList;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class Game {
 	
@@ -32,33 +32,26 @@ public class Game {
 	public void gameStart(String newLevel, String p1, String p2) {
 		setGameStatus(true);
 	
-		if (newLevel == "easy") {
-			Tile.setDifficulty("easy");
-			Tile.setPixelSize(75);
+		if (Objects.equals(newLevel, "easy")) {
 		  	level = new Level("Easy", board);
 		  	
 		  	robot1 = new Robot(p1, 5);
 			robot2 = new Robot(p2, 5);
 		  	}
-		else if (newLevel == "mid") {
-			Tile.setDifficulty("medium");
-			Tile.setPixelSize(66);
+		else if (Objects.equals(newLevel, "mid")) {
 		  	level = new Level("Medium", board);
 		  	
 		  	robot1 = new Robot(p1, 3);
 			robot2 = new Robot(p2, 3);
 		  	}
-		else if (newLevel == "hard") {
-			Tile.setDifficulty("hard");
-			Tile.setPixelSize(50);
+		else if (Objects.equals(newLevel, "hard")) {
 		  	level = new Level("Hard", board);
 
 		  	robot1 = new Robot(p1, 1);
 			robot2 = new Robot(p2, 1);
 		}
 		
-		board.loadBoard();
-		
+
 		initGameScreen();
 	}
 	
@@ -97,7 +90,7 @@ public class Game {
 				} catch (InterruptedException e) {
 					}
 				choosen2.get(i).executeAction(robot1, board);
-				board.repaint();
+//				board.repaint();
 			}
 			robot1.setGlue(true);
 			robot2.setGlue(true);

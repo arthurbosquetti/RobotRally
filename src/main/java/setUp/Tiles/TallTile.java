@@ -8,7 +8,7 @@ public class TallTile extends Tile {
 
     public TallTile() {
         this.setValid(false);
-        this.setImage("tall.png");
+//        this.setImage("tall.png");
     }
 
     @Override

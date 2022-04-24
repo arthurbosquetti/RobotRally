@@ -1,16 +1,9 @@
 package view;
 
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import setUp.Board;
-import setUp.Tiles.Tile;
+
+import javax.swing.*;
+import java.awt.*;
 
 public class GameScreen extends JFrame {
 	
@@ -27,7 +20,7 @@ public class GameScreen extends JFrame {
 		c.weightx = 0.5;
 		c.gridx = 0;
 		c.gridy = 0;
-		add(board, c);
+//		add(board, c);
 		
 		//create new panel for right side of board
 		JPanel hands = new JPanel();
@@ -40,7 +33,7 @@ public class GameScreen extends JFrame {
 		add(hands, c);
 		
 		//initialize frame
-		setSize((Tile.pixelSize * board.getBoardSize()) + 650, (Tile.pixelSize * board.getBoardSize()) + 50);
+//		setSize((Tile.pixelSize * board.getBoardSize()) + 650, (Tile.pixelSize * board.getBoardSize()) + 50);
 		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
