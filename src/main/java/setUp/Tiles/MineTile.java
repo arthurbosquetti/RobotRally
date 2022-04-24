@@ -22,10 +22,13 @@ public class MineTile extends Tile{
     	int x = robot.getX();
     	int y = robot.getY();
     	
+    	int rc = board.getBoardSize();
+    	
+    	
     	// can we get level?
     	// get position of other robot???
     	
-    	// medium inside case
+    	//  inside case
     	//if (x > 0 && x < 11 && y > 0 && y < 11) {
     	//	for (int i = x-1; i <= x+1; i++) {
     	//		for (int j = y-1; j <= y+1; j++) {
