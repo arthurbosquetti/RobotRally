@@ -13,10 +13,8 @@ public class TeleportTile extends Tile {
     public String tileType() {
         return " |0|";
     }
-
-	@Override
+    
+    @Override
 	public void steppedOn(Robot robot, Board board) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 }

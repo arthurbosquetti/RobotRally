@@ -176,10 +176,6 @@ public class Board extends JPanel {
 		}
 	}
 	
-	public void searchBoard(Tile tile) {
-		//TODO
-	}
-	
 	public void loadBoard() {
 		setLayout(new GridLayout(boardSize, boardSize));
 		for (Tile[] row : boardLayout) {
