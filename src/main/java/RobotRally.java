@@ -1,3 +1,5 @@
+import java.util.List;
+
 import io.cucumber.java.en.When;
 import setUp.AI;
 import setUp.Board;
@@ -7,68 +9,50 @@ import setUp.Deck;
 import setUp.Tiles.*;
 import setUp.Robot;
 
+import java.io.FileWriter;   // Import the FileWriter class
+import java.io.IOException;  // Import the IOException class to handle errors
+
+
+
 public class RobotRally {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 			
 			Board board = new Board();
-			new Level("Easy", board);
-			
-			Board board2 = board;
-			
-//			Robot robo = new Robot("Robo");
-//			robo.setX(3);
-//			robo.setY(3);
-			
-			
+			new Level("Hard", board);
+		
 			AI ai = new AI("AI");
-			ai.setX(3);
-			ai.setY(3);
-			
-			
 			ai.setFlagPosition(board);
+			ai.getFlagPosition(ai.getFlag1());			
 			
-			AI ai2 = ai;
 			
-			board.printBoard(ai);
-			board2.printBoard(ai2);
-			int i=0;
+			FileWriter myWriter = new FileWriter("AI v1.txt");
+			long startTime = System.nanoTime();
 			
-			while (!ai.getFlag1()) {
-				i++;
-				System.out.println(i);
+			for (int i=0; i<100; i++) {				
+				if (i%10==0) System.out.println("i= "+i+"/100");
 				
-				System.out.println("GOAL 1= "+ ai.getFlagPosition(ai.getFlag1()));
-				System.out.println("GOAL 2= "+ ai2.getFlagPosition(ai2.getFlag1()));
-				Deck deck = new Deck();
-				deck.newHand();
+				int counter = 0;
 				
-				System.out.println(deck.getHand());
-				ai.setPossibleHands(deck.getHand());
-				Card[] chosenHand = ai.findSuggestedCardChoice(board);
-				//System.out.println("R  = ("+robo.getX()+","+robo.getY()+")" +", d="+robo.getDir());
-			    System.out.println("AI = ("+ai.getX()+","+ai.getY()+")"+", d="+ai.getDir());
-			    System.out.println("AI = ("+ai2.getX()+","+ai2.getY()+")"+", d="+ai2.getDir());
-			    
-			    for (Card c : chosenHand) {
-					System.out.print(c + " ");
-			    }
-			    //System.out.println("");
-			    
-				for (Card c : chosenHand) {
-					System.out.println(c);
-				    //c.executeAction(robo, board);
-				    //System.out.println("R = ("+robo.getX()+","+robo.getY()+")" );
-				    c.executeAction(ai, board);
-				    System.out.println("AI  = ("+ai.getX()+","+ai.getY()+")"+", d ="+ai.getDir());
-				    c.executeAction(ai2, board2);
-				    System.out.println("AI2 = ("+ai2.getX()+","+ai2.getY()+")"+", d2="+ai2.getDir());
+				ai.setFlag1(false);
+				ai.setFlag2(false);
+				while (!(ai.getFlag1() && ai.getFlag2())) {
+					counter++;
+					Deck deck = new Deck();
+					deck.newHand();
+				
+					ai.setPossibleHands(deck.getHand());
+					ai.setHand(ai.findSuggestedCardChoice(board));
+					for (Card card : ai.getHand()) { 
+						card.executeAction(ai, board);
+					}
 				}
-			}
-
-		   
+				myWriter.write(counter + "\n");
+			} myWriter.close();
 			
-	
+			long stopTime = System.nanoTime();
+			System.out.println("Time elapsed was "+(stopTime - startTime)/1000000000 + " seconds");
+
 	}
 	
 }

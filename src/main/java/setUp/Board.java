@@ -30,12 +30,16 @@ public class Board {
 	
 	public void setTile(int x, int y, Tile newTile) {
 		//checks to make sure new tile is within the game board
-		if ((x > 0 && x < boardSize) && (y > 0 && y < boardSize)) {
+		if ((x >= 0 && x < boardSize) && (y >= 0 && y < boardSize)) {
 			this.boardLayout[y][x] = newTile;
 		} 
 		else {
 		System.out.println("Error: attempted to set tile outside of gameboard");
 		}
+	}
+	
+	public void setFlagNumber(int number) {
+		this.flagNumber= number;
 	}
 	
 
@@ -71,7 +75,8 @@ public class Board {
 		// Place players in bottom corners, rn keep always keep them empty
 		this.boardLayout[boardSize - 1][0] = TileFactory.getTile("EMPTY");
 		this.boardLayout[boardSize - 1][boardSize - 1] = TileFactory.getTile("EMPTY");
-
+		
+		
 		Random r = new Random();
 		boolean boardGenerated = true;
 		//while generating
@@ -118,6 +123,9 @@ public class Board {
 		this.obstacleNumber = obstacleNumber;
 	}
 	
+	public int getObstacleNumber() {
+		return obstacleNumber;
+	}
 	//printing a board without a robot
 	public void printBoard() {
 		for (Tile[] row : this.boardLayout) {
@@ -128,7 +136,7 @@ public class Board {
 			System.out.println(" ");
 		}
 	}
-		
+	  
 	//Overloaded printBoard method for printing a robot
 	public void printBoard(Robot robot) {
 		int x = robot.getX();

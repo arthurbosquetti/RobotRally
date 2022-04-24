@@ -20,10 +20,12 @@ public class AI extends Robot  {
 	private int flag2X;
 	private int flag2Y;
 	private List<List<String>> possibleHands;
+	private Card[] cardChoice;
 
 	public AI(String name) {
 		super(name);
 	}
+
 	
 	public void setFlagPosition(Board b) {
 		int flagsFound = 0;
@@ -42,10 +44,11 @@ public class AI extends Robot  {
 				}
 			}
 		}
+		
 	}
 	
 	public String getFlagPosition(boolean getflag1) {
-		if (!this.getFlag1()) return "(" + flag1X + "," + flag1Y + ")";
+		if (!getflag1) return "(" + flag1X + "," + flag1Y + ")";
 		else return  "(" + flag2X + "," + flag2Y + ")";
 	}
 	
@@ -55,8 +58,7 @@ public class AI extends Robot  {
 											possibleHand.get(3).getCardAction(),possibleHand.get(4).getCardAction(),
 											possibleHand.get(5).getCardAction(),possibleHand.get(6).getCardAction(),
 											possibleHand.get(7).getCardAction(),possibleHand.get(8).getCardAction())
-											.simple().stream());
-		
+											.simple().stream());;
         List<List<String>> result = possibleHands.collect(Collectors.toList());
         this.possibleHands = result;
 	}
@@ -66,68 +68,102 @@ public class AI extends Robot  {
 	 }
 	
 	public Card[] findSuggestedCardChoice(Board board) {
-		//store possible hands and their distance from the flag.
+		
+		//initialize a map that stores the different hands and the final distance from the desired flag
 		Map<Card[], Integer> distances = new HashMap<Card[], Integer>();
 		
-		//remember original data
+		//remember the original data
 		int xOriginal = getX();
 		int yOriginal = getY();
-		Direction direcOG = getDir();
-		Board boardCopy;
+		int direcOG = getDir().getDirectionInt();
 		
 		//iterate through all possible hands
-		for (int i=0; i<possibleHands.size(); i++) {
-		
-			this.setX(xOriginal);
-			this.setY(yOriginal);
-			this.setDir(direcOG);
-			boardCopy = board;
+		for (List<String> possibleHand : possibleHands) {
+
+			setX(xOriginal);
+			setY(yOriginal);
+			setDir(new Direction(direcOG));
 			
-			//create hand of cards
-			Card[] hand = {new Card(possibleHands.get(i).get(0)),new Card(possibleHands.get(i).get(1)),
-						   new Card(possibleHands.get(i).get(2)),new Card(possibleHands.get(i).get(3)),
-						   new Card(possibleHands.get(i).get(4))};
-			//iterate through the card actions from the hand:
+			//manually generate a copy of the board
+			Board boardCopy = new Board();
+			boardCopy.setBoardSize(board.getBoardSize());
+			boardCopy.setObstacleNumber(board.getObstacleNumber());
+			boardCopy.generateBoard();
+			for (int i=0; i<boardCopy.getBoardSize(); i++) {
+				for (int j=0; j<boardCopy.getBoardSize(); j++) {
+						boardCopy.setTile(j, i, board.getTile(j, i));
+				}
+			}
+			
+			//create a hand of cards
+			Card[] hand = {new Card(possibleHand.get(0)),new Card(possibleHand.get(1)),
+						   new Card(possibleHand.get(2)),new Card(possibleHand.get(3)),
+						   new Card(possibleHand.get(4))};
+			
+			//iterate through the cards of the current hand:
 			for (Card card : hand) {
-				//move the AI piece
-				card.executeAction(this, boardCopy);
-				//if it lands on the flag it wants, return that hand.
-//				if ((!this.getFlag1() && this.getX()==this.flag1X && this.getY()==this.flag1Y) ||
-//					( this.getFlag1() && this.getX()==this.flag2X && this.getY()==this.flag2Y)) {
 				
-				if ((this.getX()==this.flag1X && this.getY()==this.flag1Y)) {
-					
-//				if ((!this.getFlag1() && this.getX()==this.flag1X)) {
-					
-//					if ((!this.getFlag1() && this.getX()==this.flag1X ) ||
-//					( this.getFlag1() && this.getX()==this.flag2X )) {
-					System.out.println("======================A FLAG HAS BEEN FOUND!!!!============================");
-					this.setFlag1(true);
+				boolean foundFlag1=getFlag1();
+				card.executeAction(this, boardCopy);
+				
+				//flag 1 has been found whenever getFlag1() changes (false->true)
+				foundFlag1=(foundFlag1!=getFlag1());
+						
+				//if the AI has just found flag 1, return the hand after resetting the original values
+				//(the AI shouldn't change positions in this method, but rather in the main game setting).
+				if (getFlag1() && foundFlag1 && (getX()==flag1X) && (getY()==flag1Y)) {
 					this.setX(xOriginal);
 					this.setY(yOriginal);
-					this.setDir(direcOG);
+					this.setDir(new Direction(direcOG));
 					return hand;
+				
+				//if the AI has just found flag 2, return the hand.
+				} else if (getFlag1() && getFlag2() && (getX()==flag2X) && (getY()==flag2Y)) {
+					this.setX(xOriginal);
+					this.setY(yOriginal);
+					this.setDir(new Direction(direcOG));
+					return hand;	
+					
 				}
-			//if it didn't find the flag it wants when "playing" that hand, put hand and final distance
-			//into the distances dictionary
-			if (!getFlag1()) {distances.put(hand, Math.abs(flag1X-getX())+Math.abs(flag1Y-getY()));}
-			else {distances.put(hand, Math.abs(flag2X-getX())+Math.abs(flag2Y-getY()));}}
-		}
+				//we only get to this part of the code if the hand didn't take the AI to the desired flag...
+				
+				//if it has not found flag1 yet:
+				if (!getFlag1()) {
+					distances.put(hand, Math.abs(flag1X-getX())+Math.abs(flag1Y-getY()));
+				} 
+				//if it has, add the distance compared to flag2
+				else {
+					distances.put(hand, Math.abs(flag2X-getX())+Math.abs(flag2Y-getY()));
+				}
+			}			
+		}		
+		
 		//find the minimum distance value
 		int min = Collections.min(distances.values());
-		//return the first hand Card[] that has the minimum distance value
+		//return the first hand Card[] that has the minimum distance value using a linear search
 		for (Map.Entry<Card[], Integer> entry : distances.entrySet()) {
-			if (entry.getValue().equals(min)) {
+			if (entry.getValue()==(min)) {
 				this.setX(xOriginal);
 				this.setY(yOriginal);
-				this.setDir(direcOG);
+				this.setDir(new Direction(direcOG));
 				return entry.getKey();
 			}
 		}
-		//something is wrong if the above don't return anything
-		System.out.println("Error in findSuggestedCardChoice()!!");
+		//error solving...
+		System.out.println("Error: no cards found in AI.findSuggestedCardChoice");
 		return null;
-	}		
+	}
+
+
+	public void setHand(Card[] cardChoice) {
+		this.cardChoice=cardChoice;
+	}
+	public Card[] getHand() {
+		return cardChoice;
+	}
+
+
+		
 		
 	
 

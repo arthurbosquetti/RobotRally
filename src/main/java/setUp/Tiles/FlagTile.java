@@ -19,8 +19,10 @@ public class FlagTile extends Tile {
     public void steppedOn(Robot robot) {
         if (flagNum == 1) {
             robot.setFlag1(true);
+            setValid(true);
         } else if (flagNum == 2 && robot.getFlag1()) {
             robot.setFlag2(true);
+            setValid(true);
         }
     }
 

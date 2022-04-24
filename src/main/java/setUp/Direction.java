@@ -3,15 +3,15 @@ package setUp;
 public class Direction {
 
     private int direction;
-    private boolean rotatedLeft;
-    private boolean rotatedRight;
+    //private boolean rotatedLeft;
+   // private boolean rotatedRight;
 
     public Direction(int dir) {
         this.direction = dir;
     }
 
-    public void turnLeft() {
-    	this.rotatedLeft = true;
+    public void turnRight() {
+    	//this.rotatedLeft = true;
         if (direction < 270) {
             direction += 90;
         } else {
@@ -19,9 +19,9 @@ public class Direction {
         }
     }
 
-    public void turnRight() {
-    	this.rotatedRight = true;
-        if (direction > 0) {
+    public void turnLeft() {
+    	//this.rotatedRight = true;
+    	if (direction > 0) {
             direction -= 90;
         } else {
             direction = 270;
@@ -52,10 +52,10 @@ public class Direction {
     	return this.getDirection();
     }
 
-    public boolean getRotatedRight() {
-    	return rotatedRight;
-    }
-    public boolean getRotatedLeft() {
-    	return rotatedLeft;
-    }
+//    public boolean getRotatedRight() {
+//    	return rotatedRight;
+//    }
+//    public boolean getRotatedLeft() {
+//    	return rotatedLeft;
+//    }
 }
