@@ -17,21 +17,18 @@ import java.io.IOException;  // Import the IOException class to handle errors
 public class RobotRally {
 	
 	public static void main(String[] args) throws IOException {
+					
 			
-			Board board = new Board();
-			new Level("Hard", board);
-		
-			AI ai = new AI("AI");
-			ai.setFlagPosition(board);
-			ai.getFlagPosition(ai.getFlag1());			
+			double counterF = 0;		
+			for (int i=0; i<10; i++) {
+				Board board = new Board();
+				new Level("Hard", board);
 			
-			
-			FileWriter myWriter = new FileWriter("AI v1.txt");
-			long startTime = System.nanoTime();
-			
-			for (int i=0; i<100; i++) {				
-				if (i%10==0) System.out.println("i= "+i+"/100");
+				AI ai = new AI("AI");
+				ai.setFlagPosition(board);
+				ai.getFlagPosition(ai.getFlag1());	
 				
+				System.out.println("i= "+i+"/10");
 				int counter = 0;
 				
 				ai.setFlag1(false);
@@ -47,12 +44,9 @@ public class RobotRally {
 						card.executeAction(ai, board);
 					}
 				}
-				myWriter.write(counter + "\n");
-			} myWriter.close();
-			
-			long stopTime = System.nanoTime();
-			System.out.println("Time elapsed was "+(stopTime - startTime)/1000000000 + " seconds");
-
+				counterF+=counter;
+			}
+			System.out.println("It took on average "+counterF/10+" 'turns' for the AI to find both flags..");
 	}
 	
 }

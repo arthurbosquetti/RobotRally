@@ -10,9 +10,6 @@ import java.util.stream.Stream;
 
 import org.paukov.combinatorics3.Generator;
 
-import setUp.Tiles.FlagTile;
-import setUp.Tiles.Tile;
-
 public class AI extends Robot  {
 	
 	private int flag1X;
@@ -26,6 +23,12 @@ public class AI extends Robot  {
 		super(name);
 	}
 
+	public void setHand(Card[] cardChoice) {
+		this.cardChoice=cardChoice;
+	}
+	public Card[] getHand() {
+		return cardChoice;
+	}
 	
 	public void setFlagPosition(Board b) {
 		int flagsFound = 0;
@@ -125,21 +128,22 @@ public class AI extends Robot  {
 					return hand;	
 					
 				}
-				//we only get to this part of the code if the hand didn't take the AI to the desired flag...
-				
-				//if it has not found flag1 yet:
-				if (!getFlag1()) {
-					distances.put(hand, Math.abs(flag1X-getX())+Math.abs(flag1Y-getY()));
-				} 
-				//if it has, add the distance compared to flag2
-				else {
-					distances.put(hand, Math.abs(flag2X-getX())+Math.abs(flag2Y-getY()));
-				}
-			}			
+			}
+			//we only get to this part of the code if the hand didn't take the AI to the desired flag...
+			
+			//if it has not found flag1 yet:
+			if (!getFlag1()) {
+				distances.put(hand, Math.abs(flag1X-getX())+Math.abs(flag1Y-getY()));
+			} 
+			//if it has, add the distance compared to flag2
+			else {
+				distances.put(hand, Math.abs(flag2X-getX())+Math.abs(flag2Y-getY()));
+			}
 		}		
 		
-		//find the minimum distance value
+		//find the minimum distance
 		int min = Collections.min(distances.values());
+		
 		//return the first hand Card[] that has the minimum distance value using a linear search
 		for (Map.Entry<Card[], Integer> entry : distances.entrySet()) {
 			if (entry.getValue()==(min)) {
@@ -155,24 +159,7 @@ public class AI extends Robot  {
 	}
 
 
-	public void setHand(Card[] cardChoice) {
-		this.cardChoice=cardChoice;
-	}
-	public Card[] getHand() {
-		return cardChoice;
-	}
-
-
-		
-		
-	
-
 
 }
 	
 	
-
-
-
-
-
