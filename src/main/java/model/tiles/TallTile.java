@@ -1,14 +1,15 @@
-package setUp.Tiles;
+package model.tiles;
 
-import setUp.Board;
-import setUp.Game;
-import setUp.Robot;
+import controller.Game;
+import model.Board;
+import model.Robot;
+import view.TileType;
 
 public class TallTile extends Tile {
 
     public TallTile() {
         this.setValid(false);
-//        this.setImage("tall.png");
+		this.setType(TileType.TALL);
     }
 
     @Override

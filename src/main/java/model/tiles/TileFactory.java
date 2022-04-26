@@ -1,4 +1,4 @@
-package setUp.Tiles;
+package model.tiles;
 
 public class TileFactory {
     public static Tile getTile(String tile) {

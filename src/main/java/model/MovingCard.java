@@ -1,4 +1,4 @@
-package setUp;
+package model;
 
 public class MovingCard {
 	private int steps;

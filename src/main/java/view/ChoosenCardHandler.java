@@ -4,8 +4,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import setUp.Card;
-import setUp.Deck;
+import model.Card;
+import model.Deck;
 
 public class ChoosenCardHandler extends JPanel {
 	

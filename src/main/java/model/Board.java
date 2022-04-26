@@ -1,9 +1,9 @@
-package setUp;
-
-import setUp.Tiles.Tile;
-import setUp.Tiles.TileFactory;
+package model;
 
 import java.util.Random;
+
+import model.tiles.Tile;
+import model.tiles.TileFactory;
 
 @SuppressWarnings("unused")
 public class Board {

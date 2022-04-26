@@ -1,13 +1,16 @@
-package setUp.Tiles;
+package model.tiles;
 
-import setUp.Board;
-import setUp.Game;
-import setUp.Robot;
+import controller.Game;
+import model.Board;
+import model.Robot;
+import view.TileType;
 
 public class TeleportTile extends Tile {
 	
+	//TODO: change this to real type/add teleport type
 	public TeleportTile() {
 		this.setValid(true);
+		this.setType(TileType.PIT);
 	}
 	
     @Override

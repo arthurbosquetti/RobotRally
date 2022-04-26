@@ -1,9 +1,10 @@
-package setUp.Tiles;
+package model.tiles;
 
-import setUp.Robot;
-import setUp.Game;
-import setUp.Board;
-import setUp.Direction;
+import controller.Game;
+import model.Board;
+import model.Direction;
+import model.Robot;
+import view.TileType;
 
 public class ConveyorTile extends Tile {
 
@@ -11,12 +12,13 @@ public class ConveyorTile extends Tile {
 
     public ConveyorTile(Direction dir) {
     	this.setValid(true);
-//    	this.setImage("acid.png");
+		this.setType(TileType.CONVEYOR);
     	direction = dir;
     }
     
     public ConveyorTile() {
     	this.setValid(true);
+		this.setType(TileType.CONVEYOR);
         this.direction = new Direction(0);
     }
     

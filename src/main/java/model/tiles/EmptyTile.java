@@ -1,14 +1,15 @@
-package setUp.Tiles;
+package model.tiles;
 
-import setUp.Board;
-import setUp.Game;
-import setUp.Robot;
+import controller.Game;
+import model.Board;
+import model.Robot;
+import view.TileType;
 
 public class EmptyTile extends Tile{
 	
 	public EmptyTile() {
 		this.setValid(true);
-//		this.setImage("empty.png");
+		this.setType(TileType.EMPTY);
 	}
 	
     @Override

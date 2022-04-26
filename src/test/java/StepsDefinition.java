@@ -2,21 +2,21 @@
 
 import static org.junit.Assert.*;
 
+import controller.Game;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import setUp.Board;
-import setUp.Card;
-import setUp.Deck;
-import setUp.Game;
-import setUp.Level;
-import setUp.Player;
-import setUp.Robot;
-import setUp.Tiles.PitTile;
-import setUp.Tiles.TallTile;
-import setUp.Tiles.Tile;
-import setUp.Tiles.FlagTile;
+import model.Board;
+import model.Card;
+import model.Deck;
+import model.Level;
+import model.Player;
+import model.Robot;
+import model.tiles.FlagTile;
+import model.tiles.PitTile;
+import model.tiles.TallTile;
+import model.tiles.Tile;
 
 public class StepsDefinition {
 	

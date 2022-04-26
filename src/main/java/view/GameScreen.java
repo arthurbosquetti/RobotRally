@@ -1,26 +1,28 @@
 package view;
 
-import setUp.Board;
-
 import javax.swing.*;
+
+import model.Board;
+
 import java.awt.*;
 
 public class GameScreen extends JFrame {
 	
 	private GridBagConstraints c = new GridBagConstraints();
 	private GridBagLayout gbl = new GridBagLayout();
+	private BoardScreen bs;
 	
 	public GameScreen() {
 		super("RobotRally game");
 		setLayout(gbl);
 	}
 	
-	public void initGameScreen(Board board, HandHandler hh1, HandHandler hh2) {
+	public void initGameScreen(BoardScreen bs, HandHandler hh1, HandHandler hh2) {
 		//add board to screen
 		c.weightx = 0.5;
 		c.gridx = 0;
 		c.gridy = 0;
-//		add(board, c);
+		add(bs, c);
 		
 		//create new panel for right side of board
 		JPanel hands = new JPanel();
@@ -33,7 +35,7 @@ public class GameScreen extends JFrame {
 		add(hands, c);
 		
 		//initialize frame
-//		setSize((Tile.pixelSize * board.getBoardSize()) + 650, (Tile.pixelSize * board.getBoardSize()) + 50);
+		setSize((BoardScreen.pixelSize * BoardScreen.size) + 650, (BoardScreen.pixelSize * BoardScreen.size) + 50);
 		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

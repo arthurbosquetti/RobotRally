@@ -6,10 +6,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import setUp.Board;
-import setUp.Deck;
-import setUp.Game;
-import setUp.Robot;
+import controller.Game;
+import model.Board;
+import model.Deck;
+import model.Robot;
 
 public class HandListener implements ActionListener {
 

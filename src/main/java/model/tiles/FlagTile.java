@@ -1,8 +1,9 @@
-package setUp.Tiles;
+package model.tiles;
 
-import setUp.Board;
-import setUp.Game;
-import setUp.Robot;
+import controller.Game;
+import model.Board;
+import model.Robot;
+import view.TileType;
 
 public class FlagTile extends Tile {
 
@@ -10,7 +11,7 @@ public class FlagTile extends Tile {
 
     public FlagTile(int flagNum) {
         this.flagNum = flagNum;
-//        this.setImage("flag"+flagNum+".png");
+        this.setType((flagNum == 1)? TileType.FLAG1 : TileType.FLAG2);
 
     }
 

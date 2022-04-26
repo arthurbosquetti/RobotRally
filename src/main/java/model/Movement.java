@@ -1,7 +1,7 @@
-package setUp;
+package model;
 
-import setUp.Board;
-import setUp.Direction;
+import model.Board;
+import model.Direction;
 
 public class Movement {
 

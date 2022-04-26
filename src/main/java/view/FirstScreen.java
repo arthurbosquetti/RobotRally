@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import setUp.Game;
+import controller.Game;
 
 
 public class FirstScreen extends JPanel {

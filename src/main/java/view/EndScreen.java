@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import setUp.Player;
+import model.Player;
 
 public class EndScreen extends JPanel {
 

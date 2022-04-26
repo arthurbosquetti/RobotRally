@@ -1,13 +1,14 @@
-package setUp.Tiles;
+package model.tiles;
 
-import setUp.Board;
-import setUp.Game;
-import setUp.Robot;
+import controller.Game;
+import model.Board;
+import model.Robot;
+import view.TileType;
 public class PitTile extends Tile {
     
     public PitTile() {
         this.setValid(true);
-//        this.setImage("pit.png");
+		this.setType(TileType.PIT);
     }
 
     @Override

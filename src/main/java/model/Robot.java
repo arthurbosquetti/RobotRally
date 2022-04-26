@@ -1,7 +1,8 @@
-package setUp;
+package model;
 
-import setUp.Tiles.Tile;
-import setUp.Direction;
+import controller.Game;
+import model.Direction;
+import model.tiles.Tile;
 
 public class Robot extends Player {
     

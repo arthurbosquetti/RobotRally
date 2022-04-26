@@ -1,6 +1,6 @@
+package controller;
 
-import setUp.Game;
-import setUp.Player;
+import model.Player;
 
 public class RobotRally {
 	

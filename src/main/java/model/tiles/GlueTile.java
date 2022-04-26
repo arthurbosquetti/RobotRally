@@ -1,14 +1,15 @@
-package setUp.Tiles;
+package model.tiles;
 
-import setUp.Board;
-import setUp.Game;
-import setUp.Robot;
+import controller.Game;
+import model.Board;
+import model.Robot;
+import view.TileType;
 
 public class GlueTile extends Tile {
 
 	public GlueTile() {
 		this.setValid(true);
-//		this.setImage("acid.png");
+		this.setType(TileType.GLUE);
 	}
 	
     @Override

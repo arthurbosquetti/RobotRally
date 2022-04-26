@@ -1,5 +1,6 @@
-package setUp;
+package controller;
 
+import view.BoardScreen;
 import view.EndScreen;
 import view.FirstScreen;
 import view.GameScreen;
@@ -9,12 +10,20 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
+import model.Board;
+import model.Card;
+import model.Level;
+import model.Robot;
+
+//TODO: add singleton principle code
 public class Game {
 	
 	private GameScreen gs;
 	
 	private HandHandler hh1;
 	private HandHandler hh2;
+	
+	private BoardScreen bs;
 	
 	private Board board = new Board();
 	private Level level;
@@ -23,11 +32,11 @@ public class Game {
 
 	private boolean gameOn;
 	
-	public Game() {FirstScreen fs = new FirstScreen(this);}
+	public Game() { FirstScreen fs = new FirstScreen(this); }
 	
-	public void setGameStatus(boolean b) {this.gameOn = b;}
+	public void setGameStatus(boolean b) { this.gameOn = b; }
 	
-	public boolean getGameStatus(){return gameOn;}
+	public boolean getGameStatus() { return gameOn; }
 	
 	public void gameStart(String newLevel, String p1, String p2) {
 		setGameStatus(true);
@@ -61,7 +70,9 @@ public class Game {
 		hh1 = new HandHandler(robot1, this);	
 		hh2 = new HandHandler(robot2, this);	
 		
-		gs.initGameScreen(board, hh1, hh2);
+		bs = new BoardScreen(board, level.getLevel());
+		
+		gs.initGameScreen(bs, hh1, hh2);
 		
 		//temp for testing
 		robot1.setX(3);

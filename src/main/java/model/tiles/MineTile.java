@@ -1,13 +1,15 @@
-package setUp.Tiles;
+package model.tiles;
 
-import setUp.Board;
-import setUp.Robot;
-import setUp.Game;
+import controller.Game;
+import model.Board;
+import model.Robot;
+import view.TileType;
 
 public class MineTile extends Tile{ // now used as kamikaze tile!!!!
 
 	public MineTile() {
 		this.setValid(true);
+		this.setType(TileType.MINE);
 	}
 	
     @Override
