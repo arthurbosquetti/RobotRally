@@ -39,6 +39,6 @@ public class HandListener implements ActionListener {
 			System.out.println("player done choosing");
 			handler.removeButton(9);
 			game.playerDone();
-		}
+		}		
 	}
 }

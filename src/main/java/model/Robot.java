@@ -16,6 +16,7 @@ public class Robot extends Player {
     private boolean canMove;
     private Board board;
     private Game game;
+    private int num;
     //private boolean glue;
     
     public Robot(String name, int lives) {
@@ -37,6 +38,13 @@ public class Robot extends Player {
     }
     public void setY(int newY) {
         this.y = newY;
+    }
+    
+    public void setNum(int newNum) {
+        this.num = newNum;
+    }
+    public int getNum() {
+        return num;
     }
 
     public int[] getSpawn() {

@@ -32,7 +32,7 @@ public class BoardScreen extends JPanel {
 //        setPreferredSize(getMinimumSize());
 
         setLayout(new GridLayout(size, size));
-
+        
         loadTiles(board);
     }
 
@@ -54,6 +54,10 @@ public class BoardScreen extends JPanel {
     
     public static void setPixelSize(int newSize) {
     	pixelSize = newSize;
+    }
+    
+    public static void setBoardSize(int newSize) {
+    	size = newSize;
     }
     
 //only one main

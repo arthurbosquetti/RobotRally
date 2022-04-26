@@ -60,7 +60,16 @@ public class Game {
 			robot2 = new Robot(p2, 1);
 		}
 		
-
+		robot1.setNum(1);
+		robot2.setNum(2);
+		
+		robot1.setX(1);
+		robot1.setY(BoardScreen.size - 2);
+		robot2.setX(BoardScreen.size - 2);
+		robot2.setY(BoardScreen.size - 2);
+		board.getTile(1, BoardScreen.size - 2).setRobotOn(robot1);
+		board.getTile(BoardScreen.size - 2, BoardScreen.size - 2).setRobotOn(robot2);
+		
 		initGameScreen();
 	}
 	
@@ -73,13 +82,6 @@ public class Game {
 		bs = new BoardScreen(board, level.getLevel());
 		
 		gs.initGameScreen(bs, hh1, hh2);
-		
-		//temp for testing
-		robot1.setX(3);
-		robot1.setY(3);
-		robot2.setX(5);
-		robot2.setY(5);
-
 	}
 	
 	public void playerDone() {
@@ -107,6 +109,7 @@ public class Game {
 			robot2.setGlue(true);
 			//Code to move select again, etc
 		}
+		gs.newRound();
 	}
 	
 	public void hurtOtherPlayer(Robot robot1) {
@@ -127,6 +130,5 @@ public class Game {
 		else if (robot2.isAlive() == false || robot1.getWinner()== true) {
 			EndScreen es = new EndScreen(robot1.getName());
 		}
-		
 	}
 }

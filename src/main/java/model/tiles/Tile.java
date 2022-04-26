@@ -36,6 +36,9 @@ public abstract class Tile {
 	public void setRobotOff() {
 		robotOn = null;
 	}
+	public Robot getRobotOn() {
+		return robotOn;
+	}
 	
 	public boolean validTile() {
 		return valid;
@@ -59,6 +62,7 @@ public abstract class Tile {
         //draw robot on top of tile if there is robot on the board
         if (robotOn != null) {
             try {
+            	System.out.println("yes!");
                 BufferedImage robotImage = ImageIO.read(getClass().getClassLoader().getResourceAsStream(BoardScreen.robotLoc));
                 g2d.drawImage(robotImage, 0, 0, null);
             } catch (IOException e) {

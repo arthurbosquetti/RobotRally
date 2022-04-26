@@ -10,6 +10,10 @@ public class GameScreen extends JFrame {
 	
 	private GridBagConstraints c = new GridBagConstraints();
 	private GridBagLayout gbl = new GridBagLayout();
+	
+	private HandHandler hh1;
+	private HandHandler hh2;
+	
 	private BoardScreen bs;
 	
 	public GameScreen() {
@@ -23,6 +27,9 @@ public class GameScreen extends JFrame {
 		c.gridx = 0;
 		c.gridy = 0;
 		add(bs, c);
+		
+		this.hh1 = hh1;
+		this.hh2 = hh2;
 		
 		//create new panel for right side of board
 		JPanel hands = new JPanel();
@@ -39,6 +46,14 @@ public class GameScreen extends JFrame {
 		setResizable(false);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+	
+	public void newRound() {
+		hh1.clearHand();
+		hh2.clearHand();
+		hh1.drawCards();
+		hh2.drawCards();
+		repaint();
 	}
 	
 }

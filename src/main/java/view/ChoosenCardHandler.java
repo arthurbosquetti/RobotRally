@@ -29,4 +29,10 @@ public class ChoosenCardHandler extends JPanel {
 		revalidate();
 		repaint();
 	}
+	
+	public void clear() {
+		for (int i = 1; i < 4; i++) {
+			remove(i);
+		}
+	}
 }

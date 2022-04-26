@@ -45,15 +45,6 @@ public class Level {
 	//
 	public String getLevel() {
 		return level.toLowerCase();
-//		switch (level) {
-//			case "Easy":
-//				return "easy";
-//			case "Medium":
-//				return "medium";
-//			case "Hard":
-//				return "hard";
-//			default:
-//				return "easy";
 		
 	}
 }

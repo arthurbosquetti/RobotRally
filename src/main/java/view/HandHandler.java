@@ -32,6 +32,11 @@ public class HandHandler extends JPanel {
 		this.deck = robot.getDeck();
 		listener = new HandListener(this, deck, game);
 		
+		JLabel cardLbl = new JLabel(robot.getName() + "'s cards: ");
+		c.gridx = 0;
+		c.gridy = 0;
+		add(cardLbl, c);
+		
 		drawCards();
 		
 		cch = new ChoosenCardHandler(robot.getName(), deck);
@@ -47,18 +52,13 @@ public class HandHandler extends JPanel {
 			}
 		}
 		buttons.clear();
+		cch.clear();
 		revalidate();
 		repaint();
 	}
 	
 	public void drawCards() {
 		ArrayList<Card> hand = deck.getHand();
-		
-		JLabel cardLbl = new JLabel(robot.getName() + "'s cards: ");
-		c.gridx = 0;
-		c.gridy = 0;
-		add(cardLbl, c);
-		
 		for (int i = 0; i < hand.size(); i ++) {
 			String action = hand.get(i).getCardAction();
 			JButton button = new JButton(action);

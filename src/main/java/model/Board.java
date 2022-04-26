@@ -4,6 +4,7 @@ import java.util.Random;
 
 import model.tiles.Tile;
 import model.tiles.TileFactory;
+import view.BoardScreen;
 
 @SuppressWarnings("unused")
 public class Board {
@@ -21,6 +22,7 @@ public class Board {
 	
 	public void setBoardSize(int boardSize) {
 		this.boardSize = boardSize;
+		BoardScreen.setBoardSize(boardSize);
 	}
 	
 	public int getBoardSize() {
