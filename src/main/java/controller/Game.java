@@ -13,7 +13,9 @@ import java.util.concurrent.TimeUnit;
 import model.AI;
 import model.Board;
 import model.Card;
+import model.Direction;
 import model.Level;
+import model.Movement;
 import model.Robot;
 
 //TODO: add singleton principle code
@@ -128,7 +130,14 @@ public class Game {
 			//executes moves selected
 			System.out.println("starting moves:");
 			
+			Movement mov = new Movement(board);
+			Direction dir = new Direction(0);
+			
 			for (int i = 0; i < 5; i++) {
+				
+				System.out.println(mov.checkMove(mov.getNewPoint(dir, robot1.getX(), robot1.getY(), true, 1)) + "");
+				
+				
 				makeMove(i, choosen1.get(i), choosen2.get(i));
 			
 				try {
