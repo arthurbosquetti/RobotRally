@@ -48,21 +48,21 @@ public class Game {
 	public void robotInitializer(int lives, String name1, String name2) {
 
 		if (isRobot1AI && isRobot2AI){
-			robot1 = new AI(name1, lives);
-			robot2 = new AI(name2, lives);
+			robot1 = new AI(name1, lives, this);
+			robot2 = new AI(name2, lives, this);
 		}
 		
 		else if (isRobot1AI) {
-			robot1 = new AI(name1, lives);
-			robot2=  new Robot(name2, lives);
+			robot1 = new AI(name1, lives, this);
+			robot2=  new Robot(name2, lives, this);
 		}
 		else if (isRobot2AI) {
-			robot1 =  new Robot(name1, lives);
-			robot2 = new AI(name2, lives);
+			robot1 =  new Robot(name1, lives, this);
+			robot2 = new AI(name2, lives, this);
 		}
 		else{
-			robot1 = new Robot(name1, lives);
-			robot2 = new Robot(name2, lives);
+			robot1 = new Robot(name1, lives, this);
+			robot2 = new Robot(name2, lives,this );
 	  	}
 	}
 	
@@ -146,8 +146,8 @@ public class Game {
 				
 			}
 			
-			robot1.setGlue(true);
-			robot2.setGlue(true);
+			robot1.setCanMove(true);
+			robot2.setCanMove(true);
 			gameEnd();
 			
 			newRound();
@@ -157,9 +157,9 @@ public class Game {
 	public void makeMove(int i, Card choosen1, Card choosen2) {		
 		bs.removeRobots(robot1, robot2);
 		
-		choosen1.executeAction(robot1, board);
+		if (robot1.canMove()) { choosen1.executeAction(robot1, board); }
 		
-		choosen2.executeAction(robot2, board);
+		if (robot2.canMove()) { choosen2.executeAction(robot2, board); }
 		
 		bs.addRobots(robot1, robot2);
 	}

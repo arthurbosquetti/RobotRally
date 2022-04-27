@@ -3,6 +3,7 @@ package model.tiles;
 import controller.Game;
 import model.Board;
 import model.Robot;
+import view.BoardScreen;
 import view.TileType;
 
 public class MineTile extends Tile{ // now used as kamikaze tile!!!!
@@ -19,9 +20,10 @@ public class MineTile extends Tile{ // now used as kamikaze tile!!!!
     
     @Override
 	public void steppedOn(Robot robot, Board board, Game game) {
-    	int otherC = game.findOtherPlayer(robot)[0];
-    	int otherR = game.findOtherPlayer(robot)[1];
-    	int rc = board.getBoardSize();
+    	int[] otherPlayers = game.findOtherPlayer(robot);
+    	int otherC = otherPlayers[0];
+    	int otherR = otherPlayers[1];
+    	int rc = BoardScreen.size;
     	
     	robot.hurt(1);
     	int R = robot.getY(); int C = robot.getX();
