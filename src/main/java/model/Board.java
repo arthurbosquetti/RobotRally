@@ -33,6 +33,10 @@ public class Board {
 		this.obstacleNumbers = new int[]{teleportNr, mineNr, pitNr, glueNr, conveyorNr, tallNr};
 	}
 	
+	public int[] getObstacleNumbers() {
+		return this.obstacleNumbers;
+	}
+	
 	public void setTile(int x, int y, Tile newTile) {
 		//checks to make sure new tile is within the game board
 		if ((x > 0 && x < boardSize) && (y > 0 && y < boardSize)) {
@@ -170,4 +174,5 @@ public class Board {
 		}
 		return tileSpot;
 	}
+
 }

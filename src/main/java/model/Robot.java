@@ -51,6 +51,10 @@ public class Robot extends Player {
     	return new int[] {spawnX, spawnY};
     }
     
+    public void setDir(Direction direction) {
+		this.direction = direction;
+	}
+    
     public Direction getDir() {
     	return this.direction;
     }
