@@ -16,6 +16,7 @@ public class HandListener implements ActionListener {
 	private Deck deck;
 	private HandHandler handler;
 	private Game game;
+	private Robot robot;
 	
 	public HandListener(HandHandler hh, Deck newDeck, Game game) {
 		this.handler = hh;

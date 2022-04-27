@@ -9,9 +9,10 @@ public class Deck{
 	private ArrayList<Card> hand = new ArrayList<Card>(); 
 	private ArrayList<Card> choosenCards = new ArrayList<Card>();
 	private Random rnd = new Random();
-
 	
 	public void newHand() {
+		hand = new ArrayList<Card>(); 
+		choosenCards = new ArrayList<Card>();
 		for (int i=0; i<9; i++) {
 			double val = rnd.nextDouble();
 			if (val < 0.20) {
@@ -61,13 +62,4 @@ public class Deck{
 	public void chooseCard(int index) {
 		choosenCards.add(hand.get(index));
 	}
-
 }
-
-
-
-
-
-
-
-

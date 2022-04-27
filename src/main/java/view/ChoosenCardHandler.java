@@ -26,13 +26,14 @@ public class ChoosenCardHandler extends JPanel {
 	public void addCard(Card card) {
 		JLabel actLbl = new JLabel(" "+ card.getCardAction()+ " ");
 		add(actLbl);
-		revalidate();
-		repaint();
+		this.revalidate();
+		this.repaint();
 	}
 	
 	public void clear() {
-		for (int i = 1; i < 4; i++) {
-			remove(i);
-		}
+		removeAll();
+		
+		JLabel choosenLbl = new JLabel("Choosen cards: ");
+		add(choosenLbl);
 	}
 }

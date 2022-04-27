@@ -38,19 +38,16 @@ public class HandHandler extends JPanel {
 		add(cardLbl, c);
 		
 		drawCards();
-		
-		cch = new ChoosenCardHandler(robot.getName(), deck);
-		c.gridx = 0;
-		c.gridy = 2;
-		add(cch, c);
 	}		
 	
 	public void clearHand() {
-		if (buttons.size() != 0) {
-			for (JButton button : buttons) {
-				remove(button);
-			}
-		}
+		removeAll();
+		
+		JLabel cardLbl = new JLabel(robot.getName() + "'s cards: ");
+		c.gridx = 0;
+		c.gridy = 0;
+		add(cardLbl, c);
+		
 		buttons.clear();
 		cch.clear();
 		revalidate();
@@ -79,6 +76,11 @@ public class HandHandler extends JPanel {
 		c.gridy = 1;
 		buttons.add(submitButton);
 		add(submitButton, c);
+		
+		cch = new ChoosenCardHandler(robot.getName(), deck);
+		c.gridx = 0;
+		c.gridy = 2;
+		add(cch, c);
 	}
 	
 	public void removeButton(int index) {
@@ -87,10 +89,9 @@ public class HandHandler extends JPanel {
 		repaint(button.getX(), button.getY(), button.getWidth(), button.getHeight());
 	}
 	
-	
-	
 	public void addChoosenCard(Card card) {
 		cch.addCard(card);
 	}
+	
 	
 }
