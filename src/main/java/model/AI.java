@@ -11,6 +11,8 @@ import java.util.stream.Stream;
 
 import org.paukov.combinatorics3.Generator;
 
+import controller.Game;
+
 public class AI extends Robot  {
 	
 	private int flag1X;
@@ -20,8 +22,8 @@ public class AI extends Robot  {
 	private List<List<String>> possibleHands;
 	private Card[] cardChoice;
 
-	public AI(String name, int lives) {
-		super(name, lives);
+	public AI(String name, int lives, Game game) {
+		super(name, lives, game);
 	}
 
 	public void setHand(Card[] cardChoice) {

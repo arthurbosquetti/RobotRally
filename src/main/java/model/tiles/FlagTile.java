@@ -10,8 +10,9 @@ public class FlagTile extends Tile {
     private int flagNum;
 
     public FlagTile(int flagNum) {
-        this.flagNum = flagNum;
+    	this.setValid(true);
         this.setType((flagNum == 1)? TileType.FLAG1 : TileType.FLAG2);
+        this.flagNum = flagNum;
 
     }
 

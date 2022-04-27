@@ -19,7 +19,7 @@ public class GlueTile extends Tile {
 
     @Override
     public void steppedOn(Robot robot, Board board, Game game) {
-    	robot.setGlue(false); // then canMove is true, but might be too confusing
+    	robot.setCanMove(false); // then canMove is true, but might be too confusing
     }
 
 

@@ -19,9 +19,10 @@ public class Robot extends Player {
     private int num;
     //private boolean glue;
     
-    public Robot(String name, int lives) {
+    public Robot(String name, int lives, Game game) {
         super(name, lives);
         this.direction = new Direction(0);
+        this.game = game;
         canMove = true;
     }
 
@@ -52,7 +53,7 @@ public class Robot extends Player {
     }
     public void setSpawn(int[] newSpawn) {
     	spawnX = newSpawn[0];
-    	spawnY = newSpawn[0];
+    	spawnY = newSpawn[1];
     }
     
     public void setDir(Direction direction) {
@@ -86,7 +87,9 @@ public class Robot extends Player {
         	int[] spawnpoint = this.getSpawn();
         	this.setX(spawnpoint[0]);
         	this.setY(spawnpoint[1]);
+        	this.setDir(new Direction(0));
             this.setLives(this.getLives() - dmg);
+            this.setCanMove(false);
         }
     }
     
@@ -108,8 +111,11 @@ public class Robot extends Player {
 		}
 	}
 
-	public void setGlue(boolean glue) {
-		this.canMove = glue;
+    public boolean canMove() {
+    	return canMove;
+    }
+	public void setCanMove(boolean moveable) {
+		this.canMove = moveable;
 	}
     
 
