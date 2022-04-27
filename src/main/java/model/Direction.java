@@ -19,7 +19,12 @@ public class Direction {
     public void turnLeft() {
     	System.out.println("I turned left");
     	this.rotatedLeft = true;
-    	direction = (direction - 90) % 360;
+    	if (direction == 0) {
+    		direction = 270;
+    	}
+    	else {
+    		direction = (direction - 90);
+    	}
     }
     
     public int getDirectionInt() {
