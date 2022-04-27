@@ -13,6 +13,8 @@ import java.util.stream.Stream;
 
 import org.paukov.combinatorics3.Generator;
 
+import controller.Game;
+
 public class AI extends Robot  {
 	
 	private int flag1X;
@@ -22,8 +24,8 @@ public class AI extends Robot  {
 	private ArrayList<List<String>> possibleHands;
 	private ArrayList<Card> cardChoice;
 
-	public AI(String name, int lives) {
-		super(name, lives);
+	public AI(String name, int lives, Game game) {
+		super(name, lives, game);
 	}
 
 	public void setHand(ArrayList<Card> cardChoice) {
@@ -58,7 +60,7 @@ public class AI extends Robot  {
 		if (!getflag1) return "FL (" + flag1X + "," + flag1Y + ")";
 		else return  "FL (" + flag2X + "," + flag2Y + ")";
 	}
-	
+
 	public void setPossibleHands(ArrayList<Card> possibleHand) {
 		Stream<List<String>> possibleHands = (Generator.permutation(			possibleHand.get(0).getCardAction(),
 											possibleHand.get(1).getCardAction(),possibleHand.get(2).getCardAction(),

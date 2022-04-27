@@ -10,10 +10,13 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
+import view.CoinFlip;
 import model.AI;
 import model.Board;
 import model.Card;
+import model.Direction;
 import model.Level;
+import model.Movement;
 import model.Robot;
 
 //TODO: add singleton principle code
@@ -46,26 +49,41 @@ public class Game {
 	public void robotInitializer(int lives, String name1, String name2) {
 
 		if (isRobot1AI && isRobot2AI){
+<<<<<<< HEAD
 			robot1 = new AI(name1, lives);
 			((AI) robot1).setFlagPosition(board);
 			robot2 = new AI(name2, lives);
 			((AI) robot2).setFlagPosition(board);
 
+=======
+			robot1 = new AI(name1, lives, this);
+			robot2 = new AI(name2, lives, this);
+>>>>>>> branch 'dev' of https://github.com/arthurbosquetti/RobotRally.git
 		}
 		
 		else if (isRobot1AI) {
+<<<<<<< HEAD
 			robot1 = new AI(name1, lives);
 			((AI) robot1).setFlagPosition(board);
 			robot2=  new Robot(name2, lives);
+=======
+			robot1 = new AI(name1, lives, this);
+			robot2=  new Robot(name2, lives, this);
+>>>>>>> branch 'dev' of https://github.com/arthurbosquetti/RobotRally.git
 		}
 		else if (isRobot2AI) {
+<<<<<<< HEAD
 			robot1 =  new Robot(name1, lives);
 			robot2 = new AI(name2, lives);
 			((AI) robot2).setFlagPosition(board);
+=======
+			robot1 =  new Robot(name1, lives, this);
+			robot2 = new AI(name2, lives, this);
+>>>>>>> branch 'dev' of https://github.com/arthurbosquetti/RobotRally.git
 		}
 		else{
-			robot1 = new Robot(name1, lives);
-			robot2 = new Robot(name2, lives);
+			robot1 = new Robot(name1, lives, this);
+			robot2 = new Robot(name2, lives,this );
 	  	}
 	}
 	
@@ -142,7 +160,14 @@ public class Game {
 			//executes moves selected
 			System.out.println("starting moves:");
 			
+			Movement mov = new Movement(board);
+			Direction dir = new Direction(0);
+			
 			for (int i = 0; i < 5; i++) {
+				
+				System.out.println(mov.checkMove(mov.getNewPoint(dir, robot1.getX(), robot1.getY(), true, 1)) + "");
+				
+				
 				makeMove(i, choosen1.get(i), choosen2.get(i));
 			
 				try {
@@ -151,8 +176,8 @@ public class Game {
 				
 			}
 			
-			robot1.setGlue(true);
-			robot2.setGlue(true);
+			robot1.setCanMove(true);
+			robot2.setCanMove(true);
 			gameEnd();
 			
 			newRound();
@@ -162,9 +187,9 @@ public class Game {
 	public void makeMove(int i, Card choosen1, Card choosen2) {		
 		bs.removeRobots(robot1, robot2);
 		
-		choosen1.executeAction(robot1, board);
+		if (robot1.canMove()) { choosen1.executeAction(robot1, board); }
 		
-		choosen2.executeAction(robot2, board);
+		if (robot2.canMove()) { choosen2.executeAction(robot2, board); }
 		
 		bs.addRobots(robot1, robot2);
 	}
@@ -188,7 +213,10 @@ public class Game {
 	}
 	
 	public void gameEnd(){
-		if (robot1.isAlive() == false || robot2.getWinner()== true) {
+		if ((robot1.isAlive() == false && robot2.isAlive() == false)||(robot1.getWinner() == true && robot2.getWinner() == true)){
+			CoinFlip cf = new CoinFlip(robot1.getName(), robot2.getName());
+		}
+		else if (robot1.isAlive() == false || robot2.getWinner()== true) {
 			EndScreen es = new EndScreen(robot2.getName());
 		}
 		else if (robot2.isAlive() == false || robot1.getWinner()== true) {

@@ -10,7 +10,7 @@ public class TeleportTile extends Tile {
 	//TODO: change this to real type/add teleport type
 	public TeleportTile() {
 		this.setValid(true);
-		this.setType(TileType.PIT);
+		this.setType(TileType.PORTAL);
 	}
 	
     @Override

@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -19,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.Game;
+import io.cucumber.messages.types.Background;
 
 
 public class FirstScreen extends JPanel {
@@ -30,6 +32,7 @@ public class FirstScreen extends JPanel {
 	private JTextField p1name, p2name;
 	private static String player1, player2;
 	private JCheckBox AIplayer1, AIplayer2;
+	private ImageIcon prettyfaces;
 	private Game game;
 	
 	public FirstScreen(Game game) {
@@ -57,6 +60,9 @@ public class FirstScreen extends JPanel {
 	    mid = new JButton("Medium");
 	    hard = new JButton("Hard");
 	   
+	    //Pretty faces
+	    prettyfaces = new ImageIcon("src/main/resources/prettyfaces.JPG");
+	    
 	    //Setting up the panel
 		GridBagConstraints constr = new GridBagConstraints();
 		newPanel.setPreferredSize(new Dimension (1000,700));
@@ -65,13 +71,21 @@ public class FirstScreen extends JPanel {
         constr.insets = new Insets(10, 10, 15, 10);
     
         //Setting all the objects around
+        
+        constr.gridx = 0;
+        constr.gridy = 0;  
+        JLabel label = new JLabel();
+        label.setIcon(prettyfaces);
+        label.setPreferredSize(new Dimension(350, 233));
+        newPanel.add(label);
+        
         name.setFont(title);
         constr.gridx = 0;
-        constr.gridy = 0;     
+        constr.gridy = 3;     
         newPanel.add(name, constr);
 
 		constr.gridx = 0;
-        constr.gridy = 1;     
+        constr.gridy = 4;     
         newPanel.add(labelP1, constr);
  
         constr.gridx = 1;
@@ -81,7 +95,7 @@ public class FirstScreen extends JPanel {
         newPanel.add(AIplayer1, constr);
          
         constr.gridx = 0;
-        constr.gridy = 2;     
+        constr.gridy = 6;     
         newPanel.add(labelP2, constr);
  
         constr.gridx = 1;
@@ -92,23 +106,23 @@ public class FirstScreen extends JPanel {
          
         labelDif.setFont(subtitle);
         constr.gridx = 0;
-        constr.gridy = 6;
+        constr.gridy = 8;
         newPanel.add(labelDif, constr);
        
         //Button set up
         constr.gridx = 1;
         constr.anchor = GridBagConstraints.SOUTH;
-        constr.gridy = 7;
+        constr.gridy = 9;
 
         easy.addActionListener(click);
         newPanel.add(easy, constr);
-        constr.gridy = 8;
+        constr.gridy = 10;
         
         mid.addActionListener(click);
         newPanel.add(mid, constr);
 
         hard.addActionListener(click);
-        constr.gridy = 9;
+        constr.gridy = 11;
         newPanel.add(hard, constr);
         
 	     AIplayer1.addItemListener(checkbox);
