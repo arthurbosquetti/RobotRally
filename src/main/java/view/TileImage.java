@@ -70,7 +70,6 @@ public class TileImage extends JPanel {
 		}  catch (IOException e) {
 			System.out.println("oops");
 		}
-		System.out.println("kill me kill me kill me kill me");
 		revalidate();
 		repaint();
 	}

@@ -128,20 +128,19 @@ public class Game {
 			//executes moves selected
 			System.out.println("starting moves:");
 			
-			makeMove(0, choosen1.get(0), choosen2.get(0));
+			for (int i = 0; i < 5; i++) {
+				makeMove(i, choosen1.get(i), choosen2.get(i));
 			
-			
-			try {
-				TimeUnit.SECONDS.sleep(1);
-			} catch (InterruptedException e) {  }
-			
-			makeMove(1, choosen1.get(1), choosen2.get(1));
-			
+				try {
+					TimeUnit.SECONDS.sleep(1);
+				} catch (InterruptedException e) {  }
+				
+			}
 			
 			robot1.setGlue(true);
 			robot2.setGlue(true);
 			
-			//newRound();
+			newRound();
 		}
 	}
 	
