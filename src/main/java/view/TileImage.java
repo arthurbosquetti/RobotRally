@@ -67,7 +67,8 @@ public class TileImage extends JPanel {
 	public void addRobot(Robot robo) {
 		try {	
 			robotOn = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/"+BoardScreen.level+"/"+"robot"+tile.getRobotOn().getNum()+".png"));
-		
+			BufferedImage image2 = rotateImage(robotOn, robo.getDir());
+			robotOn = image2;
 		}  catch (IOException e) {
 			System.out.println("oops");
 		}
