@@ -67,6 +67,10 @@ public class Game {
 		robot1.setY(BoardScreen.size - 2);
 		robot2.setX(BoardScreen.size - 2);
 		robot2.setY(BoardScreen.size - 2);
+		
+		robot1.setSpawn(new int[] {robot1.getX(), robot1.getY()});
+		robot2.setSpawn(new int[] {robot2.getX(), robot2.getY()});
+		
 		board.getTile(1, BoardScreen.size - 2).setRobotOn(robot1);
 		board.getTile(BoardScreen.size - 2, BoardScreen.size - 2).setRobotOn(robot2);
 		
@@ -80,35 +84,56 @@ public class Game {
 		hh2 = new HandHandler(robot2, this);	
 		
 		bs = new BoardScreen(board, level.getLevel());
+		bs.addRobots(robot1, robot2);
 		
 		gs.initGameScreen(bs, hh1, hh2);
 	}
 	
 	public void playerDone() {
 		
-		ArrayList<Card> choosen1 = robot1.getDeck().getChoosen();
-		ArrayList<Card> choosen2 = robot2.getDeck().getChoosen();
+		
 		if (!(robot1.getDeck().canChoose()) & !(robot2.getDeck().canChoose())) {
 			//removes submit button if it still exists
 			hh1.removeButton(9);
 			hh2.removeButton(9);
 			
+			ArrayList<Card> choosen1 = robot1.getDeck().getChoosen();
+			ArrayList<Card> choosen2 = robot2.getDeck().getChoosen();
+			
 			//executes moves selected
 			System.out.println("starting moves:");
-			for (int i = 0; i < 5; i++) {
-				choosen1.get(i).executeAction(robot1, board);
-				//one second pause to slow things down a bit
-				try {
-					TimeUnit.SECONDS.sleep(1);
-				} catch (InterruptedException e) {
-					}
-				choosen2.get(i).executeAction(robot1, board);
-//				board.repaint();
-			}
+			
+			makeMove(0, choosen1.get(0), choosen2.get(0));
+			
+			
+			try {
+				TimeUnit.SECONDS.sleep(1);
+			} catch (InterruptedException e) {  }
+			
+			makeMove(1, choosen1.get(1), choosen2.get(1));
+			
+			
 			robot1.setGlue(true);
 			robot2.setGlue(true);
-			//Code to move select again, etc
+			
+			//newRound();
 		}
+	}
+	
+	public void makeMove(int i, Card choosen1, Card choosen2) {		
+		bs.removeRobots(robot1, robot2);
+		
+		choosen1.executeAction(robot1, board);
+		
+		choosen2.executeAction(robot2, board);
+		
+		bs.addRobots(robot1, robot2);
+	}
+	
+	public void newRound() {
+		robot1.getDeck().newHand();
+		robot2.getDeck().newHand();
+		
 		gs.newRound();
 	}
 	

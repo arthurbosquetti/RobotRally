@@ -17,12 +17,12 @@ public class TileImage extends JPanel {
 	
 	private Tile tile;
 	private BufferedImage image;
+	private BufferedImage robotOn;
 	
 	public TileImage(Tile tile) {
 		this.tile = tile;
 		
 		setImage();
-		
 	}
 	
 	public void setImage() {
@@ -38,24 +38,35 @@ public class TileImage extends JPanel {
 		setPreferredSize(getMinimumSize());
 	}
 	
+	public void addRobot(Robot robo) {
+		try {	
+			robotOn = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/"+BoardScreen.level+"/"+"robot"+tile.getRobotOn().getNum()+".png"));
+		}  catch (IOException e) {
+			System.out.println("oops");
+		}
+		System.out.println("kill me kill me kill me kill me");
+		revalidate();
+		repaint();
+	}
+	
+	public void removeRobot() {
+		robotOn = null;
+		revalidate();
+		repaint();
+	}
 	
 	@Override
-    public void paint(Graphics g) {        
+    public void paintComponent(Graphics g) {        
         super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-		
+
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2d.drawImage(image, 0, 0, null);
 		//draw robot on top of tile if there is robot on the board
-		if (tile.getRobotOn() != null) {
-			try {
-				BufferedImage robotImage = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/"+BoardScreen.level+"/"+"robot"+tile.getRobotOn().getNum()+".png"));
-				g2d.drawImage(robotImage, 0, 0, null);
-			} catch (IOException e) {
-				System.out.println("oops");
-			}
+		if (robotOn != null) {
+			System.out.println("this time");
+			g2d.drawImage(robotOn, 0, 0, null);
 		}
-        
     }
 	
 }

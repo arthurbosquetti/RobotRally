@@ -28,9 +28,6 @@ public class BoardScreen extends JPanel {
         level = newLevel;
         tileImages = new TileImage[size][size];
         
-//        setMinimumSize(new Dimension(size*pixelSize, size*pixelSize));
-//        setPreferredSize(getMinimumSize());
-
         setLayout(new GridLayout(size, size));
         
         loadTiles(board);
@@ -44,13 +41,25 @@ public class BoardScreen extends JPanel {
             }
         }
     }
-
-//    @Override
-//    public void paint(Graphics g) {
-//        super.paintComponent(g);
-//        
-//        
-//    }
+    
+    public void removeRobots(Robot robo1, Robot robo2) {
+    	tileImages[robo1.getY()][robo1.getX()].removeRobot();
+    	tileImages[robo2.getY()][robo2.getX()].removeRobot();
+    	
+    }
+    
+    public void addRobots(Robot robo1, Robot robo2) {
+    	tileImages[robo1.getY()][robo1.getX()].addRobot(robo1);
+    	tileImages[robo2.getY()][robo2.getX()].addRobot(robo2);
+    }
+    
+    public void refreshTiles() {
+    	for (TileImage[] imgCol : tileImages) {
+    		for (TileImage img : imgCol) {
+    			img.repaint();
+        	}
+    	}
+    }
     
     public static void setPixelSize(int newSize) {
     	pixelSize = newSize;
@@ -59,12 +68,4 @@ public class BoardScreen extends JPanel {
     public static void setBoardSize(int newSize) {
     	size = newSize;
     }
-    
-//only one main
-//    public static void main(String[] args) {
-//        Board board = new Board();
-//        Level level = new Level("Easy", board);
-//        BoardScreen bs = new BoardScreen(board, 8, "easy");
-//        bs.loadTiles(board);
-//    }
 }

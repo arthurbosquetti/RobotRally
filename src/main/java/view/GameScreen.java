@@ -13,9 +13,7 @@ public class GameScreen extends JFrame {
 	
 	private HandHandler hh1;
 	private HandHandler hh2;
-	
-	private BoardScreen bs;
-	
+		
 	public GameScreen() {
 		super("RobotRally game");
 		setLayout(gbl);
@@ -56,4 +54,7 @@ public class GameScreen extends JFrame {
 		repaint();
 	}
 	
+	public void refresh() {
+		repaint();
+	}
 }

@@ -58,20 +58,27 @@ public class Board {
 		//checks move for validity: runs code to move robot
 		if (mov.checkMove(newPoint)) {
 			//remove robot from previous tile
-			this.getTile(robot.getX(), robot.getY()).setRobotOff();
-			//add robot to next tile
-			this.getTile(newPoint[0], newPoint[1]).setRobotOn(robot);;
+			boardLayout[robot.getY()][robot.getX()].setRobotOff();
 			//moves robot
 			robot.nextTile(this.getTile(newPoint[0], newPoint[1]));
 			robot.setX(newPoint[0]);
 			robot.setY(newPoint[1]);
 			robot.move();
+			updateRobotPos(robot);
 			return true;
+			
 		}
 		//Code for when robot can't move forward
 		return false;
 	}
-
+	
+	public void updateRobotPos(Robot robot) {
+		int x = robot.getX();
+		int y = robot.getY();
+		
+		boardLayout[robot.getY()][robot.getX()].setRobotOn(robot);
+	}
+	
 	// Randomized board generation
 	public void generateBoard() {
 		this.boardLayout = new Tile[boardSize][boardSize];
