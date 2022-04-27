@@ -16,18 +16,17 @@ import model.Robot;
 import model.tiles.FlagTile;
 import model.tiles.PitTile;
 import model.tiles.TallTile;
-import model.tiles.Tile;
 
 public class StepsDefinition {
 	
-	Game game		 	 = new Game();
-	Player player1 		 = new Player("test1", 9);
-	Player player2  	 = new Player("test2", 9);
-	Board board     	 = new Board();
-	Deck deck      	     = new Deck();
-	FlagTile flag1  	 = new FlagTile(1);
-	FlagTile flag2       = new FlagTile(2);
-	Robot robot     	 = new Robot("test", 9);
+	Game game		 = new Game();
+	Player player1 	 = new Player("test1", 9);
+	Player player2   = new Player("test2", 9);
+	Board board      = new Board();
+	Deck deck      	 = new Deck();
+	FlagTile flag1 	 = new FlagTile(1);
+	FlagTile flag2   = new FlagTile(2);
+Robot robot     	 = new Robot("test", 9);
 	TallTile stopper = new TallTile();
 	PitTile pit      = new PitTile();
 	Level level;
@@ -43,6 +42,7 @@ public class StepsDefinition {
 	public void difficulty_level_is(String str) {
 		this.level = new Level(str, board);
 	}
+
 	@Given("players set their names to {string} and {string}")
 	public void players_set_name(String name1, String name2) {
 	    player1.setName(name1);

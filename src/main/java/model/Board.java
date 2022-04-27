@@ -33,6 +33,10 @@ public class Board {
 		this.obstacleNumbers = new int[]{teleportNr, mineNr, pitNr, glueNr, conveyorNr, tallNr};
 	}
 	
+	public int[] getObstacleNumbers() {
+		return this.obstacleNumbers;
+	}
+	
 	public void setTile(int x, int y, Tile newTile) {
 		//checks to make sure new tile is within the game board
 		if ((x > 0 && x < boardSize) && (y > 0 && y < boardSize)) {
@@ -95,6 +99,8 @@ public class Board {
 
 		Random r = new Random();
 		boolean boardGenerated = true;
+		int ry = 0;
+		int rx = 0;
 		//while generating
 		while (boardGenerated) {
 			// Generating random coords
@@ -103,10 +109,20 @@ public class Board {
 			int randObstacle = r.nextInt(2);
 			// Go to coords and set tile
 			if (this.boardLayout[randCol][randRow] == null) {
-				if (flagNumber != 0) {
+				if (flagNumber == 2) {
 					this.boardLayout[randCol][randRow] = TileFactory.getTile("FLAG" + flagNumber);
+					rx = randCol;
+					ry = randRow;
 					flagNumber--;
 				}
+				
+				else if (flagNumber == 1) {
+					if ((Math.abs(rx-randCol) >= boardSize/2)&&(Math.abs(ry-randRow) >= boardSize/2)) {
+						this.boardLayout[randCol][randRow] = TileFactory.getTile("FLAG" + flagNumber);
+						flagNumber--;
+					}
+				}
+				
 				else if (obstacleNumbers[0] != 0 ){
 					this.boardLayout[randCol][randRow] = TileFactory.getTile("TELEPORT");
 					obstacleNumbers[0]--;
@@ -165,4 +181,5 @@ public class Board {
 		}
 		return tileSpot;
 	}
+
 }

@@ -8,8 +8,11 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -26,6 +29,7 @@ public class FirstScreen extends JPanel {
 	private JButton easy, mid, hard;
 	private JTextField p1name, p2name;
 	private static String player1, player2;
+	private JCheckBox AIplayer1, AIplayer2;
 	private Game game;
 	
 	public FirstScreen(Game game) {
@@ -36,6 +40,10 @@ public class FirstScreen extends JPanel {
 	    JLabel labelP2 = new JLabel("Name of Player 2:");
 	    JLabel labelDif = new JLabel("Set difficulty and play!");
 	    
+	    
+	    AIplayer1 = new JCheckBox("is AI?", false);
+        AIplayer2 = new JCheckBox("is AI?", false);
+	    
 	    p1name = new JTextField(7);
 	    p2name = new JTextField(7);
 	    
@@ -43,6 +51,7 @@ public class FirstScreen extends JPanel {
 	    
         //Listener for the buttons
         Clicklistener click = new Clicklistener();
+    	CheckboxListener checkbox = new CheckboxListener();
         
 	    easy = new JButton("Easy");
 	    mid = new JButton("Medium");
@@ -67,6 +76,9 @@ public class FirstScreen extends JPanel {
  
         constr.gridx = 1;
         newPanel.add(p1name, constr);
+        
+        constr.gridx = 2;
+        newPanel.add(AIplayer1, constr);
          
         constr.gridx = 0;
         constr.gridy = 2;     
@@ -74,6 +86,9 @@ public class FirstScreen extends JPanel {
  
         constr.gridx = 1;
         newPanel.add(p2name, constr);
+        
+        constr.gridx = 2;
+        newPanel.add(AIplayer2, constr);
          
         labelDif.setFont(subtitle);
         constr.gridx = 0;
@@ -96,6 +111,8 @@ public class FirstScreen extends JPanel {
         constr.gridy = 9;
         newPanel.add(hard, constr);
         
+	     AIplayer1.addItemListener(checkbox);
+	     AIplayer2.addItemListener(checkbox);
         
         //Setting up how the frame looks
         frame.add(newPanel);
@@ -109,10 +126,11 @@ public class FirstScreen extends JPanel {
 
 private class Clicklistener implements ActionListener{
 	
-	    public void actionPerformed(ActionEvent e)
-	    {
+	    public void actionPerformed(ActionEvent e){
+	      
 	      player1 = p1name.getText();
 	      player2 = p2name.getText();
+	      
 	      
 	      if (e.getSource() == easy)
 	      {
@@ -133,4 +151,24 @@ private class Clicklistener implements ActionListener{
 	      }
 	    }
 	  }
+
+private class CheckboxListener implements ItemListener{
+	public void itemStateChanged(ItemEvent e){  
+		 if(AIplayer1.isSelected()){ 
+			 game.setP1AI(true);
+		 }
+		 else {
+			 game.setP1AI(false);
+			 }
+		 
+		 if(AIplayer2.isSelected()){ 
+			 game.setP2AI(true);
+		}
+		 else {
+			 game.setP2AI(false);
+		 }
+				 
+			 }
+	 
+}
 }

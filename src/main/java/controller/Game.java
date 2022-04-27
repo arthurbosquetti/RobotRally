@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
+import model.AI;
 import model.Board;
 import model.Card;
 import model.Level;
@@ -20,16 +21,16 @@ public class Game {
 	
 	private GameScreen gs;
 	
-	private HandHandler hh1;
-	private HandHandler hh2;
+	private HandHandler hh1, hh2;
 	
 	private BoardScreen bs;
 	
 	private Board board = new Board();
 	private Level level;
-	private Robot robot1;
-	private Robot robot2;
-
+	private Robot robot1, robot2;
+	private boolean isRobot1AI =false;
+	private boolean isRobot2AI = false;
+	
 	private boolean gameOn;
 	
 	public Game() { FirstScreen fs = new FirstScreen(this); }
@@ -38,26 +39,50 @@ public class Game {
 	
 	public boolean getGameStatus() { return gameOn; }
 	
-	public void gameStart(String newLevel, String p1, String p2) {
+	public void setP1AI(boolean b) { this.isRobot1AI = b;}
+	
+	public void setP2AI(boolean b) { this.isRobot2AI = b;}
+	
+	public void robotInitializer(int lives, String name1, String name2) {
+
+		if (isRobot1AI && isRobot2AI){
+			robot1 = new AI(name1, lives);
+			robot2 = new AI(name2, lives);
+		}
+		
+		else if (isRobot1AI) {
+			robot1 = new AI(name1, lives);
+			robot2=  new Robot(name2, lives);
+		}
+		else if (isRobot2AI) {
+			robot1 =  new Robot(name1, lives);
+			robot2 = new AI(name2, lives);
+		}
+		else{
+			robot1 = new Robot(name1, lives);
+			robot2 = new Robot(name2, lives);
+	  	}
+	}
+	
+
+	public void gameStart(String newLevel, String name1, String name2) {
 		setGameStatus(true);
 	
 		if (Objects.equals(newLevel, "easy")) {
+			
 		  	level = new Level("Easy", board);
 		  	
-		  	robot1 = new Robot(p1, 5);
-			robot2 = new Robot(p2, 5);
-		  	}
-		else if (Objects.equals(newLevel, "mid")) {
+		  	robotInitializer(5, name1, name2);
+		  	
+		} else if (Objects.equals(newLevel, "mid")) {
 		  	level = new Level("Medium", board);
 		  	
-		  	robot1 = new Robot(p1, 3);
-			robot2 = new Robot(p2, 3);
-		  	}
+		  	robotInitializer(3, name1, name2);
+		}
 		else if (Objects.equals(newLevel, "hard")) {
 		  	level = new Level("Hard", board);
 
-		  	robot1 = new Robot(p1, 1);
-			robot2 = new Robot(p2, 1);
+		  	robotInitializer(1, name1, name2);
 		}
 		
 		robot1.setNum(1);
