@@ -18,7 +18,7 @@ public class FlagTile extends Tile {
 
     @Override
     public String tileType() {
-        return " |" + flagNum+"|";
+        return "|F" + flagNum+"|";
     }
 
     @Override
