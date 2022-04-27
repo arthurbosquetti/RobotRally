@@ -1,8 +1,5 @@
 package model;
 
-import model.Board;
-import model.Direction;
-
 public class Movement {
 
 	private Board board;
@@ -17,7 +14,7 @@ public class Movement {
 		if (x < 0 || x >= board.getBoardSize() || y < 0 || y >= board.getBoardSize()) {
 			System.out.println("Error: move out of board");
 			return false;
-		} else if (board.getTile(x, y).validTile()) {	// no clue what a valid tile is... any tile that's not null?
+		} else if (board.getTile(x, y).validTile()) {
 			return true;
 		} else
 			System.out.println("move failed, obstacle in the way");

@@ -1,10 +1,10 @@
 package model;
 
-import java.util.Random;
-
 import model.tiles.Tile;
 import model.tiles.TileFactory;
 import view.BoardScreen;
+
+import java.util.Random;
 
 @SuppressWarnings("unused")
 public class Board {
@@ -39,7 +39,7 @@ public class Board {
 	
 	public void setTile(int x, int y, Tile newTile) {
 		//checks to make sure new tile is within the game board
-		if ((x > 0 && x < boardSize) && (y > 0 && y < boardSize)) {
+		if ((x >= 0 && x < boardSize) && (y >= 0 && y < boardSize)) {
 			this.boardLayout[y][x] = newTile;
 		} 
 		else {

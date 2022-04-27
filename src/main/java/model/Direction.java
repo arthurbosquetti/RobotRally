@@ -21,12 +21,7 @@ public class Direction {
 
     public void turnLeft() {
     	this.rotatedLeft = true;
-    	if (direction == 0) {
-    		direction = 270;
-    	}
-    	else {
-    		direction = (direction - 90);
-    	}
+    	direction = (direction - 90) % 360;
     }
     
     public int getDirectionInt() {

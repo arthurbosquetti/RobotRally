@@ -26,6 +26,7 @@ public class MovingCard {
 		}
 		else if (action.equals("J")) {
 			board.makeMove(robot, true, 2, true);
+			this.moved_forward = 2;
 		}
 
 	}
