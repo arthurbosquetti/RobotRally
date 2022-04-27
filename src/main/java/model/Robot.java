@@ -108,13 +108,7 @@ public class Robot extends Player {
 		}
 	}
 
-	//public boolean isGlue() {
-		//return glue;
-	//	return canMove;
-	//}
-
 	public void setGlue(boolean glue) {
-		//this.glue = glue;
 		this.canMove = glue;
 	}
     
