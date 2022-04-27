@@ -56,7 +56,7 @@ public class AI extends Robot  {
 		if (!getflag1) return "(" + flag1X + "," + flag1Y + ")";
 		else return  "(" + flag2X + "," + flag2Y + ")";
 	}
-	
+
 	public void setPossibleHands(ArrayList<Card> possibleHand) {
 		Stream<List<String>> possibleHands = (Generator.permutation(			possibleHand.get(0).getCardAction(),
 											possibleHand.get(1).getCardAction(),possibleHand.get(2).getCardAction(),

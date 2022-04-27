@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
+import view.CoinFlip;
 import model.AI;
 import model.Board;
 import model.Card;
@@ -173,7 +174,10 @@ public class Game {
 	}
 	
 	public void gameEnd(){
-		if (robot1.isAlive() == false || robot2.getWinner()== true) {
+		if ((robot1.isAlive() == false && robot2.isAlive() == false)||(robot1.getWinner() == true && robot2.getWinner() == true)){
+			CoinFlip cf = new CoinFlip(robot1.getName(), robot2.getName());
+		}
+		else if (robot1.isAlive() == false || robot2.getWinner()== true) {
 			EndScreen es = new EndScreen(robot2.getName());
 		}
 		else if (robot2.isAlive() == false || robot1.getWinner()== true) {
