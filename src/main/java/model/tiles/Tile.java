@@ -14,12 +14,14 @@ import javax.imageio.ImageIO;
 
 import controller.Game;
 import model.Board;
+import model.Direction;
 import model.Robot;
 
 public abstract class Tile {	
 	private boolean valid;
 	private TileType type; 
 	private Robot robotOn;
+	private Direction direction;
 
 
 	public abstract String tileType();
