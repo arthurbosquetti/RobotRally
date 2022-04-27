@@ -5,6 +5,7 @@ import view.EndScreen;
 import view.FirstScreen;
 import view.GameScreen;
 import view.HandHandler;
+import view.LifeView;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -25,6 +26,7 @@ public class Game {
 	private GameScreen gs;
 	
 	private HandHandler hh1, hh2;
+	private LifeView lv1, lv2;
 	
 	private BoardScreen bs;
 	
@@ -65,6 +67,9 @@ public class Game {
 			robot1 = new Robot(name1, lives, this);
 			robot2 = new Robot(name2, lives,this );
 	  	}
+		
+		lv1 = new LifeView(lives, 1);
+	  	lv2 = new LifeView(lives, 2);
 	}
 	
 
@@ -74,19 +79,20 @@ public class Game {
 		if (Objects.equals(newLevel, "easy")) {
 			
 		  	level = new Level("Easy", board);
-		  	
+		  	BoardScreen.setLevel("easy");
 		  	robotInitializer(5, name1, name2);
 		  	
 		} else if (Objects.equals(newLevel, "mid")) {
 		  	level = new Level("Medium", board);
-		  	
+		  	BoardScreen.setLevel("medium");
 		  	robotInitializer(3, name1, name2);
 		}
 		else if (Objects.equals(newLevel, "hard")) {
 		  	level = new Level("Hard", board);
-
+		  	BoardScreen.setLevel("hard");
 		  	robotInitializer(1, name1, name2);
 		}
+		
 		
 		robot1.setNum(1);
 		robot2.setNum(2);
@@ -111,10 +117,10 @@ public class Game {
 		hh1 = new HandHandler(robot1, this);	
 		hh2 = new HandHandler(robot2, this);	
 		
-		bs = new BoardScreen(board, level.getLevel());
+		bs = new BoardScreen(board);
 		bs.addRobots(robot1, robot2);
 		
-		gs.initGameScreen(bs, hh1, hh2);
+		gs.initGameScreen(bs, lv1, lv2, hh1, hh2);
 	}
 	
 	public void playerDone() {
@@ -124,7 +130,7 @@ public class Game {
 			//removes submit button if it still exists
 			hh1.removeButton(9);
 			hh2.removeButton(9);
-			
+
 			ArrayList<Card> choosen1 = robot1.getDeck().getChoosen();
 			ArrayList<Card> choosen2 = robot2.getDeck().getChoosen();
 			

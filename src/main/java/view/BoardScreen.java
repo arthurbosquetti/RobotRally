@@ -22,10 +22,9 @@ public class BoardScreen extends JPanel {
     private TileImage[][] tileImages;
     private Board board;
 
-    public BoardScreen(Board board, String newLevel){
+    public BoardScreen(Board board){
     	this.board = board;
         size = board.getBoardSize();
-        level = newLevel;
         tileImages = new TileImage[size][size];
         
         setLayout(new GridLayout(size, size));
@@ -67,5 +66,9 @@ public class BoardScreen extends JPanel {
     
     public static void setBoardSize(int newSize) {
     	size = newSize;
+    }
+    
+    public static void setLevel(String newLevel) {
+    	level = newLevel;
     }
 }
