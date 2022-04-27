@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+C:\Users\herma\Documents_local\RobotRally\.metadata\.plugins\org.eclipse.jdt.core
+4245665120.index
+2360426812.index
+1865797976.index
