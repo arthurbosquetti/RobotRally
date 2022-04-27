@@ -18,17 +18,17 @@ public class AI extends Robot  {
 	private int flag2X;
 	private int flag2Y;
 	private List<List<String>> possibleHands;
-	private Card[] cardChoice;
+	private List<Card> cardChoice;
 
 	public AI(String name, int lives) {
 		super(name, lives);
 	}
 
-	public void setHand(Card[] cardChoice) {
+	public void setHand(List<Card> cardChoice) {
 		this.cardChoice=cardChoice;
 	}
 	
-	public Card[] getHand() {
+	public List<Card> getHand() {
 		return cardChoice;
 	}
 	
@@ -72,10 +72,10 @@ public class AI extends Robot  {
 		 return this.possibleHands;
 	 }
 	
-	public Card[] findSuggestedCardChoice(Board board) {
+	public List<Card> findSuggestedCardChoice(Board board) {
 		
 		//initialize a map that stores the different hands and the final distance from the desired flag
-		Map<Card[], Integer> distances = new HashMap<Card[], Integer>();
+		Map<List<Card>, Integer> distances = new HashMap<List<Card>, Integer>();
 		
 		//remember the original data
 		int xOriginal = getX();
@@ -104,10 +104,12 @@ public class AI extends Robot  {
 			}
 			
 			//create a hand of cards
-			Card[] hand = {new Card(possibleHand.get(0)),new Card(possibleHand.get(1)),
-						   new Card(possibleHand.get(2)),new Card(possibleHand.get(3)),
-						   new Card(possibleHand.get(4))};
-			
+			List<Card> hand = new ArrayList<>();
+			hand.add(new Card(possibleHand.get(0)));
+			hand.add(new Card(possibleHand.get(1)));
+			hand.add(new Card(possibleHand.get(2)));
+			hand.add(new Card(possibleHand.get(3)));
+			hand.add(new Card(possibleHand.get(4)));
 			
 			//iterate through the cards of the current hand:
 			for (Card card : hand) {
@@ -155,7 +157,7 @@ public class AI extends Robot  {
 		int min = Collections.min(distances.values());
 		
 		//return the first hand Card[] that has the minimum distance value using a linear search
-		for (Map.Entry<Card[], Integer> entry : distances.entrySet()) {
+		for (Map.Entry<List<Card>, Integer> entry : distances.entrySet()) {
 			if (entry.getValue()==(min)) {
 				this.setX(xOriginal);
 				this.setY(yOriginal);

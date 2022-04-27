@@ -64,7 +64,6 @@ public class Game {
 	  	}
 	}
 	
-
 	public void gameStart(String newLevel, String name1, String name2) {
 		setGameStatus(true);
 	
