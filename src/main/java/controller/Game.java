@@ -20,16 +20,15 @@ public class Game {
 	
 	private GameScreen gs;
 	
-	private HandHandler hh1;
-	private HandHandler hh2;
+	private HandHandler hh1, hh2;
 	
 	private BoardScreen bs;
 	
 	private Board board = new Board();
 	private Level level;
-	private Robot robot1;
-	private Robot robot2;
-
+	private Robot robot1, robot2;
+	private boolean isRobot1AI, isRobot2AI;
+	
 	private boolean gameOn;
 	
 	public Game() { FirstScreen fs = new FirstScreen(this); }
@@ -37,6 +36,11 @@ public class Game {
 	public void setGameStatus(boolean b) { this.gameOn = b; }
 	
 	public boolean getGameStatus() { return gameOn; }
+	
+	public void setP1AI(boolean b) { this.isRobot1AI = b;}
+	
+	public void setP2AI(boolean b) { this.isRobot2AI = b;}
+	
 	
 	public void gameStart(String newLevel, String p1, String p2) {
 		setGameStatus(true);
