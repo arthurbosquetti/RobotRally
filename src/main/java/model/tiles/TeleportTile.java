@@ -5,9 +5,8 @@ import model.Board;
 import model.Robot;
 import view.TileType;
 
-public class TeleportTile extends Tile {
+public class TeleportTile extends Tile { //always teleports you to middle of board
 	
-	//TODO: change this to real type/add teleport type
 	public TeleportTile() {
 		this.setValid(true);
 		this.setType(TileType.PORTAL);
@@ -21,7 +20,7 @@ public class TeleportTile extends Tile {
     public int[] findOtherTeleportTile(Robot robot, Board board) {
     	int[] otherTile = new int[2];
     	int x = robot.getX(); int y = robot.getY();
-    	int [][] tiles = board.searchBoard(this);
+    	int [][] tiles = board.searchBoard();
     	if (tiles[0][0] == y && tiles[0][1] == x) { 
     		otherTile[0] = tiles[1][0];
     		otherTile[1] = tiles[1][1];
@@ -35,8 +34,11 @@ public class TeleportTile extends Tile {
     
     @Override
 	public void steppedOn(Robot robot, Board board, Game game) {
-	  int[] otherTile = findOtherTeleportTile(robot, board);
-	  robot.setX(otherTile[1]);
-	  robot.setY(otherTile[0]);
+    	
+	  robot.setX(6);
+	  robot.setY(6);
+	  
+	  
+
 	}
 }
