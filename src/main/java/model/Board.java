@@ -88,6 +88,8 @@ public class Board {
 
 		Random r = new Random();
 		boolean boardGenerated = true;
+		int ry = 0;
+		int rx = 0;
 		//while generating
 		while (boardGenerated) {
 			// Generating random coords
@@ -96,10 +98,20 @@ public class Board {
 			int randObstacle = r.nextInt(2);
 			// Go to coords and set tile
 			if (this.boardLayout[randCol][randRow] == null) {
-				if (flagNumber != 0) {
+				if (flagNumber == 2) {
 					this.boardLayout[randCol][randRow] = TileFactory.getTile("FLAG" + flagNumber);
+					rx = randCol;
+					ry = randRow;
 					flagNumber--;
 				}
+				
+				else if (flagNumber == 1) {
+					if ((Math.abs(rx-randCol) >= boardSize/2)&&(Math.abs(ry-randRow) >= boardSize/2)) {
+						this.boardLayout[randCol][randRow] = TileFactory.getTile("FLAG" + flagNumber);
+						flagNumber--;
+					}
+				}
+				
 				else if (obstacleNumbers[0] != 0 ){
 					this.boardLayout[randCol][randRow] = TileFactory.getTile("TELEPORT");
 					obstacleNumbers[0]--;

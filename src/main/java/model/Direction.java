@@ -9,6 +9,10 @@ public class Direction {
     public Direction(int dir) {
         this.direction = dir;
     }
+    
+    public int dirToInt() {
+    	return this.direction;
+    }
 
     public void turnRight() {
     	System.out.println("I turned right");

@@ -22,6 +22,10 @@ public class ConveyorTile extends Tile {
         this.direction = new Direction(0);
     }
     
+    public Direction getDir() {
+    	return this.direction;
+    }
+    
     @Override
     public String tileType() {
         return " |C|";
