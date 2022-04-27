@@ -148,6 +148,7 @@ public class Game {
 			
 			robot1.setGlue(true);
 			robot2.setGlue(true);
+			gameEnd();
 			
 			newRound();
 		}
