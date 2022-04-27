@@ -4,8 +4,10 @@ package model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -17,18 +19,18 @@ public class AI extends Robot  {
 	private int flag1Y;
 	private int flag2X;
 	private int flag2Y;
-	private List<List<String>> possibleHands;
-	private List<Card> cardChoice;
+	private ArrayList<List<String>> possibleHands;
+	private ArrayList<Card> cardChoice;
 
 	public AI(String name, int lives) {
 		super(name, lives);
 	}
 
-	public void setHand(List<Card> cardChoice) {
+	public void setHand(ArrayList<Card> cardChoice) {
 		this.cardChoice=cardChoice;
 	}
 	
-	public List<Card> getHand() {
+	public ArrayList<Card> getHand() {
 		return cardChoice;
 	}
 	
@@ -53,8 +55,8 @@ public class AI extends Robot  {
 	}
 	
 	public String getFlagPosition(boolean getflag1) {
-		if (!getflag1) return "(" + flag1X + "," + flag1Y + ")";
-		else return  "(" + flag2X + "," + flag2Y + ")";
+		if (!getflag1) return "FL (" + flag1X + "," + flag1Y + ")";
+		else return  "FL (" + flag2X + "," + flag2Y + ")";
 	}
 	
 	public void setPossibleHands(ArrayList<Card> possibleHand) {
@@ -64,18 +66,35 @@ public class AI extends Robot  {
 											possibleHand.get(5).getCardAction(),possibleHand.get(6).getCardAction(),
 											possibleHand.get(7).getCardAction(),possibleHand.get(8).getCardAction())
 											.simple().stream());;
-        List<List<String>> result = possibleHands.collect(Collectors.toList());
-        this.possibleHands = result;
+        List<List<String>> listList = possibleHands.collect(Collectors.toList());
+        ArrayList<List<String>>result = new ArrayList<List<String>>(listList);
+        this.possibleHands = removeDuplicates(result);
 	}
-	 
-	public List<List<String>> getPossibleHands(){
+	
+	public ArrayList<List<String>> removeDuplicates(ArrayList<List<String>> list) {
+		Set<List<String>> set = new LinkedHashSet<List<String>>();
+		for (List<String> hand : list) {
+			ArrayList<String> hand5 = new ArrayList<String>(hand);
+			hand5.add(hand.get(0));
+			hand5.add(hand.get(1));
+			hand5.add(hand.get(2));
+			hand5.add(hand.get(3));
+			hand5.add(hand.get(4));
+			set.add(hand5);
+		}
+		list.clear();
+		list.addAll(set);
+		return list;
+	}
+	
+	public ArrayList<List<String>> getPossibleHands(){
 		 return this.possibleHands;
 	 }
 	
-	public List<Card> findSuggestedCardChoice(Board board) {
+	public ArrayList<Card> findSuggestedCardChoice(Board board) {
 		
 		//initialize a map that stores the different hands and the final distance from the desired flag
-		Map<List<Card>, Integer> distances = new HashMap<List<Card>, Integer>();
+		Map<ArrayList<Card>, Integer> distances = new HashMap<ArrayList<Card>, Integer>();
 		
 		//remember the original data
 		int xOriginal = getX();
@@ -83,9 +102,13 @@ public class AI extends Robot  {
 		int direcOG = getDir().getDirectionInt();
 		int lives = getLives();
 		
+		int counter = 0;
 		//iterate through all possible hands
 		for (List<String> possibleHand : possibleHands) {
 
+			counter++;
+			System.out.println("counter = "+counter);
+			
 			setX(xOriginal);
 			setY(yOriginal);
 			setDir(new Direction(direcOG));
@@ -102,20 +125,19 @@ public class AI extends Robot  {
 						boardCopy.setTile(j, i, board.getTile(j, i));
 				}
 			}
+			ArrayList<Card> hand = new ArrayList<Card>();
+			for (String action : possibleHand) {
+				hand.add(new Card(action));
+			}
 			
-			//create a hand of cards
-			List<Card> hand = new ArrayList<>();
-			hand.add(new Card(possibleHand.get(0)));
-			hand.add(new Card(possibleHand.get(1)));
-			hand.add(new Card(possibleHand.get(2)));
-			hand.add(new Card(possibleHand.get(3)));
-			hand.add(new Card(possibleHand.get(4)));
 			
 			//iterate through the cards of the current hand:
 			for (Card card : hand) {
-				
+				System.out.println("Card at "+counter+" is "+card);
 				boolean foundFlag1=getFlag1();
 				card.executeAction(this, boardCopy);
+				System.out.println("AI at ("+getX()+","+getY()+","+getDir().getDirection()+")");
+
 				
 				//flag 1 has been found whenever getFlag1() changes (false->true)
 				foundFlag1=(foundFlag1!=getFlag1());
@@ -157,7 +179,7 @@ public class AI extends Robot  {
 		int min = Collections.min(distances.values());
 		
 		//return the first hand Card[] that has the minimum distance value using a linear search
-		for (Map.Entry<List<Card>, Integer> entry : distances.entrySet()) {
+		for (Map.Entry<ArrayList<Card>, Integer> entry : distances.entrySet()) {
 			if (entry.getValue()==(min)) {
 				this.setX(xOriginal);
 				this.setY(yOriginal);
@@ -172,4 +194,27 @@ public class AI extends Robot  {
 
 }
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	

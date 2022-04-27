@@ -47,16 +47,21 @@ public class Game {
 
 		if (isRobot1AI && isRobot2AI){
 			robot1 = new AI(name1, lives);
+			((AI) robot1).setFlagPosition(board);
 			robot2 = new AI(name2, lives);
+			((AI) robot2).setFlagPosition(board);
+
 		}
 		
 		else if (isRobot1AI) {
 			robot1 = new AI(name1, lives);
+			((AI) robot1).setFlagPosition(board);
 			robot2=  new Robot(name2, lives);
 		}
 		else if (isRobot2AI) {
 			robot1 =  new Robot(name1, lives);
 			robot2 = new AI(name2, lives);
+			((AI) robot2).setFlagPosition(board);
 		}
 		else{
 			robot1 = new Robot(name1, lives);
@@ -121,7 +126,17 @@ public class Game {
 			hh1.removeButton(9);
 			hh2.removeButton(9);
 			
-			ArrayList<Card> choosen1 = robot1.getDeck().getChoosen();
+			ArrayList<Card> choosen1= new ArrayList<>();
+			
+			if (isRobot1AI) {
+				System.out.println("in 'isRobot1AI' condition");
+				((AI) robot1).setPossibleHands(robot1.getDeck().getHand());
+				System.out.println(((AI) robot1).getPossibleHands());
+				System.out.println("OK");
+				choosen1 = ((AI) robot1).findSuggestedCardChoice(board);
+				System.out.println("choosen1= "+choosen1);
+			}
+			//choosen1 = robot1.getDeck().getChoosen();
 			ArrayList<Card> choosen2 = robot2.getDeck().getChoosen();
 			
 			//executes moves selected
