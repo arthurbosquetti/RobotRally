@@ -1,7 +1,5 @@
 package view;
 
-import view.EndScreen;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -22,28 +20,26 @@ public class CoinFlip extends JFrame implements ActionListener
         this.pl1 = pl1;
         this.pl2 = pl2;
         JFrame frame = new JFrame("Sudden Death");
-        frame.setSize(300,400);
-        createGUI();
-        frame.setVisible(true);
-    }
+        frame.setSize(250,300);
 
-    private void createGUI()
-    {
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        Container window = getContentPane();
-        window.setLayout(new FlowLayout());
+        JPanel window = new JPanel();
+        frame.add(window, BorderLayout.CENTER);
 
         coin = new ImageIcon("src/main/resources/coin.jpg");
         heads = new ImageIcon("src/main/resources/heads.jpg");
         tails = new ImageIcon("src/main/resources/tails.jpg");
 
+        window.setPreferredSize(new Dimension (200, 200));
         label = new JLabel();
         label.setIcon(coin);
         window.add(label);
 
         button = new JButton("Flip");
-        window.add(button);
+        button.setHorizontalAlignment(SwingConstants.CENTER);
+        frame.add(button, BorderLayout.SOUTH);
         button.addActionListener(this);
+
+        frame.setVisible(true);
     }
 
     public void actionPerformed(ActionEvent event)
