@@ -52,7 +52,10 @@ public class Game {
 
 		if (isRobot1AI && isRobot2AI){
 			robot1 = new AI(name1, lives, this);
+			((AI) robot1).setFlagPosition(board);
 			robot2 = new AI(name2, lives, this);
+			((AI) robot2).setFlagPosition(board);
+
 
 		}
 		
@@ -65,6 +68,8 @@ public class Game {
 		else if (isRobot2AI & !isRobot1AI) {
 			robot1 =  new Robot(name1, lives, this);
 			robot2 = new AI(name2, lives, this);
+			((AI) robot2).setFlagPosition(board);
+
 
 		}
 		else{
@@ -134,25 +139,44 @@ public class Game {
 			
 			//create a hand for robot1.
 			ArrayList<Card> choosen1= new ArrayList<>();
-			
-			//use AI method if it's an AI
+			ArrayList<Card> choosen2= new ArrayList<>();
+
+			//use AI method if robot1 it's an AI
 			if (isRobot1AI) {
 				((AI) robot1).setPossibleHands(robot1.getDeck().getHand());
 				choosen1 = ((AI) robot1).findSuggestedCardChoice(board);
-				System.out.println(((AI) robot1).getFlagPosition(robot1.getFlag1()));			}
+			}
+			//use regular method otherwise
 			else {
 				choosen1 = robot1.getDeck().getChoosen();
 			}
-			ArrayList<Card> choosen2 = robot2.getDeck().getChoosen();
+			
+			//use AI method if robot2 it's an AI
+			if (isRobot2AI) {
+				((AI) robot2).setPossibleHands(robot2.getDeck().getHand());
+				choosen2 = ((AI) robot2).findSuggestedCardChoice(board);
+			}
+			//use regular method otherwise
+			else {
+				choosen2 = robot2.getDeck().getChoosen();
+			}
 			
 			//executes moves selected			
 			Movement mov = new Movement(board);
 			Direction dir = new Direction(0);
+					
+			System.out.println("Deck= "+robot1.getDeck().getHand());
 			
 			for (int i = 0; i < 5; i++) {
 				
 				System.out.println(mov.checkMove(mov.getNewPoint(dir, robot1.getX(), robot1.getY(), true, 1)) + "");
+				System.out.println(robot1.getName()+"Card = "+choosen1.get(i));
+				System.out.println(robot2.getName()+"Card = "+choosen2.get(i));
+
 				makeMove(i, choosen1.get(i), choosen2.get(i));
+
+//				System.out.println("AI is at ("+robot1.getX()+","+robot1.getY()+","+robot1.canMove()+")");
+//				System.out.println(((AI) robot1).getFlagPosition(((AI) robot1).getFlag1()));
 
 				try {
 					TimeUnit.SECONDS.sleep(1);

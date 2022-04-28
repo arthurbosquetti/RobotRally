@@ -52,6 +52,8 @@ public class Board {
 	//TODO: add code for robots colliding, change to work with movement card, and change based on those
 	public boolean makeMove(Robot robot, boolean forward, int steps, boolean jump) {
 		//gets the next point based on move
+		int xO=robot.getX();
+		int yO=  robot.getY();
 		int[] newPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
 		
 		if (jump) {
@@ -69,7 +71,17 @@ public class Board {
 			robot.setX(newPoint[0]);
 			robot.setY(newPoint[1]);
 			robot.move();
-			updateRobotPos(robot);
+			try {
+				updateRobotPos(robot);
+			} catch (Exception e) {
+				System.out.println("The robot is "+robot.getName());
+				System.out.println("Robot starts at ("+xO+","+yO+")");
+				System.out.println("newPoint[][]= {"+newPoint[0]+","+newPoint[1]+"}");
+				System.out.println("Next tile is "+getTile(newPoint[0], newPoint[1]).getType());
+				System.out.println("Robot is at ("+robot.getX()+","+robot.getX()+")");
+				
+				e.printStackTrace();
+			}
 			return true;
 			
 		}
@@ -77,7 +89,7 @@ public class Board {
 		return false;
 	}
 	
-	public void updateRobotPos(Robot robot) {
+	public void updateRobotPos(Robot robot) throws Exception {
 		int x = robot.getX();
 		int y = robot.getY();
 		
