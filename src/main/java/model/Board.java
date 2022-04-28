@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Random;
-
 import model.tiles.TeleportTile;
 import model.tiles.Tile;
 import model.tiles.TileFactory;
@@ -80,8 +78,8 @@ public class Board {
 	}
 	
 	public void updateRobotPos(Robot robot) {
-		int x = robot.getX();
-		int y = robot.getY();
+//		int x = robot.getX();
+//		int y = robot.getY();
 		
 		boardLayout[robot.getY()][robot.getX()].setRobotOn(robot);
 	}

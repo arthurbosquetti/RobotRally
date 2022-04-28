@@ -5,6 +5,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import model.*;
 import model.tiles.FlagTile;
+import model.tiles.GlueTile;
 import model.tiles.PitTile;
 import model.tiles.TallTile;
 
@@ -20,8 +21,6 @@ public class StepsDefinition {
 	FlagTile flag1 	 = new FlagTile(1);
 	FlagTile flag2   = new FlagTile(2);
 	Robot robot		 = new Robot("test", 9, game);
-	TallTile stopper = new TallTile();
-	PitTile pit      = new PitTile();
 	Level level;
 	Card[] availableCards;
 	Card[] chosenCards;
@@ -117,7 +116,7 @@ public class StepsDefinition {
 	//Scenario: Successful jump
 	@And("the tile in front is not a Tall tile")
 	public void theTileInFrontIsNotATallTile() {
-		board.setTile(3, 3, new TallTile());
+		board.setTile(3, 3, new GlueTile());
 	}
 	@Then("Robot jumps")
 	public void robotJumps() {
@@ -125,20 +124,9 @@ public class StepsDefinition {
 		robot.setY(2);
 		board.makeMove(robot,true,2,true);
 	}
-	@Then("Robot lands in front of Tall tile")
-	public void robotLandsInFrontOfTallTile() {
-		assertNotNull(board.getTile(3,4).getRobotOn());
-//		assertEquals(2, card1.get_MovingCard().get_MovedForward());
-	}
-
-	//Scenario: Unsuccessful jump
-	@And("the tile in front is a Tall tile")
-	public void theTileInFrontIsATallTile() {
-		assertEquals("TALL", board.getTile(robot.getX(), robot.getY()).tileType());
-	}
-	@Then("Robot does not jump")
-	public void robotDoesNotJump() {
-		assertNotEquals(2,card1.get_MovingCard().get_MovedForward());
+	@Then("Robot lands 2 tiles away")
+	public void robotLands2TilesAway() {
+		assertNotNull(board.getTile(3,0).getRobotOn());
 	}
 
 
@@ -147,7 +135,7 @@ public class StepsDefinition {
 	//Scenario: Robot hits a stopping obstacle
 	@Given("a stopping obstacle on the board in front of the robot")
 	public void a_stopping_obstacle_on_the_board_in_front_of_the_robot() {
-		board.setTile(2, 2, stopper);
+		board.setTile(2, 2, new TallTile());
 		robot.setX(2);
 		robot.setY(3);
 	}
@@ -165,7 +153,7 @@ public class StepsDefinition {
 	 //Scenario: Robot 1 hits a damaging obstacle and survives
 	@Given("a damaging obstacle on the board in front of the robot")
 	public void a_damaging_obstacle_on_the_board_in_front_of_the_robot() {
-		board.setTile(2, 2, pit);
+		board.setTile(2, 2, new PitTile());
 		robot.setX(2);
 		robot.setY(3);
 	}
@@ -181,9 +169,9 @@ public class StepsDefinition {
 	}
 	@Then("the robot is moved to the starting position")
 	public void the_robot_is_moved_to_the_starting_position() {
-	    int[] spawnpoint = robot.getSpawn();
-		assertEquals(robot.getX(), spawnpoint[0]);
-		assertEquals(robot.getY(), spawnpoint[1]);
+	    int[] spawnPoint = robot.getSpawn();
+		assertEquals(robot.getX(), spawnPoint[0]);
+		assertEquals(robot.getY(), spawnPoint[1]);
 	}
 
 	 //Scenario: Robot hits a damaging obstacle and dies!
@@ -201,6 +189,16 @@ public class StepsDefinition {
    public void is_out_of_the_game() {
        assertFalse(robot.isAlive());
    }
+
+	//Scenario: Unsuccessful jump
+	@And("the tile in front is a Tall tile")
+	public void theTileInFrontIsATallTile() {
+		board.setTile(3,3, new TallTile());
+	}
+	@Then("Robot does not jump")
+	public void robotDoesNotJump() {
+		assertFalse(board.makeMove(robot,true,2,true));
+	}
 
 
 

@@ -45,13 +45,4 @@ Feature: Choosing 5 cards to be played
 		And Robot is facing north
 		And the tile in front is not a Tall tile
 		And Robot jumps
-		Then Robot lands in front of Tall tile
-
-	@tag6
-	Scenario: Unsuccessful jump
-		Given difficulty level is "Easy"
-		And P1 chooses card "J"
-		And P1 chooses 5 cards
-		When the card is executed
-		And the tile in front is a Tall tile
-		Then Robot does not jump
+		Then Robot lands 2 tiles away
