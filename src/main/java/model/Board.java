@@ -55,7 +55,7 @@ public class Board {
 		int[] newPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
 		
 		if (jump) {
-			int [] midPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
+			int [] midPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), true, 1);
 			if (!(mov.checkMove(midPoint))) {
 				return false;
 			}

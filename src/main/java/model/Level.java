@@ -30,7 +30,7 @@ public class Level {
 				break;
 			case "Hard":
 				board.setBoardSize(15);
-				board.setObstacleNumbers(2,8,10,6,6,8);
+				board.setObstacleNumbers(1,8,10,6,6,8);
 				board.generateBoard();
 				BoardScreen.setPixelSize(50);
 				break;
