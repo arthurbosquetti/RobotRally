@@ -147,9 +147,7 @@ public class Game {
 				choosen1 = ((AI) robot1).findSuggestedCardChoice(board);
 			}
 			//use regular method otherwise
-			else {
-				choosen1 = robot1.getDeck().getChoosen();
-			}
+			else {choosen1 = robot1.getDeck().getChoosen();}
 			
 			//use AI method if robot2 it's an AI
 			if (isRobot2AI) {
@@ -157,9 +155,7 @@ public class Game {
 				choosen2 = ((AI) robot2).findSuggestedCardChoice(board);
 			}
 			//use regular method otherwise
-			else {
-				choosen2 = robot2.getDeck().getChoosen();
-			}
+			else {choosen2 = robot2.getDeck().getChoosen();}
 			
 			//executes moves selected			
 			Movement mov = new Movement(board);
@@ -170,8 +166,8 @@ public class Game {
 			for (int i = 0; i < 5; i++) {
 				
 				System.out.println(mov.checkMove(mov.getNewPoint(dir, robot1.getX(), robot1.getY(), true, 1)) + "");
-				System.out.println(robot1.getName()+"Card = "+choosen1.get(i));
-				System.out.println(robot2.getName()+"Card = "+choosen2.get(i));
+				System.out.println(robot1.getName()+" Card = "+choosen1.get(i));
+				System.out.println(robot2.getName()+" Card = "+choosen2.get(i));
 
 				makeMove(i, choosen1.get(i), choosen2.get(i));
 

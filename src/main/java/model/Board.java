@@ -1,11 +1,11 @@
 package model;
 
-import java.util.Random;
-
 import model.tiles.TeleportTile;
 import model.tiles.Tile;
 import model.tiles.TileFactory;
 import view.BoardScreen;
+
+import java.util.Random;
 
 @SuppressWarnings("unused")
 public class Board {
@@ -57,7 +57,7 @@ public class Board {
 		int[] newPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
 		
 		if (jump) {
-			int [] midPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
+			int [] midPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), true, 1);
 			if (!(mov.checkMove(midPoint))) {
 				return false;
 			}
@@ -92,6 +92,7 @@ public class Board {
 	public void updateRobotPos(Robot robot) throws Exception {
 		int x = robot.getX();
 		int y = robot.getY();
+
 		
 		boardLayout[robot.getY()][robot.getX()].setRobotOn(robot);
 	}

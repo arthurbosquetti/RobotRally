@@ -26,6 +26,7 @@ public class MineTile extends Tile{ // now used as kamikaze tile!!!!
     	int rc = BoardScreen.size;
     	
     	robot.hurt(1);
+    	game.hurtOtherPlayer(robot);
     	int R = robot.getY(); int C = robot.getX();
     	
     	if (R > 0 && R < rc-1 && C > 0 && C < rc-1) {

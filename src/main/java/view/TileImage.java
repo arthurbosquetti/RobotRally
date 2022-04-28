@@ -70,6 +70,7 @@ public class TileImage extends JPanel {
 			BufferedImage image2 = rotateImage(robotOn, robo.getDir());
 			robotOn = image2;
 		}  catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("robot= "+robo.getName());
 			System.out.println("oops");
 		}
