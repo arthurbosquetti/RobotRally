@@ -24,8 +24,8 @@ public class AI extends Robot  {
 	private ArrayList<List<String>> possibleHands;
 	private ArrayList<Card> cardChoice;
 
-	public AI(String name, int lives, Game game) {
-		super(name, lives, game);
+	public AI(String name, int lives, Game game, Board board) {
+		super(name, lives, game, board);
 	}
 
 	public void setHand(ArrayList<Card> cardChoice) {

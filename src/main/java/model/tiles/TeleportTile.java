@@ -35,9 +35,10 @@ public class TeleportTile extends Tile { //always teleports you to middle of boa
     @Override
 	public void steppedOn(Robot robot, Board board, Game game) {
     	
-	  robot.setX(6);
-	  robot.setY(6);
 	  
+	  int[] other = findOtherTeleportTile(robot, board);
+	  robot.setX(other[1]);
+	  robot.setY(other[0]);
 	  
 
 	}

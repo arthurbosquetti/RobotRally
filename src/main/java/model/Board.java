@@ -102,9 +102,9 @@ public class Board {
 		this.boardLayout = new Tile[boardSize][boardSize];
 //		System.out.println("generateBoard().boardLayout OK");
 		// middle teleport tile
-		if (this.boardSize == 12 || this.boardSize == 15) {
-			this.boardLayout[6][6] = TileFactory.getTile("TELEPORT");
-		}
+		//if (this.boardSize == 12 || this.boardSize == 15) {
+		//	this.boardLayout[6][6] = TileFactory.getTile("TELEPORT");
+		//}
 //		System.out.println("generateBoard(). middleTeleport tile OK");
 
 
@@ -205,16 +205,17 @@ public class Board {
 	
 	public int[][] searchBoard() { // currently built for finding 2 teleport tiles :P
 		int[][] tileSpot = new int[2][2];
-		for (int row = 0; row < boardLayout.length; row++)  { //search from top left corner
-			for (int col = 0; col < boardLayout[0].length; col++) {	
+		int a = boardSize;
+		for (int row = 0; row < a; row++)  { //search from top left corner
+			for (int col = 0; col < a; col++) {	
 				if (this.boardLayout[row][col] instanceof TeleportTile) {
 					tileSpot[0][0] = row;
 					tileSpot[0][1] = col;
 				}
 			}
 		}
-		for (int row = boardLayout.length-1; row > -1; row--)  { //search from bottom right corner
-			for (int col = boardLayout.length-1; col > -1; col--) {	
+		for (int row = a-1; row > -1; row--)  { //search from bottom right corner
+			for (int col = a-1; col > -1; col--) {	
 				if (this.boardLayout[row][col] instanceof TeleportTile) {
 					tileSpot[1][0] = row;
 					tileSpot[1][1] = col;
