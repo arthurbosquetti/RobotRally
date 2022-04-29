@@ -52,17 +52,19 @@ public class FirstScreen extends JPanel {
 		Image img = Toolkit.getDefaultToolkit().getImage("src/main/resources/firstscreenbg.png");
 		
 		JLabel name = new JLabel("Robot Rally Game");
-		JLabel empty = new JLabel(".                                                                                                                                                                     .");
+		JLabel empty = new JLabel(".                                                                                                                                        .");
 		JLabel labelP1 = new JLabel("Name of Player 1:");
 	    JLabel labelP2 = new JLabel("Name of Player 2:");
 	    JLabel labelDif = new JLabel("Set difficulty and play!");
+	    JLabel ai = new JLabel("AI");
 
 		labelP1.setForeground(Color.WHITE);
 		labelP2.setForeground(Color.WHITE);
 		labelDif.setForeground(Color.WHITE);
+		ai.setForeground(Color.WHITE);
 	    
-	    AIplayer1 = new JCheckBox("is AI?", false);
-        AIplayer2 = new JCheckBox("is AI?", false);
+	    AIplayer1 = new JCheckBox("", false);
+        AIplayer2 = new JCheckBox("", false);
 	    
 	    p1name = new JTextField(7);
 	    p2name = new JTextField(7);
@@ -89,9 +91,13 @@ public class FirstScreen extends JPanel {
         constr.insets = new Insets(10, 10, 15, 10);
     
         //Setting all the objects around
-
-		constr.anchor = GridBagConstraints.LINE_END;
-
+        constr.gridy = 3;
+        constr.gridx = 3;
+        newPanel.add(ai, constr);
+        
+        constr.weightx = 1.0;
+        constr.gridwidth = 1;
+        
 		constr.gridy = 4;
 		constr.gridx = 0;
 		newPanel.add(empty, constr);
