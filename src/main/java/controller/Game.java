@@ -161,7 +161,9 @@ public class Game {
 			Movement mov = new Movement(board);
 			Direction dir = new Direction(0);
 					
-			System.out.println("Deck= "+robot1.getDeck().getHand());
+			System.out.println(robot1.getName()+" Deck= "+robot1.getDeck().getHand());
+			System.out.println(robot2.getName()+" Deck= "+robot2.getDeck().getHand());
+
 			
 			for (int i = 0; i < 5; i++) {
 				

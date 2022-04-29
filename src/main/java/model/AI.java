@@ -1,4 +1,3 @@
-
 package model;
 
 import java.util.ArrayList;
@@ -136,7 +135,6 @@ public class AI extends Robot  {
 				hand.add(card);
 				if (canMove()) {
 					card.executeAction(this, boardCopy);
-					setLivingStatus(true);
 				}
 			}
 			
@@ -144,24 +142,26 @@ public class AI extends Robot  {
 			foundFlag1 = (foundFlag1!=getFlag1());
 			foundFlag2 = (foundFlag2!=getFlag2());
 			
-			if (!getFlag1() & !getFlag2()) {
+			if (!getFlag1() & !getFlag2() & isAlive()) {
 				//if it still has not found flag1, still looking for flag1
 				distancesFl1.put(hand, Math.abs(flag1X-getX())+Math.abs(flag1Y-getY()));
 			}
-			else if (getFlag1() & !getFlag2()) { 
+			else if (getFlag1() & !getFlag2() & isAlive()) { 
 				//reset getFlag1() for the next iteration if F1 has just been found
 				if (foundFlag1) {setFlag1(false);}
 				
 				//flag1 has been found, looking for flag2
 				distancesFl2.put(hand,Math.abs(flag2X-getX())+Math.abs(flag2Y-getY()));
 				}
-			else if (!getFlag1() & getFlag2()) { 
+			else if (!getFlag1() & getFlag2() & isAlive()) { 
 				//reset getFlag2() for the next iteration if F2 has just been found
 				if (foundFlag2) {setFlag2(false);}
 				
 				//flag1 has been found, looking for flag2
 				distancesFl1.put(hand,Math.abs(flag1X-getX())+Math.abs(flag1Y-getY()));
-				}
+			}
+			
+			
 			
 			//reset the AI parameters
 			boardCopy.getTile(getX(), getY()).setRobotOff();
@@ -170,6 +170,7 @@ public class AI extends Robot  {
 			setDir(new Direction(direcOG));
 			setLives(lives);
 			setCanMove(true);
+			setLivingStatus(true);
 			boardCopy.getTile(xOriginal, yOriginal).setRobotOn(this);
 			
 			if (foundFlag1) {setFlag1(false);}
@@ -185,9 +186,18 @@ public class AI extends Robot  {
 			System.out.println("====== "+getName()+" IN DISTANCESFL2");
 			return findMin(distancesFl2,Collections.min(distancesFl2.values()));
 		}
-		else {
+		else if (distancesFl1.size()>0) {
 			System.out.println("====== "+getName()+" IN DISTANCESFL1");
 			return findMin(distancesFl1, Collections.min(distancesFl1.values()));
+		}
+		else {
+			System.out.println("===== ONLY BAD MOVES :( BYE!");
+			ArrayList<Card> deathReturn = new ArrayList<Card>();
+			for (String action : possibleHands.get(0)) {
+				Card card = new Card(action);
+				deathReturn.add(card);
+			}
+			return deathReturn;
 		}
 	}
 	
@@ -204,30 +214,3 @@ public class AI extends Robot  {
 	}
 	
 }
-
-	
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
