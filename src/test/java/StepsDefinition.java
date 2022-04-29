@@ -20,7 +20,7 @@ public class StepsDefinition {
 	Deck deck      	 = new Deck();
 	FlagTile flag1 	 = new FlagTile(1);
 	FlagTile flag2   = new FlagTile(2);
-	Robot robot		 = new Robot("test", 9, game);
+	Robot robot		 = new Robot("test", 9, game, board);
 	Level level;
 	Card[] availableCards;
 	Card[] chosenCards;

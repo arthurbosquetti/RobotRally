@@ -51,30 +51,30 @@ public class Game {
 	public void robotInitializer(int lives, String name1, String name2) {
 
 		if (isRobot1AI && isRobot2AI){
-			robot1 = new AI(name1, lives, this);
+			robot1 = new AI(name1, lives, this, board);
 			((AI) robot1).setFlagPosition(board);
-			robot2 = new AI(name2, lives, this);
+			robot2 = new AI(name2, lives, this, board);
 			((AI) robot2).setFlagPosition(board);
 
 
 		}
 		
 		else if (isRobot1AI & !isRobot2AI) {
-			robot1 = new AI(name1, lives, this);	
+			robot1 = new AI(name1, lives, this, board);	
 			((AI) robot1).setFlagPosition(board);
 			
-			robot2=  new Robot(name2, lives, this);
+			robot2=  new Robot(name2, lives, this, board);
 		}
 		else if (isRobot2AI & !isRobot1AI) {
-			robot1 =  new Robot(name1, lives, this);
-			robot2 = new AI(name2, lives, this);
+			robot1 =  new Robot(name1, lives, this, board);
+			robot2 = new AI(name2, lives, this, board);
 			((AI) robot2).setFlagPosition(board);
 
 
 		}
 		else{
-			robot1 = new Robot(name1, lives, this);
-			robot2 = new Robot(name2, lives,this );
+			robot1 = new Robot(name1, lives, this, board);
+			robot2 = new Robot(name2, lives, this, board );
 	  	}
 	}
 	
