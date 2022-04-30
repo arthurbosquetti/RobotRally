@@ -11,7 +11,7 @@ import java.util.Random;
 public class Board {
 	
 	private int boardSize;
-	private Tile[][] boardLayout;
+	public Tile[][] boardLayout;
 	private Movement mov= new Movement(this);
 	private int[] obstacleNumbers;
 	private int flagNumber = 2;

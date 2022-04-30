@@ -34,32 +34,9 @@ public class ConveyorTile extends Tile {
 
     @Override
     public void steppedOn(Robot robot, Board board, Game game) { //assuming this is never on an edge
-    	int x = robot.getX();
-    	int y = robot.getY();
-    // how to know which robot is which??
+    	
     	robot.setDir(direction);
-    	Card f1 = new Card("F1");
-    	Card f2 = new Card("NO");
+    	board.makeMove(robot, true, 1, false);
     	
-    	game.makeMove(1, f1, f2);
-    	
-    	//switch (this.direction.getDirection()) {
-		//case "north":
-		//	robot.setY(y-1);
-		//	robot.setX(x);
-		//	robot.nextTile(board.getTile(x, y-1));
-		//case "east":
-		//	robot.setX(x+1);
-		//	robot.setY(y);
-		//	robot.nextTile(board.getTile(x+1, y));
-		//case "south":
-		//	robot.setY(y+1);
-		//	robot.setX(x);
-		//	robot.nextTile(board.getTile(x, y+1));
-		//case "west":
-		//	robot.setX(x-1);
-		//	robot.setY(y);
-		//	robot.nextTile(board.getTile(x-1, y));
-    	//}
     }
 }
