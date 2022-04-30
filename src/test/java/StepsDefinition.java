@@ -4,6 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import model.*;
+import model.tiles.ConveyorTile;
 import model.tiles.FlagTile;
 import model.tiles.GlueTile;
 import model.tiles.PitTile;
@@ -117,12 +118,12 @@ public class StepsDefinition {
 	//Scenario: Successful jump
 	@And("the tile in front is not a Tall tile")
 	public void theTileInFrontIsNotATallTile() {
-		board.setTile(3, 3, new GlueTile());
+		board.setTile(2, 2, new GlueTile());
+		robot.setX(2);
+		robot.setY(3);
 	}
-	@Then("Robot jumps")
+	@When("Robot jumps")
 	public void robotJumps() {
-		robot.setX(3);
-		robot.setY(2);
 		board.makeMove(robot,true,2,true);
 	}
 	@Then("Robot lands 2 tiles away")
@@ -199,6 +200,20 @@ public class StepsDefinition {
 	@Then("Robot does not jump")
 	public void robotDoesNotJump() {
 		assertFalse(board.makeMove(robot,true,2,true));
+	}
+	
+	//Scenario: Robot hits a conveyor obsticle
+	@Given("a conveyor obstacle on the board in front of the robot")
+	public void a_conveyor_obstacle_on_the_board_in_front_of_the_robot() {
+		board.setTile(2, 2, new ConveyorTile(new Direction(90)));
+		robot.setX(2);
+		robot.setY(3);
+	}
+	@Then("the robot is moved in the right direction")
+	public void the_robot_is_moved_in_the_right_direction() {
+	    assertEquals(90, robot.getDir().getDirectionInt());
+	    assertEquals(3, robot.getX());
+	    assertEquals(2, robot.getY());
 	}
 
 
