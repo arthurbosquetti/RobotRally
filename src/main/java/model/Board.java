@@ -53,8 +53,12 @@ public class Board {
 	public boolean makeMove(Robot robot, boolean forward, int steps, boolean jump) {
 		//gets the next point based on move
 		int xO=robot.getX();
-		int yO=  robot.getY();
+		int yO=robot.getY();
 		int[] newPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
+		
+		if (this.getTile(newPoint[0], newPoint[1]).alreadyOccupied()) {
+			return false;
+		}
 		
 		if (jump) {
 			int [] midPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), true, 1);

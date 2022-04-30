@@ -48,6 +48,13 @@ public abstract class Tile {
 		return robotOn;
 	}
 	
+	public boolean alreadyOccupied() {
+		if (this.getRobotOn() != null) {
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean validTile() {
 		return valid;
 	}	
