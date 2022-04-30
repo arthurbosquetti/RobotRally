@@ -74,6 +74,7 @@ public class Robot extends Player {
     //moves the Robot to nextTile then interacts
     public void move() {
     	this.currentTile = nextTile;
+    	System.out.println(currentTile);
         this.currentTile.steppedOn(this, board, game); 
     }
     

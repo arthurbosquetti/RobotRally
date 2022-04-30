@@ -5,6 +5,13 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import model.*;
 import model.tiles.*;
+import model.tiles.ConveyorTile;
+import model.tiles.FlagTile;
+import model.tiles.GlueTile;
+import model.tiles.MineTile;
+import model.tiles.PitTile;
+import model.tiles.TallTile;
+import model.tiles.TeleportTile;
 
 import static org.junit.Assert.*;
 
@@ -18,6 +25,7 @@ public class StepsDefinition {
 	FlagTile flag1 	 = new FlagTile(1);
 	FlagTile flag2   = new FlagTile(2);
 	Robot robot		 = new Robot("test", 9, game, board);
+	Robot robot2	 = new Robot("test2", 9, game, board);
 	Level level;
 	Card[] availableCards;
 	Card[] chosenCards;
@@ -139,6 +147,7 @@ public class StepsDefinition {
 	@Given("a stopping obstacle on the board in front of the robot")
 	public void a_stopping_obstacle_on_the_board_in_front_of_the_robot() {
 		board.setTile(2, 2, new TallTile());
+		robot.setDir(new Direction(0));
 		robot.setX(2);
 		robot.setY(3);
 	}
@@ -188,8 +197,8 @@ public class StepsDefinition {
 		assertEquals(robot.getLives(), 0);
 	}
 
-   @Then("is out of the game")
-   public void is_out_of_the_game() {
+   @Then("the robot dies")
+   public void the_robot_dies() {
        assertFalse(robot.isAlive());
    }
 
@@ -217,7 +226,65 @@ public class StepsDefinition {
 	    assertEquals(2, robot.getY());
 	}
 
-
+	//Scenario: Robot steps on a a glue obstacle
+	@Given("a glue obstacle on the board in front of the robot")
+	public void a_glue_obstacle_on_the_board_in_front_of_the_robot() {
+		board.setTile(2, 2, new GlueTile());
+		robot.setX(2);
+		robot.setY(3);
+	}
+		
+	@Then("the robot cannot move for the rest of the turn")
+	public void the_robot_cannot_move_for_the_rest_of_the_turn() {
+		assertFalse(robot.canMove());
+	}
+	
+	
+	//Scenario: Robot steps on a a teleport obstacle
+	@Given("a teleport obstacle on the board in front of the robot")
+	public void a_teleport_obstacle_on_the_board_in_front_of_the_robot() {
+		board.setTile(2, 2, new TeleportTile());
+		robot.setX(2);
+		robot.setY(3);
+	}
+		
+	@And("another teleport obstacle on the board")
+	public void another_teleport_obstacle_on_the_board() {
+		board.setTile(4, 4, new TeleportTile());
+	}
+	
+	@Then("the robot is moved to the other teleport tile")
+	public void the_robot_is_moved_to_the_other_teleport_tile() {
+		assertEquals(4, robot.getX());
+		assertEquals(4, robot.getY());
+	}
+	
+	//Scenario: Robot hits a mine obstacle and both die!
+		@Given("a mine obstacle on the board in front of the robot")
+		public void a_mine_obstacle_on_the_board_in_front_of_the_robot() {
+			board.setTile(2, 2, new MineTile());
+			robot.setX(2);
+			robot.setY(3);
+		}
+		
+		@And("robot2 is in the area of the mine")
+		public void robot2_is_in_the_area_of_the_mine() {
+			robot2.setX(3);
+			robot2.setY(3);
+		}
+	
+		@And("both robots have one life left")
+		public void both_robots_have_one_life_left() {
+			robot.setLives(1);
+			robot2.setLives(1);
+		}
+		
+		@Then("both robots die")
+		public void both_robots_die() {
+			System.out.println(robot.getLives());
+			assertFalse(robot.isAlive());
+			assertFalse(robot2.isAlive());
+		}
 
 ////// FLAGS //////////
 	//Scenario: Robot reaches flag first time

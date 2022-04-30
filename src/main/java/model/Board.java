@@ -56,9 +56,9 @@ public class Board {
 		int yO=robot.getY();
 		int[] newPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
 		
-		if (this.getTile(newPoint[0], newPoint[1]).alreadyOccupied()) {
-			return false;
-		}
+		//if (this.getTile(newPoint[0], newPoint[1]).alreadyOccupied()) {
+		//	return false;
+		//}
 		
 		if (jump) {
 			int [] midPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), true, 1);

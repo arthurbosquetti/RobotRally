@@ -1,6 +1,6 @@
 package view;
 
-import java.awt.FlowLayout;
+import java.awt.*;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -10,10 +10,12 @@ public class FlagView extends JPanel {
 	private FlagIcon[] icons;
 	
 	public FlagView() {
+		setBackground(Color.DARK_GRAY);
 		setLayout(new FlowLayout(FlowLayout.LEFT));
 		
-		JLabel lifeLbl = new JLabel("Flags collected: ");
-		add(lifeLbl);
+		JLabel flagLbl = new JLabel("Flags collected: ");
+		add(flagLbl);
+		flagLbl.setForeground(Color.WHITE);
 		
 		icons = new FlagIcon[2];
 	}
