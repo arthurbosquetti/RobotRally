@@ -4,11 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import model.*;
-import model.tiles.ConveyorTile;
-import model.tiles.FlagTile;
-import model.tiles.GlueTile;
-import model.tiles.PitTile;
-import model.tiles.TallTile;
+import model.tiles.*;
 
 import static org.junit.Assert.*;
 
@@ -78,6 +74,17 @@ public class StepsDefinition {
 	}
 
 	//Scenario: Moving forward
+	@And("Robot spawned")
+	public void robotSpawned() {
+		robot.setX(3);
+		robot.setY(3);
+	}
+	@And("the tiles in front are empty tiles")
+	public void theTilesInFrontAreEmptyTiles() {
+		board.setTile(3,2,new EmptyTile());
+		board.setTile(3,1,new EmptyTile());
+		board.setTile(3,0,new EmptyTile());
+	}
 	@Given("P1 chooses card {string}")
 	public void p1_chooses_card(String action) {
 		this.card1 = new Card(action);
@@ -86,9 +93,9 @@ public class StepsDefinition {
 	public void the_card_is_executed() {
 	    card1.executeAction(robot, board);
 	}
-	@Then("Robot moves forward")
-	public void robot_moves_forward() {
-	    assertEquals(1, card1.get_MovingCard().get_MovedForward());
+	@Then("Robot moves forward {int} tiles")
+	public void robotMovesForwardCells(int arg0) {
+	    assertEquals(arg0, card1.get_MovingCard().get_MovedForward());
 	}
 
 	//Scenario: Turning left
@@ -118,17 +125,11 @@ public class StepsDefinition {
 	//Scenario: Successful jump
 	@And("the tile in front is not a Tall tile")
 	public void theTileInFrontIsNotATallTile() {
-		board.setTile(2, 2, new GlueTile());
-		robot.setX(2);
-		robot.setY(3);
+		board.setTile(3, 2, new GlueTile());
 	}
-	@When("Robot jumps")
-	public void robotJumps() {
-		board.makeMove(robot,true,2,true);
-	}
-	@Then("Robot lands 2 tiles away")
+	@Then("Robot jumps")
 	public void robotLands2TilesAway() {
-		assertNotNull(board.getTile(3,0).getRobotOn());
+		assertEquals(2,card1.get_MovingCard().get_MovedForward());
 	}
 
 
@@ -201,7 +202,7 @@ public class StepsDefinition {
 	public void robotDoesNotJump() {
 		assertFalse(board.makeMove(robot,true,2,true));
 	}
-	
+
 	//Scenario: Robot hits a conveyor obsticle
 	@Given("a conveyor obstacle on the board in front of the robot")
 	public void a_conveyor_obstacle_on_the_board_in_front_of_the_robot() {
@@ -268,12 +269,12 @@ public class StepsDefinition {
 	public void the_robot_has_won() {
 		assertTrue(robot.getWinner());
 	}
-	
+
 	@And("the game ends")
 	public void the_game_ends() {
 		assertFalse(game.getGameStatus());
 	}
-	
+
 }
 
 

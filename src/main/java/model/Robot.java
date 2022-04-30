@@ -1,7 +1,6 @@
 package model;
 
 import controller.Game;
-import model.Direction;
 import model.tiles.Tile;
 
 public class Robot extends Player {
@@ -115,8 +114,8 @@ public class Robot extends Player {
     public boolean canMove() {
     	return canMove;
     }
-	public void setCanMove(boolean moveable) {
-		this.canMove = moveable;
+	public void setCanMove(boolean movable) {
+		this.canMove = movable;
 	}
     
 

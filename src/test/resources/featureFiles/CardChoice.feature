@@ -11,10 +11,41 @@ Feature: Choosing 5 cards to be played
 	@tag2
 	Scenario: Moving forward
 		Given difficulty level is "Medium"
+		And Robot spawned
+		And the tiles in front are empty tiles
 		And P1 chooses card "F1"
 		And P1 chooses 5 cards
 		When the card is executed
-		Then Robot moves forward
+		Then Robot moves forward 1 tiles
+
+	@tag6
+	Scenario: Moving forward
+		Given difficulty level is "Medium"
+		And Robot spawned
+		And the tiles in front are empty tiles
+		And P1 chooses card "F2"
+		And P1 chooses 5 cards
+		When the card is executed
+		Then Robot moves forward 2 tiles
+
+	@tag7
+	Scenario: Moving forward
+		Given difficulty level is "Medium"
+		And Robot spawned
+		And the tiles in front are empty tiles
+		And P1 chooses card "F3"
+		And P1 chooses 5 cards
+		When the card is executed
+		Then Robot moves forward 3 tiles
+
+	@tag8
+	Scenario: Moving forward
+		Given difficulty level is "Medium"
+		And Robot spawned
+		And P1 chooses card "B"
+		And P1 chooses 5 cards
+		When the card is executed
+		Then Robot moves forward -1 tiles
 
 	@tag3
 	Scenario: Turning left
@@ -38,11 +69,11 @@ Feature: Choosing 5 cards to be played
 
 	@tag5
 	Scenario: Successful jump
-		Given difficulty level is "Easy"
+		Given difficulty level is "Hard"
+		And Robot spawned
+		And Robot is facing north
+		And the tile in front is not a Tall tile
 		And P1 chooses card "J"
 		And P1 chooses 5 cards
 		When the card is executed
-		And Robot is facing north
-		And the tile in front is not a Tall tile
-		And Robot jumps
-		Then Robot lands 2 tiles away
+		Then Robot jumps

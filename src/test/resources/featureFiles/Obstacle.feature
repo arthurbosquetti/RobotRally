@@ -10,7 +10,7 @@ Feature: Obstaclewar
 
     @tag2
     Scenario: Robot hits a damaging obstacle and survives
-        Given difficulty level is "Easy"
+        Given difficulty level is "Medium"
         And a damaging obstacle on the board in front of the robot
         And two or more lives left
         When the robot hits the obstacle
@@ -19,7 +19,7 @@ Feature: Obstaclewar
 
     @tag3
     Scenario: Robot hits a damaging obstacle and dies!
-        Given difficulty level is "Easy"
+        Given difficulty level is "Hard"
         And a damaging obstacle on the board in front of the robot
         And one life left
         When the robot hits the obstacle
@@ -37,7 +37,7 @@ Feature: Obstaclewar
         Then Robot does not jump
         
     @tag5
-    Scenario: Robot hits a conveyor obsticle
+    Scenario: Robot hits a conveyor obstacle
         Given difficulty level is "Easy"
         And a conveyor obstacle on the board in front of the robot
         When the robot hits the obstacle
