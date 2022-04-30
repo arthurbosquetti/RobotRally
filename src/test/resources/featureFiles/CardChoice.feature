@@ -63,9 +63,9 @@ Feature: Choosing 5 cards to be played
 		And P1 chooses card "R"
 		And P1 chooses 5 cards
 		When the card is executed
-		And Robot is facing north
+		And Robot is facing east
 		And Robot rotates right
-		Then Robot is facing east
+		Then Robot is facing south
 
 	@tag5
 	Scenario: Successful jump

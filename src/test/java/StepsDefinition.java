@@ -18,8 +18,6 @@ import static org.junit.Assert.*;
 public class StepsDefinition {
 	
 	Game game		 = new Game();
-	Player player1 	 = new Player("test1", 9);
-	Player player2   = new Player("test2", 9);
 	Board board      = new Board();
 	Deck deck      	 = new Deck();
 	FlagTile flag1 	 = new FlagTile(1);
@@ -42,17 +40,24 @@ public class StepsDefinition {
 
 	@Given("players set their names to {string} and {string}")
 	public void players_set_name(String name1, String name2) {
-	    player1.setName(name1);
-	    player2.setName(name2);
+	    robot.setName(name1);
+	    robot2.setName(name2);
 	}
 	@When("game is started")
 	public void game_is_started() {
 	    //game.setGameStatus(true);
-		game.gameStart(level.getLevel(), player1.getName(), player2.getName());
+		game.gameStart(level.getLevel(), robot.getName(), robot2.getName());
 	}
 	@Then("board is initialized")
 	public void board_is_initialized() {
 		assertNotNull(board);
+	}
+	
+	//Scenario: Successful start of the AI game
+	@And ("players are both AI")
+	public void player_are_both_AI() {
+		game.setP1AI(true);
+		game.setP2AI(true);
 	}
 
 ////// CARD CHOICE //////////
@@ -64,21 +69,21 @@ public class StepsDefinition {
 	}
 	@Given("P1s turn")
 	public void p1_s_turn() {
-	    player1.setTurn(true);
+	    robot.setTurn(true);
 	}
 	@When("P1 chooses {int} cards")
 	public void p1_chooses_cards(Integer int1) {
 	    chosenCards = new Card[int1];
-		player1.checkHand(chosenCards, player2);
+		robot.checkHand(chosenCards, robot2);
 	}
 	@And("Hand is not empty")
 	public void hand_is_not_empty() {
 		assertNotNull(robot.getDeck().getHand());
-		player2.setTurn(true);
+		robot2.setTurn(true);
 	}
 	@Then("P2s turn")
 	public void p2_s_turn() {
-	    assertTrue(player2.getTurn());
+	    assertTrue(robot2.getTurn());
 	}
 
 	//Scenario: Moving forward
@@ -117,17 +122,22 @@ public class StepsDefinition {
 	}
 	@Then("Robot is facing west")
 	public void robotIsFacingWest() {
-	    assertTrue(robot.getDir().getRotatedLeft());
+	    assertEquals("west",robot.getDir().getDirection());
 	}
 
 	//Scenario: Turning right
+	@And("Robot is facing east")
+	public void robotIsFacingEast() {
+		robot.setDir(new Direction(90));
+	}
+	
 	@Then("Robot rotates right")
 	public void robotRotatesRight() {
 		robot.getDir().turnRight();
 	}
-	@Then("Robot is facing east")
-	public void robotIsFacingEast() {
-		assertTrue(robot.getDir().getRotatedRight());
+	@Then("Robot is facing south")
+	public void robotIsFacingSouth() {
+		assertEquals("south",robot.getDir().getDirection());
 	}
 
 	//Scenario: Successful jump
@@ -212,7 +222,7 @@ public class StepsDefinition {
 		assertFalse(board.makeMove(robot,true,2,true));
 	}
 
-	//Scenario: Robot hits a conveyor obsticle
+	//Scenario: Robot hits a conveyor obstacle
 	@Given("a conveyor obstacle on the board in front of the robot")
 	public void a_conveyor_obstacle_on_the_board_in_front_of_the_robot() {
 		board.setTile(2, 2, new ConveyorTile(new Direction(90)));

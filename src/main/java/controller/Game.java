@@ -21,19 +21,15 @@ import model.Robot;
 
 //TODO: add singleton principle code
 public class Game {
-	
 	private GameScreen gs;
-	
 	private HandHandler hh1, hh2;
 	private LifeView lv1, lv2;
 	private FlagView fv1, fv2;
-	
 	private BoardScreen bs;
-		
 	private Board board = new Board();
 	private Level level;
 	private Robot robot1, robot2;
-	private boolean isRobot1AI =false;
+	private boolean isRobot1AI = false;
 	private boolean isRobot2AI = false;
 	
 	private boolean gameOn;
