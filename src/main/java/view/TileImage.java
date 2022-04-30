@@ -72,14 +72,10 @@ public class TileImage extends JPanel {
 		}  catch (IOException e) {
 			System.out.println("oops");
 		}
-		revalidate();
-		repaint();
 	}
 	
 	public void removeRobot() {
 		robotOn = null;
-		revalidate();
-		repaint();
 	}
 	
 	@Override

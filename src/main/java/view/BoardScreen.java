@@ -45,19 +45,20 @@ public class BoardScreen extends JPanel {
     	tileImages[robo1.getY()][robo1.getX()].removeRobot();
     	tileImages[robo2.getY()][robo2.getX()].removeRobot();
     	
+    	tileImages[robo1.getY()][robo1.getX()].repaint();
+    	tileImages[robo2.getY()][robo2.getX()].repaint();
     }
     
     public void addRobots(Robot robo1, Robot robo2) {
     	tileImages[robo1.getY()][robo1.getX()].addRobot(robo1);
     	tileImages[robo2.getY()][robo2.getX()].addRobot(robo2);
+    	
+    	tileImages[robo1.getY()][robo1.getX()].repaint();
+    	tileImages[robo2.getY()][robo2.getX()].repaint();
     }
     
-    public void refreshTiles() {
-    	for (TileImage[] imgCol : tileImages) {
-    		for (TileImage img : imgCol) {
-    			img.repaint();
-        	}
-    	}
+    public void refreshTile(int x, int y) {
+    	tileImages[y][x].repaint();
     }
     
     public static void setPixelSize(int newSize) {

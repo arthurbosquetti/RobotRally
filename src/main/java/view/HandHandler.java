@@ -17,6 +17,7 @@ import model.Robot;
 public class HandHandler extends JPanel {
 	private static final long serialVersionUID = -1363523608759469440L;
 	
+	private boolean donePicking; 
 	private Robot robot;
 	private Deck deck;
 	private GridBagConstraints c = new GridBagConstraints();
@@ -30,7 +31,7 @@ public class HandHandler extends JPanel {
 		
 		this.robot = robot;
 		this.deck = robot.getDeck();
-		listener = new HandListener(this, deck, game);
+		listener = new HandListener(this, deck, game, robot);
 		
 		JLabel cardLbl = new JLabel(robot.getName() + "'s cards: ");
 		c.gridx = 0;
@@ -87,6 +88,13 @@ public class HandHandler extends JPanel {
 		Component button = this.getComponent(index+1);
 		button.setVisible(false);
 		repaint(button.getX(), button.getY(), button.getWidth(), button.getHeight());
+	}
+	
+	public void setDone(boolean isDone) {
+		donePicking = true;
+	}
+	public boolean isDone() {
+		return donePicking;
 	}
 	
 	public void addChoosenCard(Card card) {

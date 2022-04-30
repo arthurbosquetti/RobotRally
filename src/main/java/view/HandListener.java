@@ -2,9 +2,11 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import controller.Game;
 import model.Board;
@@ -17,11 +19,12 @@ public class HandListener implements ActionListener {
 	private HandHandler handler;
 	private Game game;
 	private Robot robot;
-	
-	public HandListener(HandHandler hh, Deck newDeck, Game game) {
+		
+	public HandListener(HandHandler hh, Deck newDeck, Game game, Robot robot) {
 		this.handler = hh;
 		this.deck = newDeck;
 		this.game = game;
+		this.robot = robot;
 	}
 	
 	public void setDeck(Deck newDeck) {
@@ -32,6 +35,7 @@ public class HandListener implements ActionListener {
 	public void actionPerformed(ActionEvent arg) {
 		int index = Integer.valueOf(arg.getActionCommand());
 		
+		//checks if players can choose a new card
 		if(deck.canChoose() && index != -1) {
 			deck.chooseCard(index);
 			handler.addChoosenCard(deck.getCard(index));
@@ -39,7 +43,25 @@ public class HandListener implements ActionListener {
 		} else if (!deck.canChoose() && index == -1) {
 			System.out.println("player done choosing");
 			handler.removeButton(9);
-			game.playerDone();
-		}		
+			handler.setDone(true);
+			//making a new thread to make the moves because why not
+			if (game.checkMoves()) {
+				new Thread() {
+					public void run() {
+						game.makeMoves();
+					}
+				}.start();
+				//timer for when the moves are done being shown, updates hands
+				Timer timer = new Timer(7000, new ActionListener() {
+				    public void actionPerformed(ActionEvent evt) {
+				        game.newRound();
+				    }
+				});
+				timer.setRepeats(false);
+				timer.start();
+			}
+			
+		}	
+		
 	}
 }

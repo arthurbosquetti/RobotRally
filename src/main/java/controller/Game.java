@@ -15,9 +15,7 @@ import view.CoinFlip;
 import model.AI;
 import model.Board;
 import model.Card;
-import model.Direction;
 import model.Level;
-import model.Movement;
 import model.Robot;
 
 //TODO: add singleton principle code
@@ -29,6 +27,8 @@ public class Game {
 	private LifeView lv1, lv2;
 	
 	private BoardScreen bs;
+	
+	private static Thread moveThread;
 	
 	private Board board = new Board();
 	private Level level;
@@ -111,6 +111,7 @@ public class Game {
 		initGameScreen();
 	}
 	
+	//initializes the game JFrame with all Components
 	public void initGameScreen() {
 		gs = new GameScreen();
 		
@@ -123,49 +124,49 @@ public class Game {
 		gs.initGameScreen(bs, lv1, lv2, hh1, hh2);
 	}
 	
-	public void playerDone() {
+	//makes moves from the cards the players selected
+	public void makeMoves() {
 		
-		
-		if (!(robot1.getDeck().canChoose()) & !(robot2.getDeck().canChoose())) {
-			//removes submit button if it still exists
-			hh1.removeButton(9);
-			hh2.removeButton(9);
+        	//removes submit button if it still exists
+    		hh1.removeButton(9);
+    		hh2.removeButton(9);
 
-			ArrayList<Card> choosen1 = robot1.getDeck().getChoosen();
-			ArrayList<Card> choosen2 = robot2.getDeck().getChoosen();
-			
-			//executes moves selected
-			System.out.println("starting moves:");
-			
-			Movement mov = new Movement(board);
-			Direction dir = new Direction(0);
-			
-			for (int i = 0; i < 5; i++) {
-				
-				System.out.println(mov.checkMove(mov.getNewPoint(dir, robot1.getX(), robot1.getY(), true, 1)) + "");
-				
-				
-				makeMove(i, choosen1.get(i), choosen2.get(i));
-			
-				try {
+    		ArrayList<Card> choosen1 = robot1.getDeck().getChoosen();
+    		ArrayList<Card> choosen2 = robot2.getDeck().getChoosen();
+    		
+    		//executes moves selected
+    		System.out.println("starting moves:");
+    					
+    		for (int i = 0; i < 5; i++) {				
+    			
+    			makeMove(i, choosen1.get(i), choosen2.get(i));
+    		
+    			try {
 					TimeUnit.SECONDS.sleep(1);
-				} catch (InterruptedException e) {  }
-				
-			}
-			
-			robot1.setCanMove(true);
-			robot2.setCanMove(true);
-			gameEnd();
-			
-			newRound();
+    			} catch (InterruptedException e) {  }
+    			
+    		}
+    		
+    		robot1.setCanMove(true);
+    		robot2.setCanMove(true);
+    		
+
+	    System.out.println("now this runs 1");
+	}
+	
+	//checks if both robots are done selecting their cards
+	public boolean checkMoves() {
+		if (!(robot1.getDeck().canChoose()) & !(robot2.getDeck().canChoose())) {
+			return true;
 		}
+		return false;
 	}
 	
 	public void makeMove(int i, Card choosen1, Card choosen2) {		
 		bs.removeRobots(robot1, robot2);
 		
 		if (robot1.canMove()) { choosen1.executeAction(robot1, board); }
-		
+				
 		if (robot2.canMove()) { choosen2.executeAction(robot2, board); }
 		
 		bs.addRobots(robot1, robot2);
@@ -178,6 +179,7 @@ public class Game {
 		gs.newRound();
 	}
 	
+	//this always hurts robot2, what did robot2 do wrong?
 	public void hurtOtherPlayer(Robot robot1) {
 		robot2.hurt(1);
 	}
@@ -198,6 +200,8 @@ public class Game {
 		}
 		else if (robot2.isAlive() == false || robot1.getWinner()== true) {
 			EndScreen es = new EndScreen(robot1.getName());
+		} else {
+			newRound();
 		}
 	}
 }
