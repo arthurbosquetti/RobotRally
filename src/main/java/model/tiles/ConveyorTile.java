@@ -17,12 +17,6 @@ public class ConveyorTile extends Tile {
     	direction = dir;
     }
     
-    //public ConveyorTile() {
-    //	this.setValid(true);
-	//	this.setType(TileType.CONVEYOR);
-    //    this.direction = new Direction(0);
-    //}
-    
     public Direction getDir() {
     	return this.direction;
     }

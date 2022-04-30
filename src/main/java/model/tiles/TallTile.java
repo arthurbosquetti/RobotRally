@@ -19,6 +19,5 @@ public class TallTile extends Tile {
 
 	@Override
 	public void steppedOn(Robot robot, Board board, Game game) {
-
 	}
 }
