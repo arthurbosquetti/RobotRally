@@ -224,5 +224,26 @@ public class Board {
 		}
 		return tileSpot;
 	}
+	
+	/*public Tile[] searchTeleport() { // currently built for finding 2 teleport tiles :P
+		Tile[] tiles = new Tile[2];
+		int a = boardSize;
+		for (int row = 0; row < a; row++)  { //search from top left corner
+			for (int col = 0; col < a; col++) {	
+				if (this.boardLayout[row][col] instanceof TeleportTile) {
+					tiles[0] = 
+				}
+			}
+		}
+		for (int row = a-1; row > -1; row--)  { //search from bottom right corner
+			for (int col = a-1; col > -1; col--) {	
+				if (this.boardLayout[row][col] instanceof TeleportTile) {
+					tileSpot[1][0] = row;
+					tileSpot[1][1] = col;
+				}
+			}
+		}
+		return tileSpot;*/
+	//}
 
 }

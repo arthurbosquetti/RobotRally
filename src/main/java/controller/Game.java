@@ -221,6 +221,10 @@ public class Game {
 	}
 	
 	public void gameEnd(){
+		System.out.println("robot.getWinner() =("+robot1.getWinner()+","+robot2.getWinner()+")");
+		System.out.println("robot.getFlags() =({"+robot1.getFlag1()+","+robot1.getFlag2()+"}, {"+robot2.getFlag1()+","+robot2.getFlag2()+"})");
+
+		
 		if ((robot1.isAlive() == false && robot2.isAlive() == false)||(robot1.getWinner() == true && robot2.getWinner() == true)){
 			CoinFlip cf = new CoinFlip(robot1.getName(), robot2.getName());
 		}
