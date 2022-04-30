@@ -34,11 +34,6 @@ public class Level {
 				board.generateBoard();
 				BoardScreen.setPixelSize(50);
 				break;
-			default:
-				board.setBoardSize(0);
-				board.generateBoard();
-				BoardScreen.setPixelSize(0);
-				break;
 		}
 	}
 	

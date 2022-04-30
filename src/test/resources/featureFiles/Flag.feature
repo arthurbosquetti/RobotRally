@@ -28,3 +28,4 @@ Feature: Flags
 			And the robot has already reached the first flag
 			When a movement is executed by a robot
 			Then the robot has won
+			And the game ends

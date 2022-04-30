@@ -42,7 +42,8 @@ public class StepsDefinition {
 	}
 	@When("game is started")
 	public void game_is_started() {
-	    game.setGameStatus(true);
+	    //game.setGameStatus(true);
+		game.gameStart(level.getLevel(), player1.getName(), player2.getName());
 	}
 	@Then("board is initialized")
 	public void board_is_initialized() {
@@ -250,8 +251,14 @@ public class StepsDefinition {
 	 //Scenario: Robot wins
 	@Then("the robot has won")
 	public void the_robot_has_won() {
+		assertTrue(robot.getWinner());
+	}
+	
+	@And("the game ends")
+	public void the_game_ends() {
 		assertFalse(game.getGameStatus());
 	}
+	
 }
 
 
