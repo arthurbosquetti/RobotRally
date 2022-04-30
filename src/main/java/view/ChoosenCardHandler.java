@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import model.Card;
 import model.Deck;
 
+import java.awt.*;
+
 public class ChoosenCardHandler extends JPanel {
 	
 	private static final long serialVersionUID = -419638239226798711L;
@@ -14,6 +16,7 @@ public class ChoosenCardHandler extends JPanel {
 	private Deck deck;	
 	
 	public ChoosenCardHandler(String player, Deck deck) {
+		setBackground(Color.DARK_GRAY);
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		this.player = player;
@@ -21,11 +24,13 @@ public class ChoosenCardHandler extends JPanel {
 
 		JLabel choosenLbl = new JLabel("Choosen cards: ");
 		add(choosenLbl);
+		choosenLbl.setForeground(Color.WHITE);
 	}
 	
 	public void addCard(Card card) {
 		JLabel actLbl = new JLabel(" "+ card.getCardAction()+ " ");
 		add(actLbl);
+		actLbl.setForeground(Color.PINK);
 		this.revalidate();
 		this.repaint();
 	}

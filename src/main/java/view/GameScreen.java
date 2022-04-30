@@ -21,11 +21,13 @@ public class GameScreen extends JFrame {
 	}
 	
 	public void initGameScreen(BoardScreen bs, LifeView[] lv, HandHandler[] hh, FlagView[] fv) {
+		Image img = Toolkit.getDefaultToolkit().getImage("src/main/resources/gamescreenbg.png");
+		JPanel bg = new BackgroundPanel(img);
 		//add board to screen
 		c.weightx = 0.5;
 		c.gridx = 0;
 		c.gridy = 0;
-		add(bs, c);
+		bg.add(bs, c);
 		
 		this.hh1 = hh[0];
 		this.hh2 = hh[1];
@@ -37,7 +39,10 @@ public class GameScreen extends JFrame {
 		this.fv2 = fv[1];
 		
 		//create new panel for right side of board
-		JPanel hands = new JPanel();
+
+		Image handimg = Toolkit.getDefaultToolkit().getImage("src/main/resources/blank.png");
+		JPanel hands = new BackgroundPanel(handimg);
+		hands.setSize(450,450);
 		hands.setLayout(new BoxLayout(hands, BoxLayout.Y_AXIS));
 		hands.add(hh1);
 		hands.add(lv1);
@@ -48,7 +53,8 @@ public class GameScreen extends JFrame {
 		hands.add(fv2);
 		c.gridx = 3;
 		c.gridy = 0;
-		add(hands, c);
+		add(bg);
+		bg.add(hands, c);
 		
 		//initialize frame
 		setSize((BoardScreen.pixelSize * BoardScreen.size) + 650, (BoardScreen.pixelSize * BoardScreen.size) + 50);
