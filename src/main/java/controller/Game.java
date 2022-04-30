@@ -3,6 +3,7 @@ package controller;
 import view.BoardScreen;
 import view.EndScreen;
 import view.FirstScreen;
+import view.FlagView;
 import view.GameScreen;
 import view.HandHandler;
 import view.LifeView;
@@ -25,6 +26,7 @@ public class Game {
 	
 	private HandHandler hh1, hh2;
 	private LifeView lv1, lv2;
+	private FlagView fv1, fv2;
 	
 	private BoardScreen bs;
 		
@@ -125,63 +127,78 @@ public class Game {
 		hh1 = new HandHandler(robot1, this);	
 		hh2 = new HandHandler(robot2, this);	
 		
+		fv1 = new FlagView();
+		fv2 = new FlagView();
+		
 		bs = new BoardScreen(board);
 		bs.addRobots(robot1, robot2);
 		
-		gs.initGameScreen(bs, lv1, lv2, hh1, hh2);
+		gs.initGameScreen(bs, new LifeView[] {lv1,lv2}, new HandHandler[] {hh1, hh2}, new FlagView[] {fv1, fv2});
 	}
 	
 	//makes moves from the cards the players selected
 	public void makeMoves() {
 		
-        	//removes submit button if it still exists
-    		hh1.removeButton(9);
-    		hh2.removeButton(9);
+    	//removes submit button if it still exists
+		hh1.removeButton(9);
+		hh2.removeButton(9);
 
-    		ArrayList<Card> choosen1 = robot1.getDeck().getChoosen();
-    		ArrayList<Card> choosen2 = robot2.getDeck().getChoosen();
+		int robot1Lives = robot1.getLives();
+		int robot2Lives = robot2.getLives();
 		
-			//use AI method if robot1 it's an AI
-			if (isRobot1AI) {
-				((AI) robot1).setPossibleHands(robot1.getDeck().getHand());
-				choosen1 = ((AI) robot1).findSuggestedCardChoice(board);
-			}
-			//use regular method otherwise
-			else {choosen1 = robot1.getDeck().getChoosen();}
-			
-			//use AI method if robot2 it's an AI
-			if (isRobot2AI) {
-				((AI) robot2).setPossibleHands(robot2.getDeck().getHand());
-				choosen2 = ((AI) robot2).findSuggestedCardChoice(board);
-			}
-			//use regular method otherwise
-			else {choosen2 = robot2.getDeck().getChoosen();}
-								
-			System.out.println(robot1.getName()+" Deck= "+robot1.getDeck().getHand());
-			System.out.println(robot2.getName()+" Deck= "+robot2.getDeck().getHand());
+		boolean[] robot1Flags = new boolean[] {robot1.getFlag1(), robot1.getFlag2()};
+		boolean[] robot2Flags = new boolean[] {robot2.getFlag1(), robot2.getFlag2()};
+		
+		ArrayList<Card> choosen1 = robot1.getDeck().getChoosen();
+		ArrayList<Card> choosen2 = robot2.getDeck().getChoosen();
+	
+		//use AI method if robot1 it's an AI
+		if (isRobot1AI) {
+			((AI) robot1).setPossibleHands(robot1.getDeck().getHand());
+			choosen1 = ((AI) robot1).findSuggestedCardChoice(board);
+		}
+		//use regular method otherwise
+		else {choosen1 = robot1.getDeck().getChoosen();}
+		
+		//use AI method if robot2 it's an AI
+		if (isRobot2AI) {
+			((AI) robot2).setPossibleHands(robot2.getDeck().getHand());
+			choosen2 = ((AI) robot2).findSuggestedCardChoice(board);
+		}
+		//use regular method otherwise
+		else {choosen2 = robot2.getDeck().getChoosen();}
+							
+		System.out.println(robot1.getName()+" Deck= "+robot1.getDeck().getHand());
+		System.out.println(robot2.getName()+" Deck= "+robot2.getDeck().getHand());
 
+		
+		for (int i = 0; i < 5; i++) {
 			
-			for (int i = 0; i < 5; i++) {
-				
-				System.out.println(robot1.getName()+" Card = "+choosen1.get(i));
-				System.out.println(robot2.getName()+" Card = "+choosen2.get(i));
+			System.out.println(robot1.getName()+" Card = "+choosen1.get(i));
+			System.out.println(robot2.getName()+" Card = "+choosen2.get(i));
 
-				makeMove(i, choosen1.get(i), choosen2.get(i));
+			makeMove(i, choosen1.get(i), choosen2.get(i));
 
 //				System.out.println("AI is at ("+robot1.getX()+","+robot1.getY()+","+robot1.canMove()+")");
 //				System.out.println(((AI) robot1).getFlagPosition(((AI) robot1).getFlag1()));
 
-				try {
-					TimeUnit.SECONDS.sleep(1);
-    			} catch (InterruptedException e) {  }
-    			
-    		}
-    		
-    		robot1.setCanMove(true);
-    		robot2.setCanMove(true);
-    		
-
-	    System.out.println("now this runs 1");
+			try {
+				TimeUnit.SECONDS.sleep(1);
+			} catch (InterruptedException e) {  }
+			
+		}
+		
+		if (robot1.getLives() != robot1Lives) { lv1.removeLife(); };
+		if (robot2.getLives() != robot2Lives) { lv2.removeLife(); };
+		
+		if(robot1.getFlag1() != robot1Flags[0]) { fv1.addFlag(1); } 
+		else if (robot1.getFlag2() != robot1Flags[1]) { fv1.addFlag(2); }
+		
+		if(robot2.getFlag1() != robot2Flags[0]) { fv2.addFlag(1); } 
+		else if (robot2.getFlag2() != robot2Flags[1]) { fv2.addFlag(2); }
+		
+		robot1.setCanMove(true);
+		robot2.setCanMove(true);
 	}
 	
 	//checks if both robots are done selecting their cards

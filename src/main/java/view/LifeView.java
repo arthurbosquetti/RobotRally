@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Component;
 import java.awt.FlowLayout;
 
 import javax.swing.JLabel;
@@ -30,11 +31,10 @@ public class LifeView extends JPanel {
 
 	
 	public void removeLife() {
-		remove(icons[icons.length-1]);
+		Component[] componentList = this.getComponents();
+		remove(componentList[componentList.length-1]);
 		
 		lives--;
-		revalidate();
-		repaint();
 	}
 	
 	
