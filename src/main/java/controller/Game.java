@@ -54,7 +54,6 @@ public class Game {
 			robot2 = new AI(name2, lives, this, board);
 			((AI) robot2).setFlagPosition(board);
 
-
 		}
 		
 		else if (isRobot1AI & !isRobot2AI) {

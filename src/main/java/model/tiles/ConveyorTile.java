@@ -5,6 +5,7 @@ import model.Board;
 import model.Card;
 import model.Direction;
 import model.Robot;
+import view.BoardScreen;
 import view.TileType;
 
 public class ConveyorTile extends Tile {
@@ -36,12 +37,38 @@ public class ConveyorTile extends Tile {
     public void steppedOn(Robot robot, Board board, Game game) { //assuming this is never on an edge
     	int x = robot.getX();
     	int y = robot.getY();
-    // how to know which robot is which??
-    	robot.setDir(direction);
-    	Card f1 = new Card("F1");
-    	Card f2 = new Card("NO");
     	
-    	game.makeMove(1, f1, f2);
+    	int w = BoardScreen.size;
+
+    	if (this.direction.getDirection() == "north" && y>0) {
+    		robot.setY(y-1);
+    		robot.setDir(this.direction);
+    	}
+    	else if (this.direction.getDirection() == "north" && y==0) {
+    		robot.setDir(this.direction);
+    	}
+    	else if (this.direction.getDirection() == "south" && y<w-1) {
+    		robot.setY(y+1);
+    		robot.setDir(this.direction);
+    	}
+    	else if (this.direction.getDirection() == "south" && y==w-1) {
+    		robot.setDir(this.direction);
+    	}
+    	else if (this.direction.getDirection() == "west" && x>0) {
+    		robot.setX(x-1);
+    		robot.setDir(this.direction);
+    	}
+    	else if (this.direction.getDirection() == "west" && x==0) {
+    		robot.setDir(this.direction);
+    	}
+    	else if (this.direction.getDirection() == "east" && x<w-1) {
+    		robot.setX(x+1);
+    		robot.setDir(this.direction);
+    	}
+    	else if (this.direction.getDirection() == "east" && x==w-1) {
+    		robot.setDir(this.direction);
+    	}
+    
     	
     	//switch (this.direction.getDirection()) {
 		//case "north":
