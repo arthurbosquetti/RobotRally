@@ -34,9 +34,9 @@ public class Board {
 		this.obstacleNumbers = new int[]{teleportNr, mineNr, pitNr, glueNr, conveyorNr, tallNr};
 	}
 	
-	public int[] getObstacleNumbers() {
-		return this.obstacleNumbers;
-	}
+    public int[] getObstacleNumbers() {
+		return this.obstacleNumbers;}
+	
 	
 	public void setTile(int x, int y, Tile newTile) {
 		//checks to make sure new tile is within the game board

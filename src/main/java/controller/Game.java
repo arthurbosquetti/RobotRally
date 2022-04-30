@@ -88,7 +88,7 @@ public class Game {
 		  	BoardScreen.setLevel("easy");
 		  	robotInitializer(5, name1, name2);
 		  	
-		} else if (Objects.equals(newLevel, "mid")) {
+		} else if (Objects.equals(newLevel, "medium")) {
 		  	level = new Level("Medium", board);
 		  	BoardScreen.setLevel("medium");
 		  	robotInitializer(3, name1, name2);

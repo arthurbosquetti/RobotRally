@@ -7,7 +7,7 @@ import model.Direction;
 import model.Robot;
 import view.TileType;
 
-public class ConveyorTile extends Tile {
+public class ConveyorTile extends Tile { 
 
     Direction direction;
 

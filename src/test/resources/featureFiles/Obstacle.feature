@@ -31,6 +31,15 @@ Feature: Obstaclewar
         Given difficulty level is "Easy"
         And P1 chooses card "J"
         And P1 chooses 5 cards
+        And a stopping obstacle on the board in front of the robot
         When the card is executed
         And the tile in front is a Tall tile
         Then Robot does not jump
+        
+    @tag5
+    Scenario: Robot hits a conveyor obsticle
+        Given difficulty level is "Easy"
+        And a conveyor obstacle on the board in front of the robot
+        When the robot hits the obstacle
+        Then the robot is moved in the right direction
+        

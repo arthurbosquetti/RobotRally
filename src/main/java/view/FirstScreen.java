@@ -173,7 +173,7 @@ private class Clicklistener implements ActionListener{
 	      
 	      if (e.getSource() == mid)
 	      {
-	    	game.gameStart("mid", player1, player2);
+	    	game.gameStart("medium", player1, player2);
 		  	frame.dispose();
 	      }
 	      
