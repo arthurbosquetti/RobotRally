@@ -24,13 +24,13 @@ public class Level {
 				break;
 			case "Medium":
 				board.setBoardSize(12);
-				board.setObstacleNumbers(2,2,4,3,3,6);
+				board.setObstacleNumbers(2,3,5,4,4,7);
 				board.generateBoard();
 				BoardScreen.setPixelSize(66);
 				break;
 			case "Hard":
 				board.setBoardSize(15);
-				board.setObstacleNumbers(2,6,8,4,4,6);
+				board.setObstacleNumbers(2,8,10,6,6,8);
 				board.generateBoard();
 				BoardScreen.setPixelSize(50);
 				break;

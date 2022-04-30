@@ -19,10 +19,11 @@ public class Robot extends Player {
     private int num;
     //private boolean glue;
     
-    public Robot(String name, int lives, Game game) {
+    public Robot(String name, int lives, Game game, Board board) {
         super(name, lives);
         this.direction = new Direction(0);
         this.game = game;
+        this.board = board;
         canMove = true;
     }
 

@@ -13,6 +13,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import controller.Game;
+import model.AI;
 import model.Board;
 import model.Direction;
 import model.Robot;
@@ -32,7 +33,13 @@ public abstract class Tile {
 	}
 
 	public void setRobotOn(Robot robot) {
-		robotOn = robot;
+		if (robot instanceof AI) {
+			robotOn = (AI) robot;
+		}
+		else {
+			robotOn = robot;
+
+		}
 	}
 	public void setRobotOff() {
 		robotOn = null;

@@ -27,9 +27,7 @@ public class Game {
 	private LifeView lv1, lv2;
 	
 	private BoardScreen bs;
-	
-	private static Thread moveThread;
-	
+		
 	private Board board = new Board();
 	private Level level;
 	private Robot robot1, robot2;
@@ -51,28 +49,36 @@ public class Game {
 	public void robotInitializer(int lives, String name1, String name2) {
 
 		if (isRobot1AI && isRobot2AI){
-			robot1 = new AI(name1, lives, this);
-			robot2 = new AI(name2, lives, this);
+			robot1 = new AI(name1, lives, this, board);
+			((AI) robot1).setFlagPosition(board);
+			robot2 = new AI(name2, lives, this, board);
+			((AI) robot2).setFlagPosition(board);
+
+
 		}
 		
-		else if (isRobot1AI) {
-			robot1 = new AI(name1, lives, this);
-			robot2=  new Robot(name2, lives, this);
+		else if (isRobot1AI & !isRobot2AI) {
+			robot1 = new AI(name1, lives, this, board);	
+			((AI) robot1).setFlagPosition(board);
+			
+			robot2=  new Robot(name2, lives, this, board);
 		}
-		else if (isRobot2AI) {
-			robot1 =  new Robot(name1, lives, this);
-			robot2 = new AI(name2, lives, this);
+		else if (isRobot2AI & !isRobot1AI) {
+			robot1 =  new Robot(name1, lives, this, board);
+			robot2 = new AI(name2, lives, this, board);
+			((AI) robot2).setFlagPosition(board);
+
+
 		}
 		else{
-			robot1 = new Robot(name1, lives, this);
-			robot2 = new Robot(name2, lives,this );
+			robot1 = new Robot(name1, lives, this, board);
+			robot2 = new Robot(name2, lives, this, board );
 	  	}
 		
 		lv1 = new LifeView(lives, 1);
 	  	lv2 = new LifeView(lives, 2);
 	}
 	
-
 	public void gameStart(String newLevel, String name1, String name2) {
 		setGameStatus(true);
 	
@@ -93,7 +99,6 @@ public class Game {
 		  	robotInitializer(1, name1, name2);
 		}
 		
-		
 		robot1.setNum(1);
 		robot2.setNum(2);
 		
@@ -102,9 +107,11 @@ public class Game {
 		robot2.setX(BoardScreen.size - 2);
 		robot2.setY(BoardScreen.size - 2);
 		
+
 		robot1.setSpawn(new int[] {robot1.getX(), robot1.getY()});
 		robot2.setSpawn(new int[] {robot2.getX(), robot2.getY()});
 		
+
 		board.getTile(1, BoardScreen.size - 2).setRobotOn(robot1);
 		board.getTile(BoardScreen.size - 2, BoardScreen.size - 2).setRobotOn(robot2);
 		
@@ -133,15 +140,38 @@ public class Game {
 
     		ArrayList<Card> choosen1 = robot1.getDeck().getChoosen();
     		ArrayList<Card> choosen2 = robot2.getDeck().getChoosen();
-    		
-    		//executes moves selected
-    		System.out.println("starting moves:");
-    					
-    		for (int i = 0; i < 5; i++) {				
-    			
-    			makeMove(i, choosen1.get(i), choosen2.get(i));
-    		
-    			try {
+		
+			//use AI method if robot1 it's an AI
+			if (isRobot1AI) {
+				((AI) robot1).setPossibleHands(robot1.getDeck().getHand());
+				choosen1 = ((AI) robot1).findSuggestedCardChoice(board);
+			}
+			//use regular method otherwise
+			else {choosen1 = robot1.getDeck().getChoosen();}
+			
+			//use AI method if robot2 it's an AI
+			if (isRobot2AI) {
+				((AI) robot2).setPossibleHands(robot2.getDeck().getHand());
+				choosen2 = ((AI) robot2).findSuggestedCardChoice(board);
+			}
+			//use regular method otherwise
+			else {choosen2 = robot2.getDeck().getChoosen();}
+								
+			System.out.println(robot1.getName()+" Deck= "+robot1.getDeck().getHand());
+			System.out.println(robot2.getName()+" Deck= "+robot2.getDeck().getHand());
+
+			
+			for (int i = 0; i < 5; i++) {
+				
+				System.out.println(robot1.getName()+" Card = "+choosen1.get(i));
+				System.out.println(robot2.getName()+" Card = "+choosen2.get(i));
+
+				makeMove(i, choosen1.get(i), choosen2.get(i));
+
+//				System.out.println("AI is at ("+robot1.getX()+","+robot1.getY()+","+robot1.canMove()+")");
+//				System.out.println(((AI) robot1).getFlagPosition(((AI) robot1).getFlag1()));
+
+				try {
 					TimeUnit.SECONDS.sleep(1);
     			} catch (InterruptedException e) {  }
     			

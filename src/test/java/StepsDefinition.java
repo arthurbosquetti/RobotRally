@@ -1,21 +1,15 @@
-
-
-import static org.junit.Assert.*;
-
 import controller.Game;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import model.Board;
-import model.Card;
-import model.Deck;
-import model.Level;
-import model.Player;
-import model.Robot;
+import model.*;
 import model.tiles.FlagTile;
+import model.tiles.GlueTile;
 import model.tiles.PitTile;
 import model.tiles.TallTile;
+
+import static org.junit.Assert.*;
 
 public class StepsDefinition {
 	
@@ -26,9 +20,7 @@ public class StepsDefinition {
 	Deck deck      	 = new Deck();
 	FlagTile flag1 	 = new FlagTile(1);
 	FlagTile flag2   = new FlagTile(2);
-Robot robot     	 = new Robot("test", 9, game);
-	TallTile stopper = new TallTile();
-	PitTile pit      = new PitTile();
+	Robot robot		 = new Robot("test", 9, game, board);
 	Level level;
 	Card[] availableCards;
 	Card[] chosenCards;
@@ -71,46 +63,79 @@ Robot robot     	 = new Robot("test", 9, game);
 	@When("P1 chooses {int} cards")
 	public void p1_chooses_cards(Integer int1) {
 	    chosenCards = new Card[int1];
-//		player1.checkHand(chosenCards, player2);
+		player1.checkHand(chosenCards, player2);
+	}
+	@And("Hand is not empty")
+	public void hand_is_not_empty() {
+		assertNotNull(robot.getDeck().getHand());
+		player2.setTurn(true);
 	}
 	@Then("P2s turn")
 	public void p2_s_turn() {
 	    assertTrue(player2.getTurn());
 	}
-	@Then("Hand is not empty")
-	public void hand_is_not_empty() {
-//		assertNotNull(player1.getHand());
-	}
 
-	//Scenario: Turning left
+	//Scenario: Moving forward
 	@Given("P1 chooses card {string}")
 	public void p1_chooses_card(String action) {
 		this.card1 = new Card(action);
 	}
-	
 	@When("the card is executed")
 	public void the_card_is_executed() {
-	    card1.executeAction(robot, board);   
+	    card1.executeAction(robot, board);
 	}
-	
-	@Then("Robot rotates left")
-	public void robot_rotates_left() {
-	    assertTrue(robot.getDir().getRotatedLeft());
-	}
-
-
-	//Scenario: Moving forward
 	@Then("Robot moves forward")
 	public void robot_moves_forward() {
 	    assertEquals(1, card1.get_MovingCard().get_MovedForward());
 	}
+
+	//Scenario: Turning left
+	@And("Robot is facing north")
+	public void robotIsFacingNorth() {
+		robot.setDir(new Direction(0));
+	}
+	@Then("Robot rotates left")
+	public void robot_rotates_left() {
+		robot.getDir().turnLeft();
+	}
+	@Then("Robot is facing west")
+	public void robotIsFacingWest() {
+	    assertTrue(robot.getDir().getRotatedLeft());
+	}
+
+	//Scenario: Turning right
+	@Then("Robot rotates right")
+	public void robotRotatesRight() {
+		robot.getDir().turnRight();
+	}
+	@Then("Robot is facing east")
+	public void robotIsFacingEast() {
+		assertTrue(robot.getDir().getRotatedRight());
+	}
+
+	//Scenario: Successful jump
+	@And("the tile in front is not a Tall tile")
+	public void theTileInFrontIsNotATallTile() {
+		board.setTile(3, 3, new GlueTile());
+	}
+	@Then("Robot jumps")
+	public void robotJumps() {
+		robot.setX(3);
+		robot.setY(2);
+		board.makeMove(robot,true,2,true);
+	}
+	@Then("Robot lands 2 tiles away")
+	public void robotLands2TilesAway() {
+		assertNotNull(board.getTile(3,0).getRobotOn());
+	}
+
 
 ////OBSTACLES //////////
 
 	//Scenario: Robot hits a stopping obstacle
 	@Given("a stopping obstacle on the board in front of the robot")
 	public void a_stopping_obstacle_on_the_board_in_front_of_the_robot() {
-		board.setTile(2, 2, stopper);
+		board.setTile(2, 2, new TallTile());
 		robot.setX(2);
 		robot.setY(3);
 	}
@@ -128,7 +153,7 @@ Robot robot     	 = new Robot("test", 9, game);
 	 //Scenario: Robot 1 hits a damaging obstacle and survives
 	@Given("a damaging obstacle on the board in front of the robot")
 	public void a_damaging_obstacle_on_the_board_in_front_of_the_robot() {
-		board.setTile(2, 2, pit);
+		board.setTile(2, 2, new PitTile());
 		robot.setX(2);
 		robot.setY(3);
 	}
@@ -144,9 +169,9 @@ Robot robot     	 = new Robot("test", 9, game);
 	}
 	@Then("the robot is moved to the starting position")
 	public void the_robot_is_moved_to_the_starting_position() {
-	    int[] spawnpoint = robot.getSpawn();
-		assertEquals(robot.getX(), spawnpoint[0]);
-		assertEquals(robot.getY(), spawnpoint[1]);
+	    int[] spawnPoint = robot.getSpawn();
+		assertEquals(robot.getX(), spawnPoint[0]);
+		assertEquals(robot.getY(), spawnPoint[1]);
 	}
 
 	 //Scenario: Robot hits a damaging obstacle and dies!
@@ -164,6 +189,16 @@ Robot robot     	 = new Robot("test", 9, game);
    public void is_out_of_the_game() {
        assertFalse(robot.isAlive());
    }
+
+	//Scenario: Unsuccessful jump
+	@And("the tile in front is a Tall tile")
+	public void theTileInFrontIsATallTile() {
+		board.setTile(3,3, new TallTile());
+	}
+	@Then("Robot does not jump")
+	public void robotDoesNotJump() {
+		assertFalse(board.makeMove(robot,true,2,true));
+	}
 
 
 
