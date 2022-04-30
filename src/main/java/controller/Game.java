@@ -176,7 +176,12 @@ public class Game {
 			System.out.println(robot2.getName()+" Card = "+choosen2.get(i));
 
 			makeMove(i, choosen1.get(i), choosen2.get(i));
-
+			
+			if (robot1.getLives() <= 0 || robot1.getLives() <= 0) {
+				this.gameEnd();
+				break;
+			}
+			
 //				System.out.println("AI is at ("+robot1.getX()+","+robot1.getY()+","+robot1.canMove()+")");
 //				System.out.println(((AI) robot1).getFlagPosition(((AI) robot1).getFlag1()));
 
