@@ -54,7 +54,7 @@ public class HandListener implements ActionListener {
 				//timer for when the moves are done being shown, updates hands
 				Timer timer = new Timer(7000, new ActionListener() {
 				    public void actionPerformed(ActionEvent evt) {
-				        game.newRound();
+				        game.gameEnd();
 				    }
 				});
 				timer.setRepeats(false);
