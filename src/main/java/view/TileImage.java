@@ -72,6 +72,7 @@ public class TileImage extends JPanel {
 		}  catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("robot= "+robo.getName());
+			System.out.println("tile= "+tile.getType());
 			System.out.println("oops");
 		}
 	}

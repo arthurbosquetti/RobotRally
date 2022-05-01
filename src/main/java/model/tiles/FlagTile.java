@@ -6,7 +6,7 @@ import model.Board;
 import model.Robot;
 import view.TileType;
 
-public class FlagTile implements Flags, InteractsWithTile {
+public class FlagTile implements InteractsWithTile {
 
     private boolean valid;
     private TileType type;
@@ -18,15 +18,6 @@ public class FlagTile implements Flags, InteractsWithTile {
         this.setType((flagNum == 1)? TileType.FLAG1 : TileType.FLAG2);
         this.flagNum = flagNum;
 
-    }
-
-    @Override
-    public String toString() {
-		return " " + this.tileType() + " ";
-    }
-    @Override
-    public String tileType() {
-        return "|F" + flagNum+"|";
     }
 
     @Override
@@ -56,11 +47,6 @@ public class FlagTile implements Flags, InteractsWithTile {
     @Override
     public Robot getRobotOn() {
         return robotOn;
-    }
-
-    @Override
-    public boolean alreadyOccupied() {
-        return this.getRobotOn() != null;
     }
 
     @Override

@@ -34,11 +34,6 @@ public class SpawnTile implements Tile {
     }
 
     @Override
-    public boolean alreadyOccupied() {
-        return getRobotOn() != null;
-    }
-
-    @Override
     public boolean validTile() {
         return valid;
     }

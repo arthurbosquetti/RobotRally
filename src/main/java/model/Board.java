@@ -56,9 +56,6 @@ public class Board {
 		int yO=robot.getY();
 		int[] newPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
 		
-		//if (this.getTile(newPoint[0], newPoint[1]).alreadyOccupied()) {
-		//	return false;
-		//}
 		
 		if (jump) {
 			int [] midPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), true, 1);
@@ -68,6 +65,9 @@ public class Board {
 		}
 		//checks move for validity: runs code to move robot
 		if (mov.checkMove(newPoint)) {
+			if (this.getTile(newPoint[0], newPoint[1]).getRobotOn()!=null) {
+				return false;
+			}
 			//remove robot from previous tile
 			boardLayout[robot.getY()][robot.getX()].setRobotOff();
 			//moves robot

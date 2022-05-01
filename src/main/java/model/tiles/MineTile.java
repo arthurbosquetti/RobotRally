@@ -51,11 +51,6 @@ public class MineTile implements InteractsWithTile { // now used as kamikaze til
 	}
 
 	@Override
-	public boolean alreadyOccupied() {
-		return getRobotOn() != null;
-	}
-
-	@Override
 	public boolean validTile() {
 		return valid;
 	}

@@ -29,7 +29,7 @@ public class ConveyorTile implements InteractsWithTile {
     	
     	robot.setDir(direction);
     	board.makeMove(robot, true, 1, false);
-    	
+
     }
 
     @Override
@@ -49,11 +49,6 @@ public class ConveyorTile implements InteractsWithTile {
     @Override
     public Robot getRobotOn() {
         return robotOn;
-    }
-
-    @Override
-    public boolean alreadyOccupied() {
-        return this.getRobotOn() != null;
     }
 
     @Override

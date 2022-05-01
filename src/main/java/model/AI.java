@@ -170,6 +170,7 @@ public class AI extends Robot  {
 			if (foundFlag2) {
 				System.out.println("========================= "+getName()+" FOUND FLAG2!!");
 				setFlag2(false);
+				setWinner(false);
 				return hand;
 			}
 
@@ -184,7 +185,7 @@ public class AI extends Robot  {
 			return findMin(distancesFl1, Collections.min(distancesFl1.values()));
 		}
 		else {
-			System.out.println("===== ONLY BAD MOVES :( BYE!");
+			System.out.println(getName()+"===== ONLY BAD MOVES :( BYE!");
 			ArrayList<Card> deathReturn = new ArrayList<Card>();
 			for (String action : possibleHands.get(0)) {
 				Card card = new Card(action);

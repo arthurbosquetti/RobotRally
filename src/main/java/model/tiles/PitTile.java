@@ -40,11 +40,6 @@ public class PitTile implements InteractsWithTile {
     }
 
     @Override
-    public boolean alreadyOccupied() {
-        return getRobotOn() != null;
-    }
-
-    @Override
     public boolean validTile() {
         return valid;
     }

@@ -60,11 +60,6 @@ public class TeleportTile implements InteractsWithTile { //always teleports you 
 	}
 
 	@Override
-	public boolean alreadyOccupied() {
-		return getRobotOn() != null;
-	}
-
-	@Override
 	public boolean validTile() {
 		return valid;
 	}

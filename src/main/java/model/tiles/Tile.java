@@ -5,43 +5,18 @@ import model.Robot;
 import view.TileType;
 
 public interface Tile {
-//	private boolean valid;
-//	private TileType type;
-//	private Robot robotOn;
-//	private Direction direction;
 
-	public void setRobotOn(Robot robot);
-//		if (robot instanceof AI) {
-//			robotOn = (AI) robot;
-//		}
-//		else {
-//			robotOn = robot;
+	void setRobotOn(Robot robot);
 
-	public void setRobotOff() ;
-//		robotOn = null;
+	void setRobotOff() ;
 
-	public Robot getRobotOn() ;
-//		return robotOn;
+	Robot getRobotOn() ;
 
-	
-	public boolean alreadyOccupied();
-//		if (this.getRobotOn() != null) {
-//			return true;
-//		}
-//		return false;
+	boolean validTile();
 
-	
-	public boolean validTile();
-//		return valid;
+	void setValid(boolean newValid);
 
-	public void setValid(boolean newValid);
-//		this.valid = newValid;
+	void setType(TileType newType);
 
-	
-	public void setType(TileType newType);
-//		this.type = newType;
-
-	public String getType();
-//		return this.type.getPictureFile();
-
+	String getType();
 }

@@ -36,11 +36,6 @@ public class EmptyTile implements Tile {
 	}
 
 	@Override
-	public boolean alreadyOccupied() {
-		return this.getRobotOn() != null;
-	}
-
-	@Override
 	public boolean validTile() {
 		return valid;
 	}
