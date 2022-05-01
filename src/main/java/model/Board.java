@@ -144,7 +144,8 @@ public class Board {
 		}
 	}
 	
-	public int[][] searchBoard() { // currently built for finding 2 teleport tiles :P
+	// A method for finding the two teleport tiles on a board
+	public int[][] searchBoard() {
 		int[][] tileSpot = new int[2][2];
 		int a = boardSize;
 		for (int row = 0; row < a; row++)  { //search from top left corner
