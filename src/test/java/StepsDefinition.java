@@ -77,9 +77,7 @@ public class StepsDefinition {
 	@When("P1 chooses {int} cards")
 	public void p1_chooses_cards(Integer int1) {
 		ArrayList<Card> hand = deck.getHand();
-	    for (int i = 0; i < int1; i++) {
-	    	deck.chooseCard(hand.get(i));
-	    }
+	    deck.setChoosenCards(hand);
 	}
 	@And("Hand is not empty")
 	public void hand_is_not_empty() {
