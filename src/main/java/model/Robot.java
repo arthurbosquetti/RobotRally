@@ -15,8 +15,8 @@ public class Robot extends Player {
     private boolean canMove;
     private Board board;
     private Game game;
-    private int num;
- 
+    private int num; 
+    private boolean isAI;
     
     public Robot(String name, int lives, Game game, Board board) {
         super(name, lives);
@@ -46,6 +46,14 @@ public class Robot extends Player {
     }
     public int getNum() {
         return num;
+    }
+    
+    public void setIsAI(boolean b) {
+    	this.isAI = b;
+    }
+    
+    public boolean getIsAI() {
+    	return isAI;
     }
 
     public int[] getSpawn() {

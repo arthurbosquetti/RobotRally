@@ -16,6 +16,7 @@ import view.CoinFlip;
 import model.AI;
 import model.Board;
 import model.Card;
+import model.Deck;
 import model.Level;
 import model.Robot;
 
@@ -29,8 +30,8 @@ public class Game {
 	private Board board = new Board();
 	private Level level;
 	private Robot robot1, robot2;
-	private boolean isRobot1AI = false;
-	private boolean isRobot2AI = false;
+	private boolean isRobot1AI;
+	private boolean isRobot2AI;
 	
 	private boolean gameOn;
 	
@@ -49,6 +50,7 @@ public class Game {
 		if (isRobot1AI && isRobot2AI){
 			robot1 = new AI(name1, lives, this, board);
 			((AI) robot1).setFlagPosition(board);
+			
 			robot2 = new AI(name2, lives, this, board);
 			((AI) robot2).setFlagPosition(board);
 			}
@@ -56,7 +58,7 @@ public class Game {
 		else if (isRobot1AI & !isRobot2AI) {
 			robot1 = new AI(name1, lives, this, board);	
 			((AI) robot1).setFlagPosition(board);
-			
+
 			robot2=  new Robot(name2, lives, this, board);
 		}
 		else if (isRobot2AI & !isRobot1AI) {
@@ -64,12 +66,14 @@ public class Game {
 			robot2 = new AI(name2, lives, this, board);
 			((AI) robot2).setFlagPosition(board);
 
-
 		}
 		else{
 			robot1 = new Robot(name1, lives, this, board);
 			robot2 = new Robot(name2, lives, this, board );
 	  	}
+		
+		robot1.setIsAI(isRobot1AI);
+		robot2.setIsAI(isRobot2AI);
 		
 		lv1 = new LifeView(lives, 1);
 	  	lv2 = new LifeView(lives, 2);
@@ -127,6 +131,8 @@ public class Game {
 		bs = new BoardScreen(board);
 		bs.addRobots(robot1, robot2);
 		
+		AIHand();
+		
 		gs.initGameScreen(bs, new LifeView[] {lv1,lv2}, new HandHandler[] {hh1, hh2}, new FlagView[] {fv1, fv2});
 	}
 	
@@ -146,26 +152,9 @@ public class Game {
 		ArrayList<Card> choosen1 = robot1.getDeck().getChoosen();
 		ArrayList<Card> choosen2 = robot2.getDeck().getChoosen();
 	
-		//use AI method if robot1 it's an AI
-		if (isRobot1AI) {
-			((AI) robot1).setPossibleHands(robot1.getDeck().getHand());
-			choosen1 = ((AI) robot1).findSuggestedCardChoice(board);
-		}
-		//use regular method otherwise
-		else {choosen1 = robot1.getDeck().getChoosen();}
-		
-		//use AI method if robot2 it's an AI
-		if (isRobot2AI) {
-			((AI) robot2).setPossibleHands(robot2.getDeck().getHand());
-			choosen2 = ((AI) robot2).findSuggestedCardChoice(board);
-		}
-		//use regular method otherwise
-		else {choosen2 = robot2.getDeck().getChoosen();}
+		System.out.println(robot1.getName()+"'s Deck= "+robot1.getDeck().getHand());
+		System.out.println(robot2.getName()+"'s Deck= "+robot2.getDeck().getHand());
 							
-		System.out.println(robot1.getName()+" Deck= "+robot1.getDeck().getHand());
-		System.out.println(robot2.getName()+" Deck= "+robot2.getDeck().getHand());
-
-		
 		for (int i = 0; i < 5; i++) {
 			
 			System.out.println(robot1.getName()+" Card = "+choosen1.get(i));
@@ -177,9 +166,6 @@ public class Game {
 				this.gameEnd();
 				break;
 			}
-			
-//				System.out.println("AI is at ("+robot1.getX()+","+robot1.getY()+","+robot1.canMove()+")");
-//				System.out.println(((AI) robot1).getFlagPosition(((AI) robot1).getFlag1()));
 
 			try {
 				TimeUnit.SECONDS.sleep(1);
@@ -198,6 +184,29 @@ public class Game {
 		
 		robot1.setCanMove(true);
 		robot2.setCanMove(true);
+	}
+	
+	public void AIHand() {
+		//use AI method if robot1 is an AI
+		if (isRobot1AI) {
+			((AI) robot1).setPossibleHands(robot1.getDeck().getHand());
+			((AI) robot1).setHand(board);
+			Deck robot1Deck = ((AI) robot1).getDeck();
+			for (Card card : ((AI) robot1).getHand()) {
+				robot1Deck.chooseCard(card);
+				hh1.addChoosenCard(card);
+			}
+		}		
+		//use AI method if robot2 is an AI
+		if (isRobot2AI) {
+			((AI) robot2).setPossibleHands(robot2.getDeck().getHand());
+			((AI) robot2).setHand(board);
+			Deck robot2Deck = ((AI) robot2).getDeck();
+			for (Card card : ((AI) robot2).getHand()) {
+				robot2Deck.chooseCard(card);
+				hh2.addChoosenCard(card);
+			}
+		}
 	}
 	
 	//checks if both robots are done selecting their cards
@@ -223,6 +232,10 @@ public class Game {
 		robot2.getDeck().newHand();
 		
 		gs.newRound();
+		
+		AIHand();
+		
+		gs.repaint();
 	}
 	
 	//this always hurts robot2, what did robot2 do wrong?

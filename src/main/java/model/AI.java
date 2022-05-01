@@ -21,18 +21,10 @@ public class AI extends Robot  {
 	private int flag2X;
 	private int flag2Y;
 	private ArrayList<List<String>> possibleHands;
-	private ArrayList<Card> cardChoice;
+	private ArrayList<Card> hand;
 
 	public AI(String name, int lives, Game game, Board board) {
 		super(name, lives, game, board);
-	}
-
-	public void setHand(ArrayList<Card> cardChoice) {
-		this.cardChoice=cardChoice;
-	}
-	
-	public ArrayList<Card> getHand() {
-		return cardChoice;
 	}
 	
 	public void setFlagPosition(Board b) {
@@ -54,11 +46,6 @@ public class AI extends Robot  {
 		}
 		
 	}
-	
-	public String getFlagPosition(boolean getflag1) {
-		if (!getflag1) return getName()+"FL1 (" + flag1X + "," + flag1Y + ")";
-		else return  getName()+"FL2 (" + flag2X + "," + flag2Y + ")";
-	}
 
 	public void setPossibleHands(ArrayList<Card> possibleHand) {
 		Stream<List<String>> possibleHands = (Generator.permutation(			possibleHand.get(0).getCardAction(),
@@ -72,7 +59,6 @@ public class AI extends Robot  {
         ArrayList<List<String>> result 	  = new ArrayList<List<String>>();
         result = removeDuplicates(arrayList);
         this.possibleHands = result;
-
 	}
 	
 	public ArrayList<List<String>> removeDuplicates(ArrayList<List<String>> list) {
@@ -95,7 +81,7 @@ public class AI extends Robot  {
 		 return this.possibleHands;
 	 }
 	
-	public ArrayList<Card> findSuggestedCardChoice(Board board) {
+	public void setHand(Board board) {
 		
 		//initialize a map that stores the different hands and the final distance from the desired flag
 		Map<ArrayList<Card>, Integer> distancesFl1 = new HashMap<ArrayList<Card>, Integer>();
@@ -161,8 +147,6 @@ public class AI extends Robot  {
 				distancesFl1.put(hand,Math.abs(flag1X-getX())+Math.abs(flag1Y-getY()));
 			}
 			
-			
-			
 			//reset the AI parameters
 			boardCopy.getTile(getX(), getY()).setRobotOff();
 			setX(xOriginal);
@@ -178,18 +162,19 @@ public class AI extends Robot  {
 				System.out.println("========================= "+getName()+" FOUND FLAG2!!");
 				setFlag2(false);
 				setWinner(false);
-				return hand;
+				this.hand=hand;
+				return;
 			}
 			
 		}
 
 		if (distancesFl2.size()>0) {
 			System.out.println("====== "+getName()+" IN DISTANCESFL2");
-			return findMin(distancesFl2,Collections.min(distancesFl2.values()));
+			this.hand=findMin(distancesFl2,Collections.min(distancesFl2.values()));
 		}
 		else if (distancesFl1.size()>0) {
 			System.out.println("====== "+getName()+" IN DISTANCESFL1");
-			return findMin(distancesFl1, Collections.min(distancesFl1.values()));
+			this.hand=findMin(distancesFl1, Collections.min(distancesFl1.values()));
 		}
 		else {
 			System.out.println(getName()+"===== ONLY BAD MOVES :( BYE!");
@@ -198,8 +183,12 @@ public class AI extends Robot  {
 				Card card = new Card(action);
 				deathReturn.add(card);
 			}
-			return deathReturn;
+			this.hand=deathReturn;
 		}
+	}
+	
+	public ArrayList<Card> getHand() {
+		return hand;
 	}
 	
 	public ArrayList<Card> findMin(Map<ArrayList<Card>, Integer> distanceMap, int min){
@@ -213,5 +202,5 @@ public class AI extends Robot  {
 		System.out.println("Error in AI.findMin() : nothing found!");
 		return null;
 	}
-	
+		
 }
