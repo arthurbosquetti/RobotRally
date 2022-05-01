@@ -1,21 +1,11 @@
 package model.tiles;
 
 
-import view.BoardScreen;
 import view.TileType;
-
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 import controller.Game;
 import model.AI;
 import model.Board;
-import model.Direction;
 import model.Robot;
 
 public abstract class Tile {	

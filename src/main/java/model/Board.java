@@ -7,7 +7,7 @@ import view.BoardScreen;
 
 import java.util.Random;
 
-@SuppressWarnings("unused")
+
 public class Board {
 	
 	private int boardSize;
@@ -16,9 +16,21 @@ public class Board {
 	private int[] obstacleNumbers;
 	private int flagNumber = 2;
 	
+	
 	//Getters and Setters
 	public Tile getTile(int x, int y) {
 		return this.boardLayout[y][x];
+	}
+	
+	// Setting a tile to the board
+	public void setTile(int x, int y, Tile newTile) {
+		// Checks to make sure new tile is within the game board
+		if ((x >= 0 && x < boardSize) && (y >= 0 && y < boardSize)) {
+			this.boardLayout[y][x] = newTile;
+		} 
+		else {
+		System.out.println("Error: attempted to set tile outside of gameboard");
+		}
 	}
 	
 	public void setBoardSize(int boardSize) {
@@ -35,49 +47,41 @@ public class Board {
 	}
 	
     public int[] getObstacleNumbers() {
-		return this.obstacleNumbers;}
-	
-	
-	public void setTile(int x, int y, Tile newTile) {
-		//checks to make sure new tile is within the game board
-		if ((x >= 0 && x < boardSize) && (y >= 0 && y < boardSize)) {
-			this.boardLayout[y][x] = newTile;
-		} 
-		else {
-		System.out.println("Error: attempted to set tile outside of gameboard");
-		}
+		return this.obstacleNumbers;
 	}
-	
+    
+    
 
-	//TODO: add code for robots colliding, change to work with movement card, and change based on those
+
+	// Method for robot to be moved on the board
 	public boolean makeMove(Robot robot, boolean forward, int steps, boolean jump) {
-		//gets the next point based on move
+		// Gets the next point based on move
 		int xO=robot.getX();
 		int yO=robot.getY();
 		int[] newPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
 		
-		
+		// Doesn't let robot jump if there is a tall obstacle in front
 		if (jump) {
 			int [] midPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), true, 1);
 			if (!(mov.checkMove(midPoint))) {
 				return false;
 			}
 		}
-		//checks move for validity: runs code to move robot
+		// Checks move for validity: runs code to move robot
 		if (mov.checkMove(newPoint)) {
 			if (this.getTile(newPoint[0], newPoint[1]).getRobotOn()!=null) {
 				return false;
 			}
-			//remove robot from previous tile
+			// Remove robot from previous tile
 			boardLayout[robot.getY()][robot.getX()].setRobotOff();
-			//moves robot
+			// Move robot to new tile
 			robot.nextTile(this.getTile(newPoint[0], newPoint[1]));
 			robot.setX(newPoint[0]);
 			robot.setY(newPoint[1]);
 			robot.move();
 			try {
 				updateRobotPos(robot);
-			} catch (Exception e) {
+			} catch (Exception e) { // Exceptions
 				System.out.println("The robot is "+robot.getName());
 				System.out.println("Robot starts at ("+xO+","+yO+")");
 				System.out.println("newPoint[][]= {"+newPoint[0]+","+newPoint[1]+"}");
@@ -87,46 +91,31 @@ public class Board {
 				e.printStackTrace();
 			}
 			return true;
-			
 		}
-		//Code for when robot can't move forward
+		// Code for when robot can't move forward
 		return false;
 	}
 	
+	// Sets the robot on new tile, used in makeMove
 	public void updateRobotPos(Robot robot) throws Exception {
-		int x = robot.getX();
-		int y = robot.getY();
-
-		
 		boardLayout[robot.getY()][robot.getX()].setRobotOn(robot);
 	}
 	
 	// Randomized board generation
 	public void generateBoard() {
+		
 		this.boardLayout = new Tile[boardSize][boardSize];
-//		System.out.println("generateBoard().boardLayout OK");
-		// middle teleport tile
-		//if (this.boardSize == 12 || this.boardSize == 15) {
-		//	this.boardLayout[6][6] = TileFactory.getTile("TELEPORT");
-		//}
-//		System.out.println("generateBoard(). middleTeleport tile OK");
-
-
-		// Place players in bottom corners, rn keep always keep them empty
+		// Place players in bottom corners, keep tiles around them empty to avoid trapping them
 		for (int i = 0; i < 3; i++){
 			for(int j = 0; j < 3 ; j++){
 				this.boardLayout[boardSize - i -1][j] = TileFactory.getTile("EMPTY");
 				this.boardLayout[boardSize - i -1][boardSize - j - 1] = TileFactory.getTile("EMPTY");
 			}
 		}
-//		System.out.println("generateBoard().forforLoop OK");
-
+		
 		this.boardLayout[boardSize - 2][1] = TileFactory.getTile("SPAWN1");
 		this.boardLayout[boardSize - 2][boardSize - 2] = TileFactory.getTile("SPAWN2");
 
-//		System.out.println("generateBoard().spawnTiles OK");
-
-		
 		Random r = new Random();
 		boolean boardGenerated = true;
 		int ry = 0;
@@ -139,7 +128,6 @@ public class Board {
 			// Generating random coords
 			int randRow = r.nextInt(boardSize);
 			int randCol = r.nextInt(boardSize);
-			int randObstacle = r.nextInt(2);
 			
 //			System.out.println("generateBoard(). int's OK");
 

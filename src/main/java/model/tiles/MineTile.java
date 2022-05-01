@@ -3,7 +3,6 @@ package model.tiles;
 import controller.Game;
 import model.Board;
 import model.Robot;
-import view.BoardScreen;
 import view.TileType;
 
 public class MineTile extends Tile{ // now used as kamikaze tile!!!!

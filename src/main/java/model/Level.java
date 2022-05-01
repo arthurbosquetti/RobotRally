@@ -1,6 +1,5 @@
 package model;
 
-import model.tiles.Tile;
 import view.BoardScreen;
 
 public class Level {

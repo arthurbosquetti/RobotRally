@@ -2,10 +2,8 @@ package model.tiles;
 
 import controller.Game;
 import model.Board;
-import model.Card;
 import model.Direction;
 import model.Robot;
-import view.BoardScreen;
 import view.TileType;
 
 public class ConveyorTile extends Tile { 
