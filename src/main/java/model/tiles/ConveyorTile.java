@@ -4,6 +4,7 @@ import controller.Game;
 import model.AI;
 import model.Board;
 import model.Direction;
+import model.Movement;
 import model.Robot;
 import view.TileType;
 
@@ -25,10 +26,11 @@ public class ConveyorTile implements InteractsWithTile {
     }
 
     @Override
-    public void steppedOn(Robot robot, Board board, Game game) { //assuming this is never on an edge
+    public void steppedOn(Robot robot, Board board, Game game) {
     	
+    	Movement mov = new Movement(board);
     	robot.setDir(direction);
-    	board.makeMove(robot, true, 1, false);
+    	mov.makeMove(robot, true, 1, false);
 
     }
 

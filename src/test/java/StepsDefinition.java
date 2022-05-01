@@ -19,6 +19,7 @@ public class StepsDefinition {
 	
 	Game game		 = new Game();
 	Board board      = new Board();
+	Movement mov	 = new Movement(board);
 	Deck deck      	 = new Deck();
 	FlagTile flag1 	 = new FlagTile(1);
 	FlagTile flag2   = new FlagTile(2);
@@ -104,7 +105,7 @@ public class StepsDefinition {
 	}
 	@When("the card is executed")
 	public void the_card_is_executed() {
-	    card1.executeAction(robot, board);
+	    card1.executeAction(robot, mov);
 	}
 	@Then("Robot moves forward {int} tiles")
 	public void robotMovesForwardCells(int arg0) {
@@ -164,12 +165,12 @@ public class StepsDefinition {
 
 	@When("the robot hits the obstacle")
 	public void the_robot_hits_the_obstacle() {
-		board.makeMove(robot, true, 1, false);
+		mov.makeMove(robot, true, 1, false);
 	}
 
 	@Then("the robot cannot move into the obstacle")
 	public void the_robot_cannot_move_into_the_obstacle() {
-	    assertFalse(board.makeMove(robot, true, 1, false));
+	    assertFalse(mov.makeMove(robot, true, 1, false));
 	}
 
 	 //Scenario: Robot 1 hits a damaging obstacle and survives
@@ -219,7 +220,7 @@ public class StepsDefinition {
 	}
 	@Then("Robot does not jump")
 	public void robotDoesNotJump() {
-		assertFalse(board.makeMove(robot,true,2,true));
+		assertFalse(mov.makeMove(robot,true,2,true));
 	}
 
 	//Scenario: Robot hits a conveyor obstacle

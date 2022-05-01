@@ -6,7 +6,7 @@ import model.Board;
 import model.Robot;
 import view.TileType;
 
-public class TeleportTile implements InteractsWithTile { //always teleports you to middle of board
+public class TeleportTile implements InteractsWithTile {
 
 	private boolean valid;
 	private TileType type;

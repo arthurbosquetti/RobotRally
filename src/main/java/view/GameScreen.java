@@ -68,6 +68,5 @@ public class GameScreen extends JFrame {
 		hh2.clearHand();
 		hh1.drawCards();
 		hh2.drawCards();
-		repaint();
 	}
 }

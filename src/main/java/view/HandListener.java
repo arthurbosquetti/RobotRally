@@ -12,6 +12,7 @@ import controller.Game;
 import model.Board;
 import model.Deck;
 import model.Robot;
+import model.AI;
 
 public class HandListener implements ActionListener {
 
@@ -19,6 +20,7 @@ public class HandListener implements ActionListener {
 	private HandHandler handler;
 	private Game game;
 	private Robot robot;
+//	private int AIIndex=0;
 		
 	public HandListener(HandHandler hh, Deck newDeck, Game game, Robot robot) {
 		this.handler = hh;
@@ -36,11 +38,18 @@ public class HandListener implements ActionListener {
 		int index = Integer.valueOf(arg.getActionCommand());
 		
 		//checks if players can choose a new card
-		if(deck.canChoose() && index != -1) {
+		if(deck.canChoose() && index != -1 ) { //&& !(robot.getIsAI())) {
 			deck.chooseCard(index);
 			handler.addChoosenCard(deck.getCard(index));
 			handler.removeButton(index);
-		} else if (!deck.canChoose() && index == -1) {
+		}
+//		if(deck.canChoose() && index != -1 && robot.getIsAI() && AIIndex<5) {
+//			deck.chooseCard(((AI) robot).getHand().get(AIIndex));
+//			AIIndex++;
+//			handler.addChoosenCard(((AI) robot).getHand().get(AIIndex));
+//			//handler.removeButton(index);
+//		} 
+		else if (!deck.canChoose() && index == -1) {
 			System.out.println("player done choosing");
 			handler.removeButton(9);
 			handler.setDone(true);
