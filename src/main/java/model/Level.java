@@ -11,9 +11,8 @@ public class Level {
 		initializeBoard(board);
 	}
 
-				
+	//initializes board based on level given
 	public void initializeBoard(Board board) {
-		//TODO: change these to final values
 		switch(level) {
 			case "Easy":
 				board.setBoardSize(8);
@@ -36,7 +35,6 @@ public class Level {
 		}
 	}
 	
-	//
 	public String getLevel() {
 		return level.toLowerCase();
 		

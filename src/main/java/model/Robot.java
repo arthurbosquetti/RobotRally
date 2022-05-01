@@ -18,7 +18,6 @@ public class Robot extends Player {
     private Board board;
     private Game game;
     private int num; 
-    private boolean isAI;
     
     public Robot(String name, int lives, Game game, Board board) {
         super(name, lives);
@@ -29,13 +28,14 @@ public class Robot extends Player {
     }
 
     //Getters and Setters
+    //robot x position
     public int getX() {
         return this.x;
     }
     public void setX(int newX) {
         this.x = newX;
     }
-
+    //robot y position
     public int getY() {
         return this.y;
     }
@@ -43,21 +43,22 @@ public class Robot extends Player {
         this.y = newY;
     }
     
+    //set which number the robot is
     public void setNum(int newNum) {
         this.num = newNum;
     }
     public int getNum() {
         return num;
     }
-    
-    public void setIsAI(boolean b) {
-    	this.isAI = b;
-    }
-    
-    public boolean getIsAI() {
-    	return isAI;
-    }
 
+    //controls whether robot can move on current turn
+    public boolean canMove() {
+    	return canMove;
+    }
+    public void setCanMove(boolean movable) {
+    	this.canMove = movable;
+    }
+    //point the robot spawns on
     public int[] getSpawn() {
     	return new int[] {spawnX, spawnY};
     }
@@ -65,15 +66,14 @@ public class Robot extends Player {
     	spawnX = newSpawn[0];
     	spawnY = newSpawn[1];
     }
-    
+    //direction robot is facing
     public void setDir(Direction direction) {
 		this.direction = direction;
 	}
-    
     public Direction getDir() {
     	return this.direction;
     }
-    
+    //current and next tile the robot stands on
     public Tile getTile() {
         return currentTile;
     }
@@ -84,7 +84,6 @@ public class Robot extends Player {
     //moves the Robot to nextTile then interacts
     public void move() {
     	this.currentTile = nextTile;
-//    	System.out.println(currentTile);
         if (currentTile instanceof InteractsWithTile) {
             iwt = (InteractsWithTile) currentTile;
             iwt.steppedOn(this, board, game);
@@ -92,12 +91,13 @@ public class Robot extends Player {
     }
     
     public void hurt(int dmg) {
+    	//if lives will be less than 0
         if (this.getLives() - dmg <= 0) {
             //Code to kill the robot
             this.setLives(0);
             this.setLivingStatus(false);
         } else {
-        	//TODO: make sure tiles stay consistent with board
+        	//code to respawn robot when they die
         	int[] spawnpoint = this.getSpawn();
         	this.setX(spawnpoint[0]);
         	this.setY(spawnpoint[1]);
@@ -107,12 +107,6 @@ public class Robot extends Player {
         }
     }
 
-    public boolean canMove() {
-    	return canMove;
-    }
-	public void setCanMove(boolean movable) {
-		this.canMove = movable;
-	}
     
 
 }

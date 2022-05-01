@@ -9,6 +9,7 @@ public class Deck{
 	private ArrayList<Card> choosenCards = new ArrayList<Card>();
 	private Random rnd = new Random();
 	
+	//gets new hand with random cards 
 	public void newHand() {
 		hand = new ArrayList<Card>(); 
 		choosenCards = new ArrayList<Card>();
@@ -38,6 +39,7 @@ public class Deck{
 		}
 	}
 	
+	//checks if there have been 5 cards choosen or not
 	public boolean canChoose() {
 		return (choosenCards.size() < 5)? true : false;
 	}
@@ -45,7 +47,6 @@ public class Deck{
 	public ArrayList<Card> getHand() {
 		return hand;
 	}
-	
 	public ArrayList<Card> getChoosen() {
 		return choosenCards;
 	}
@@ -54,10 +55,11 @@ public class Deck{
 		return hand.get(index);
 	}
 	
+	//adds card to chosen cards
 	public void chooseCard(int index) {
 		choosenCards.add(hand.get(index));
 	}
-//	//overloaded method in order to use with AI in HandListener
+	//overloaded method in order to use with AI in HandListener
 	public void chooseCard(Card card) {
 		choosenCards.add(card);
 	}

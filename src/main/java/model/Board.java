@@ -32,15 +32,16 @@ public class Board {
 		}
 	}
 	
+	//size of board
 	public void setBoardSize(int boardSize) {
 		this.boardSize = boardSize;
 		BoardScreen.setBoardSize(boardSize);
 	}
-	
 	public int getBoardSize() {
 		return boardSize;
 	}
 	
+	//sets the different amount of different obstacles
 	public void setObstacleNumbers(int teleportNr, int mineNr, int pitNr, int glueNr, int conveyorNr, int tallNr) {
 		this.obstacleNumbers = new int[]{teleportNr, mineNr, pitNr, glueNr, conveyorNr, tallNr};
 	}
@@ -165,10 +166,6 @@ public class Board {
 			}
 		}
 		return tileSpot;
-	}
-	
-	public Tile[][] getBoardLayout() {
-		return boardLayout;
 	}
 
 }
