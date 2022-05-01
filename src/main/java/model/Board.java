@@ -34,9 +34,9 @@ public class Board {
 		this.obstacleNumbers = new int[]{teleportNr, mineNr, pitNr, glueNr, conveyorNr, tallNr};
 	}
 	
-	public int[] getObstacleNumbers() {
-		return this.obstacleNumbers;
-	}
+    public int[] getObstacleNumbers() {
+		return this.obstacleNumbers;}
+	
 	
 	public void setTile(int x, int y, Tile newTile) {
 		//checks to make sure new tile is within the game board
@@ -53,8 +53,9 @@ public class Board {
 	public boolean makeMove(Robot robot, boolean forward, int steps, boolean jump) {
 		//gets the next point based on move
 		int xO=robot.getX();
-		int yO=  robot.getY();
+		int yO=robot.getY();
 		int[] newPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
+		
 		
 		if (jump) {
 			int [] midPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), true, 1);
@@ -64,6 +65,9 @@ public class Board {
 		}
 		//checks move for validity: runs code to move robot
 		if (mov.checkMove(newPoint)) {
+			if (this.getTile(newPoint[0], newPoint[1]).getRobotOn()!=null) {
+				return false;
+			}
 			//remove robot from previous tile
 			boardLayout[robot.getY()][robot.getX()].setRobotOff();
 			//moves robot

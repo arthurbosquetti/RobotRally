@@ -1,8 +1,6 @@
 package view;
 
-import java.awt.Component;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.*;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -27,6 +25,7 @@ public class HandHandler extends JPanel {
 	private ChoosenCardHandler cch;
 	
 	public HandHandler(Robot robot, Game game) {
+		setBackground(Color.DARK_GRAY);
 		setLayout(gbl);
 		
 		this.robot = robot;
@@ -34,6 +33,7 @@ public class HandHandler extends JPanel {
 		listener = new HandListener(this, deck, game, robot);
 		
 		JLabel cardLbl = new JLabel(robot.getName() + "'s cards: ");
+		cardLbl.setForeground(Color.WHITE);
 		c.gridx = 0;
 		c.gridy = 0;
 		add(cardLbl, c);
@@ -42,9 +42,12 @@ public class HandHandler extends JPanel {
 	}		
 	
 	public void clearHand() {
+		setBackground(Color.DARK_GRAY);
+
 		removeAll();
-		
+
 		JLabel cardLbl = new JLabel(robot.getName() + "'s cards: ");
+		cardLbl.setForeground(Color.WHITE);
 		c.gridx = 0;
 		c.gridy = 0;
 		add(cardLbl, c);
@@ -56,6 +59,7 @@ public class HandHandler extends JPanel {
 	}
 	
 	public void drawCards() {
+		setBackground(Color.DARK_GRAY);
 		ArrayList<Card> hand = deck.getHand();
 		for (int i = 0; i < hand.size(); i ++) {
 			String action = hand.get(i).getCardAction();
@@ -85,6 +89,7 @@ public class HandHandler extends JPanel {
 	}
 	
 	public void removeButton(int index) {
+		setBackground(Color.DARK_GRAY);
 		Component button = this.getComponent(index+1);
 		button.setVisible(false);
 		repaint(button.getX(), button.getY(), button.getWidth(), button.getHeight());
@@ -100,6 +105,6 @@ public class HandHandler extends JPanel {
 	public void addChoosenCard(Card card) {
 		cch.addCard(card);
 	}
-	
-	
+
+
 }

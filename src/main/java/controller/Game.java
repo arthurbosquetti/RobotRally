@@ -21,19 +21,15 @@ import model.Robot;
 
 //TODO: add singleton principle code
 public class Game {
-	
 	private GameScreen gs;
-	
 	private HandHandler hh1, hh2;
 	private LifeView lv1, lv2;
 	private FlagView fv1, fv2;
-	
 	private BoardScreen bs;
-		
 	private Board board = new Board();
 	private Level level;
 	private Robot robot1, robot2;
-	private boolean isRobot1AI =false;
+	private boolean isRobot1AI = false;
 	private boolean isRobot2AI = false;
 	
 	private boolean gameOn;
@@ -55,8 +51,7 @@ public class Game {
 			((AI) robot1).setFlagPosition(board);
 			robot2 = new AI(name2, lives, this, board);
 			((AI) robot2).setFlagPosition(board);
-
-		}
+			}
 		
 		else if (isRobot1AI & !isRobot2AI) {
 			robot1 = new AI(name1, lives, this, board);	
@@ -89,7 +84,7 @@ public class Game {
 		  	BoardScreen.setLevel("easy");
 		  	robotInitializer(5, name1, name2);
 		  	
-		} else if (Objects.equals(newLevel, "mid")) {
+		} else if (Objects.equals(newLevel, "medium")) {
 		  	level = new Level("Medium", board);
 		  	BoardScreen.setLevel("medium");
 		  	robotInitializer(3, name1, name2);
@@ -177,7 +172,12 @@ public class Game {
 			System.out.println(robot2.getName()+" Card = "+choosen2.get(i));
 
 			makeMove(i, choosen1.get(i), choosen2.get(i));
-
+			
+			if (robot1.getLives() <= 0 || robot1.getLives() <= 0) {
+				this.gameEnd();
+				break;
+			}
+			
 //				System.out.println("AI is at ("+robot1.getX()+","+robot1.getY()+","+robot1.canMove()+")");
 //				System.out.println(((AI) robot1).getFlagPosition(((AI) robot1).getFlag1()));
 
@@ -226,15 +226,29 @@ public class Game {
 	}
 	
 	//this always hurts robot2, what did robot2 do wrong?
-	public void hurtOtherPlayer(Robot robot1) {
-		robot2.hurt(1);
+	public void hurtOtherPlayer(Robot robot) {
+		if (robot == robot1) {
+			robot2.hurt(1);
+		}
+		else if (robot == robot2) {
+			robot1.hurt(1);
+		}
 	}
 	
-	public int[] findOtherPlayer(Robot robot1) {
-		int[] other = new int[2];
-		other[0] = robot2.getX();
-		other[1] = robot2.getY();
-		return other;
+	public int[] findOtherPlayer(Robot robot) {
+		if (robot == robot1) {
+			int[] other = new int[2];
+			other[0] = robot2.getX();
+			other[1] = robot2.getY();
+			return other;
+		}
+		else if (robot == robot2) {
+			int[] other = new int[2];
+			other[0] = robot1.getX();
+			other[1] = robot1.getY();
+			return other;
+		}
+		return null;
 	}
 	
 	public void gameEnd(){
@@ -255,3 +269,6 @@ public class Game {
 		}
 	}
 }
+
+
+

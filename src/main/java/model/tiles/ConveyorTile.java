@@ -8,7 +8,7 @@ import model.Robot;
 import view.BoardScreen;
 import view.TileType;
 
-public class ConveyorTile extends Tile {
+public class ConveyorTile extends Tile { 
 
     Direction direction;
 
@@ -17,12 +17,6 @@ public class ConveyorTile extends Tile {
 		this.setType(TileType.CONVEYOR);
     	direction = dir;
     }
-    
-    //public ConveyorTile() {
-    //	this.setValid(true);
-	//	this.setType(TileType.CONVEYOR);
-    //    this.direction = new Direction(0);
-    //}
     
     public Direction getDir() {
     	return this.direction;

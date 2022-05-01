@@ -3,8 +3,6 @@ package model;
 public class Direction {
 
     private int direction;
-    private boolean rotatedLeft;
-    private boolean rotatedRight;
 
     public Direction(int dir) {
         this.direction = dir;
@@ -15,12 +13,10 @@ public class Direction {
     }
 
     public void turnRight() {
-    	this.rotatedRight = true;
     	direction = (direction + 90) % 360;
     }
 
     public void turnLeft() {
-    	this.rotatedLeft = true;
     	direction = (direction - 90) % 360;
     	if (direction==-90) {direction = 270;}
     }
@@ -45,14 +41,11 @@ public class Direction {
     	}
     }
     
-    public String toString() {
+    
+ /*   public String toString() {
     	return this.getDirection();
     }
-
-    public boolean getRotatedRight() {
-    	return rotatedRight;
-    }
-    public boolean getRotatedLeft() {
-    	return rotatedLeft;
-    }
+    */
 }
+
+

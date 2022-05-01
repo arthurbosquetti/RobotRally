@@ -177,6 +177,7 @@ public class AI extends Robot  {
 			if (foundFlag2) {
 				System.out.println("========================= "+getName()+" FOUND FLAG2!!");
 				setFlag2(false);
+				setWinner(false);
 				return hand;
 			}
 			

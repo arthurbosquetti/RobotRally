@@ -1,9 +1,6 @@
 package view;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -23,6 +20,7 @@ public class FlagIcon extends JPanel {
 	}
 	
 	public void setImage(String img) {
+		setBackground(Color.DARK_GRAY);
 		try {
 			System.out.println("tiles/"+BoardScreen.level+"/"+img);
 			flagImg = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/"+img));

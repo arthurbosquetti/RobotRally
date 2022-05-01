@@ -1,7 +1,6 @@
 package model;
 
 import controller.Game;
-import model.Direction;
 import model.tiles.Tile;
 
 public class Robot extends Player {
@@ -17,7 +16,7 @@ public class Robot extends Player {
     private Board board;
     private Game game;
     private int num;
-    //private boolean glue;
+ 
     
     public Robot(String name, int lives, Game game, Board board) {
         super(name, lives);
@@ -75,6 +74,7 @@ public class Robot extends Player {
     //moves the Robot to nextTile then interacts
     public void move() {
     	this.currentTile = nextTile;
+//    	System.out.println(currentTile);
         this.currentTile.steppedOn(this, board, game); 
     }
     
@@ -94,7 +94,7 @@ public class Robot extends Player {
         }
     }
     
-    public int[] getNewPoint(boolean forward, int steps) {
+ /*   public int[] getNewPoint(boolean forward, int steps) {
 		switch (direction.getDirection()) {
 			case "north":
 				return (forward)? new int[]{x, y - 1} : new int[]{x, y + 1};
@@ -111,12 +111,13 @@ public class Robot extends Player {
 				return new int[]{x, y};	
 		}
 	}
+	*/
 
     public boolean canMove() {
     	return canMove;
     }
-	public void setCanMove(boolean moveable) {
-		this.canMove = moveable;
+	public void setCanMove(boolean movable) {
+		this.canMove = movable;
 	}
     
 

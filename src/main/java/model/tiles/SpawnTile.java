@@ -8,10 +8,6 @@ import view.TileType;
 public class SpawnTile extends Tile {
     private int spawnNum;
     
-    public SpawnTile() {
-        this.setValid(true);
-        System.out.println("Spawn tile created without spawn number");
-    }
     public SpawnTile(int spawnNum) {
     	this.setValid(true);
         this.spawnNum = spawnNum;
@@ -19,12 +15,8 @@ public class SpawnTile extends Tile {
     }
 
     @Override
-    public String tileType() {
-        return " |" + spawnNum+"|";
-    }
+    public String tileType() {return " |" + spawnNum+"|"; }
 
 	@Override
-	public void steppedOn(Robot robot, Board board, Game game) {
-		
-	}
+	public void steppedOn(Robot robot, Board board, Game game) {}
 }

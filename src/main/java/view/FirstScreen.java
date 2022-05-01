@@ -30,21 +30,7 @@ public class FirstScreen extends JPanel {
 	private ImageIcon prettyfaces;
 	private Game game;
 
-	class BackgroundPanel extends JPanel
-	{
-		protected Image bgImage;
-		public BackgroundPanel(Image image)
-		{
-			super(true);
-			bgImage = image;
-			setOpaque(false);
-		}
-		public void paint(Graphics g)
-		{
-			g.drawImage(bgImage, 0 ,0 ,this);
-			super.paint(g);
-		}
-	}
+
 
 	public FirstScreen(Game game) {
 		this.game = game;
@@ -173,7 +159,7 @@ private class Clicklistener implements ActionListener{
 	      
 	      if (e.getSource() == mid)
 	      {
-	    	game.gameStart("mid", player1, player2);
+	    	game.gameStart("medium", player1, player2);
 		  	frame.dispose();
 	      }
 	      
