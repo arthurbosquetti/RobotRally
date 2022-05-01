@@ -38,17 +38,11 @@ public class HandListener implements ActionListener {
 		int index = Integer.valueOf(arg.getActionCommand());
 		
 		//checks if players can choose a new card
-		if(deck.canChoose() && index != -1 ) { //&& !(robot.getIsAI())) {
+		if(deck.canChoose() && index != -1 ) {
 			deck.chooseCard(index);
 			handler.addChoosenCard(deck.getCard(index));
 			handler.removeButton(index);
 		}
-//		if(deck.canChoose() && index != -1 && robot.getIsAI() && AIIndex<5) {
-//			deck.chooseCard(((AI) robot).getHand().get(AIIndex));
-//			AIIndex++;
-//			handler.addChoosenCard(((AI) robot).getHand().get(AIIndex));
-//			//handler.removeButton(index);
-//		} 
 		else if (!deck.canChoose() && index == -1) {
 			System.out.println("player done choosing");
 			handler.removeButton(9);

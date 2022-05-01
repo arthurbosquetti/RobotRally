@@ -87,9 +87,6 @@ public class Game {
 			robot2 = new Robot(name2, lives, this, board );
 	  	}
 		
-		robot1.setIsAI(isRobot1AI);
-		robot2.setIsAI(isRobot2AI);
-		
 		lv1 = new LifeView(lives, 1);
 	  	lv2 = new LifeView(lives, 2);
 	}
