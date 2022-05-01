@@ -22,7 +22,7 @@ public class ChoosenCardHandler extends JPanel {
 		this.player = player;
 		this.deck = deck;
 
-		JLabel choosenLbl = new JLabel("Choosen cards: ");
+		JLabel choosenLbl = new JLabel("Chosen cards: ");
 		add(choosenLbl);
 		choosenLbl.setForeground(Color.WHITE);
 	}
