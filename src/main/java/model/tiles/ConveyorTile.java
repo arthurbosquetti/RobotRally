@@ -28,8 +28,8 @@ public class ConveyorTile extends Tile {
     @Override
     public void steppedOn(Robot robot, Board board, Game game) { //assuming this is never on an edge
     	
-    	robot.setDir(direction);
-    	board.makeMove(robot, true, 1, false);
+    	//robot.setDir(direction);
+    	//board.makeMove(robot, true, 1, false);
 
     }
 }

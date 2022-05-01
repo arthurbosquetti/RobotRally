@@ -12,7 +12,6 @@ public class Board {
 	
 	private int boardSize;
 	public Tile[][] boardLayout;
-	private Movement mov= new Movement(this);
 	private int[] obstacleNumbers;
 	private int flagNumber = 2;
 	
@@ -49,57 +48,7 @@ public class Board {
     public int[] getObstacleNumbers() {
 		return this.obstacleNumbers;
 	}
-    
-    
-
-
-	// Method for robot to be moved on the board
-	public boolean makeMove(Robot robot, boolean forward, int steps, boolean jump) {
-		// Gets the next point based on move
-		int xO=robot.getX();
-		int yO=robot.getY();
-		int[] newPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), forward, steps);
-		
-		// Doesn't let robot jump if there is a tall obstacle in front
-		if (jump) {
-			int [] midPoint = mov.getNewPoint(robot.getDir(), robot.getX(), robot.getY(), true, 1);
-			if (!(mov.checkMove(midPoint))) {
-				return false;
-			}
-		}
-		// Checks move for validity: runs code to move robot
-		if (mov.checkMove(newPoint)) {
-			if (this.getTile(newPoint[0], newPoint[1]).getRobotOn()!=null) {
-				return false;
-			}
-			// Remove robot from previous tile
-			boardLayout[robot.getY()][robot.getX()].setRobotOff();
-			// Move robot to new tile
-			robot.nextTile(this.getTile(newPoint[0], newPoint[1]));
-			robot.setX(newPoint[0]);
-			robot.setY(newPoint[1]);
-			robot.move();
-			try {
-				updateRobotPos(robot);
-			} catch (Exception e) { // Exceptions
-				System.out.println("The robot is "+robot.getName());
-				System.out.println("Robot starts at ("+xO+","+yO+")");
-				System.out.println("newPoint[][]= {"+newPoint[0]+","+newPoint[1]+"}");
-				System.out.println("Next tile is "+getTile(newPoint[0], newPoint[1]).getType());
-				System.out.println("Robot is at ("+robot.getX()+","+robot.getX()+")");
-				
-				e.printStackTrace();
-			}
-			return true;
-		}
-		// Code for when robot can't move forward
-		return false;
-	}
 	
-	// Sets the robot on new tile, used in makeMove
-	public void updateRobotPos(Robot robot) throws Exception {
-		boardLayout[robot.getY()][robot.getX()].setRobotOn(robot);
-	}
 	
 	// Randomized board generation
 	public void generateBoard() {
@@ -215,6 +164,10 @@ public class Board {
 			}
 		}
 		return tileSpot;
+	}
+	
+	public Tile[][] getBoardLayout() {
+		return boardLayout;
 	}
 
 }

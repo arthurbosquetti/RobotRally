@@ -18,9 +18,9 @@ public class Card{
 		return action;
 	}
 	
-	public void executeAction(Robot robot, Board board) {
+	public void executeAction(Robot robot, Movement mov) {
 		if ( (this.action.equals("F1"))|| (this.action.equals("F2")) || (this.action.equals("F3")) || (this.action.equals("B")) || (this.action.equals("J"))) {
-			moving.detMove(action, robot, board);
+			moving.detMove(action, robot, mov);
 		}
 		else if (this.action.equals("R")) {
 			robot.getDir().turnRight();

@@ -109,6 +109,7 @@ public class AI extends Robot  {
 		
 		//manually generate a copy of the board
 		Board boardCopy = new Board();
+		Movement move = new Movement(boardCopy);
 		boardCopy.setBoardSize(board.getBoardSize());
 		boardCopy.setObstacleNumbers(board.getObstacleNumbers()[0],board.getObstacleNumbers()[1],
 									 board.getObstacleNumbers()[3],board.getObstacleNumbers()[3],
@@ -134,7 +135,7 @@ public class AI extends Robot  {
 				Card card = new Card(action);
 				hand.add(card);
 				if (canMove()) {
-					card.executeAction(this, boardCopy);
+					card.executeAction(this, move);
 				}
 			}
 			

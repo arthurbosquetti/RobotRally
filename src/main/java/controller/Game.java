@@ -17,6 +17,7 @@ import model.AI;
 import model.Board;
 import model.Card;
 import model.Level;
+import model.Movement;
 import model.Robot;
 
 //TODO: add singleton principle code
@@ -27,6 +28,7 @@ public class Game {
 	private FlagView fv1, fv2;
 	private BoardScreen bs;
 	private Board board = new Board();
+	private Movement mov = new Movement(board);
 	private Level level;
 	private Robot robot1, robot2;
 	private boolean isRobot1AI = false;
@@ -211,9 +213,9 @@ public class Game {
 	public void makeMove(int i, Card choosen1, Card choosen2) {		
 		bs.removeRobots(robot1, robot2);
 		
-		if (robot1.canMove()) { choosen1.executeAction(robot1, board); }
+		if (robot1.canMove()) { choosen1.executeAction(robot1, mov); }
 				
-		if (robot2.canMove()) { choosen2.executeAction(robot2, board); }
+		if (robot2.canMove()) { choosen2.executeAction(robot2, mov); }
 		
 		bs.addRobots(robot1, robot2);
 	}
