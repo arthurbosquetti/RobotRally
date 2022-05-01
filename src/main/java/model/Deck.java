@@ -61,4 +61,12 @@ public class Deck{
 	public void chooseCard(int index) {
 		choosenCards.add(hand.get(index));
 	}
+//	//overloaded method in order to use with AI in HandListener
+	public void chooseCard(Card card) {
+		choosenCards.add(card);
+	}
+	
+	public void setChoosenCards(ArrayList<Card> hand) {
+		choosenCards = hand;
+	}
 }

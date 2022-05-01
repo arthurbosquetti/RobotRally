@@ -17,8 +17,8 @@ public class Robot extends Player {
     private boolean canMove;
     private Board board;
     private Game game;
-    private int num;
- 
+    private int num; 
+    private boolean isAI;
     
     public Robot(String name, int lives, Game game, Board board) {
         super(name, lives);
@@ -49,6 +49,14 @@ public class Robot extends Player {
     public int getNum() {
         return num;
     }
+    
+    public void setIsAI(boolean b) {
+    	this.isAI = b;
+    }
+    
+    public boolean getIsAI() {
+    	return isAI;
+    }
 
     public int[] getSpawn() {
     	return new int[] {spawnX, spawnY};
@@ -76,7 +84,7 @@ public class Robot extends Player {
     //moves the Robot to nextTile then interacts
     public void move() {
     	this.currentTile = nextTile;
-    	System.out.println(currentTile);
+//    	System.out.println(currentTile);
         if (currentTile instanceof InteractsWithTile) {
             iwt = (InteractsWithTile) currentTile;
             iwt.steppedOn(this, board, game);
@@ -98,25 +106,6 @@ public class Robot extends Player {
             this.setCanMove(false);
         }
     }
-    
- /*   public int[] getNewPoint(boolean forward, int steps) {
-		switch (direction.getDirection()) {
-			case "north":
-				return (forward)? new int[]{x, y - 1} : new int[]{x, y + 1};
-			case "east":
-				return (forward)? new int[]{x + 1, y} : new int[]{x - 1, y};
-				
-			case "south":
-				return (forward)? new int[]{x, y + 1} : new int[]{x, y - 1};
-				
-			case "west":
-				return (forward)? new int[]{x - 1, y} : new int[]{x + 1, y};
-				
-			default:
-				return new int[]{x, y};	
-		}
-	}
-	*/
 
     public boolean canMove() {
     	return canMove;
