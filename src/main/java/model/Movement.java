@@ -1,8 +1,13 @@
 package model;
 
+import model.tiles.RobotSetOnOff;
+import model.tiles.Tile;
+
 public class Movement {
 
 	private Board board;
+	private RobotSetOnOff rbs1;
+	private RobotSetOnOff rbs2;
 	//private Movement mov= new Movement(this);
 	
 
@@ -58,26 +63,33 @@ public class Movement {
 			}
 			// Checks move for validity: runs code to move robot
 			if (this.checkMove(newPoint)) {
-				if (board.getTile(newPoint[0], newPoint[1]).getRobotOn()!=null) {
-					return false;
-				}
-				// Remove robot from previous tile
-				board.getBoardLayout()[robot.getY()][robot.getX()].setRobotOff();
-				// Move robot to new tile
-				robot.nextTile(board.getTile(newPoint[0], newPoint[1]));
-				robot.setX(newPoint[0]);
-				robot.setY(newPoint[1]);
-				robot.move();
-				try {
-					updateRobotPos(robot);
-				} catch (Exception e) { // Exceptions
-					System.out.println("The robot is "+robot.getName());
-					System.out.println("Robot starts at ("+xO+","+yO+")");
-					System.out.println("newPoint[][]= {"+newPoint[0]+","+newPoint[1]+"}");
-					System.out.println("Next tile is "+board.getTile(newPoint[0], newPoint[1]).getType());
-					System.out.println("Robot is at ("+robot.getX()+","+robot.getX()+")");
+				Tile aTile = board.getTile(newPoint[0], newPoint[1]);
+				Tile bTile = board.getBoardLayout()[robot.getY()][robot.getX()];
+				if (aTile instanceof RobotSetOnOff) {
+					rbs1 = (RobotSetOnOff) aTile;
+					rbs2 = (RobotSetOnOff) bTile;
 					
-					e.printStackTrace();
+					if (rbs1.getRobotOn()!=null) {
+						return false;
+					}
+					// Remove robot from previous tile
+					rbs2.setRobotOff();
+					// Move robot to new tile
+					robot.nextTile(board.getTile(newPoint[0], newPoint[1]));
+					robot.setX(newPoint[0]);
+					robot.setY(newPoint[1]);
+					robot.move();
+					try {
+						updateRobotPos(robot);
+					} catch (Exception e) { // Exceptions
+						System.out.println("The robot is "+robot.getName());
+						System.out.println("Robot starts at ("+xO+","+yO+")");
+						System.out.println("newPoint[][]= {"+newPoint[0]+","+newPoint[1]+"}");
+						System.out.println("Next tile is "+board.getTile(newPoint[0], newPoint[1]).getType());
+						System.out.println("Robot is at ("+robot.getX()+","+robot.getX()+")");
+						
+						e.printStackTrace();
+					}
 				}
 				return true;
 			}
@@ -87,6 +99,11 @@ public class Movement {
 		
 		// Sets the robot on new tile, used in makeMove
 		public void updateRobotPos(Robot robot) throws Exception {
-			board.getBoardLayout()[robot.getY()][robot.getX()].setRobotOn(robot);
+			Tile tile = board.getBoardLayout()[robot.getY()][robot.getX()];
+			if (tile instanceof RobotSetOnOff) {
+				rbs1 = (RobotSetOnOff) tile;
+				rbs1.setRobotOn(robot);
+			}
+					
 		}
 }

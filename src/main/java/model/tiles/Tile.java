@@ -5,12 +5,6 @@ import view.TileType;
 
 public interface Tile {
 
-	void setRobotOn(Robot robot);
-
-	void setRobotOff() ;
-
-	Robot getRobotOn() ;
-
 	boolean validTile();
 
 	void setValid(boolean newValid);

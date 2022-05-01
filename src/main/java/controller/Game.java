@@ -15,6 +15,8 @@ import model.Deck;
 import model.Level;
 import model.Movement;
 import model.Robot;
+import model.tiles.RobotSetOnOff;
+import model.tiles.Tile;
 
 //TODO: add singleton principle code
 public class Game {
@@ -30,6 +32,8 @@ public class Game {
 	private Movement mov = new Movement(board);
 	private Level level;
 	private Robot robot1, robot2;
+	private RobotSetOnOff rbs1;
+	private RobotSetOnOff rbs2;
 	private boolean isRobot1AI;
 	private boolean isRobot2AI;
 	
@@ -119,9 +123,15 @@ public class Game {
 		robot1.setSpawn(new int[] {robot1.getX(), robot1.getY()});
 		robot2.setSpawn(new int[] {robot2.getX(), robot2.getY()});
 		
+		Tile aTile = board.getTile(1, BoardScreen.size - 2);
+		Tile bTile = board.getTile(BoardScreen.size - 2, BoardScreen.size - 2);
+		if (aTile instanceof RobotSetOnOff) {
+			rbs1 = (RobotSetOnOff) aTile;
+			rbs2 = (RobotSetOnOff) bTile;
 
-		board.getTile(1, BoardScreen.size - 2).setRobotOn(robot1);
-		board.getTile(BoardScreen.size - 2, BoardScreen.size - 2).setRobotOn(robot2);
+			rbs1.setRobotOn(robot1);
+			rbs2.setRobotOn(robot2);
+		}
 		
 		initGameScreen();
 	}
