@@ -1,6 +1,7 @@
 package model;
 
 import controller.Game;
+import model.tiles.InteractsWithTile;
 import model.tiles.Tile;
 
 public class Robot extends Player {
@@ -12,6 +13,7 @@ public class Robot extends Player {
     private Direction direction;
     private Tile currentTile;
     private Tile nextTile;
+    private InteractsWithTile iwt;
     private boolean canMove;
     private Board board;
     private Game game;
@@ -83,7 +85,10 @@ public class Robot extends Player {
     public void move() {
     	this.currentTile = nextTile;
 //    	System.out.println(currentTile);
-        this.currentTile.steppedOn(this, board, game); 
+        if (currentTile instanceof InteractsWithTile) {
+            iwt = (InteractsWithTile) currentTile;
+            iwt.steppedOn(this, board, game);
+        }
     }
     
     public void hurt(int dmg) {
@@ -101,25 +106,6 @@ public class Robot extends Player {
             this.setCanMove(false);
         }
     }
-    
- /*   public int[] getNewPoint(boolean forward, int steps) {
-		switch (direction.getDirection()) {
-			case "north":
-				return (forward)? new int[]{x, y - 1} : new int[]{x, y + 1};
-			case "east":
-				return (forward)? new int[]{x + 1, y} : new int[]{x - 1, y};
-				
-			case "south":
-				return (forward)? new int[]{x, y + 1} : new int[]{x, y - 1};
-				
-			case "west":
-				return (forward)? new int[]{x - 1, y} : new int[]{x + 1, y};
-				
-			default:
-				return new int[]{x, y};	
-		}
-	}
-	*/
 
     public boolean canMove() {
     	return canMove;

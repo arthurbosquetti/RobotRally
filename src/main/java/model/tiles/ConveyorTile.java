@@ -1,15 +1,18 @@
 package model.tiles;
 
 import controller.Game;
+import model.AI;
 import model.Board;
-import model.Card;
 import model.Direction;
+import model.Movement;
 import model.Robot;
-import view.BoardScreen;
 import view.TileType;
 
-public class ConveyorTile extends Tile { 
+public class ConveyorTile implements InteractsWithTile {
 
+    private boolean valid;
+    private TileType type;
+    private Robot robotOn;
     Direction direction;
 
     public ConveyorTile(Direction dir) {
@@ -21,17 +24,52 @@ public class ConveyorTile extends Tile {
     public Direction getDir() {
     	return this.direction;
     }
-    
+
     @Override
-    public String tileType() {
-        return " |C|";
+    public void steppedOn(Robot robot, Board board, Game game) {
+    	
+    	Movement mov = new Movement(board);
+    	robot.setDir(direction);
+    	mov.makeMove(robot, true, 1, false);
+
     }
 
     @Override
-    public void steppedOn(Robot robot, Board board, Game game) { //assuming this is never on an edge
-    	
-    	robot.setDir(direction);
-    	board.makeMove(robot, true, 1, false);
+    public void setRobotOn(Robot robot) {
+        if (robot instanceof AI) {
+            robotOn = (AI) robot;
+        } else {
+            robotOn = robot;
+        }
+    }
 
+    @Override
+    public void setRobotOff() {
+        robotOn = null;
+    }
+
+    @Override
+    public Robot getRobotOn() {
+        return robotOn;
+    }
+
+    @Override
+    public boolean validTile() {
+        return valid;
+    }
+
+    @Override
+    public void setValid(boolean newValid) {
+        valid = newValid;
+    }
+
+    @Override
+    public void setType(TileType newType) {
+        type = newType;
+    }
+
+    @Override
+    public String getType() {
+        return this.type.getPictureFile();
     }
 }

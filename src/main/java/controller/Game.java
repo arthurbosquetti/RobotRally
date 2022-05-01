@@ -1,12 +1,7 @@
 package controller;
 
-import view.BoardScreen;
-import view.EndScreen;
-import view.FirstScreen;
-import view.FlagView;
-import view.GameScreen;
-import view.HandHandler;
-import view.LifeView;
+import model.*;
+import view.*;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -18,6 +13,7 @@ import model.Board;
 import model.Card;
 import model.Deck;
 import model.Level;
+import model.Movement;
 import model.Robot;
 
 //TODO: add singleton principle code
@@ -28,6 +24,7 @@ public class Game {
 	private FlagView fv1, fv2;
 	private BoardScreen bs;
 	private Board board = new Board();
+	private Movement mov = new Movement(board);
 	private Level level;
 	private Robot robot1, robot2;
 	private boolean isRobot1AI;
@@ -161,15 +158,15 @@ public class Game {
 			System.out.println(robot2.getName()+" Card = "+choosen2.get(i));
 
 			makeMove(i, choosen1.get(i), choosen2.get(i));
-			
-			if (robot1.getLives() <= 0 || robot1.getLives() <= 0 || robot1.getWinner()== true || robot2.getWinner()== true) {
+
+			if (robot1.getLives() <= 0 || robot2.getLives() <= 0 || robot1.getWinner() || robot2.getWinner()) {
 				this.gameEnd();
 				break;
 			}
 
 			try {
 				TimeUnit.SECONDS.sleep(1);
-			} catch (InterruptedException e) {  }
+			} catch (InterruptedException ignored) {  }
 			
 		}
 		
@@ -220,9 +217,9 @@ public class Game {
 	public void makeMove(int i, Card choosen1, Card choosen2) {		
 		bs.removeRobots(robot1, robot2);
 		
-		if (robot1.canMove()) { choosen1.executeAction(robot1, board); }
+		if (robot1.canMove()) { choosen1.executeAction(robot1, mov); }
 				
-		if (robot2.canMove()) { choosen2.executeAction(robot2, board); }
+		if (robot2.canMove()) { choosen2.executeAction(robot2, mov); }
 		
 		bs.addRobots(robot1, robot2);
 	}
@@ -269,13 +266,13 @@ public class Game {
 		System.out.println("robot.getFlags() =({"+robot1.getFlag1()+","+robot1.getFlag2()+"}, {"+robot2.getFlag1()+","+robot2.getFlag2()+"})");
 
 		
-		if ((robot1.isAlive() == false && robot2.isAlive() == false)||(robot1.getWinner() == true && robot2.getWinner() == true)){
+		if ((!robot1.isAlive() && !robot2.isAlive())||(robot1.getWinner() && robot2.getWinner())){
 			CoinFlip cf = new CoinFlip(robot1.getName(), robot2.getName());
 		}
-		else if (robot1.isAlive() == false || robot2.getWinner()== true) {
+		else if (!robot1.isAlive() || robot2.getWinner()) {
 			EndScreen es = new EndScreen(robot2.getName());
 		}
-		else if (robot2.isAlive() == false || robot1.getWinner()== true) {
+		else if (!robot2.isAlive() || robot1.getWinner()) {
 			EndScreen es = new EndScreen(robot1.getName());
 		} else {
 			newRound();
