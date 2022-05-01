@@ -1,6 +1,6 @@
 package model;
 
-public class Player {
+public abstract class Player {
 	
 	private String name;
 	private boolean turn;
