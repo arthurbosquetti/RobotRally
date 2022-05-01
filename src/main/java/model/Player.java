@@ -31,8 +31,6 @@ public abstract class Player {
 	
 	public boolean getTurn() {return turn;}
 	
-	public void setDeck(Deck newDeck) {this.deck = newDeck;}
-	
 	public Deck getDeck() {return deck;}
 
 	public void checkHand(Card[] cards, Player player2) {
