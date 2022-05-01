@@ -1,11 +1,14 @@
 package model.tiles;
 
-import controller.Game;
-import model.Board;
+import model.AI;
 import model.Robot;
 import view.TileType;
 
-public class TallTile extends Tile {
+public class TallTile implements Tile {
+
+    private boolean valid;
+    private TileType type;
+    private Robot robotOn;
 
     public TallTile() {
         this.setValid(false);
@@ -13,11 +16,41 @@ public class TallTile extends Tile {
     }
 
     @Override
-    public String tileType() {
-        return " |T|";
+    public void setRobotOn(Robot robot) {
+        if (robot instanceof AI) {
+            robotOn = (AI) robot;
+        } else {
+            robotOn = robot;
+        }
     }
 
-	@Override
-	public void steppedOn(Robot robot, Board board, Game game) {
-	}
+    @Override
+    public void setRobotOff() {
+        robotOn = null;
+    }
+
+    @Override
+    public Robot getRobotOn() {
+        return robotOn;
+    }
+
+    @Override
+    public boolean validTile() {
+        return valid;
+    }
+
+    @Override
+    public void setValid(boolean newValid) {
+        valid = newValid;
+    }
+
+    @Override
+    public void setType(TileType newType) {
+        type = newType;
+    }
+
+    @Override
+    public String getType() {
+        return type.getPictureFile();
+    }
 }

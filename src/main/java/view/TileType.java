@@ -16,7 +16,7 @@ public enum TileType {
 
     private String pictureFile;
 
-    private TileType(String pictureFile) {
+    TileType(String pictureFile) {
         this.pictureFile = pictureFile;
     }
 

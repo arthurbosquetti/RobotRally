@@ -1,12 +1,7 @@
 package controller;
 
-import view.BoardScreen;
-import view.EndScreen;
-import view.FirstScreen;
-import view.FlagView;
-import view.GameScreen;
-import view.HandHandler;
-import view.LifeView;
+import model.*;
+import view.*;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -174,8 +169,8 @@ public class Game {
 			System.out.println(robot2.getName()+" Card = "+choosen2.get(i));
 
 			makeMove(i, choosen1.get(i), choosen2.get(i));
-			
-			if (robot1.getLives() <= 0 || robot1.getLives() <= 0 || robot1.getWinner()== true || robot2.getWinner()== true) {
+
+			if (robot1.getLives() <= 0 || robot2.getLives() <= 0 || robot1.getWinner() || robot2.getWinner()) {
 				this.gameEnd();
 				break;
 			}
@@ -185,7 +180,7 @@ public class Game {
 
 			try {
 				TimeUnit.SECONDS.sleep(1);
-			} catch (InterruptedException e) {  }
+			} catch (InterruptedException ignored) {  }
 			
 		}
 		
@@ -258,13 +253,13 @@ public class Game {
 		System.out.println("robot.getFlags() =({"+robot1.getFlag1()+","+robot1.getFlag2()+"}, {"+robot2.getFlag1()+","+robot2.getFlag2()+"})");
 
 		
-		if ((robot1.isAlive() == false && robot2.isAlive() == false)||(robot1.getWinner() == true && robot2.getWinner() == true)){
+		if ((!robot1.isAlive() && !robot2.isAlive())||(robot1.getWinner() && robot2.getWinner())){
 			CoinFlip cf = new CoinFlip(robot1.getName(), robot2.getName());
 		}
-		else if (robot1.isAlive() == false || robot2.getWinner()== true) {
+		else if (!robot1.isAlive() || robot2.getWinner()) {
 			EndScreen es = new EndScreen(robot2.getName());
 		}
-		else if (robot2.isAlive() == false || robot1.getWinner()== true) {
+		else if (!robot2.isAlive() || robot1.getWinner()) {
 			EndScreen es = new EndScreen(robot1.getName());
 		} else {
 			newRound();
