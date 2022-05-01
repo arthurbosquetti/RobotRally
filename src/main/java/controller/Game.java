@@ -9,6 +9,9 @@ import java.util.concurrent.TimeUnit;
 
 //TODO: add singleton principle code
 public class Game {
+	
+	private static Game gameInstance = null;
+	
 	private GameScreen gs;
 	private HandHandler hh1, hh2;
 	private LifeView lv1, lv2;
@@ -23,6 +26,14 @@ public class Game {
 	private boolean gameOn;
 	
 	public Game() { FirstScreen fs = new FirstScreen(this); }
+	
+	public static Game getInstance()
+    {
+        if (gameInstance == null) {
+        	gameInstance = new Game();
+        }
+        return gameInstance;
+    }
 	
 	public void setGameStatus(boolean b) { this.gameOn = b; }
 	
@@ -137,7 +148,7 @@ public class Game {
 		//use AI method if robot1 it's an AI
 		if (isRobot1AI) {
 			((AI) robot1).setPossibleHands(robot1.getDeck().getHand());
-			choosen1 = ((AI) robot1).findSuggestedCardChoice(board);
+			choosen2 = ((AI) robot1).findSuggestedCardChoice(board);
 		}
 		//use regular method otherwise
 		else {choosen1 = robot1.getDeck().getChoosen();}
@@ -206,9 +217,12 @@ public class Game {
 		bs.addRobots(robot1, robot2);
 	}
 	
+	
 	public void newRound() {
 		robot1.getDeck().newHand();
 		robot2.getDeck().newHand();
+		
+		
 		
 		gs.newRound();
 	}

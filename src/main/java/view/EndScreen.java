@@ -19,6 +19,7 @@ public class EndScreen extends JPanel {
 
 		JFrame frame = new JFrame("Game Ended!");
 		JButton Okay = new JButton("Okay");
+		JButton restart = new JButton("New Game");
 		JLabel text = new JLabel(WinnerName + " has won the game!");
 			
 		JPanel newPanel = new BackgroundPanel(endimg);
