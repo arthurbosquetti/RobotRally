@@ -1,23 +1,11 @@
 package controller;
 
-import view.BoardScreen;
-import view.EndScreen;
-import view.FirstScreen;
-import view.FlagView;
-import view.GameScreen;
-import view.HandHandler;
-import view.LifeView;
+import model.*;
+import view.*;
 
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
-
-import view.CoinFlip;
-import model.AI;
-import model.Board;
-import model.Card;
-import model.Level;
-import model.Robot;
 
 //TODO: add singleton principle code
 public class Game {
@@ -173,7 +161,7 @@ public class Game {
 
 			makeMove(i, choosen1.get(i), choosen2.get(i));
 			
-			if (robot1.getLives() <= 0 || robot1.getLives() <= 0) {
+			if (robot1.getLives() <= 0 || robot2.getLives() <= 0) {
 				this.gameEnd();
 				break;
 			}
@@ -183,7 +171,7 @@ public class Game {
 
 			try {
 				TimeUnit.SECONDS.sleep(1);
-			} catch (InterruptedException e) {  }
+			} catch (InterruptedException ignored) {  }
 			
 		}
 		

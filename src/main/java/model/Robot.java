@@ -1,6 +1,7 @@
 package model;
 
 import controller.Game;
+import model.tiles.InteractsWithTile;
 import model.tiles.Tile;
 
 public class Robot extends Player {
@@ -12,6 +13,7 @@ public class Robot extends Player {
     private Direction direction;
     private Tile currentTile;
     private Tile nextTile;
+    private InteractsWithTile iwt;
     private boolean canMove;
     private Board board;
     private Game game;
@@ -75,7 +77,10 @@ public class Robot extends Player {
     public void move() {
     	this.currentTile = nextTile;
     	System.out.println(currentTile);
-        this.currentTile.steppedOn(this, board, game); 
+        if (currentTile instanceof InteractsWithTile) {
+            iwt = (InteractsWithTile) currentTile;
+            iwt.steppedOn(this, board, game);
+        }
     }
     
     public void hurt(int dmg) {
