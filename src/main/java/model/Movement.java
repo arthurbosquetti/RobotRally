@@ -81,28 +81,21 @@ public class Movement {
 					robot.setX(newPoint[0]);
 					robot.setY(newPoint[1]);
 					robot.move();
-					try {
+
 						updateRobotPos(robot);
-					} catch (Exception e) { // Exceptions
-						System.out.println("The robot is "+robot.getName());
-						System.out.println("Robot starts at ("+xO+","+yO+")");
-						System.out.println("newPoint[][]= {"+newPoint[0]+","+newPoint[1]+"}");
-						System.out.println("Next tile is "+board.getTile(newPoint[0], newPoint[1]).getType());
-						System.out.println("Robot is at ("+robot.getX()+","+robot.getX()+")");
-						
-						e.printStackTrace();
-					}
-				}
+				
 
 				return true;
 			}
+			}
 			// Code for when robot can't move forward
 			return false;
+		
 		}
 		
 		// Sets the robot on new tile, used in makeMove
 
-		public void updateRobotPos(Robot robot) throws Exception {
+		public void updateRobotPos(Robot robot) {
 			Tile tile = board.getBoardLayout()[robot.getY()][robot.getX()];
 			if (tile instanceof RobotSetOnOff) {
 				rbs1 = (RobotSetOnOff) tile;
