@@ -4,8 +4,10 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import setUp.Card;
-import setUp.Deck;
+import model.Card;
+import model.Deck;
+
+import java.awt.*;
 
 public class ChoosenCardHandler extends JPanel {
 	
@@ -14,19 +16,29 @@ public class ChoosenCardHandler extends JPanel {
 	private Deck deck;	
 	
 	public ChoosenCardHandler(String player, Deck deck) {
+		setBackground(Color.DARK_GRAY);
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		
 		this.player = player;
 		this.deck = deck;
 
-		JLabel choosenLbl = new JLabel("Choosen cards: ");
+		JLabel choosenLbl = new JLabel("Chosen cards: ");
 		add(choosenLbl);
+		choosenLbl.setForeground(Color.WHITE);
 	}
 	
 	public void addCard(Card card) {
 		JLabel actLbl = new JLabel(" "+ card.getCardAction()+ " ");
 		add(actLbl);
-		revalidate();
-		repaint();
+		actLbl.setForeground(Color.PINK);
+		this.revalidate();
+		this.repaint();
+	}
+	
+	public void clear() {
+		removeAll();
+		
+		JLabel choosenLbl = new JLabel("Choosen cards: ");
+		add(choosenLbl);
 	}
 }

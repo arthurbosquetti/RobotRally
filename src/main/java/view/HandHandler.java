@@ -1,22 +1,21 @@
 package view;
 
-import java.awt.Component;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
+import java.awt.*;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import setUp.Card;
-import setUp.Deck;
-import setUp.Game;
-import setUp.Robot;
+import controller.Game;
+import model.Card;
+import model.Deck;
+import model.Robot;
 
 public class HandHandler extends JPanel {
 	private static final long serialVersionUID = -1363523608759469440L;
 	
+	private boolean donePicking; 
 	private Robot robot;
 	private Deck deck;
 	private GridBagConstraints c = new GridBagConstraints();
@@ -26,39 +25,42 @@ public class HandHandler extends JPanel {
 	private ChoosenCardHandler cch;
 	
 	public HandHandler(Robot robot, Game game) {
+		setBackground(Color.DARK_GRAY);
 		setLayout(gbl);
 		
 		this.robot = robot;
 		this.deck = robot.getDeck();
-		listener = new HandListener(this, deck, game);
+		listener = new HandListener(this, deck, game, robot);
+		
+		JLabel cardLbl = new JLabel(robot.getName() + "'s cards: ");
+		cardLbl.setForeground(Color.WHITE);
+		c.gridx = 0;
+		c.gridy = 0;
+		add(cardLbl, c);
 		
 		drawCards();
-		
-		cch = new ChoosenCardHandler(robot.getName(), deck);
-		c.gridx = 0;
-		c.gridy = 2;
-		add(cch, c);
 	}		
 	
 	public void clearHand() {
-		if (buttons.size() != 0) {
-			for (JButton button : buttons) {
-				remove(button);
-			}
-		}
+		setBackground(Color.DARK_GRAY);
+
+		removeAll();
+
+		JLabel cardLbl = new JLabel(robot.getName() + "'s cards: ");
+		cardLbl.setForeground(Color.WHITE);
+		c.gridx = 0;
+		c.gridy = 0;
+		add(cardLbl, c);
+		
 		buttons.clear();
+		cch.clear();
 		revalidate();
 		repaint();
 	}
 	
 	public void drawCards() {
+		setBackground(Color.DARK_GRAY);
 		ArrayList<Card> hand = deck.getHand();
-		
-		JLabel cardLbl = new JLabel(robot.getName() + "'s cards: ");
-		c.gridx = 0;
-		c.gridy = 0;
-		add(cardLbl, c);
-		
 		for (int i = 0; i < hand.size(); i ++) {
 			String action = hand.get(i).getCardAction();
 			JButton button = new JButton(action);
@@ -79,18 +81,30 @@ public class HandHandler extends JPanel {
 		c.gridy = 1;
 		buttons.add(submitButton);
 		add(submitButton, c);
+		
+		cch = new ChoosenCardHandler(robot.getName(), deck);
+		c.gridx = 0;
+		c.gridy = 2;
+		add(cch, c);
 	}
 	
 	public void removeButton(int index) {
+		setBackground(Color.DARK_GRAY);
 		Component button = this.getComponent(index+1);
 		button.setVisible(false);
 		repaint(button.getX(), button.getY(), button.getWidth(), button.getHeight());
 	}
 	
-	
+	public void setDone(boolean isDone) {
+		donePicking = true;
+	}
+	public boolean isDone() {
+		return donePicking;
+	}
 	
 	public void addChoosenCard(Card card) {
 		cch.addCard(card);
 	}
-	
+
+
 }
