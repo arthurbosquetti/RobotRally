@@ -15,6 +15,8 @@ import model.tiles.TeleportTile;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 public class StepsDefinition {
 	
 	Game game		 = new Game();
@@ -70,21 +72,26 @@ public class StepsDefinition {
 	}
 	@Given("P1s turn")
 	public void p1_s_turn() {
-	    robot.setTurn(true);
+	    deck.newHand();
 	}
 	@When("P1 chooses {int} cards")
 	public void p1_chooses_cards(Integer int1) {
-	    chosenCards = new Card[int1];
-		robot.checkHand(chosenCards, robot2);
+		ArrayList<Card> hand = deck.getHand();
+	    for (int i = 0; i < int1; i++) {
+	    	deck.chooseCard(hand.get(i));
+	    }
 	}
 	@And("Hand is not empty")
 	public void hand_is_not_empty() {
-		assertNotNull(robot.getDeck().getHand());
-		robot2.setTurn(true);
+		assertNotNull(deck.getHand());
 	}
-	@Then("P2s turn")
-	public void p2_s_turn() {
-	    assertTrue(robot2.getTurn());
+	@And("there are 5 cards chosen")
+	public void five_cards_in_hand() {
+		assertNotNull(deck.getChoosen());
+	}
+	@Then("P1 is done choosing")
+	public void p1_done_choosing() {
+	    assertFalse(deck.canChoose());
 	}
 
 	//Scenario: Moving forward
