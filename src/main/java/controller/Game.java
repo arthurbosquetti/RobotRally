@@ -226,15 +226,29 @@ public class Game {
 	}
 	
 	//this always hurts robot2, what did robot2 do wrong?
-	public void hurtOtherPlayer(Robot robot1) {
-		robot2.hurt(1);
+	public void hurtOtherPlayer(Robot robot) {
+		if (robot == robot1) {
+			robot2.hurt(1);
+		}
+		else if (robot == robot2) {
+			robot1.hurt(1);
+		}
 	}
 	
-	public int[] findOtherPlayer(Robot robot1) {
-		int[] other = new int[2];
-		other[0] = robot2.getX();
-		other[1] = robot2.getY();
-		return other;
+	public int[] findOtherPlayer(Robot robot) {
+		if (robot == robot1) {
+			int[] other = new int[2];
+			other[0] = robot2.getX();
+			other[1] = robot2.getY();
+			return other;
+		}
+		else if (robot == robot2) {
+			int[] other = new int[2];
+			other[0] = robot1.getX();
+			other[1] = robot1.getY();
+			return other;
+		}
+		return null;
 	}
 	
 	public void gameEnd(){
