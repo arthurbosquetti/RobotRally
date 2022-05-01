@@ -54,10 +54,6 @@ public class Deck{
 		return hand.get(index);
 	}
 	
-	public void setCard(int index, Card card) {
-		hand.set(index, card);
-	}
-	
 	public void chooseCard(int index) {
 		choosenCards.add(hand.get(index));
 	}
