@@ -59,8 +59,48 @@ public class FirstScreen extends JPanel {
 		newPanel.setLayout(new GridBagLayout());
 
         //Listener for the buttons
-        Clicklistener click = new Clicklistener();
-    	CheckboxListener checkbox = new CheckboxListener();
+        ActionListener click = new ActionListener() {
+        	public void actionPerformed(ActionEvent e){
+        	      
+        	      player1 = p1name.getText();
+        	      player2 = p2name.getText();
+        	      
+        	      
+        	      if (e.getSource() == easy)
+        	      {
+        	    	game.gameStart("easy", player1, player2);
+        		  	frame.dispose();
+        	      }
+        	      
+        	      if (e.getSource() == mid)
+        	      {
+        	    	game.gameStart("medium", player1, player2);
+        		  	frame.dispose();
+        	      }
+        	      
+        	      if (e.getSource() == hard)
+        	      {
+        	    	 game.gameStart("hard", player1, player2);
+        			 frame.dispose();
+        	      }
+        	    }
+        };
+    	ItemListener checkbox = new ItemListener() {
+    		public void itemStateChanged(ItemEvent e){  
+    			 if(AIplayer1.isSelected()){ 
+    				 game.setP1AI(true);
+    			 }
+    			 else {
+    				 game.setP1AI(false);
+    			 }
+    			 if(AIplayer2.isSelected()){ 
+    				 game.setP2AI(true);
+    			 }
+    			 else {
+    				 game.setP2AI(false);
+    			 }	 
+    		}
+    	};
         
 	    easy = new JButton("Easy");
 	    mid = new JButton("Medium");
@@ -141,53 +181,4 @@ public class FirstScreen extends JPanel {
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 	}
-	
-
-private class Clicklistener implements ActionListener{
-	
-	    public void actionPerformed(ActionEvent e){
-	      
-	      player1 = p1name.getText();
-	      player2 = p2name.getText();
-	      
-	      
-	      if (e.getSource() == easy)
-	      {
-	    	game.gameStart("easy", player1, player2);
-		  	frame.dispose();
-	      }
-	      
-	      if (e.getSource() == mid)
-	      {
-	    	game.gameStart("medium", player1, player2);
-		  	frame.dispose();
-	      }
-	      
-	      if (e.getSource() == hard)
-	      {
-	    	 game.gameStart("hard", player1, player2);
-			 frame.dispose();
-	      }
-	    }
-	  }
-
-private class CheckboxListener implements ItemListener{
-	public void itemStateChanged(ItemEvent e){  
-		 if(AIplayer1.isSelected()){ 
-			 game.setP1AI(true);
-		 }
-		 else {
-			 game.setP1AI(false);
-			 }
-		 
-		 if(AIplayer2.isSelected()){ 
-			 game.setP2AI(true);
-		}
-		 else {
-			 game.setP2AI(false);
-		 }
-				 
-			 }
-	 
-}
 }
