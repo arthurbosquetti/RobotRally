@@ -40,6 +40,7 @@ public class CoinFlip extends JFrame implements ActionListener
         button.addActionListener(this);
 
         frame.setVisible(true);
+       
     }
 
     public void actionPerformed(ActionEvent event)
@@ -50,10 +51,13 @@ public class CoinFlip extends JFrame implements ActionListener
         if (flip == 0) {
             label.setIcon(heads);
             EndScreen es = new EndScreen(pl1);
+            button.setVisible(false);
         }
         else {
             label.setIcon(tails);
             EndScreen es = new EndScreen(pl2);
+            button.setVisible(false);
         }
+        
     }
 }

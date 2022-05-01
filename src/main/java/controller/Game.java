@@ -173,7 +173,7 @@ public class Game {
 
 			makeMove(i, choosen1.get(i), choosen2.get(i));
 			
-			if (robot1.getLives() <= 0 || robot1.getLives() <= 0) {
+			if (robot1.getLives() <= 0 || robot1.getLives() <= 0 || robot1.getWinner()== true || robot2.getWinner()== true) {
 				this.gameEnd();
 				break;
 			}

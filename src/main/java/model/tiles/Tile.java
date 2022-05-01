@@ -22,7 +22,6 @@ public abstract class Tile {
 	private boolean valid;
 	private TileType type; 
 	private Robot robotOn;
-	private Direction direction;
 
 	public abstract String tileType();
 	public abstract void steppedOn(Robot robot, Board board, Game game);

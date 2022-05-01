@@ -3,7 +3,7 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
-class BackgroundPanel extends JPanel
+public class BackgroundPanel extends JPanel
 {
     protected Image bgImage;
     public BackgroundPanel(Image image)
