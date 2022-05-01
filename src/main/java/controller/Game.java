@@ -1,22 +1,13 @@
 package controller;
 
 import model.*;
+import model.tiles.RobotSetOnOff;
+import model.tiles.Tile;
 import view.*;
 
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
-
-import view.CoinFlip;
-import model.AI;
-import model.Board;
-import model.Card;
-import model.Deck;
-import model.Level;
-import model.Movement;
-import model.Robot;
-import model.tiles.RobotSetOnOff;
-import model.tiles.Tile;
 
 //TODO: add singleton principle code
 public class Game {
@@ -41,13 +32,12 @@ public class Game {
 	
 	public Game() { FirstScreen fs = new FirstScreen(this); }
 	
-	public static Game getInstance()
+	public static void getInstance()
     {
         if (gameInstance == null) {
         	gameInstance = new Game();
         }
-        return gameInstance;
-    }
+	}
 	
 	public void setGameStatus(boolean b) { this.gameOn = b; }
 	
@@ -203,16 +193,12 @@ public class Game {
 	
 	public void AIHand() {
 		//use AI method if robot1 is an AI
-		if (isRobot1AI) {
-			((AI) robot1).setPossibleHands(robot1.getDeck().getHand());
-			((AI) robot1).setHand(board);
-			Deck robot1Deck = ((AI) robot1).getDeck();
-			for (Card card : ((AI) robot1).getHand()) {
-				robot1Deck.chooseCard(card);
-				hh1.addChoosenCard(card);
-			}
-		}		
+		isRobotAI(isRobot1AI, robot1, hh1);
 		//use AI method if robot2 is an AI
+		isRobotAI(isRobot2AI, robot2, hh2);
+	}
+
+	private void isRobotAI(boolean isRobot2AI, Robot robot2, HandHandler hh2) {
 		if (isRobot2AI) {
 			((AI) robot2).setPossibleHands(robot2.getDeck().getHand());
 			((AI) robot2).setHand(board);
@@ -223,7 +209,7 @@ public class Game {
 			}
 		}
 	}
-	
+
 	//checks if both robots are done selecting their cards
 	public boolean checkMoves() {
 		if (!(robot1.getDeck().canChoose()) & !(robot2.getDeck().canChoose())) {
