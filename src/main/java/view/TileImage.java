@@ -90,7 +90,6 @@ public class TileImage extends JPanel {
 		g2d.drawImage(image, 0, 0, null);
 		//draw robot on top of tile if there is robot on the board
 		if (robotOn != null) {
-			System.out.println("this time");
 			g2d.drawImage(robotOn, 0, 0, null);
 		}
     }

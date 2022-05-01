@@ -13,33 +13,39 @@ public class GameScreen extends JFrame {
 	
 	private HandHandler hh1, hh2;
 	private LifeView lv1, lv2;
+	private FlagView fv1, fv2;
 		
 	public GameScreen() {
 		super("RobotRally game");
 		setLayout(gbl);
 	}
 	
-	public void initGameScreen(BoardScreen bs, LifeView lv1, LifeView lv2, HandHandler hh1, HandHandler hh2) {
+	public void initGameScreen(BoardScreen bs, LifeView[] lv, HandHandler[] hh, FlagView[] fv) {
 		//add board to screen
 		c.weightx = 0.5;
 		c.gridx = 0;
 		c.gridy = 0;
 		add(bs, c);
 		
-		this.hh1 = hh1;
-		this.hh2 = hh2;
+		this.hh1 = hh[0];
+		this.hh2 = hh[1];
 		
-		this.lv1 = lv1;
-		this.lv2 = lv2;
+		this.lv1 = lv[0];
+		this.lv2 = lv[1];
+		
+		this.fv1 = fv[0];
+		this.fv2 = fv[1];
 		
 		//create new panel for right side of board
 		JPanel hands = new JPanel();
 		hands.setLayout(new BoxLayout(hands, BoxLayout.Y_AXIS));
 		hands.add(hh1);
 		hands.add(lv1);
+		hands.add(fv1);
 		hands.add(Box.createRigidArea(new Dimension(0, 25)));
 		hands.add(hh2);
 		hands.add(lv2);
+		hands.add(fv2);
 		c.gridx = 3;
 		c.gridy = 0;
 		add(hands, c);
@@ -56,10 +62,6 @@ public class GameScreen extends JFrame {
 		hh2.clearHand();
 		hh1.drawCards();
 		hh2.drawCards();
-		repaint();
-	}
-	
-	public void refresh() {
 		repaint();
 	}
 }
