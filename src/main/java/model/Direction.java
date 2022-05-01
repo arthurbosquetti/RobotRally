@@ -35,17 +35,12 @@ public class Direction {
     			return "south";
     		case 270:
     			return "west";
-    		default:
-    			System.out.println("Error in Direction: direction = "+direction);
-    			return "";
     	}
+    	return null;
     }
     
     
- /*   public String toString() {
-    	return this.getDirection();
-    }
-    */
+
 }
 
 

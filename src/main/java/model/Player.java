@@ -26,8 +26,6 @@ public abstract class Player {
 	
 	public String getName() { return name; }
 	
-	public void setDeck(Deck newDeck) {this.deck = newDeck;}
-	
 	public Deck getDeck() {return deck;}
 	
 	public void setLives(int newLives) {this.lives = newLives;}

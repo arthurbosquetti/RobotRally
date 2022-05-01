@@ -45,6 +45,7 @@ public class Movement {
 				System.out.println("Error in getNewPoint, direction not found");
 				return new int[]{x, y};
 		}
+
 	}
 	
 	// Method for robot to be moved on the board
@@ -63,6 +64,7 @@ public class Movement {
 			}
 			// Checks move for validity: runs code to move robot
 			if (this.checkMove(newPoint)) {
+
 				Tile aTile = board.getTile(newPoint[0], newPoint[1]);
 				Tile bTile = board.getBoardLayout()[robot.getY()][robot.getX()];
 				if (aTile instanceof RobotSetOnOff) {
@@ -91,6 +93,7 @@ public class Movement {
 						e.printStackTrace();
 					}
 				}
+
 				return true;
 			}
 			// Code for when robot can't move forward
@@ -98,6 +101,7 @@ public class Movement {
 		}
 		
 		// Sets the robot on new tile, used in makeMove
+
 		public void updateRobotPos(Robot robot) throws Exception {
 			Tile tile = board.getBoardLayout()[robot.getY()][robot.getX()];
 			if (tile instanceof RobotSetOnOff) {
@@ -105,5 +109,6 @@ public class Movement {
 				rbs1.setRobotOn(robot);
 			}
 					
+
 		}
 }

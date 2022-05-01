@@ -4,7 +4,7 @@ import model.AI;
 import model.Robot;
 import view.TileType;
 
-public class SpawnTile implements SteppableTile {
+public class SpawnTile implements RobotSetOnOff {
     private boolean valid;
     private TileType type;
     private Robot robotOn;
