@@ -39,8 +39,10 @@ public class Game {
 	
 	private boolean gameOn;
 	
+	//initializes the first screen when the game is started
 	public Game() { FirstScreen fs = new FirstScreen(this); }
 	
+	//getInstance class for singleton principle
 	public static Game getInstance()
     {
         if (gameInstance == null) {
@@ -49,14 +51,15 @@ public class Game {
         return gameInstance;
     }
 	
+	//Getters and Setters
+	//whether not game is running
 	public void setGameStatus(boolean b) { this.gameOn = b; }
-	
 	public boolean getGameStatus() { return gameOn; }
-	
+	//set player as AI
 	public void setP1AI(boolean b) { this.isRobot1AI = b;}
-	
 	public void setP2AI(boolean b) { this.isRobot2AI = b;}
 	
+	//initializes robots based on lives and names
 	public void robotInitializer(int lives, String name1, String name2) {
 
 		if (isRobot1AI && isRobot2AI){
@@ -91,6 +94,7 @@ public class Game {
 	  	lv2 = new LifeView(lives, 2);
 	}
 	
+	//starts game with level and names
 	public void gameStart(String newLevel, String name1, String name2) {
 		setGameStatus(true);
 	
@@ -175,7 +179,7 @@ public class Game {
 			System.out.println(robot1.getName()+" Card = "+choosen1.get(i));
 			System.out.println(robot2.getName()+" Card = "+choosen2.get(i));
 
-			makeMove(i, choosen1.get(i), choosen2.get(i));
+			makeMove(choosen1.get(i), choosen2.get(i));
 
 			if (robot1.getLives() <= 0 || robot2.getLives() <= 0 || robot1.getWinner() || robot2.getWinner()) {
 				this.gameEnd();
@@ -201,6 +205,7 @@ public class Game {
 		robot2.setCanMove(true);
 	}
 	
+	//gets new hand from AI and adds it to view
 	public void AIHand() {
 		//use AI method if robot1 is an AI
 		if (isRobot1AI) {
@@ -232,7 +237,8 @@ public class Game {
 		return false;
 	}
 	
-	public void makeMove(int i, Card choosen1, Card choosen2) {		
+	//makes moves for both robots based on cards chosen 
+	public void makeMove(Card choosen1, Card choosen2) {		
 		bs.removeRobots(robot1, robot2);
 		
 		if (robot1.canMove()) { choosen1.executeAction(robot1, mov); }
@@ -242,12 +248,10 @@ public class Game {
 		bs.addRobots(robot1, robot2);
 	}
 	
-	
+	//gets new hands for both robots/AI and draws to screen
 	public void newRound() {
 		robot1.getDeck().newHand();
 		robot2.getDeck().newHand();
-		
-		
 		
 		gs.newRound();
 		
@@ -256,7 +260,7 @@ public class Game {
 		gs.repaint();
 	}
 	
-	//this always hurts robot2, what did robot2 do wrong?
+	//hurts the robot that isn't taken as argument
 	public void hurtOtherPlayer(Robot robot) {
 		if (robot == robot1) {
 			robot2.hurt(1);
@@ -266,6 +270,7 @@ public class Game {
 		}
 	}
 	
+	//finds other player on game board
 	public int[] findOtherPlayer(Robot robot) {
 		if (robot == robot1) {
 			int[] other = new int[2];
@@ -282,6 +287,7 @@ public class Game {
 		return null;
 	}
 	
+	//checks if a robot has one, either starts new round or makes end screen
 	public void gameEnd(){
 		System.out.println("robot.getWinner() =("+robot1.getWinner()+","+robot2.getWinner()+")");
 		System.out.println("robot.getFlags() =({"+robot1.getFlag1()+","+robot1.getFlag2()+"}, {"+robot2.getFlag1()+","+robot2.getFlag2()+"})");

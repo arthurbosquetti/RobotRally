@@ -21,36 +21,36 @@ public abstract class Player {
 		this.deck = new Deck();
 		deck.newHand();
 	}
-
-	public void setName(String name) { this.name = name; }
 	
+	//Name of Player
+	public void setName(String name) { this.name = name; }
 	public String getName() { return name; }
 	
 	public Deck getDeck() {return deck;}
 	
+	//how many lives the player has
 	public void setLives(int newLives) {this.lives = newLives;}
-	
 	public int getLives() {return lives;}
 
+	//flag 1 found
 	public void setFlag1(boolean newFlag1) {this.flag1 = newFlag1;}
-	
 	public boolean getFlag1() {return flag1;}
 
+	//flag 2 found
 	public void setFlag2(boolean newFlag2) {
 		this.flag2 = newFlag2;
 		if (flag2 == true) {
 			setWinner(true);
 		}
 	}
-	
-	public boolean getFlag2() {return flag2;}
+	public boolean getFlag2() { return flag2; }
 
-	public void setLivingStatus(boolean living) {this.alive = living;}
-
-    public boolean isAlive() {return alive;}
+	//player is living
+	public void setLivingStatus(boolean living) { this.alive = living; }
+    public boolean isAlive() { return alive; }
     
-    public void setWinner(boolean won) {this.won = won;}
-    
-    public boolean getWinner() {return won;}
+    //player has won
+    public void setWinner(boolean won) { this.won = won; }
+    public boolean getWinner() { return won; }
 
 }
