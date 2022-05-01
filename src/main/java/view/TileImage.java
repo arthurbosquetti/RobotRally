@@ -15,10 +15,12 @@ import javax.swing.JPanel;
 import model.Direction;
 import model.Robot;
 import model.tiles.ConveyorTile;
+import model.tiles.RobotSetOnOff;
 import model.tiles.Tile;
 
 public class TileImage extends JPanel {
 	
+	private RobotSetOnOff rbs;
 	private Tile tile;
 	private BufferedImage image;
 	private BufferedImage robotOn;
@@ -65,10 +67,13 @@ public class TileImage extends JPanel {
 	}
 	
 	public void addRobot(Robot robo) {
-		try {	
-			robotOn = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/"+BoardScreen.level+"/"+"robot"+tile.getRobotOn().getNum()+".png"));
-			BufferedImage image2 = rotateImage(robotOn, robo.getDir());
-			robotOn = image2;
+		try {
+			if (tile instanceof RobotSetOnOff) {
+				rbs = (RobotSetOnOff) tile;
+				robotOn = ImageIO.read(getClass().getClassLoader().getResourceAsStream("tiles/"+BoardScreen.level+"/"+"robot"+rbs.getRobotOn().getNum()+".png"));
+				BufferedImage image2 = rotateImage(robotOn, robo.getDir());
+				robotOn = image2;
+			}
 		}  catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("robot= "+robo.getName());

@@ -4,7 +4,7 @@ import model.AI;
 import model.Robot;
 import view.TileType;
 
-public class EmptyTile implements Tile {
+public class EmptyTile implements SteppableTile {
 
 	private TileType type;
 	private boolean valid;

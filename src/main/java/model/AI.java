@@ -1,6 +1,9 @@
 package model;
 
 import controller.Game;
+import model.tiles.RobotSetOnOff;
+import model.tiles.Tile;
+
 import org.paukov.combinatorics3.Generator;
 
 import java.util.*;
@@ -15,6 +18,8 @@ public class AI extends Robot  {
 	private int flag2Y;
 	private ArrayList<List<String>> possibleHands;
 	private ArrayList<Card> hand;
+	private RobotSetOnOff rbs1;
+	private RobotSetOnOff rbs2;
 
 	public AI(String name, int lives, Game game, Board board) {
 		super(name, lives, game, board);
@@ -140,24 +145,31 @@ public class AI extends Robot  {
 				//flag1 has been found, looking for flag2
 				distancesFl1.put(hand,Math.abs(flag1X-getX())+Math.abs(flag1Y-getY()));
 			}
+			
+			Tile aTile = boardCopy.getTile(getX(), getY());
+			Tile bTile = boardCopy.getTile(xOriginal, yOriginal);
+			if (aTile instanceof RobotSetOnOff) {
+				rbs1 = (RobotSetOnOff) aTile;
+				rbs2 = (RobotSetOnOff) bTile;
 
-			//reset the AI parameters
-			boardCopy.getTile(getX(), getY()).setRobotOff();
-			setX(xOriginal);
-			setY(yOriginal);
-			setDir(new Direction(direcOG));
-			setLives(lives);
-			setCanMove(true);
-			setLivingStatus(true);
-			boardCopy.getTile(xOriginal, yOriginal).setRobotOn(this);
-
-			if (foundFlag1) {setFlag1(false);}
-			if (foundFlag2) {
-				System.out.println("========================= "+getName()+" FOUND FLAG2!!");
-				setFlag2(false);
-				setWinner(false);
-				this.hand=hand;
-				return;
+				//reset the AI parameters
+				rbs1.setRobotOff();
+				setX(xOriginal);
+				setY(yOriginal);
+				setDir(new Direction(direcOG));
+				setLives(lives);
+				setCanMove(true);
+				setLivingStatus(true);
+				rbs2.setRobotOn(this);
+	
+				if (foundFlag1) {setFlag1(false);}
+				if (foundFlag2) {
+					System.out.println("========================= "+getName()+" FOUND FLAG2!!");
+					setFlag2(false);
+					setWinner(false);
+					this.hand=hand;
+					return;
+				}
 			}
 
 		}

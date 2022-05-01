@@ -3,7 +3,6 @@ package model;
 public abstract class Player {
 	
 	private String name;
-	private boolean turn;
 	private int lives;
 	private boolean flag1;
 	private boolean flag2;
@@ -26,19 +25,8 @@ public abstract class Player {
 	public void setName(String name) { this.name = name; }
 	
 	public String getName() { return name; }
-
-	public void setTurn(boolean b) {this.turn=b;}
-	
-	public boolean getTurn() {return turn;}
 	
 	public Deck getDeck() {return deck;}
-
-	public void checkHand(Card[] cards, Player player2) {
-		if (cards.length == 5) {
-			this.setTurn(false);
-			player2.setTurn(true);
-		}
-	}
 	
 	public void setLives(int newLives) {this.lives = newLives;}
 	

@@ -16,25 +16,6 @@ public class TallTile implements Tile {
     }
 
     @Override
-    public void setRobotOn(Robot robot) {
-        if (robot instanceof AI) {
-            robotOn = (AI) robot;
-        } else {
-            robotOn = robot;
-        }
-    }
-
-    @Override
-    public void setRobotOff() {
-        robotOn = null;
-    }
-
-    @Override
-    public Robot getRobotOn() {
-        return robotOn;
-    }
-
-    @Override
     public boolean validTile() {
         return valid;
     }

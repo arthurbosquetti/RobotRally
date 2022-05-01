@@ -6,7 +6,8 @@ Feature: Choosing 5 cards to be played
 		And P1s turn
 		When P1 chooses 5 cards
 		And Hand is not empty
-		Then P2s turn
+		And there are 5 cards chosen
+		Then P1 is done choosing
 
 	@tag2
 	Scenario: Moving forward
